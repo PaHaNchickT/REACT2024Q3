@@ -7,24 +7,35 @@ import { Component, ReactNode } from 'react'
 import Search from './components/search/search'
 import Results from './components/results/results'
 import { GenObj } from './components/types'
+import API from './components/utils/API'
 
 class App extends Component<GenObj, { [key: string]: string | boolean }> {
+  API = new API()
+
+  state = {
+    value: '',
+  }
+
   constructor(props: { [key: string]: string }) {
     super(props)
-    this.state = {
-      isSearched: false,
-    }
+    this.buttonHandler = this.buttonHandler.bind(this)
+    // this.test()
+  }
+
+  async test() {
+    const temp = await ((await this.API.start()) as unknown as Response).json()
+    console.log(temp)
   }
 
   buttonHandler(value: string) {
-    console.log(value)
+    this.setState({ value: value })
   }
 
   render(): ReactNode {
     return (
       <>
         <Search onChange={this.buttonHandler} />
-        <Results />
+        <Results value={this.state.value} />
       </>
     )
   }
