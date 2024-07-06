@@ -6,8 +6,9 @@
 import { Component, ReactNode } from 'react'
 import Search from './components/search/search'
 import Results from './components/results/results'
+import { GenObj } from './components/types'
 
-class App extends Component<{ [key: string]: string }, { [key: string]: string | boolean }> {
+class App extends Component<GenObj, { [key: string]: string | boolean }> {
   constructor(props: { [key: string]: string }) {
     super(props)
     this.state = {

@@ -1,14 +1,12 @@
 import { ChangeEvent, Component, ReactNode } from 'react'
+import { GenObj } from '../types'
 
-type Itest = (value: string) => void
-type Ttest = { [key: string]: string | boolean | Itest }
-
-export default class Search extends Component<Ttest, { [key: string]: string }> {
+export default class Search extends Component<GenObj, { [key: string]: string }> {
   state = {
     value: '',
   }
 
-  constructor(props: Ttest) {
+  constructor(props: GenObj) {
     super(props)
     this.getData = this.getData.bind(this)
   }
