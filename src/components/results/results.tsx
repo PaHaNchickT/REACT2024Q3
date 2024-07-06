@@ -35,7 +35,7 @@ export default class Results extends Component<GenObj, { [key: string]: string }
     console.log(filmsArray, 'jopa')
 
     const films = filmsArray.map((film) => (
-      <div>
+      <div className="results__item">
         <img
           src={film.posterUrlPreview}
           alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
