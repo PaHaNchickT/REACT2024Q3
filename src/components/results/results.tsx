@@ -42,7 +42,7 @@ export default class Results extends Component<GenObj, { [key: string]: string }
           width="200px"
           height="300px"
         />
-        <p>{film.nameEn || film.nameOriginal}</p>
+        <p>{film.nameEn || film.nameOriginal || film.nameRu}</p>
       </div>
     ))
     // console.log(this.props.value, this.filmsArray, 'jopa')
