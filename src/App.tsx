@@ -7,22 +7,22 @@ import { Component, ReactNode } from 'react'
 import Search from './components/search/search'
 import Results from './components/results/results'
 
-class App extends Component<{ name: string }, { name: string }> {
-  constructor(props: { name: string }) {
+class App extends Component<{ [key: string]: string }, { [key: string]: string | boolean }> {
+  constructor(props: { [key: string]: string }) {
     super(props)
     this.state = {
-      name: 'Jopa',
+      isSearched: false,
     }
   }
 
-  buttonHandler() {
-    console.log('jopa')
+  buttonHandler(value: string) {
+    console.log(value)
   }
 
   render(): ReactNode {
     return (
       <>
-        <Search name={this.state.name} />
+        <Search onChange={this.buttonHandler} />
         <Results />
       </>
     )
