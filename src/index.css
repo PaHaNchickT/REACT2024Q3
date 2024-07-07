@@ -87,6 +87,12 @@ body {
 /* search */
 
 .search__cont {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search__panel-wrapper {
   display: flex;
   gap: 10px;
 }
