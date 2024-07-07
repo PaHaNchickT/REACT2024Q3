@@ -1,6 +1,7 @@
 import { ChangeEvent, Component, ReactNode } from 'react'
 import { GenObj } from '../types'
 import LocalStorage from '../utils/localStorage'
+import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
 
 export default class Search extends Component<GenObj, { [key: string]: string }> {
   localStorage = new LocalStorage()
@@ -22,7 +23,7 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
 
   buttonHandler(event: Event) {
     let value = this.state.value
-    if ((event.target as HTMLInputElement).textContent === 'Reset Search') {
+    if ((event.target as HTMLInputElement).textContent === TEXT_CONTENT.btnHome) {
       value = ''
       this.localStorage.saveValue('')
     }
@@ -33,15 +34,15 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
 
   render(): ReactNode {
     return (
-      <div className="search__cont">
-        <button onClick={(event) => this.buttonHandler(event as unknown as Event)}>Reset Search</button>
-        <form className="search__panel-wrapper" onSubmit={(event) => event.preventDefault()}>
+      <div className={CLASS_NAMES.searchContMain}>
+        <button onClick={(event) => this.buttonHandler(event as unknown as Event)}>{TEXT_CONTENT.btnHome}</button>
+        <form className={CLASS_NAMES.searchPanelWrapper} onSubmit={(event) => event.preventDefault()}>
           <input type="text" value={this.state.value} onChange={(event) => this.inputHandler(event)} />
           <button type="submit" onClick={(event) => this.buttonHandler(event as unknown as Event)}>
-            Search
+            {TEXT_CONTENT.btnSearch}
           </button>
         </form>
-        <button>Error</button>
+        <button>{TEXT_CONTENT.btnError}</button>
       </div>
     )
   }

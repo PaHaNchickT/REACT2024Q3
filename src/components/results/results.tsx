@@ -1,6 +1,7 @@
 import { Component, ReactNode } from 'react'
 import { FilmObj, GenObj } from '../types'
 import API from '../utils/API'
+import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
 
 export default class Results extends Component<GenObj, { [key: string]: string }> {
   API = new API()
@@ -12,29 +13,29 @@ export default class Results extends Component<GenObj, { [key: string]: string }
 
   render(): ReactNode {
     const films = (this.props.value as FilmObj[]).map((film) => (
-      <div className="results__item" key={crypto.randomUUID()}>
+      <div className={CLASS_NAMES.resultsItem} key={crypto.randomUUID()}>
         <img
           src={film.posterUrlPreview}
           alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
           width="200px"
           height="300px"
         />
-        <div className="results__item-info">
-          <p className="results__item-name">
+        <div className={CLASS_NAMES.resultsItemInfo}>
+          <p className={CLASS_NAMES.resultsItemName}>
             <span>Title: </span>
             {film.nameEn || film.nameOriginal || film.nameRu}
           </p>
-          <p className="results__item-year">
+          <p className={CLASS_NAMES.resultsItemYear}>
             <span>Year: </span>
-            {+film.year || 'No information'}
+            {+film.year || TEXT_CONTENT.itemYearStub}
           </p>
-          <p className="results__item-imdb">
+          <p className={CLASS_NAMES.resultsItemRaiting}>
             <span>IMDb: </span>
-            {film.ratingImdb || +film.rating || 'Unranked'}
+            {film.ratingImdb || +film.rating || TEXT_CONTENT.itemRaitingStub}
           </p>
         </div>
       </div>
     ))
-    return <div className="results__cont">{films}</div>
+    return <div className={CLASS_NAMES.resultsContMain}>{films}</div>
   }
 }
