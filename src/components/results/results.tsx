@@ -27,7 +27,7 @@ export default class Results extends Component<GenObj, { [key: string]: string }
           </p>
           <p className="results__item-year">
             <span>Year: </span>
-            {film.year}
+            {+film.year || 'No information'}
           </p>
           <p className="results__item-imdb">
             <span>IMDb: </span>
