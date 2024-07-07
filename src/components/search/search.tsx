@@ -18,11 +18,12 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
 
   buttonHandler() {
     if (typeof this.props.onClick === 'function') this.props.onClick(this.state.value)
+    this.setState({ value: this.state.value.trim() })
   }
 
   inputHandler(event: ChangeEvent<HTMLInputElement>) {
     this.setState({ value: event.target.value })
-    this.localStorage.saveValue(event.target.value)
+    this.localStorage.saveValue(event.target.value.trim())
   }
 
   defaultSearch() {

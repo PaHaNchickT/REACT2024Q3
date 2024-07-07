@@ -24,11 +24,12 @@ class App extends Component<GenObj, { [key: string]: FilmObj[] }> {
   }
 
   async buttonHandler(value: string) {
+    const searchString = value.trim()
     let temp = []
-    if (value.trim() === '') {
+    if (searchString === '') {
       temp = (await ((await this.API.start()) as unknown as Response).json()).items
     } else {
-      temp = (await ((await this.API.search(value)) as unknown as Response).json()).films
+      temp = (await ((await this.API.search(searchString)) as unknown as Response).json()).films
     }
 
     this.setState({ value: temp })
