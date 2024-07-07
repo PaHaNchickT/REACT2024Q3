@@ -7,4 +7,7 @@ export type FilmObj = {
   nameEn: string | undefined
   nameRu: string
   posterUrlPreview: string
+  year: number
+  ratingImdb: number
+  rating: number
 }
