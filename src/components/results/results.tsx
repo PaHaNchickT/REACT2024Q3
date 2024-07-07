@@ -11,7 +11,6 @@ export default class Results extends Component<GenObj, { [key: string]: string }
   }
 
   render(): ReactNode {
-    console.log(this.props.value)
     const films = (this.props.value as FilmObj[]).map((film) => (
       <div className="results__item" key={crypto.randomUUID()}>
         <img

@@ -13,12 +13,6 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
   constructor(props: GenObj) {
     super(props)
     this.buttonHandler = this.buttonHandler.bind(this)
-    this.defaultSearch = this.defaultSearch.bind(this)
-  }
-
-  buttonHandler() {
-    if (typeof this.props.onClick === 'function') this.props.onClick(this.state.value)
-    this.setState({ value: this.state.value.trim() })
   }
 
   inputHandler(event: ChangeEvent<HTMLInputElement>) {
@@ -26,19 +20,24 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
     this.localStorage.saveValue(event.target.value.trim())
   }
 
-  defaultSearch() {
-    if (typeof this.props.onClick === 'function') this.props.onClick('')
-    this.setState({ value: '' })
-    this.localStorage.saveValue('')
+  buttonHandler(event: Event) {
+    let value = this.state.value
+    if ((event.target as HTMLInputElement).textContent === 'Reset Search') {
+      value = ''
+      this.localStorage.saveValue('')
+    }
+
+    if (typeof this.props.onClick === 'function') this.props.onClick(value)
+    this.setState({ value: value.trim() })
   }
 
   render(): ReactNode {
     return (
       <div className="search__cont">
-        <button onClick={this.defaultSearch}>Reset Search</button>
+        <button onClick={(event) => this.buttonHandler(event as unknown as Event)}>Reset Search</button>
         <form className="search__panel-wrapper" onSubmit={(event) => event.preventDefault()}>
           <input type="text" value={this.state.value} onChange={(event) => this.inputHandler(event)} />
-          <button type="submit" onClick={this.buttonHandler}>
+          <button type="submit" onClick={(event) => this.buttonHandler(event as unknown as Event)}>
             Search
           </button>
         </form>
