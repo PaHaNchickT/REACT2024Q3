@@ -31,7 +31,7 @@ export default class Results extends Component<GenObj, { [key: string]: string }
     }
 
     const films = filmsArray.map((film) => (
-      <div className="results__item" key={film.nameEn || film.nameOriginal || film.nameRu}>
+      <div className="results__item" key={crypto.randomUUID()}>
         <img
           src={film.posterUrlPreview}
           alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
