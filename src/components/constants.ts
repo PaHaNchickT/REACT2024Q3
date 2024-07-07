@@ -10,6 +10,7 @@ export const CLASS_NAMES = {
   errorBtn: 'search__error-btn',
   errorWrapper: 'error__wrapper',
   errorCont: 'error__cont',
+  loaderWrapper: 'loader__wrapper',
 }
 
 export const TEXT_CONTENT = {
@@ -21,4 +22,5 @@ export const TEXT_CONTENT = {
   errorTitle: 'Oops',
   errorText: 'Something went wrong...',
   errorID: crypto.randomUUID(),
+  loaderText: 'Loading...',
 }
