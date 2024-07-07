@@ -10,7 +10,7 @@ import { FilmObj, GenObj } from './components/types'
 import API from './components/utils/API'
 import LocalStorage from './components/utils/localStorage'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
-import { TEXT_CONTENT } from './components/constants'
+import { CLASS_NAMES, TEXT_CONTENT } from './components/constants'
 
 class App extends Component<GenObj, { [key: string]: FilmObj[] }> {
   API = new API()
@@ -47,10 +47,10 @@ class App extends Component<GenObj, { [key: string]: FilmObj[] }> {
     return (
       <ErrorBoundary
         fallback={
-          <div className="error__wrapper">
-            <h2>Oops</h2>
+          <div className={CLASS_NAMES.errorWrapper}>
+            <h2>{TEXT_CONTENT.errorTitle}</h2>
             <div></div>
-            <p>Something went wrong...</p>
+            <p>{TEXT_CONTENT.errorText}</p>
           </div>
         }
       >

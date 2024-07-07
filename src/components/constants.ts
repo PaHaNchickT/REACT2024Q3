@@ -7,6 +7,7 @@ export const CLASS_NAMES = {
   resultsItemName: 'results__item-name',
   resultsItemYear: 'results__item-year',
   resultsItemRaiting: 'results__item-imdb',
+  errorWrapper: 'error__wrapper',
 }
 
 export const TEXT_CONTENT = {
@@ -15,5 +16,7 @@ export const TEXT_CONTENT = {
   btnError: 'Throw Error',
   itemYearStub: 'No information',
   itemRaitingStub: 'Unranked',
-  errorID: '1dd12aaf-fd61-49c2-ab50-1a6435076801',
+  errorTitle: 'Oops',
+  errorText: 'Something went wrong...',
+  errorID: crypto.randomUUID(),
 }
