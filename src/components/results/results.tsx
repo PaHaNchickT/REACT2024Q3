@@ -8,12 +8,9 @@ export default class Results extends Component<GenObj, { [key: string]: string }
 
   constructor(props: GenObj) {
     super(props)
-
-    this.start = this.start.bind(this)
-    this.start()
   }
 
-  async start() {
+  async componentDidMount() {
     this.filmsArray = (await ((await this.API.start()) as unknown as Response).json()).items
     this.forceUpdate()
   }
