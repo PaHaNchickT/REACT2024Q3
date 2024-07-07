@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap")
+
+p
+  margin: 0
+
+#root
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 50px
+  padding: 20px
+  box-sizing: border-box
+
+body, button
+  margin: 0
+  font-family: Inter
+
+button
+  cursor: pointer
+  transition: 300ms
+
+/* search */
+
+.search__cont
+  width: 100%
+  display: flex
+  justify-content: space-between
+
+.search__panel-wrapper
+  display: flex
+  gap: 10px
+
+/* results */
+
+.results__cont
+  display: flex
+  width: 90vw
+  flex-wrap: wrap
+  justify-content: center
+  gap: 10px
+
+.results__item
+  width: 200px
+  display: flex
+  flex-direction: column
+  gap: 5px
+  border: 1px solid black
+  box-sizing: border-box
+  overflow: hidden
+  border-radius: 10px
+  transition: 300ms
+  cursor: pointer
+  &:hover
+    box-shadow: 0 0 10px 0 red
+
+.results__item > img
+  border-top-left-radius: 10px
+  border-top-right-radius: 10px
+  box-shadow: 0 0 20px -5px black
+
+.results__item-info
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  padding: 10px
+  gap: 3px
+
+.results__item-info > p > span
+  font-weight: 700
