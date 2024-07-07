@@ -48,9 +48,11 @@ class App extends Component<GenObj, { [key: string]: FilmObj[] }> {
       <ErrorBoundary
         fallback={
           <div className={CLASS_NAMES.errorWrapper}>
-            <h2>{TEXT_CONTENT.errorTitle}</h2>
-            <div></div>
-            <p>{TEXT_CONTENT.errorText}</p>
+            <div className={CLASS_NAMES.errorCont}>
+              <h2>{TEXT_CONTENT.errorTitle}</h2>
+              <div></div>
+              <p>{TEXT_CONTENT.errorText}</p>
+            </div>
           </div>
         }
       >

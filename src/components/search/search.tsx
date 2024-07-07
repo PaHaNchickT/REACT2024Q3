@@ -47,7 +47,9 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
             {TEXT_CONTENT.btnSearch}
           </button>
         </form>
-        <button onClick={this.errorThrowing}>{TEXT_CONTENT.btnError}</button>
+        <button className={CLASS_NAMES.errorBtn} onClick={this.errorThrowing}>
+          {TEXT_CONTENT.btnError}
+        </button>
       </div>
     )
   }

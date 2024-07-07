@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-p {
+p,
+h2 {
   margin: 0;
 }
 
@@ -10,10 +11,17 @@ p {
   gap: 50px;
   padding: 20px;
   box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(#ff9a00, black);
+  height: 100%;
 }
 
 body,
-button {
+button,
+input {
   margin: 0;
   font-family: Inter;
 }
@@ -21,9 +29,24 @@ button {
 button {
   cursor: pointer;
   transition: 300ms;
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+button:hover {
+  color: black;
+  background-color: #ffc873;
+  box-shadow: 0 0 5px 2px #a66400;
 }
 
-/* search */
+.search__error-btn:hover {
+  background-color: #ffa473;
+  box-shadow: 0 0 5px 2px #a63a00;
+}
+
 .search__cont {
   width: 100%;
   display: flex;
@@ -35,7 +58,12 @@ button {
   gap: 10px;
 }
 
-/* results */
+input {
+  border: none;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+
 .results__cont {
   display: flex;
   width: 90vw;
@@ -45,6 +73,7 @@ button {
 }
 
 .results__item {
+  background-color: white;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -57,7 +86,7 @@ button {
   cursor: pointer;
 }
 .results__item:hover {
-  box-shadow: 0 0 10px 0 red;
+  box-shadow: 0 0 10px 0 #ffc873;
 }
 
 .results__item > img {
@@ -76,4 +105,32 @@ button {
 
 .results__item-info > p > span {
   font-weight: 700;
+}
+
+.error__wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error__cont {
+  width: 300px;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.error__cont > div {
+  width: 200px;
+  height: 200px;
+  background-image: url('assets/sad-smile.png');
+  background-position: 50%;
+  background-size: 200px;
 } /*# sourceMappingURL=index.css.map */

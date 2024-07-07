@@ -7,7 +7,9 @@ export const CLASS_NAMES = {
   resultsItemName: 'results__item-name',
   resultsItemYear: 'results__item-year',
   resultsItemRaiting: 'results__item-imdb',
+  errorBtn: 'search__error-btn',
   errorWrapper: 'error__wrapper',
+  errorCont: 'error__cont',
 }
 
 export const TEXT_CONTENT = {
