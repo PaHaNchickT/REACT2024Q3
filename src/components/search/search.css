@@ -1,0 +1,16 @@
+.search__cont {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search__panel-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  border: none;
+  padding-left: 10px;
+  border-radius: 5px;
+} /*# sourceMappingURL=search.css.map */

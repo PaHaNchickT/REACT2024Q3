@@ -3,6 +3,8 @@ import { FilmObj, GenObj } from '../types'
 import API from '../utils/API'
 import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
 
+import './results.css'
+
 export default class Results extends Component<GenObj, { [key: string]: string }> {
   API = new API()
   filmsArray = null

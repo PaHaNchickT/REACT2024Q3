@@ -3,6 +3,8 @@ import { GenObj } from '../types'
 import LocalStorage from '../utils/localStorage'
 import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
 
+import './search.css'
+
 export default class Search extends Component<GenObj, { [key: string]: string }> {
   localStorage = new LocalStorage()
   savedValue = this.localStorage.getValue()

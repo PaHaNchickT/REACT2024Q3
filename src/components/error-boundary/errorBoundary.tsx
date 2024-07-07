@@ -1,5 +1,7 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
 
+import './errorBoundary.css'
+
 export default class ErrorBoundary extends Component<{ [key: string]: ReactNode }, { [key: string]: boolean }> {
   constructor(props: { [key: string]: ReactNode }) {
     super(props)
