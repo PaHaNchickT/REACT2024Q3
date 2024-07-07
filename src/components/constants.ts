@@ -12,7 +12,8 @@ export const CLASS_NAMES = {
 export const TEXT_CONTENT = {
   btnHome: 'Reset Search',
   btnSearch: 'Search',
-  btnError: 'Error',
+  btnError: 'Throw Error',
   itemYearStub: 'No information',
   itemRaitingStub: 'Unranked',
+  errorID: '1dd12aaf-fd61-49c2-ab50-1a6435076801',
 }

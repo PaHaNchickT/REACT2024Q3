@@ -14,6 +14,7 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
   constructor(props: GenObj) {
     super(props)
     this.buttonHandler = this.buttonHandler.bind(this)
+    this.errorThrowing = this.errorThrowing.bind(this)
   }
 
   inputHandler(event: ChangeEvent<HTMLInputElement>) {
@@ -32,6 +33,10 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
     this.setState({ value: value.trim() })
   }
 
+  errorThrowing() {
+    if (typeof this.props.onClick === 'function') this.props.onClick(TEXT_CONTENT.errorID)
+  }
+
   render(): ReactNode {
     return (
       <div className={CLASS_NAMES.searchContMain}>
@@ -42,7 +47,7 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
             {TEXT_CONTENT.btnSearch}
           </button>
         </form>
-        <button>{TEXT_CONTENT.btnError}</button>
+        <button onClick={this.errorThrowing}>{TEXT_CONTENT.btnError}</button>
       </div>
     )
   }

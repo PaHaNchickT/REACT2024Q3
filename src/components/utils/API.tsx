@@ -28,4 +28,15 @@ export default class API {
 
     return data
   }
+
+  async fakeRequest() {
+    let data
+    await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_MOVIES&page=1', {
+      method: 'GET',
+    }).then((resp) => {
+      data = resp
+    })
+
+    return data
+  }
 }
