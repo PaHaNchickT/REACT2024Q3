@@ -6,6 +6,7 @@ import API from './components/utils/API'
 import LocalStorage from './components/utils/localStorage'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { CLASS_NAMES, TEXT_CONTENT } from './components/constants'
+import Loader from './components/loader/loader'
 
 class App extends Component<GenObj, { [key: string]: FilmObj[] | boolean }> {
   API = new API()
@@ -45,11 +46,7 @@ class App extends Component<GenObj, { [key: string]: FilmObj[] | boolean }> {
   render(): ReactNode {
     let resultsUI = <Results value={this.state.value} />
     if (this.state.isLoading) {
-      resultsUI = (
-        <div className={CLASS_NAMES.loaderWrapper}>
-          <div></div>
-        </div>
-      )
+      resultsUI = <Loader />
     }
 
     return (
