@@ -10,27 +10,15 @@ export default class Results extends Component<GenObj, { [key: string]: string }
     super(props)
   }
 
-  async componentDidMount() {
-    this.filmsArray = (await ((await this.API.start()) as unknown as Response).json()).items
-    this.forceUpdate()
-  }
-
   render(): ReactNode {
-    if (!this.filmsArray) return
-
-    let filmsArray: { nameOriginal: string; nameEn: string | undefined; nameRu: string; posterUrlPreview: string }[]
-    if (this.props.value instanceof Array && !this.props.value.length) {
-      filmsArray = this.filmsArray
-    } else {
-      filmsArray = this.props.value as {
+    const films = (
+      this.props.value as {
         nameOriginal: string
         nameEn: string | undefined
         nameRu: string
         posterUrlPreview: string
       }[]
-    }
-
-    const films = filmsArray.map((film) => (
+    ).map((film) => (
       <div className="results__item" key={crypto.randomUUID()}>
         <img
           src={film.posterUrlPreview}

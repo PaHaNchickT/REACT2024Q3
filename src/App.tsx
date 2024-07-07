@@ -8,8 +8,9 @@ import Search from './components/search/search'
 import Results from './components/results/results'
 import { GenObj } from './components/types'
 import API from './components/utils/API'
+import LocalStorage from './components/utils/localStorage'
 
-class App extends Component<GenObj, { [key: string]: string | boolean | string[] }> {
+class App extends Component<GenObj, { [key: string]: string[] }> {
   API = new API()
 
   state = {
@@ -31,6 +32,10 @@ class App extends Component<GenObj, { [key: string]: string | boolean | string[]
     }
 
     this.setState({ value: temp })
+  }
+
+  componentDidMount() {
+    this.buttonHandler(new LocalStorage().getValue())
   }
 
   render(): ReactNode {
