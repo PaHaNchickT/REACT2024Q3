@@ -23,4 +23,5 @@ export const TEXT_CONTENT = {
   errorText: 'Something went wrong...',
   errorID: crypto.randomUUID(),
   loaderText: 'Loading...',
+  searchPH: 'Type here to search...',
 }

@@ -21,7 +21,6 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
 
   inputHandler(event: ChangeEvent<HTMLInputElement>) {
     this.setState({ value: event.target.value })
-    this.localStorage.saveValue(event.target.value.trim())
   }
 
   buttonHandler(event: Event) {
@@ -33,6 +32,7 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
 
     if (typeof this.props.onClick === 'function') this.props.onClick(value)
     this.setState({ value: value.trim() })
+    this.localStorage.saveValue(value.trim())
   }
 
   errorThrowing() {
@@ -44,7 +44,12 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
       <div className={CLASS_NAMES.searchContMain}>
         <button onClick={(event) => this.buttonHandler(event as unknown as Event)}>{TEXT_CONTENT.btnHome}</button>
         <form className={CLASS_NAMES.searchPanelWrapper} onSubmit={(event) => event.preventDefault()}>
-          <input type="text" value={this.state.value} onChange={(event) => this.inputHandler(event)} />
+          <input
+            type="text"
+            value={this.state.value}
+            placeholder={TEXT_CONTENT.searchPH}
+            onChange={(event) => this.inputHandler(event)}
+          />
           <button type="submit" onClick={(event) => this.buttonHandler(event as unknown as Event)}>
             {TEXT_CONTENT.btnSearch}
           </button>
