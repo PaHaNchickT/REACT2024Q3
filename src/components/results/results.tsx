@@ -9,11 +9,11 @@ export default class Results extends Component<GenObj, { [key: string]: string }
   constructor(props: GenObj) {
     super(props)
 
-    this.getData = this.getData.bind(this)
-    this.getData()
+    this.start = this.start.bind(this)
+    this.start()
   }
 
-  async getData() {
+  async start() {
     this.filmsArray = (await ((await this.API.start()) as unknown as Response).json()).items
     this.forceUpdate()
   }
@@ -32,10 +32,9 @@ export default class Results extends Component<GenObj, { [key: string]: string }
         posterUrlPreview: string
       }[]
     }
-    console.log(filmsArray, 'jopa')
 
     const films = filmsArray.map((film) => (
-      <div className="results__item">
+      <div className="results__item" key={film.nameEn || film.nameOriginal || film.nameRu}>
         <img
           src={film.posterUrlPreview}
           alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
@@ -45,7 +44,6 @@ export default class Results extends Component<GenObj, { [key: string]: string }
         <p>{film.nameEn || film.nameOriginal || film.nameRu}</p>
       </div>
     ))
-    // console.log(this.props.value, this.filmsArray, 'jopa')
     return <div className="results__cont">{films}</div>
   }
 }

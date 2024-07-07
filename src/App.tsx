@@ -20,7 +20,6 @@ class App extends Component<GenObj, { [key: string]: string | boolean | string[]
     super(props)
 
     this.buttonHandler = this.buttonHandler.bind(this)
-    this.buttonHandler('')
   }
 
   async buttonHandler(value: string) {
@@ -37,7 +36,7 @@ class App extends Component<GenObj, { [key: string]: string | boolean | string[]
   render(): ReactNode {
     return (
       <>
-        <Search onChange={this.buttonHandler} />
+        <Search onClick={this.buttonHandler} />
         <Results value={this.state.value} />
       </>
     )

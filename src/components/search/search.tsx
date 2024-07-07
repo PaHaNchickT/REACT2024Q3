@@ -12,7 +12,7 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
   }
 
   getData() {
-    if (typeof this.props.onChange === 'function') this.props.onChange(this.state.value)
+    if (typeof this.props.onClick === 'function') this.props.onClick(this.state.value)
   }
 
   getValue(event: ChangeEvent<HTMLInputElement>) {
