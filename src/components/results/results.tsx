@@ -1,5 +1,5 @@
 import { Component, ReactNode } from 'react'
-import { GenObj } from '../types'
+import { FilmObj, GenObj } from '../types'
 import API from '../utils/API'
 
 export default class Results extends Component<GenObj, { [key: string]: string }> {
@@ -11,14 +11,7 @@ export default class Results extends Component<GenObj, { [key: string]: string }
   }
 
   render(): ReactNode {
-    const films = (
-      this.props.value as {
-        nameOriginal: string
-        nameEn: string | undefined
-        nameRu: string
-        posterUrlPreview: string
-      }[]
-    ).map((film) => (
+    const films = (this.props.value as FilmObj[]).map((film) => (
       <div className="results__item" key={crypto.randomUUID()}>
         <img
           src={film.posterUrlPreview}
