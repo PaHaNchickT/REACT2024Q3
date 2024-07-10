@@ -2,8 +2,11 @@ import { Component, ErrorInfo, ReactNode } from 'react'
 
 import './errorBoundary.css'
 
-export default class ErrorBoundary extends Component<{ [key: string]: ReactNode }, { [key: string]: boolean }> {
-  constructor(props: { [key: string]: ReactNode }) {
+export default class ErrorBoundary extends Component<
+  { children: ReactNode; fallback: ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: ReactNode; fallback: ReactNode }) {
     super(props)
     this.state = { hasError: false }
   }
