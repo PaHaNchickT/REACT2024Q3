@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import Search from './components/search/search'
-import Results from './components/results/results'
+import { Results } from './components/results/results'
 import { FilmObj } from './components/types'
 import { API } from './components/utils/API'
 import { LocalStorage } from './components/utils/localStorage'
