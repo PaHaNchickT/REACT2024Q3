@@ -1,11 +1,11 @@
 import { Component } from 'react'
-import LocalStorage from '../utils/localStorage'
+import { LocalStorage } from '../utils/localStorage'
 import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
 
 import './search.css'
 
 export default class Search extends Component<{ onClick: (value: string) => void }, { value: string }> {
-  localStorage = new LocalStorage()
+  localStorage = LocalStorage()
   savedValue = this.localStorage.getValue()
 
   state = {

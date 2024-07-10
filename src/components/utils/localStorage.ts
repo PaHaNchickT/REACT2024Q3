@@ -1,9 +1,14 @@
-export default class LocalStorage {
-  getValue() {
+export function LocalStorage() {
+  const getValue = () => {
     return localStorage.getItem('paul-saved-value') || ''
   }
 
-  saveValue(value: string) {
+  const saveValue = (value: string) => {
     localStorage.setItem('paul-saved-value', value)
   }
+
+  return Object.freeze({
+    getValue,
+    saveValue,
+  })
 }
