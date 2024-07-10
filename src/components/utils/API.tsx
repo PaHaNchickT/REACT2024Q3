@@ -8,7 +8,7 @@ export default class API {
         'Content-Type': 'application/json',
       },
     }).then((resp) => {
-      data = resp
+      data = resp.json()
     })
 
     return data
@@ -23,7 +23,7 @@ export default class API {
         'Content-Type': 'application/json',
       },
     }).then((resp) => {
-      data = resp
+      data = resp.json()
     })
 
     return data
@@ -34,7 +34,7 @@ export default class API {
     await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_MOVIES&page=1', {
       method: 'GET',
     }).then((resp) => {
-      data = resp
+      data = resp.json()
     })
 
     return data

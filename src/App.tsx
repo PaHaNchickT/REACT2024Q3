@@ -16,7 +16,7 @@ class App extends Component<GenObj, { [key: string]: FilmObj[] | boolean }> {
     isLoading: true,
   }
 
-  constructor(props: { [key: string]: string }) {
+  constructor(props: Record<string, string>) {
     super(props)
 
     this.buttonHandler = this.buttonHandler.bind(this)
@@ -28,11 +28,11 @@ class App extends Component<GenObj, { [key: string]: FilmObj[] | boolean }> {
     const searchString = value.trim()
     let temp = []
     if (searchString === TEXT_CONTENT.errorID) {
-      temp = (await ((await this.API.fakeRequest()) as unknown as Response).json()).items
+      temp = ((await this.API.fakeRequest()) as unknown as { items: FilmObj[] }).items
     } else if (searchString === '') {
-      temp = (await ((await this.API.start()) as unknown as Response).json()).items
+      temp = ((await this.API.start()) as unknown as { items: FilmObj[] }).items
     } else {
-      temp = (await ((await this.API.search(searchString)) as unknown as Response).json()).films
+      temp = ((await this.API.search(searchString)) as unknown as { films: FilmObj[] }).films
     }
 
     this.setState({ isLoading: false })
