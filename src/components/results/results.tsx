@@ -1,12 +1,12 @@
 import { Component } from 'react'
 import { FilmObj } from '../types'
-import API from '../utils/API'
+import { API } from '../utils/API'
 import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
 
 import './results.css'
 
 export default class Results extends Component<{ value: FilmObj[] }, { [key: string]: string }> {
-  API = new API()
+  API = API()
   filmsArray = null
 
   constructor(props: { value: FilmObj[] }) {

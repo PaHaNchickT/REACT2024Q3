@@ -2,14 +2,14 @@ import { Component } from 'react'
 import Search from './components/search/search'
 import Results from './components/results/results'
 import { FilmObj } from './components/types'
-import API from './components/utils/API'
+import { API } from './components/utils/API'
 import LocalStorage from './components/utils/localStorage'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { CLASS_NAMES, TEXT_CONTENT } from './components/constants'
 import Loader from './components/loader/loader'
 
 class App extends Component<Record<string, string>, { value: FilmObj[]; isLoading: boolean }> {
-  API = new API()
+  API = API()
 
   state = {
     value: [],

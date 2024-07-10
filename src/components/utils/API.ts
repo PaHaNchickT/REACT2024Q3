@@ -1,5 +1,5 @@
-export default class API {
-  async start() {
+export function API() {
+  const start = async () => {
     let data
     await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_MOVIES&page=1', {
       method: 'GET',
@@ -18,7 +18,7 @@ export default class API {
     return data
   }
 
-  async search(value: string) {
+  const search = async (value: string) => {
     let data
     await fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${value}&page=1`, {
       method: 'GET',
@@ -37,7 +37,7 @@ export default class API {
     return data
   }
 
-  async fakeRequest() {
+  const fakeRequest = async () => {
     let data
     await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_MOVIES&page=1', {
       method: 'GET',
@@ -51,4 +51,10 @@ export default class API {
 
     return data
   }
+
+  return Object.freeze({
+    start,
+    search,
+    fakeRequest,
+  })
 }
