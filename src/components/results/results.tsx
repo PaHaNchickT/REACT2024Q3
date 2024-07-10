@@ -1,20 +1,20 @@
 import { Component } from 'react'
-import { FilmObj, GenObj } from '../types'
+import { FilmObj } from '../types'
 import API from '../utils/API'
 import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
 
 import './results.css'
 
-export default class Results extends Component<GenObj, { [key: string]: string }> {
+export default class Results extends Component<{ value: FilmObj[] }, { [key: string]: string }> {
   API = new API()
   filmsArray = null
 
-  constructor(props: GenObj) {
+  constructor(props: { value: FilmObj[] }) {
     super(props)
   }
 
   render() {
-    const films = (this.props.value as FilmObj[]).map((film) => (
+    const films = this.props.value.map((film) => (
       <div className={CLASS_NAMES.resultsItem} key={film.kinopoiskId}>
         <img
           src={film.posterUrlPreview}
