@@ -1,4 +1,4 @@
-import { Component, ReactNode } from 'react'
+import { Component } from 'react'
 import Search from './components/search/search'
 import Results from './components/results/results'
 import { FilmObj, GenObj } from './components/types'
@@ -43,7 +43,7 @@ class App extends Component<GenObj, { [key: string]: FilmObj[] | boolean }> {
     this.buttonHandler(new LocalStorage().getValue())
   }
 
-  render(): ReactNode {
+  render() {
     let resultsUI = <Results value={this.state.value} />
     if (this.state.isLoading) {
       resultsUI = <Loader />

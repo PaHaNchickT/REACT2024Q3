@@ -16,7 +16,7 @@ export default class ErrorBoundary extends Component<{ [key: string]: ReactNode 
     console.log(error, errorInfo)
   }
 
-  render(): ReactNode {
+  render() {
     if (this.state.hasError) {
       return this.props.fallback
     }

@@ -1,4 +1,4 @@
-import { ChangeEvent, Component, ReactNode } from 'react'
+import { ChangeEvent, Component } from 'react'
 import { GenObj } from '../types'
 import LocalStorage from '../utils/localStorage'
 import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
@@ -39,7 +39,7 @@ export default class Search extends Component<GenObj, { [key: string]: string }>
     if (typeof this.props.onClick === 'function') this.props.onClick(TEXT_CONTENT.errorID)
   }
 
-  render(): ReactNode {
+  render() {
     return (
       <div className={CLASS_NAMES.searchContMain}>
         <button onClick={(event) => this.buttonHandler(event as unknown as Event)}>{TEXT_CONTENT.btnHome}</button>

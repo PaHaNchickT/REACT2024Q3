@@ -1,4 +1,4 @@
-import { Component, ReactNode } from 'react'
+import { Component } from 'react'
 import { FilmObj, GenObj } from '../types'
 import API from '../utils/API'
 import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
@@ -13,7 +13,7 @@ export default class Results extends Component<GenObj, { [key: string]: string }
     super(props)
   }
 
-  render(): ReactNode {
+  render() {
     const films = (this.props.value as FilmObj[]).map((film) => (
       <div className={CLASS_NAMES.resultsItem} key={crypto.randomUUID()}>
         <img
