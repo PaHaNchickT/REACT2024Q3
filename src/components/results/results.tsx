@@ -15,7 +15,7 @@ export default class Results extends Component<GenObj, { [key: string]: string }
 
   render() {
     const films = (this.props.value as FilmObj[]).map((film) => (
-      <div className={CLASS_NAMES.resultsItem} key={crypto.randomUUID()}>
+      <div className={CLASS_NAMES.resultsItem} key={film.kinopoiskId}>
         <img
           src={film.posterUrlPreview}
           alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}

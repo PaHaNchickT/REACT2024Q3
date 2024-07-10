@@ -10,4 +10,5 @@ export type FilmObj = {
   year: number
   ratingImdb: number
   rating: number
+  kinopoiskId: number
 }
