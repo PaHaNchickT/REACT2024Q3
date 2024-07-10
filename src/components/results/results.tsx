@@ -15,7 +15,7 @@ export default class Results extends Component<{ value: FilmObj[] }, { [key: str
 
   render() {
     const films = this.props.value.map((film) => (
-      <div className={CLASS_NAMES.resultsItem} key={film.kinopoiskId}>
+      <div className={CLASS_NAMES.resultsItem} key={film.filmId}>
         <img
           src={film.posterUrlPreview}
           alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
