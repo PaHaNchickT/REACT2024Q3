@@ -11,29 +11,39 @@ import { Loader } from './components/loader/loader'
 export function App() {
   const [value, setValue] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [pages, setPages] = useState(0)
 
   const buttonHandler = async (value: string) => {
     setLoading(true)
 
     const searchString = value.trim()
     let tempValue = []
+    let tempPages = 0
     if (searchString === TEXT_CONTENT.errorID) {
       tempValue = ((await API().fakeRequest()) as unknown as { items: FilmObj[] }).items
     } else if (searchString === '') {
-      tempValue = ((await API().start()) as unknown as { items: FilmObj[] }).items
+      const request = (await API().start()) as unknown as { items: FilmObj[]; totalPages: number }
+      tempValue = request.items
+      tempPages = request.totalPages
     } else {
-      tempValue = ((await API().search(searchString)) as unknown as { films: FilmObj[] }).films
+      const request = (await API().search(searchString)) as unknown as {
+        films: FilmObj[]
+        searchFilmsCountResult: number
+      }
+      tempValue = request.films
+      tempPages = Math.ceil(request.searchFilmsCountResult / 20)
     }
 
     setLoading(false)
     setValue(tempValue as SetStateAction<never[]>)
+    setPages(tempPages)
   }
 
   useEffect(() => {
     buttonHandler(LocalStorage().getValue())
   }, [])
 
-  let resultsUI = <Results value={value} />
+  let resultsUI = <Results value={value} pages={pages} />
   if (isLoading) resultsUI = <Loader />
 
   return (

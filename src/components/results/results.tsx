@@ -2,8 +2,11 @@ import { FilmObj } from '../types'
 import { TEXT_CONTENT } from '../constants'
 
 import './results.css'
+import { numberToArray } from '../utils/numberToArray'
+import { Pagination } from '../pagination/paginatioin'
 
-export function Results(props: { value: FilmObj[] }) {
+export function Results(props: { value: FilmObj[]; pages: number }) {
+  console.log(props.pages)
   const films = props.value.map((film) => (
     <div className="results__item" key={film.filmId || film.kinopoiskId}>
       <img
@@ -29,5 +32,12 @@ export function Results(props: { value: FilmObj[] }) {
     </div>
   ))
 
-  return <div className="results__cont">{films}</div>
+  const pages = numberToArray(props.pages).map((page) => <Pagination page={page} key={`page-${page}`} />)
+
+  return (
+    <section className="results__cont">
+      <div className="results__items">{films}</div>
+      <div className="pagination__cont">{pages}</div>
+    </section>
+  )
 }

@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "sources": [
+    "pagination.sass",
+    "pagination.css"
+  ],
+  "names": [],
+  "mappings": "AAAA;EACI,aAAA;EACA,eAAA;EACA,uBAAA;EACA,QAAA;ACCJ;;ADCA;EACI,uBAAA;EACA,WAAA;EACA,YAAA;EACA,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;EACA,kBAAA;ACEJ",
+  "file": "pagination.css"
+}
