@@ -2,7 +2,7 @@
     display: flex
     flex-wrap: wrap
     justify-content: center
-    gap: 5px
+    gap: 10px
     list-style: none
 
 .pagination__cont > li > a
@@ -15,3 +15,14 @@
     cursor: pointer
     border-radius: 5px
     text-decoration: none
+    font-weight: 700
+    color: black
+    &:hover
+        color: black
+        background-color: #FFC873
+        box-shadow: 0 0 5px 2px #A66400
+
+.activeBtn
+    pointer-events: none
+    background-color: #FF9A00 !important
+    box-shadow: 0 0 5px 2px #A66400

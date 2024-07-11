@@ -14,11 +14,13 @@ export function App() {
   const [isLoading, setLoading] = useState(true)
   const [pages, setPages] = useState(0)
   const [value, setValue] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
   const navigate = useNavigate()
 
   const buttonHandler = async (value: string, page: number) => {
     setLoading(true)
     setValue(value)
+    setCurrentPage(page)
 
     const searchString = value.trim()
     let tempArr = []
@@ -48,7 +50,9 @@ export function App() {
     buttonHandler(LocalStorage().getValue(), 1)
   }, [])
 
-  let resultsUI = <Results filmsArr={filmsArr} pages={pages} value={value} onClick={buttonHandler} />
+  let resultsUI = (
+    <Results filmsArr={filmsArr} pages={pages} currentPage={currentPage} value={value} onClick={buttonHandler} />
+  )
   if (isLoading) resultsUI = <Loader />
 
   return (

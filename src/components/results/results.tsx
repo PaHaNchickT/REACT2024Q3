@@ -9,6 +9,7 @@ export function Results(props: {
   filmsArr: FilmObj[]
   value: string
   pages: number
+  currentPage: number
   onClick: (value: string, page: number) => void
 }) {
   const films = props.filmsArr.map((film) => (
@@ -37,7 +38,13 @@ export function Results(props: {
   ))
 
   const pages = numberToArray(props.pages).map((page) => (
-    <Pagination page={page} key={`page-${page}`} value={props.value} onClick={props.onClick} />
+    <Pagination
+      page={page}
+      key={`page-${page}`}
+      value={props.value}
+      currentPage={props.currentPage}
+      onClick={props.onClick}
+    />
   ))
 
   return (

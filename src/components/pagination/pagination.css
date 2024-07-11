@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 5px;
+  gap: 10px;
   list-style: none;
 }
 
@@ -16,4 +16,17 @@
   cursor: pointer;
   border-radius: 5px;
   text-decoration: none;
+  font-weight: 700;
+  color: black;
+}
+.pagination__cont > li > a:hover {
+  color: black;
+  background-color: #ffc873;
+  box-shadow: 0 0 5px 2px #a66400;
+}
+
+.activeBtn {
+  pointer-events: none;
+  background-color: #ff9a00 !important;
+  box-shadow: 0 0 5px 2px #a66400;
 } /*# sourceMappingURL=pagination.css.map */
