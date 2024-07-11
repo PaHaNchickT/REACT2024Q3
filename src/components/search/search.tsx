@@ -3,9 +3,11 @@ import { LocalStorage } from '../utils/localStorage'
 import { TEXT_CONTENT } from '../constants'
 
 import './search.css'
+import { useNavigate } from 'react-router-dom'
 
 export function Search(props: { onClick: (value: string) => void }) {
   const [value, setValue] = useState(LocalStorage().getValue())
+  const navigate = useNavigate()
 
   const buttonHandler = (event: Event) => {
     let tempValue = value
@@ -14,6 +16,8 @@ export function Search(props: { onClick: (value: string) => void }) {
       tempValue = ''
       LocalStorage().saveValue('')
     }
+
+    tempValue === '' ? navigate('/') : navigate(`/search/${value}/1`) //make page dynamic upgradable
 
     props.onClick(tempValue)
     setValue(tempValue.trim())

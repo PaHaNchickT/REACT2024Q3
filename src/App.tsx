@@ -7,11 +7,13 @@ import { LocalStorage } from './components/utils/localStorage'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
 import { Loader } from './components/loader/loader'
+import { useNavigate } from 'react-router-dom'
 
 export function App() {
   const [value, setValue] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [pages, setPages] = useState(0)
+  const navigate = useNavigate()
 
   const buttonHandler = async (value: string) => {
     setLoading(true)
@@ -32,6 +34,7 @@ export function App() {
       }
       tempValue = request.films
       tempPages = Math.ceil(request.searchFilmsCountResult / 20)
+      navigate(`/search/${searchString}/1`) //make page dynamic upgradable
     }
 
     setLoading(false)

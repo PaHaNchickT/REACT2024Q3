@@ -6,7 +6,6 @@ import { numberToArray } from '../utils/numberToArray'
 import { Pagination } from '../pagination/paginatioin'
 
 export function Results(props: { value: FilmObj[]; pages: number }) {
-  console.log(props.pages)
   const films = props.value.map((film) => (
     <div className="results__item" key={film.filmId || film.kinopoiskId}>
       <img
