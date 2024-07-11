@@ -5,7 +5,7 @@ import { FilmObj } from './components/types'
 import { API } from './components/utils/API'
 import { LocalStorage } from './components/utils/localStorage'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
-import { CLASS_NAMES, TEXT_CONTENT } from './components/constants'
+import { TEXT_CONTENT } from './components/constants'
 import { Loader } from './components/loader/loader'
 
 export function App() {
@@ -39,8 +39,8 @@ export function App() {
   return (
     <ErrorBoundary
       fallback={
-        <div className={CLASS_NAMES.errorWrapper}>
-          <div className={CLASS_NAMES.errorCont}>
+        <div className="error__wrapper">
+          <div className="error__cont">
             <h2>{TEXT_CONTENT.errorTitle}</h2>
             <div></div>
             <p>{TEXT_CONTENT.errorText}</p>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { LocalStorage } from '../utils/localStorage'
-import { CLASS_NAMES, TEXT_CONTENT } from '../constants'
+import { TEXT_CONTENT } from '../constants'
 
 import './search.css'
 
@@ -21,9 +21,9 @@ export function Search(props: { onClick: (value: string) => void }) {
   }
 
   return (
-    <div className={CLASS_NAMES.searchContMain}>
+    <div className="search__cont">
       <button onClick={(event) => buttonHandler(event as unknown as Event)}>{TEXT_CONTENT.btnHome}</button>
-      <form className={CLASS_NAMES.searchPanelWrapper} onSubmit={(event) => event.preventDefault()}>
+      <form className="search__panel-wrapper" onSubmit={(event) => event.preventDefault()}>
         <input
           type="text"
           value={value}
@@ -37,7 +37,7 @@ export function Search(props: { onClick: (value: string) => void }) {
         </button>
       </form>
       <button
-        className={CLASS_NAMES.errorBtn}
+        className="search__error-btn"
         onClick={() => {
           props.onClick(TEXT_CONTENT.errorID)
         }}

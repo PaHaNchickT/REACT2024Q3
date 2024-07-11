@@ -1,10 +1,8 @@
-import { CLASS_NAMES } from '../constants'
-
 import './loader.css'
 
 export function Loader() {
   return (
-    <div className={CLASS_NAMES.loaderWrapper}>
+    <div className="loader__wrapper">
       <div></div>
     </div>
   )
