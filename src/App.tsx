@@ -34,7 +34,7 @@ export function App() {
       }
       tempValue = request.films
       tempPages = Math.ceil(request.searchFilmsCountResult / 20)
-      navigate(`/search/${searchString}/1`) //make page dynamic upgradable
+      navigate(`/search/1`) //make page dynamic upgradable
     }
 
     setLoading(false)

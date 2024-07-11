@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'search/:searchValue/:pagenumber',
+        path: 'search/:pagenumber',
         element: <App />,
       },
     ],
