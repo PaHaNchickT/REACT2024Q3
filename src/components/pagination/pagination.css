@@ -3,9 +3,10 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
+  list-style: none;
 }
 
-.pagination__cont > * {
+.pagination__cont > li > a {
   background-color: white;
   width: 30px;
   height: 30px;
@@ -14,4 +15,5 @@
   align-items: center;
   cursor: pointer;
   border-radius: 5px;
+  text-decoration: none;
 } /*# sourceMappingURL=pagination.css.map */

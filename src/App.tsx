@@ -10,43 +10,45 @@ import { Loader } from './components/loader/loader'
 import { useNavigate } from 'react-router-dom'
 
 export function App() {
-  const [value, setValue] = useState([])
+  const [filmsArr, setFilmsArr] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [pages, setPages] = useState(0)
+  const [value, setValue] = useState('')
   const navigate = useNavigate()
 
-  const buttonHandler = async (value: string) => {
+  const buttonHandler = async (value: string, page: number) => {
     setLoading(true)
+    setValue(value)
 
     const searchString = value.trim()
-    let tempValue = []
+    let tempArr = []
     let tempPages = 0
     if (searchString === TEXT_CONTENT.errorID) {
-      tempValue = ((await API().fakeRequest()) as unknown as { items: FilmObj[] }).items
+      tempArr = ((await API().fakeRequest()) as unknown as { items: FilmObj[] }).items
     } else if (searchString === '') {
-      const request = (await API().start()) as unknown as { items: FilmObj[]; totalPages: number }
-      tempValue = request.items
+      const request = (await API().start(page)) as unknown as { items: FilmObj[]; totalPages: number }
+      tempArr = request.items
       tempPages = request.totalPages
     } else {
-      const request = (await API().search(searchString)) as unknown as {
+      const request = (await API().search(searchString, page)) as unknown as {
         films: FilmObj[]
         searchFilmsCountResult: number
       }
-      tempValue = request.films
+      tempArr = request.films
       tempPages = Math.ceil(request.searchFilmsCountResult / 20)
-      navigate(`/search/1`) //make page dynamic upgradable
+      navigate(`/search/${page}`)
     }
 
     setLoading(false)
-    setValue(tempValue as SetStateAction<never[]>)
+    setFilmsArr(tempArr as SetStateAction<never[]>)
     setPages(tempPages)
   }
 
   useEffect(() => {
-    buttonHandler(LocalStorage().getValue())
+    buttonHandler(LocalStorage().getValue(), 1)
   }, [])
 
-  let resultsUI = <Results value={value} pages={pages} />
+  let resultsUI = <Results filmsArr={filmsArr} pages={pages} value={value} onClick={buttonHandler} />
   if (isLoading) resultsUI = <Loader />
 
   return (

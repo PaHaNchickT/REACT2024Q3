@@ -3,10 +3,15 @@ import { TEXT_CONTENT } from '../constants'
 
 import './results.css'
 import { numberToArray } from '../utils/numberToArray'
-import { Pagination } from '../pagination/paginatioin'
+import { Pagination } from '../pagination/pagination'
 
-export function Results(props: { value: FilmObj[]; pages: number }) {
-  const films = props.value.map((film) => (
+export function Results(props: {
+  filmsArr: FilmObj[]
+  value: string
+  pages: number
+  onClick: (value: string, page: number) => void
+}) {
+  const films = props.filmsArr.map((film) => (
     <div className="results__item" key={film.filmId || film.kinopoiskId}>
       <img
         src={film.posterUrlPreview}
@@ -31,12 +36,14 @@ export function Results(props: { value: FilmObj[]; pages: number }) {
     </div>
   ))
 
-  const pages = numberToArray(props.pages).map((page) => <Pagination page={page} key={`page-${page}`} />)
+  const pages = numberToArray(props.pages).map((page) => (
+    <Pagination page={page} key={`page-${page}`} value={props.value} onClick={props.onClick} />
+  ))
 
   return (
     <section className="results__cont">
       <div className="results__items">{films}</div>
-      <div className="pagination__cont">{pages}</div>
+      <ul className="pagination__cont">{pages}</ul>
     </section>
   )
 }

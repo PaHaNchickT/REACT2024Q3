@@ -5,7 +5,7 @@ import { TEXT_CONTENT } from '../constants'
 import './search.css'
 import { useNavigate } from 'react-router-dom'
 
-export function Search(props: { onClick: (value: string) => void }) {
+export function Search(props: { onClick: (value: string, page: number) => void }) {
   const [value, setValue] = useState(LocalStorage().getValue())
   const navigate = useNavigate()
 
@@ -19,7 +19,7 @@ export function Search(props: { onClick: (value: string) => void }) {
 
     tempValue === '' ? navigate('/') : navigate(`/search/${value}/1`) //make page dynamic upgradable
 
-    props.onClick(tempValue)
+    props.onClick(tempValue, 1)
     setValue(tempValue.trim())
     LocalStorage().saveValue(tempValue.trim())
   }
@@ -43,7 +43,7 @@ export function Search(props: { onClick: (value: string) => void }) {
       <button
         className="search__error-btn"
         onClick={() => {
-          props.onClick(TEXT_CONTENT.errorID)
+          props.onClick(TEXT_CONTENT.errorID, 1)
         }}
       >
         {TEXT_CONTENT.btnError}
