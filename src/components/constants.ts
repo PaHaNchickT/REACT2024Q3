@@ -6,6 +6,8 @@ export const TEXT_CONTENT = {
   itemRaitingStub: 'Unranked',
   errorTitle: 'Oops',
   errorText: 'Something went wrong...',
+  errorPageTitle: '404',
+  errorPageText: 'Not found',
   errorID: crypto.randomUUID(),
   loaderText: 'Loading...',
   searchPH: 'Type here to search...',
