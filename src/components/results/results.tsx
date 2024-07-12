@@ -17,7 +17,7 @@ export function Results(props: {
   const [details, setDetails] = useState(<></>)
 
   const buttonHandler = (event: MouseEvent) => {
-    setDetails(<Details id={(event.currentTarget as HTMLDivElement).id} />)
+    setDetails(<Details id={+(event.currentTarget as HTMLDivElement).id} />)
   }
 
   const films = props.filmsArr.map((film) => (

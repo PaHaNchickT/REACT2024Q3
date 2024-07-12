@@ -8,4 +8,10 @@ export type FilmObj = {
   rating: number
   filmId: number
   kinopoiskId: number
+  slogan: string
+  description: string
+  webUrl: string
+  filmLength: string
+  type: string
+  genres: { genre: string }[]
 }

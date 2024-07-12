@@ -37,6 +37,25 @@ export function API() {
     return data
   }
 
+  const getFilmInfo = async (id: number) => {
+    let data
+    await fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/${id}`, {
+      method: 'GET',
+      headers: {
+        'X-API-KEY': 'fe77bc0c-1287-4d70-adb2-d5f3b64ee3e7',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((resp) => {
+        data = resp.json()
+      })
+      .catch((err) => {
+        throw new Error(err.text)
+      })
+
+    return data
+  }
+
   const fakeRequest = async () => {
     let data
     await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_MOVIES&page=1', {
@@ -55,6 +74,7 @@ export function API() {
   return Object.freeze({
     start,
     search,
+    getFilmInfo,
     fakeRequest,
   })
 }
