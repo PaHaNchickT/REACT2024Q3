@@ -4,6 +4,8 @@ import { TEXT_CONTENT } from '../constants'
 import './results.css'
 import { numberToArray } from '../utils/numberToArray'
 import { Pagination } from '../pagination/pagination'
+import { useState } from 'react'
+import { Details } from '../details/details'
 
 export function Results(props: {
   filmsArr: FilmObj[]
@@ -12,8 +14,19 @@ export function Results(props: {
   currentPage: number
   onClick: (value: string, page: number) => void
 }) {
+  const [details, setDetails] = useState(<></>)
+
+  const buttonHandler = (event: MouseEvent) => {
+    setDetails(<Details id={(event.currentTarget as HTMLDivElement).id} />)
+  }
+
   const films = props.filmsArr.map((film) => (
-    <div className="results__item" key={film.filmId || film.kinopoiskId}>
+    <div
+      className="results__item"
+      key={film.filmId || film.kinopoiskId}
+      id={(film.filmId || film.kinopoiskId).toString()}
+      onClick={(event) => buttonHandler(event as unknown as MouseEvent)}
+    >
       <img
         src={film.posterUrlPreview}
         alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
@@ -49,8 +62,11 @@ export function Results(props: {
 
   return (
     <section className="results__cont">
-      <div className="results__items">{films}</div>
-      <ul className="pagination__cont">{pages}</ul>
+      <div className="results__wrapper">
+        <div className="results__items">{films}</div>
+        <ul className="pagination__cont">{pages}</ul>
+      </div>
+      {details}
     </section>
   )
 }
