@@ -12,6 +12,5 @@ export type FilmObj = {
   description: string
   webUrl: string
   filmLength: string
-  type: string
   genres: { genre: string }[]
 }

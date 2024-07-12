@@ -2,3 +2,51 @@
     background-color: white
     width: 40vw
     border-radius: 10px
+    padding: 15px
+    box-sizing: border-box
+    display: flex
+    flex-direction: column
+    gap: 25px
+    position: relative
+    overflow: hidden
+
+.details__bg
+    height: 100%
+    position: absolute
+    z-index: 2
+    filter: blur(10px)
+    left: -100%
+    top: 0
+    opacity: 0.15
+
+.details__cont > *:not(.details__bg)
+    z-index: 3
+
+.details__close
+    width: 20px
+    height: 20px
+    background-image: url("../../assets/cross.png")
+    background-size: 100%
+    cursor: pointer
+    align-self: flex-end
+
+.details__cover
+    align-self: center
+    border-radius: 10px
+    box-shadow: 0 0 20px -3px black
+
+.details__descr > p
+    text-align: justify
+
+.details__cont > div
+    display: flex
+    flex-direction: column
+    gap: 5px
+
+.details__cont > a
+    color: black
+    font-weight: 700
+    align-self: center
+    transition: 300ms
+    &:hover
+        color: #ff9a00

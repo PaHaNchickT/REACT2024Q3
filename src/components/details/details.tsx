@@ -26,40 +26,46 @@ export function Details(props: { id: number }) {
   if (filmInfo.genres) genres = filmInfo.genres.map((genre) => <li>{genre.genre}</li>)
 
   let resultsUI = (
-    <div>
-      <div>X</div>
-      <div>
-        <h2>{`${filmInfo.nameEn || filmInfo.nameOriginal || filmInfo.nameRu} ${`(${filmInfo.year})` || ''}`}</h2>
+    <div className="details__cont">
+      <img
+        className="details__bg"
+        src={filmInfo.posterUrlPreview}
+        alt={`${filmInfo.nameEn || filmInfo.nameOriginal || filmInfo.nameRu} cover`}
+      />
+      <div className="details__close"></div>
+      <div className="details__title">
+        <h2>{filmInfo.nameEn || filmInfo.nameOriginal || filmInfo.nameRu}</h2>
         <p>{filmInfo.slogan}</p>
       </div>
       <img
+        className="details__cover"
         src={filmInfo.posterUrlPreview}
         alt={`${filmInfo.nameEn || filmInfo.nameOriginal || filmInfo.nameRu} cover`}
         width="200px"
         height="300px"
       />
-      <div>
-        <h3>Type:</h3>
-        <p>{filmInfo.type}</p>
+      <div className="details__year">
+        <h3>Year:</h3>
+        <p>{filmInfo.year}</p>
       </div>
-      <div>
+      <div className="details__genres">
         <h3>Genres:</h3>
         <p>{genres}</p>
       </div>
-      <div>
+      <div className="details__descr">
         <h3>Description:</h3>
         <p>{filmInfo.description}</p>
       </div>
-      <div>
+      <div className="details__length">
         <h3>Film length:</h3>
         <p>{filmInfo.filmLength}</p>
       </div>
       <a href={filmInfo.webUrl} target="_blank">
-        More details:
+        More details
       </a>
     </div>
   )
   if (isLoading) resultsUI = <Loader />
 
-  return <div className="details__cont">{resultsUI}</div>
+  return resultsUI
 }
