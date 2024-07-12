@@ -45,7 +45,7 @@ export function Details(props: { id: number; onClick: () => void }) {
       />
       <div className="details__year">
         <h3>Year:</h3>
-        <p>{filmInfo.year}</p>
+        <p>{filmInfo.year || 'No information'}</p>
       </div>
       <div className="details__genres">
         <h3>Genres:</h3>
@@ -53,11 +53,11 @@ export function Details(props: { id: number; onClick: () => void }) {
       </div>
       <div className="details__descr">
         <h3>Description:</h3>
-        <p>{filmInfo.description}</p>
+        <p>{filmInfo.description || 'No information'}</p>
       </div>
       <div className="details__length">
         <h3>Film length:</h3>
-        <p>{filmInfo.filmLength}</p>
+        <p>{filmInfo.filmLength || 'No information'}</p>
       </div>
       <a href={filmInfo.webUrl} target="_blank">
         More details
