@@ -4,8 +4,9 @@ import { TEXT_CONTENT } from '../constants'
 import './results.css'
 import { numberToArray } from '../utils/numberToArray'
 import { Pagination } from '../pagination/pagination'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Details } from '../details/details'
+import { useNavigate } from 'react-router-dom'
 
 export function Results(props: {
   filmsArr: FilmObj[]
@@ -16,15 +17,34 @@ export function Results(props: {
 }) {
   const [showDetails, setShowDetails] = useState(false)
   const [id, setId] = useState(0)
+  const navigate = useNavigate()
 
   const buttonHandler = (event: MouseEvent) => {
-    setId(+(event.currentTarget as HTMLDivElement).id)
+    const filmId = +(event.currentTarget as HTMLDivElement).id
+    setId(filmId)
     setShowDetails(true)
+
+    if (location.pathname.split('/')[1] === 'search') {
+      navigate(`/search/${props.currentPage}&details=${filmId}`)
+    } else {
+      navigate(`${props.currentPage}&details=${filmId}`)
+    }
   }
 
   const closeDetails = () => {
-    if (showDetails) setShowDetails(false)
+    if (!showDetails) return
+
+    setShowDetails(false)
+    if (location.pathname.split('/')[1] === 'search') {
+      navigate(`/search/${props.currentPage}`)
+    } else {
+      navigate(`${props.currentPage}`)
+    }
   }
+
+  useEffect(() => {
+    if (location.pathname.split('&')[1]) navigate(location.pathname.split('&')[0])
+  }, [])
 
   const films = props.filmsArr.map((film) => (
     <div

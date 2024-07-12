@@ -51,8 +51,8 @@ export function App() {
       navigate('1')
     }
 
-    if (+location.pathname.split('/')[2]) {
-      buttonHandler(LocalStorage().getValue(), +location.pathname.split('/')[2] || 1)
+    if (location.pathname.split('/')[2] && +location.pathname.split('/')[2].split('&')[0]) {
+      buttonHandler(LocalStorage().getValue(), +location.pathname.split('/')[2].split('&')[0] || 1)
     } else {
       setValue('')
       LocalStorage().saveValue('')
