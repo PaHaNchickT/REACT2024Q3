@@ -7,7 +7,7 @@ import { LocalStorage } from './components/utils/localStorage'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
 import { Loader } from './components/loader/loader'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export function App() {
   const [filmsArr, setFilmsArr] = useState([])
@@ -16,6 +16,7 @@ export function App() {
   const [value, setValue] = useState(LocalStorage().getValue())
   const [currentPage, setCurrentPage] = useState(1)
   const location = useLocation()
+  const navigate = useNavigate()
 
   const buttonHandler = async (value: string, page: number) => {
     setLoading(true)
@@ -46,6 +47,10 @@ export function App() {
   }
 
   useEffect(() => {
+    if (location.pathname === '/') {
+      navigate('1')
+    }
+
     if (+location.pathname.split('/')[2]) {
       buttonHandler(LocalStorage().getValue(), +location.pathname.split('/')[2] || 1)
     } else {

@@ -15,6 +15,10 @@ const router = createBrowserRouter([
         path: 'search/:pagenumber',
         element: <App />,
       },
+      {
+        path: ':pagenumber',
+        element: <App />,
+      },
     ],
   },
   {

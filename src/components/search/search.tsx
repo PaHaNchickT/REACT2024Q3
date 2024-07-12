@@ -17,7 +17,7 @@ export function Search(props: { onClick: (value: string, page: number) => void }
       LocalStorage().saveValue('')
     }
 
-    tempValue === '' ? navigate('/') : navigate(`/search/1`)
+    tempValue === '' ? navigate('/1') : navigate(`/search/1`)
 
     props.onClick(tempValue, 1)
     setValue(tempValue.trim())
