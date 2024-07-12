@@ -14,10 +14,16 @@ export function Results(props: {
   currentPage: number
   onClick: (value: string, page: number) => void
 }) {
-  const [details, setDetails] = useState(<></>)
+  const [showDetails, setShowDetails] = useState(false)
+  const [id, setId] = useState(0)
 
   const buttonHandler = (event: MouseEvent) => {
-    setDetails(<Details id={+(event.currentTarget as HTMLDivElement).id} />)
+    setId(+(event.currentTarget as HTMLDivElement).id)
+    setShowDetails(true)
+  }
+
+  const closeDetails = () => {
+    if (showDetails) setShowDetails(false)
   }
 
   const films = props.filmsArr.map((film) => (
@@ -62,11 +68,11 @@ export function Results(props: {
 
   return (
     <section className="results__cont">
-      <div className="results__wrapper">
+      <div className="results__wrapper" onClick={closeDetails}>
         <div className="results__items">{films}</div>
         <ul className="pagination__cont">{pages}</ul>
       </div>
-      {details}
+      {showDetails && <Details id={id} onClick={closeDetails} />}
     </section>
   )
 }

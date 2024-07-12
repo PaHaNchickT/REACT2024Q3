@@ -4,7 +4,7 @@ import './details.css'
 import { API } from '../utils/API'
 import { FilmObj } from '../types'
 
-export function Details(props: { id: number }) {
+export function Details(props: { id: number; onClick: () => void }) {
   const [isLoading, setLoading] = useState(true)
   const [filmInfo, setFilmInfo] = useState({} as FilmObj)
 
@@ -12,9 +12,8 @@ export function Details(props: { id: number }) {
     setLoading(true)
 
     const request = (await API().getFilmInfo(props.id)) as unknown as { data: FilmObj }
-    setFilmInfo(request.data)
 
-    console.log(request.data)
+    setFilmInfo(request.data)
     setLoading(false)
   }
 
@@ -23,16 +22,16 @@ export function Details(props: { id: number }) {
   }, [])
 
   let genres
-  if (filmInfo.genres) genres = filmInfo.genres.map((genre) => <li>{genre.genre}</li>)
+  if (filmInfo.genres) genres = filmInfo.genres.map((genre) => <li key={genre.genre}>{genre.genre}</li>)
 
   let resultsUI = (
-    <div className="details__cont">
+    <>
       <img
         className="details__bg"
         src={filmInfo.posterUrlPreview}
         alt={`${filmInfo.nameEn || filmInfo.nameOriginal || filmInfo.nameRu} cover`}
       />
-      <div className="details__close"></div>
+      <div className="details__close" onClick={props.onClick}></div>
       <div className="details__title">
         <h2>{filmInfo.nameEn || filmInfo.nameOriginal || filmInfo.nameRu}</h2>
         <p>{filmInfo.slogan}</p>
@@ -63,9 +62,9 @@ export function Details(props: { id: number }) {
       <a href={filmInfo.webUrl} target="_blank">
         More details
       </a>
-    </div>
+    </>
   )
   if (isLoading) resultsUI = <Loader />
 
-  return resultsUI
+  return <div className="details__cont">{resultsUI}</div>
 }
