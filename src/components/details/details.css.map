@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "sources": [
+    "details.sass",
+    "details.css"
+  ],
+  "names": [],
+  "mappings": "AAAA;EACI,uBAAA;EACA,WAAA;EACA,mBAAA;ACCJ",
+  "file": "details.css"
+}

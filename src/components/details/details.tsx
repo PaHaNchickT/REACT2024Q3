@@ -1,8 +1,8 @@
-// import './loader.css'
+import './details.css'
 
 export function Details(props: { id: string }) {
   return (
-    <div className="test">
+    <div className="details__cont">
       <p>{props.id}</p>
     </div>
   )
