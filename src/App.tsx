@@ -7,15 +7,15 @@ import { LocalStorage } from './components/utils/localStorage'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
 import { Loader } from './components/loader/loader'
-import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 export function App() {
   const [filmsArr, setFilmsArr] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [pages, setPages] = useState(0)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(LocalStorage().getValue())
   const [currentPage, setCurrentPage] = useState(1)
-  const navigate = useNavigate()
+  const location = useLocation()
 
   const buttonHandler = async (value: string, page: number) => {
     setLoading(true)
@@ -38,7 +38,6 @@ export function App() {
       }
       tempArr = request.films
       tempPages = Math.ceil(request.searchFilmsCountResult / 20)
-      navigate(`/search/${page}`)
     }
 
     setLoading(false)
@@ -47,7 +46,13 @@ export function App() {
   }
 
   useEffect(() => {
-    buttonHandler(LocalStorage().getValue(), 1)
+    if (+location.pathname.split('/')[2]) {
+      buttonHandler(LocalStorage().getValue(), +location.pathname.split('/')[2] || 1)
+    } else {
+      setValue('')
+      LocalStorage().saveValue('')
+      buttonHandler('', 1)
+    }
   }, [])
 
   let resultsUI = (
