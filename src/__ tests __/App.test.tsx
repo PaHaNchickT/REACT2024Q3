@@ -42,16 +42,27 @@ describe('Items list', () => {
 })
 
 describe('Item', () => {
-  // it('should render the relevant item data', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <App />
-  //     </BrowserRouter>
-  //   )
-  //   expect(true).toBeTruthy()
-  //   // const heading = screen.getByRole('heading')
-  //   // expect(heading).toBeInTheDocument()
-  // })
+  it('should render the relevant item data', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    const currentData = mockAPIstart.items[0]
+    const item = screen.getAllByTestId('results__item')
+
+    expect(item[0].children[0]).toHaveAttribute('src', currentData.posterUrlPreview)
+    expect(item[0].children[1].children[0].textContent === `Title: ${currentData.nameOriginal}`).toBeTruthy()
+    expect(item[0].children[1].children[1].textContent === `Year: ${currentData.year}`).toBeTruthy()
+    expect(item[0].children[1].children[2].textContent === `IMDb: ${currentData.ratingImdb}`).toBeTruthy()
+  })
 
   it("should render detailed item component after it's clicking", async () => {
     const mockJsonPromise = Promise.resolve(mockAPIstart)
@@ -88,7 +99,7 @@ describe('Item', () => {
     const item = screen.getAllByTestId('results__item')
     fireEvent.click(item[0])
 
-    expect(global.fetch).toHaveBeenCalledTimes(3)
+    expect(global.fetch).toHaveBeenCalledTimes(2)
   })
 })
 
