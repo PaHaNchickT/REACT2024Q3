@@ -8,7 +8,7 @@ export const TEXT_CONTENT = {
   errorText: 'Something went wrong...',
   errorPageTitle: '404',
   errorPageText: 'Not found',
-  errorID: '123456789',
+  errorID: '9ce1093a-82d7-4c43-b702-925b4e40e0b6',
   loaderText: 'Loading...',
   searchPH: 'Type here to search...',
 }
