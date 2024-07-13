@@ -63,7 +63,7 @@ export function App() {
   let resultsUI = (
     <Results filmsArr={filmsArr} pages={pages} currentPage={currentPage} value={value} onClick={buttonHandler} />
   )
-  if (isLoading) resultsUI = <Loader />
+  if (isLoading) resultsUI = <Loader theme="default" />
 
   return (
     <ErrorBoundary

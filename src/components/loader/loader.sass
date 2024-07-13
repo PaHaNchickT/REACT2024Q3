@@ -2,6 +2,16 @@
   width: 100%
   height: 100vh
 
+.loader__details > div
+    &::after
+        border: 4px solid rgba(0, 0, 0, 0.1)
+        border-left-color: #ff9a00
+
+.loader__default > div
+    &::after
+        border: 4px solid rgba(0, 0, 0, 0.1)
+        border-left-color: white
+
 .loader__wrapper > div
     position: relative
     z-index: 6
@@ -14,8 +24,6 @@
         height: 30px
         top: 42px
         left: calc(50% - 15px)
-        border: 4px solid rgba(0, 0, 0, 0.1)
-        border-left-color: white
         border-radius: 50%
         animation: donut-spin 1.2s linear infinite
 

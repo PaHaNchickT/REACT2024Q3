@@ -64,7 +64,7 @@ export function Details(props: { id: number; onClick: () => void }) {
       </a>
     </>
   )
-  if (isLoading) resultsUI = <Loader />
+  if (isLoading) resultsUI = <Loader theme="details" />
 
   return <div className="details__cont">{resultsUI}</div>
 }
