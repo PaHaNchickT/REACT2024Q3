@@ -8,7 +8,7 @@ export const TEXT_CONTENT = {
   errorText: 'Something went wrong...',
   errorPageTitle: '404',
   errorPageText: 'Not found',
-  errorID: crypto.randomUUID(),
+  errorID: '123456789',
   loaderText: 'Loading...',
   searchPH: 'Type here to search...',
 }

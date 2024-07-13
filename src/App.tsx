@@ -65,7 +65,7 @@ export function App() {
     } else {
       // setValue('')
       LocalStorage().saveValue('')
-      window.location.reload() //stub for input
+      // window.location.reload() //stub for input
     }
   }, [])
 
