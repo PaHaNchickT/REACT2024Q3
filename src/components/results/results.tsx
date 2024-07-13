@@ -39,11 +39,11 @@ export function Results(props: {
     if (location.pathname.split('&')[1]) navigate(location.pathname.split('&')[0])
   }, [])
 
-  const films = props.filmsArr.map((film) => (
+  const films = props.filmsArr.map((film, index) => (
     <div
       className="results__item"
       data-testid="results__item"
-      key={film.filmId || film.kinopoiskId}
+      key={`${film.filmId || film.kinopoiskId}${index}`}
       id={(film.filmId || film.kinopoiskId).toString()}
       onClick={(event) => buttonHandler(event as unknown as MouseEvent)}
     >
