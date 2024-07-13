@@ -44,6 +44,13 @@ export function App() {
     setLoading(false)
     setFilmsArr(tempArr as SetStateAction<never[]>)
     setPages(tempPages)
+
+    if (page > tempPages) {
+      const pathNameArr = location.pathname.split('/')
+
+      navigate(`${pathNameArr.slice(0, pathNameArr.length - 1).join('/')}/${tempPages}`)
+      buttonHandler(value, tempPages)
+    }
   }
 
   useEffect(() => {
