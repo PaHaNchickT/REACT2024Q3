@@ -60,10 +60,12 @@ export function App() {
 
     if (location.pathname.split('/')[2] && +location.pathname.split('/')[2].split('&')[0]) {
       buttonHandler(LocalStorage().getValue(), +location.pathname.split('/')[2].split('&')[0] || 1)
+    } else if (+location.pathname.split('/')[1]) {
+      buttonHandler(LocalStorage().getValue(), +location.pathname.split('/')[1])
     } else {
-      setValue('')
+      // setValue('')
       LocalStorage().saveValue('')
-      buttonHandler('', 1)
+      window.location.reload() //stub for input
     }
   }, [])
 
