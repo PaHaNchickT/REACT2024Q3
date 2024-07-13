@@ -79,7 +79,7 @@ export function App() {
       buttonHandler(LocalStorage().getValue(), +pathNameArr[2].split('&')[0] || +pathNameArr[2])
       //search page URL editing
     } else {
-      throw new Error('Not found')
+      navigate('error/404')
       // 404 page redirecting
     }
   }, [])
