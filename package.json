@@ -9,13 +9,18 @@
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format:fix": "prettier src --write",
-    "prepare": "husky install",
     "test": "jest"
   },
   "lint-staged": {
     "*.ts": "npx tsc --noEmit",
     "*.{js,jsx,ts,tsx}": "npx eslint",
     "*.{js,jsx,ts,tsx,html,css}": "npx prettier --check"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "jest"
+    }
   },
   "validate-branch-name": {
     "pattern": "class-components",
