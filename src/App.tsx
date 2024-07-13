@@ -72,14 +72,15 @@ export function App() {
       //zero pages for main and search
     }
 
-    if (pathNameArr.length === 2) {
+    if (pathNameArr.length === 2 && (+pathNameArr[1].split('&')[0] || +pathNameArr[1])) {
       buttonHandler(LocalStorage().getValue(), +pathNameArr[1].split('&')[0] || +pathNameArr[1])
       //main page URL editing
-    }
-
-    if (pathNameArr.length === 3) {
+    } else if (pathNameArr.length === 3) {
       buttonHandler(LocalStorage().getValue(), +pathNameArr[2].split('&')[0] || +pathNameArr[2])
       //search page URL editing
+    } else {
+      throw new Error('Not found')
+      // 404 page redirecting
     }
   }, [])
 
