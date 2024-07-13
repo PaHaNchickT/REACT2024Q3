@@ -42,6 +42,7 @@ export function Results(props: {
   const films = props.filmsArr.map((film) => (
     <div
       className="results__item"
+      data-testid="results__item"
       key={film.filmId || film.kinopoiskId}
       id={(film.filmId || film.kinopoiskId).toString()}
       onClick={(event) => buttonHandler(event as unknown as MouseEvent)}

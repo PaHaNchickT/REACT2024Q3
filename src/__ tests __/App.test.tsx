@@ -1,20 +1,15 @@
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { App } from '../App'
 import { BrowserRouter } from 'react-router-dom'
+import { mockAPIstart } from '../test/__ mocks __/API-start'
+import { act } from 'react'
+
+// screen.debug()
 
 test('demo', () => {
   expect(true).toBe(true)
 })
-
-// test('Renders the main page', () => {
-//   render(
-//     <BrowserRouter>
-//       <App />
-//     </BrowserRouter>
-//   )
-//   expect(true).toBeTruthy()
-// })
 
 describe('Main Page', () => {
   it('should render the main page', () => {
@@ -25,7 +20,142 @@ describe('Main Page', () => {
     )
 
     expect(true).toBeTruthy()
-    // const heading = screen.getByRole('heading')
-    // expect(heading).toBeInTheDocument()
   })
+
+  it('should render the specified number of items', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    const items = screen.getAllByTestId('results__item')
+    expect(items).toHaveLength(40)
+  })
+
+  // it('should display an appropriate message if no items are present', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
+
+  // it('should render the relevant item data', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
+
+  // it("should render detailed item component after it's clicking", () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
+
+  // it('should triggers an additional API call to fetch detailed information after item clicking', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
+
+  // it('should display a loading indicator while fetching data', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
+
+  // it('should correctly display the detailed item data', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
+
+  // it('should hide the component after clicking the close button', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
+
+  // it('should update URL query parameter when page changes', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
+
+  // it('should save the entered value to the local storage after clicking the Search button', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
+
+  // it('should retrieve the value from the local storage upon component mounting', () => {
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(true).toBeTruthy()
+  //   // const heading = screen.getByRole('heading')
+  //   // expect(heading).toBeInTheDocument()
+  // })
 })
