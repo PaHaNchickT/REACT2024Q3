@@ -7,6 +7,7 @@ import { Pagination } from '../pagination/pagination'
 import { useEffect, useState } from 'react'
 import { Details } from '../details/details'
 import { useNavigate } from 'react-router-dom'
+import { NoResults } from '../no-results/no-results'
 
 export function Results(props: {
   filmsArr: FilmObj[]
@@ -86,12 +87,19 @@ export function Results(props: {
     />
   ))
 
+  let resultsUI = (
+    <div className="results__wrapper" onClick={closeDetails}>
+      <div className="results__items">{films}</div>
+      <ul className="pagination__cont">{pages}</ul>
+    </div>
+  )
+  if (!props.filmsArr.length) {
+    resultsUI = <NoResults value={props.value} />
+  }
+
   return (
     <section className="results__cont">
-      <div className="results__wrapper" onClick={closeDetails}>
-        <div className="results__items">{films}</div>
-        <ul className="pagination__cont">{pages}</ul>
-      </div>
+      {resultsUI}
       {showDetails && <Details id={id} onClick={closeDetails} />}
     </section>
   )
