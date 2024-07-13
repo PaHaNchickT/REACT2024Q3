@@ -1,4 +1,4 @@
-import './search-stub.css'
+import './no-results.css'
 
 export function NoResults(props: { value: string }) {
   return (

@@ -23,24 +23,16 @@ export function Results(props: {
   const buttonHandler = (event: MouseEvent) => {
     const filmId = +(event.currentTarget as HTMLDivElement).id
     setId(filmId)
-    setShowDetails(true)
 
-    if (location.pathname.split('/')[1] === 'search') {
-      navigate(`/search/${props.currentPage}&details=${filmId}`)
-    } else {
-      navigate(`${props.currentPage}&details=${filmId}`)
-    }
+    setShowDetails(true)
+    navigate(`${location.pathname}&details=${filmId}`)
   }
 
   const closeDetails = () => {
     if (!showDetails) return
 
     setShowDetails(false)
-    if (location.pathname.split('/')[1] === 'search') {
-      navigate(`/search/${props.currentPage}`)
-    } else {
-      navigate(`${props.currentPage}`)
-    }
+    navigate(location.pathname.split('&')[0])
   }
 
   useEffect(() => {
