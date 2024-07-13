@@ -72,16 +72,27 @@ describe('Item', () => {
     expect(screen.getByTestId('details__cont')).toBeInTheDocument()
   })
 
-  // it('should triggers an additional API call to fetch detailed information after item clicking', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <App />
-  //     </BrowserRouter>
-  //   )
-  //   expect(true).toBeTruthy()
-  //   // const heading = screen.getByRole('heading')
-  //   // expect(heading).toBeInTheDocument()
-  // })
+  it('should triggers an additional API call to fetch detailed information after item clicking', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    const item = screen.getAllByTestId('results__item')
+    fireEvent.click(item[0])
+
+    expect(global.fetch).toHaveBeenCalledTimes(3)
+  })
+})
+
+describe('Detailed item', () => {
   // it('should display a loading indicator while fetching data', () => {
   //   render(
   //     <BrowserRouter>
