@@ -1496,3 +1496,9 @@ export const mockAPIstart = {
   total: 40,
   totalPages: 2,
 }
+
+export const mockAPIempty = {
+  items: [],
+  total: 0,
+  totalPages: 0,
+}
