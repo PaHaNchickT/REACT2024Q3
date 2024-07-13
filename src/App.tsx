@@ -54,18 +54,32 @@ export function App() {
   }
 
   useEffect(() => {
-    if (location.pathname === '/') {
+    const pathNameArr = location.pathname.split('/')
+
+    if (location.pathname === '/' || pathNameArr.length > 3) {
       navigate('1')
+      LocalStorage().saveValue('')
+      buttonHandler('', 1)
+      //root page redirecting
     }
 
-    if (location.pathname.split('/')[2] && +location.pathname.split('/')[2].split('&')[0]) {
-      buttonHandler(LocalStorage().getValue(), +location.pathname.split('/')[2].split('&')[0] || 1)
-    } else if (+location.pathname.split('/')[1]) {
-      buttonHandler(LocalStorage().getValue(), +location.pathname.split('/')[1])
-    } else {
-      // setValue('')
-      LocalStorage().saveValue('')
-      // window.location.reload() //stub for input
+    if (
+      (pathNameArr.length === 2 && (+pathNameArr[1] === 0 || +pathNameArr[1].split('&')[0] === 0)) ||
+      (pathNameArr.length === 3 && (+pathNameArr[2] === 0 || +pathNameArr[2].split('&')[0] === 0))
+    ) {
+      navigate(`${pathNameArr.splice(0, pathNameArr.length - 1).join('/')}/1`)
+      buttonHandler(LocalStorage().getValue(), 1)
+      //zero pages for main and search
+    }
+
+    if (pathNameArr.length === 2) {
+      buttonHandler(LocalStorage().getValue(), +pathNameArr[1].split('&')[0] || +pathNameArr[1])
+      //main page URL editing
+    }
+
+    if (pathNameArr.length === 3) {
+      buttonHandler(LocalStorage().getValue(), +pathNameArr[2].split('&')[0] || +pathNameArr[2])
+      //search page URL editing
     }
   }, [])
 
