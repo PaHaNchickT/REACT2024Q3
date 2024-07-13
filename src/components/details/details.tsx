@@ -66,5 +66,9 @@ export function Details(props: { id: number; onClick: () => void }) {
   )
   if (isLoading) resultsUI = <Loader theme="details" />
 
-  return <div className="details__cont">{resultsUI}</div>
+  return (
+    <div className="details__cont" data-testid="details__cont">
+      {resultsUI}
+    </div>
+  )
 }
