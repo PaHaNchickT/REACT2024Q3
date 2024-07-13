@@ -10,7 +10,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format:fix": "prettier src --write",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "lint-staged": {
     "*.ts": "npx tsc --noEmit",
