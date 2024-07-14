@@ -57,8 +57,6 @@ export function App() {
       //root page redirecting
     }
 
-    console.log(pathNameArr)
-
     if (pathNameArr.length === 3 && !savedValue && +pathNameArr[2]) {
       navigate(`/${pathNameArr[2]}`)
       buttonHandler('', +pathNameArr[2])
@@ -109,7 +107,7 @@ export function App() {
         </div>
       }
     >
-      <Search onClick={buttonHandler} />
+      <Search initialValue={savedValue} onClick={buttonHandler} />
       {resultsUI}
     </ErrorBoundary>
   )

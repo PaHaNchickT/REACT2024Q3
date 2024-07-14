@@ -212,6 +212,7 @@ describe('Search', () => {
       render(
         <BrowserRouter>
           <Search
+            initialValue=""
             onClick={() => {
               isSaved = true
             }}
@@ -235,7 +236,7 @@ describe('Search', () => {
     await act(async () => {
       render(
         <BrowserRouter>
-          <Search onClick={() => {}} />
+          <Search initialValue="test" onClick={() => {}} />
         </BrowserRouter>
       )
     })

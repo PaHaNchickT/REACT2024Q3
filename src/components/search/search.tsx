@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TEXT_CONTENT } from '../constants'
 
 import './search.css'
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 
-export function Search(props: { onClick: (value: string, page: number) => void }) {
+export function Search(props: { initialValue: string; onClick: (value: string, page: number) => void }) {
   const [savedValue, setSavedValue] = useLocalStorage('')
   const [value, setValue] = useState(savedValue)
   const navigate = useNavigate()
@@ -24,6 +24,10 @@ export function Search(props: { onClick: (value: string, page: number) => void }
     setValue(tempValue.trim())
     setSavedValue(tempValue.trim())
   }
+
+  useEffect(() => {
+    setValue(props.initialValue)
+  }, [props.initialValue])
 
   return (
     <div className="search__cont">
