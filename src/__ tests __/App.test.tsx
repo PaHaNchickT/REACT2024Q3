@@ -2,8 +2,9 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { App } from '../App'
 import { BrowserRouter } from 'react-router-dom'
-import { mockAPIempty, mockAPIstart } from '../test/__ mocks __/API-start'
+import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-start'
 import { act } from 'react'
+import { Details } from '../components/details/details'
 
 // screen.debug()
 
@@ -125,36 +126,31 @@ describe('Detailed item', () => {
     expect(screen.getByTestId('loader__wrapper')).toBeInTheDocument()
   })
 
-  // it('should correctly display the detailed item data', async () => {
-  //   const mockJsonPromise = Promise.resolve(mockAPIstart)
-  //   const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-  //   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+  it('should correctly display the detailed item data', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIfilmData)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
 
-  //   await act(async () => {
-  //     render(
-  //       <BrowserRouter>
-  //         <App />
-  //       </BrowserRouter>
-  //     )
-  //   })
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <Details id={430} onClick={() => {}} />
+        </BrowserRouter>
+      )
+    })
 
-  //   const item = screen.getAllByTestId('results__item')
-  //   fireEvent.click(item[0])
+    const details = screen.getByTestId('details__cont')
+    const currentData = mockAPIfilmData.data
 
-  //   // const details = screen.getByTestId('details__cont')
-  //   // const currentData = mockAPIstart.items[0]
-
-  //   // const closeBtn = details.children[1]
-  //   // const title = details.children[2].children[0].textContent
-  //   // const slogan = details.children[2].children[1].textContent
-  //   // const img = details.children[3].textContent
-  //   // const year = details.children[4].children[1].textContent
-  //   // const descr = details.children[6].children[1].textContent
-  //   // const length = details.children[7].children[1].textContent
-  //   // const link = details.children[8].textContent
-
-  //   // console.log(title === currentData.nameOriginal)
-  // })
+    // const closeBtn = details.children[1]
+    expect(details.children[2].children[0].textContent === currentData.nameEn).toBeTruthy()
+    expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
+    expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
+    expect(details.children[4].children[1].textContent === currentData.year.toString()).toBeTruthy()
+    expect(details.children[6].children[1].textContent === currentData.description).toBeTruthy()
+    expect(details.children[7].children[1].textContent === currentData.filmLength).toBeTruthy()
+    expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
+  })
 
   // it('should hide the component after clicking the close button', () => {
   //   render(
