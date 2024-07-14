@@ -57,11 +57,6 @@ export function App() {
       //root page redirecting
     }
 
-    if (pathNameArr.length === 3 && !+pathNameArr[2]) {
-      navigate('error/404')
-      // 404 page redirecting in wrond page number
-    }
-
     if (
       (pathNameArr.length === 2 && (+pathNameArr[1] === 0 || +pathNameArr[1].split('&')[0] === 0)) ||
       (pathNameArr.length === 3 && (+pathNameArr[2] === 0 || +pathNameArr[2].split('&')[0] === 0))
@@ -72,9 +67,12 @@ export function App() {
     } else if (pathNameArr.length === 2 && (+pathNameArr[1].split('&')[0] || +pathNameArr[1])) {
       buttonHandler(savedValue as string, +pathNameArr[1].split('&')[0] || +pathNameArr[1])
       //main page URL editing
-    } else if (pathNameArr.length === 3) {
+    } else if (pathNameArr.length === 3 && (+pathNameArr[2].split('&')[0] || +pathNameArr[2])) {
       buttonHandler(savedValue as string, +pathNameArr[2].split('&')[0] || +pathNameArr[2])
       //search page URL editing
+    } else if (pathNameArr.length === 3 && !+pathNameArr[2]) {
+      navigate('error/404')
+      // 404 page redirecting in wrond page number
     } else {
       navigate('error/404')
       // 404 page redirecting in all other cases
