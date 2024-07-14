@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Loader } from '../loader/loader'
 import './details.css'
-import { API } from '../utils/API'
 import { FilmObj } from '../types'
+import { API } from '../../utils/API'
 
 export function Details(props: { id: number; onClick: () => void }) {
   const [isLoading, setLoading] = useState(true)

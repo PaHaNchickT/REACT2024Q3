@@ -2,12 +2,12 @@ import { FilmObj } from '../types'
 import { TEXT_CONTENT } from '../constants'
 
 import './results.css'
-import { numberToArray } from '../utils/numberToArray'
 import { Pagination } from '../pagination/pagination'
 import { useEffect, useState } from 'react'
 import { Details } from '../details/details'
 import { useNavigate } from 'react-router-dom'
 import { NoResults } from '../no-results/no-results'
+import { numberToArray } from '../../utils/numberToArray'
 
 export function Results(props: {
   filmsArr: FilmObj[]

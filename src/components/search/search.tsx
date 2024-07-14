@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { LocalStorage } from '../utils/localStorage'
 import { TEXT_CONTENT } from '../constants'
 
 import './search.css'
 import { useNavigate } from 'react-router-dom'
+import { LocalStorage } from '../../utils/localStorage'
 
 export function Search(props: { onClick: (value: string, page: number) => void }) {
   const [value, setValue] = useState(LocalStorage().getValue())
