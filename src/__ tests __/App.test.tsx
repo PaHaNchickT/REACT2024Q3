@@ -65,6 +65,7 @@ describe('Item', () => {
   })
 
   it("should render detailed item component after it's clicking", async () => {
+    //error here
     const mockJsonPromise = Promise.resolve(mockAPIstart)
     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
@@ -84,6 +85,7 @@ describe('Item', () => {
   })
 
   it('should triggers an additional API call to fetch detailed information after item clicking', async () => {
+    //error here
     const mockJsonPromise = Promise.resolve(mockAPIstart)
     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
@@ -151,7 +153,7 @@ describe('Pagination', () => {
     })
 
     const item = screen.getAllByTestId('pendingBtn')
-    fireEvent.click(item[0])
+    await act(async () => fireEvent.click(item[0]))
 
     expect(+window.location.pathname.split('/')[1] === 1).toBeTruthy()
   })
