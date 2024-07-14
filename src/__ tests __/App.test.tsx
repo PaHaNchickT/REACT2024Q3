@@ -201,7 +201,6 @@ describe('Pagination', () => {
 
 describe('Search', () => {
   it('should save the entered value to the local storage after clicking the Search button', async () => {
-    // need to be fixed
     const mockJsonPromise = Promise.resolve(mockAPIstart)
     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
@@ -225,16 +224,24 @@ describe('Search', () => {
     expect(isSaved).toBeTruthy()
   })
 
-  // it('should retrieve the value from the local storage upon component mounting', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <App />
-  //     </BrowserRouter>
-  //   )
-  //   expect(true).toBeTruthy()
-  //   // const heading = screen.getByRole('heading')
-  //   // expect(heading).toBeInTheDocument()
-  // })
+  it('should retrieve the value from the local storage upon component mounting', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    localStorage.setItem('paul-saved-value', 'test')
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <Search onClick={() => {}} />
+        </BrowserRouter>
+      )
+    })
+
+    const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
+
+    expect(input.value === 'test').toBeTruthy()
+  })
 })
 
 describe('Error Boundary', () => {
