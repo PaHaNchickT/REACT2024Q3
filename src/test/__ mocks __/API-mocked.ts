@@ -1594,3 +1594,1241 @@ export const mockAPIfilmData = {
     imdbId: 'tt0126029',
   },
 }
+
+export const mockAPIsearch = {
+  items: [
+    {
+      filmId: 430,
+      nameRu: 'Шрэк',
+      nameEn: 'Shrek',
+      type: 'FILM',
+      year: '2001',
+      description:
+        'Жил да был в сказочном государстве большой зеленый великан по имени Шрэк. Жил он в гордом одиночестве в лесу, на болоте, которое считал своим. Но однажды злобный коротышка — лорд Фаркуад, правитель волшебного королевства, безжалостно согнал на Шрэково болото всех сказочных обитателей.\nИ беспечной жизни зеленого великана пришел конец. Но лорд Фаркуад пообещал вернуть Шрэку болото, если великан добудет ему прекрасную принцессу Фиону, которая томится в неприступной башне, охраняемой огнедышащим драконом.',
+      filmLength: '01:30',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мелодрама',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '8.2',
+      ratingVoteCount: 833946,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/430.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/430.jpg',
+    },
+    {
+      filmId: 5273,
+      nameRu: 'Шрэк 2',
+      nameEn: 'Shrek 2',
+      type: 'FILM',
+      year: '2004',
+      description:
+        'Шрэк и Фиона возвращаются после медового месяца и находят письмо от родителей Фионы с приглашением на ужин. Однако те не подозревают, что их дочь тоже стала огром! Вместе с Осликом счастливая пара отправляется в путешествие, полное неожиданностей, и попадает в круговорот событий, во время которых приобретает множество друзей…',
+      filmLength: '01:33',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мелодрама',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '7.9',
+      ratingVoteCount: 502514,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/5273.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/5273.jpg',
+    },
+    {
+      filmId: 84020,
+      nameRu: 'Шрэк Третий',
+      nameEn: 'Shrek the Third',
+      type: 'FILM',
+      year: '2007',
+      description:
+        'Король Гарольд внезапно умер, и теперь великан Шрек вынужден стать королем Далекой-Далекой страны. Шрек уважает семейные традиции своей жены Фионы, но править страной очень не хочет, и поэтому и отправляется с Ослом и Котом в сапогах на поиски нового короля. Но пока Шрек ищет короля Артура - другого наследника, принц Чарминг замышляет новые пакости.',
+      filmLength: '01:33',
+      countries: [
+        {
+          country: 'Австралия',
+        },
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мелодрама',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '6.7',
+      ratingVoteCount: 215844,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/84020.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/84020.jpg',
+    },
+    {
+      filmId: 271806,
+      nameRu: 'Шрэк навсегда',
+      nameEn: 'Shrek Forever After',
+      type: 'FILM',
+      year: '2010',
+      description:
+        'Чем бы еще заняться огру, который уже сразился со злым драконом, спас прекрасную принцессу и уберег от беды королевство родственников по линии жены? Что ж, если вы Шрэк, то, сами того не заметив, вы вдруг сядете дома и станете наслаждаться покоем в кругу семьи. Вместо того чтобы как раньше пугать деревенских жителей, теперь Шрэк, хоть и с неохотой, но соглашается оставлять автографы на их вилах. А куда же подевался знаменитый рык этого огра? \n\nПод грузом воспоминаний о днях, когда он чувствовал себя «настоящим огром», Шрэк поддается на уговоры сладкоголосого Румпельштильцхена и заключает с ним договор. Сразу после этого Шрэк оказывается в альтернативной реальности Тридевятого королевства, где все поставлено с ног на голову: на огров здесь охотятся, Румпельштильцхен восседает на троне, а Шрэк и Фиона даже не знакомы. И теперь только сам Шрэк может исправить все, что он натворил, чтобы спасти друзей, восстановить привычный ему порядок вещей и вернуть себе свою единственную Истинную Любовь.',
+      filmLength: '01:30',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мелодрама',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '7.0',
+      ratingVoteCount: 221271,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/271806.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/271806.jpg',
+    },
+    {
+      filmId: 1040433,
+      nameRu: 'Шрэк 5',
+      nameEn: 'Untitled Shrek Reboot',
+      type: 'FILM',
+      year: 'null',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 0,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1040433.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1040433.jpg',
+    },
+    {
+      filmId: 5275,
+      nameRu: 'Шрэк 4-D',
+      nameEn: 'Shrek 4-D',
+      type: 'VIDEO',
+      year: '2003',
+      description:
+        'Лорд Фаркуард был съеден драконом, но его дух все еще жив и все так же зол. Он похищает Фиону с помощью все еще живого помощника-подручного. Шрек и Осел отправляются в путешествие, чтобы спасти принцессу.',
+      filmLength: '00:13',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '5.9',
+      ratingVoteCount: 7746,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/5275.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/5275.jpg',
+    },
+    {
+      filmId: 271800,
+      nameRu: 'Шрэк мороз, зеленый нос',
+      nameEn: 'Shrek the Halls',
+      type: 'FILM',
+      year: '2007',
+      description:
+        'На этот раз Шрек стремится устроить идеальный праздник, удивить Фиону и своих замечательных сорванцов. Только вот незадача: прямо в разгар мероприятия появляются незванные гости — Осел и Кот в Сапогах. Они рушат все планы Шрека и он, сам того не желая, превращается в настоящего скрягу, сказочную разновидность диккенсовского Скруджа.',
+      filmLength: '00:21',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '6.7',
+      ratingVoteCount: 24760,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/271800.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/271800.jpg',
+    },
+    {
+      filmId: 1217884,
+      nameEn: 'Shrek Retold',
+      type: 'FILM',
+      year: '2018',
+      filmLength: '01:30',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '7.4',
+      ratingVoteCount: 311,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1217884.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1217884.jpg',
+    },
+    {
+      filmId: 570085,
+      nameRu: 'Шрэк: Хэллоуин',
+      nameEn: 'Scared Shrekless',
+      type: 'FILM',
+      year: '2010',
+      description:
+        'Шрек с друзьями решили устроить конкурс на самую страшную Хэллоуинскую историю. Но прежде чем выяснится кто же победил, им придется всю ночь пробыть в замке усопшего лорда Фаркуада.',
+      filmLength: '00:26',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '6.8',
+      ratingVoteCount: 14314,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/570085.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/570085.jpg',
+    },
+    {
+      filmId: 793631,
+      nameRu: 'Шрэк: Мюзикл',
+      nameEn: 'Shrek the Musical',
+      type: 'FILM',
+      year: '2013',
+      description:
+        'Жил да был в сказочном государстве большой зеленый великан по имени Шрек. Жил он в гордом одиночестве в лесу, на болоте, которое считал своим. Но однажды злобный коротышка — лорд Фаркуад, правитель волшебного королевства, безжалостно согнал на Шреково болото всех сказочных обитателей.\n\nИ беспечной жизни зеленого великана пришел конец. Но лорд Фаркуад пообещал вернуть Шреку болото, если великан добудет ему прекрасную принцессу Фиону, которая томится в неприступной башне, охраняемой огнедышащим драконом...',
+      filmLength: '02:10',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мюзикл',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '7.3',
+      ratingVoteCount: 350,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/793631.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/793631.jpg',
+    },
+    {
+      filmId: 327382,
+      nameRu: 'Караоке-вечеринка Шрека на болоте',
+      nameEn: 'Shrek in the Swamp Karaoke Dance Party',
+      type: 'VIDEO',
+      year: '2001',
+      description:
+        'Шрек собрал на болоте всех своих друзей и устроил грандиозное караоке. Никто не намерен стоять в сторонке, все дружно поют песни и от души веселятся.',
+      filmLength: '00:03',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мелодрама',
+        },
+        {
+          genre: 'музыка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'семейный',
+        },
+      ],
+      rating: '6.6',
+      ratingVoteCount: 4259,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/327382.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/327382.jpg',
+    },
+    {
+      filmId: 4807663,
+      nameEn: 'Shrek 2 Retold',
+      type: 'FILM',
+      year: '2021',
+      filmLength: '01:32',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'мультфильм',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 9,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4807663.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/4807663.jpg',
+    },
+    {
+      filmId: 760589,
+      nameEn: 'Shrek 5: Donkeyface Killer',
+      type: 'VIDEO',
+      year: '2012',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'ужасы',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 19,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/760589.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/760589.jpg',
+    },
+    {
+      filmId: 624137,
+      nameRu: 'Шрек: Триллер',
+      nameEn: 'Thriller Night',
+      type: 'FILM',
+      year: '2011',
+      description: 'Шреку наскучил обыденный Хэллоуин, ему захотелось чего-то по-настоящему страшного...',
+      filmLength: '00:05',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'музыка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'триллер',
+        },
+        {
+          genre: 'ужасы',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '5.9',
+      ratingVoteCount: 2331,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/624137.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/624137.jpg',
+    },
+    {
+      filmId: 1343904,
+      nameRu: 'Шрэк — это Любовь, Шрэк — это Жизнь',
+      nameEn: 'Shrek is Love, Shrek is Life',
+      type: 'VIDEO',
+      year: '2014',
+      filmLength: '00:02',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 173,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1343904.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1343904.jpg',
+    },
+    {
+      filmId: 1355366,
+      nameEn: 'Shrek Eats 2,000 Chicken Nuggets',
+      type: 'VIDEO',
+      year: '2019',
+      filmLength: '00:03',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 2,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1355366.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1355366.jpg',
+    },
+    {
+      filmId: 735769,
+      nameRu: 'Захватывающие рассказы Шрэка',
+      nameEn: "Shrek's Thrilling Tales",
+      type: 'VIDEO',
+      year: '2012',
+      description:
+        'Вот-вот должен наступить долгожданный праздник - Хэллоуин. Шрэк задумал созвать всех своих самых причудливых и весёлых друзей и устроить ночь, полную страшных рассказов.',
+      filmLength: '01:13',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'ужасы',
+        },
+        {
+          genre: 'фантастика',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '5.9',
+      ratingVoteCount: 1250,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/735769.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/735769.jpg',
+    },
+    {
+      filmId: 1367600,
+      nameEn: 'Shrek Unmasked',
+      type: 'FILM',
+      year: '2011',
+      filmLength: '00:08',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'документальный',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мюзикл',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 4,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1367600.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1367600.jpg',
+    },
+    {
+      filmId: 1228295,
+      nameRu: 'Камин у Шрека',
+      nameEn: "Shrek's Yule Log",
+      type: 'FILM',
+      year: '2010',
+      description: 'Получасовая анимация, основное время которой занимает горящий в доме Шрека камин.',
+      filmLength: '00:30',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '5.8',
+      ratingVoteCount: 250,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1228295.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1228295.jpg',
+    },
+    {
+      filmId: 5106667,
+      nameEn: 'New Shrek!',
+      type: 'MINI_SERIES',
+      year: '2014',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'мультфильм',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 2,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/5106667.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/5106667.jpg',
+    },
+    {
+      filmId: 1228295,
+      nameRu: 'Камин у Шрека',
+      nameEn: "Shrek's Yule Log",
+      type: 'FILM',
+      year: '2010',
+      description: 'Получасовая анимация, основное время которой занимает горящий в доме Шрека камин.',
+      filmLength: '00:30',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '5.8',
+      ratingVoteCount: 250,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1228295.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1228295.jpg',
+    },
+    {
+      filmId: 5106667,
+      nameEn: 'New Shrek!',
+      type: 'MINI_SERIES',
+      year: '2014',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'мультфильм',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 2,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/5106667.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/5106667.jpg',
+    },
+    {
+      filmId: 4866578,
+      nameEn: 'Shrek - The musical jr',
+      type: 'FILM',
+      year: '2021',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'приключения',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 3,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4866578.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/4866578.jpg',
+    },
+    {
+      filmId: 840821,
+      nameRu: 'Кот в сапогах 2: Последнее желание',
+      nameEn: 'Puss in Boots: The Last Wish',
+      type: 'FILM',
+      year: '2022',
+      description:
+        'Промотав восемь жизней из девяти и до смерти испугавшись пришедшего за ним волка-охотника за головами, Кот в сапогах внимает совету врача и заселяется в дом местной кошатницы. Там он смиряется с установленными порядками, отращивает бороду и теряет тягу к подвигам и приключениям, но только до тех пор, пока не узнаёт о волшебной карте, которая указывает путь к где-то упавшей Звезде желаний. Кот в сапогах твёрдо решает отыскать Звезду, чтобы вернуть свои жизни, и в компании притворявшегося кошачьим пёсика отправляется красть карту у известного коллекционера волшебных предметов Джека Хорнера.',
+      filmLength: '01:42',
+      countries: [
+        {
+          country: 'США',
+        },
+        {
+          country: 'Япония',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '8.1',
+      ratingVoteCount: 105450,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/840821.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/840821.jpg',
+    },
+    {
+      filmId: 5048801,
+      nameEn: 'The Ultimate «Shrek» Recap Cartoon',
+      type: 'FILM',
+      year: '2021',
+      filmLength: '00:04',
+      countries: [
+        {
+          country: 'Нидерланды',
+        },
+      ],
+      genres: [
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 4,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/5048801.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/5048801.jpg',
+    },
+    {
+      filmId: 930849,
+      nameEn: 'Swamp Sim: Slender Shrek',
+      type: 'FILM',
+      year: '2015',
+      filmLength: '00:09',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'ужасы',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 8,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/930849.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/930849.jpg',
+    },
+    {
+      filmId: 5164743,
+      nameEn: "Snolly in Shrek's Creppy Swamp",
+      type: 'FILM',
+      year: '2020',
+      filmLength: '00:01',
+      countries: [
+        {
+          country: 'Великобритания',
+        },
+      ],
+      genres: [
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 4,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/5164743.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/5164743.jpg',
+    },
+    {
+      filmId: 569721,
+      nameEn: 'The Tech of Shrek the Third',
+      type: 'VIDEO',
+      year: '2007',
+      filmLength: '00:10',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'документальный',
+        },
+        {
+          genre: 'короткометражка',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 12,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/569721.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/569721.jpg',
+    },
+    {
+      filmId: 102146,
+      nameRu: 'Кот в сапогах',
+      nameEn: 'Puss in Boots',
+      type: 'FILM',
+      year: '2011',
+      description:
+        'Кот в сапогах объединяется с умным Шалтай-Болтаем и сообразительной Кисой, чтобы украсть знаменитую Гусыню, несущую золотые яйца.',
+      filmLength: '01:30',
+      countries: [
+        {
+          country: 'Индия',
+        },
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'детектив',
+        },
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мелодрама',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '7.1',
+      ratingVoteCount: 225758,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/102146.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/102146.jpg',
+    },
+    {
+      filmId: 102146,
+      nameRu: 'Кот в сапогах',
+      nameEn: 'Puss in Boots',
+      type: 'FILM',
+      year: '2011',
+      description:
+        'Кот в сапогах объединяется с умным Шалтай-Болтаем и сообразительной Кисой, чтобы украсть знаменитую Гусыню, несущую золотые яйца.',
+      filmLength: '01:30',
+      countries: [
+        {
+          country: 'Индия',
+        },
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'детектив',
+        },
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мелодрама',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '7.1',
+      ratingVoteCount: 225758,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/102146.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/102146.jpg',
+    },
+    {
+      filmId: 5073013,
+      nameEn: 'How Has Shrek Aged?',
+      type: 'FILM',
+      year: '2021',
+      filmLength: '00:19',
+      countries: [
+        {
+          country: 'Великобритания',
+        },
+      ],
+      genres: [
+        {
+          genre: 'документальный',
+        },
+        {
+          genre: 'короткометражка',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 1,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/5073013.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/5073013.jpg',
+    },
+    {
+      filmId: 298931,
+      nameRu: 'Кумир Тридевятого Королевства',
+      nameEn: 'Far Far Away Idol',
+      type: 'VIDEO',
+      year: '2004',
+      description:
+        'Пародия на популярное ТВ-шоу «Американский идол». В конкурсе на лучшего исполнителя Тридевятого королевства принимают участие Шрек, Фиона, Осел, Кот в сапогах, Капитан Крюк, Дорис и многие другие сказочные персонажи. Выбор победителя обещает быть непредсказуемым, ведь каждый из участников подготовил свой лучший музыкальный номер.',
+      filmLength: '00:06',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'музыка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'семейный',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: '6.4',
+      ratingVoteCount: 2703,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/298931.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/298931.jpg',
+    },
+    {
+      filmId: 888051,
+      nameRu: 'Годзилла: Возрождение',
+      nameEn: 'Shin Gojira',
+      type: 'FILM',
+      year: '2016',
+      description:
+        'Загадочная авария в туннелях под мостом-шоссе Токио Бэй Аква-Лайн ставит на уши аварийные подразделения мегаполиса. Шеф МЧС Японии созывает всех, чтобы выявить причину аварии и найти возможные решения сложившейся проблемы. Чиновники ещё не знают, что это только начало. Гигантское существо, известное как Годзилла, встало на путь разрушения.',
+      filmLength: '02:00',
+      countries: [
+        {
+          country: 'Япония',
+        },
+      ],
+      genres: [
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'фантастика',
+        },
+      ],
+      rating: '6.0',
+      ratingVoteCount: 5911,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/888051.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/888051.jpg',
+    },
+    {
+      filmId: 5451289,
+      nameRu: 'Боевой континент 2: Страна душ',
+      nameEn: 'Douluo Dalu II: Jueshi Tangmen',
+      type: 'TV_SERIES',
+      year: '2023',
+      description:
+        'На этой земле нет магии и боевых искусств, но есть боевые духи. Секта Тан на континенте Доуло упала в упадок, но новое поколение избранных небесами появилось. Семь Монстров Шрека должны сплотить Секту Тан и вернуть ей славу. В этом им помогут духовный зверь, священный бог смерти и новая система духовных инструментов.',
+      filmLength: '00:20',
+      countries: [
+        {
+          country: 'Китай',
+        },
+      ],
+      genres: [
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      rating: 'null',
+      ratingVoteCount: 549,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/5451289.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/5451289.jpg',
+    },
+    {
+      filmId: 4870,
+      nameRu: 'Четвертак',
+      nameEn: 'Two Bits',
+      type: 'FILM',
+      year: '1995',
+      description:
+        'Америка. 1933 год. Мальчик из бедной семьи итальянских эмигрантов, Дженнаро, очень хочет попасть в только что открывшийся кинотеатр «Ла Палома», но билет стоит 25 центов, которых у него нет. Проблема кажется мальчишке совершенно неразрешимой, но дед с утра твердит, что сегодня умрет и оставит внуку монету в 25 центов...',
+      filmLength: '01:25',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      rating: '7.1',
+      ratingVoteCount: 1445,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4870.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/4870.jpg',
+    },
+    {
+      filmId: 4499094,
+      nameRu: 'Без ума от кино',
+      nameEn: 'I Like Movies',
+      type: 'FILM',
+      year: '2022',
+      description:
+        'Лоуренс — киноман на всю голову. На пару с другом он постоянно снимает пародии и любительские фильмы, но, чтобы приблизиться к своей мечте, ему необходимо поступить в киношколу при Нью-Йоркском университете. Пытаясь скопить денег на обучение, он устраивается на работу в местный видеомагазин, пусть даже там «Шрэк» и ценится больше, чем шедевры киноискусства. Но с приближением выпускного Лоуренс все больше переживает о том, кого из себя представляет и куда движется дальше.',
+      filmLength: '01:39',
+      countries: [
+        {
+          country: 'Канада',
+        },
+      ],
+      genres: [
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      rating: '6.8',
+      ratingVoteCount: 1959,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4499094.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/4499094.jpg',
+    },
+    {
+      filmId: 4499094,
+      nameRu: 'Без ума от кино',
+      nameEn: 'I Like Movies',
+      type: 'FILM',
+      year: '2022',
+      description:
+        'Лоуренс — киноман на всю голову. На пару с другом он постоянно снимает пародии и любительские фильмы, но, чтобы приблизиться к своей мечте, ему необходимо поступить в киношколу при Нью-Йоркском университете. Пытаясь скопить денег на обучение, он устраивается на работу в местный видеомагазин, пусть даже там «Шрэк» и ценится больше, чем шедевры киноискусства. Но с приближением выпускного Лоуренс все больше переживает о том, кого из себя представляет и куда движется дальше.',
+      filmLength: '01:39',
+      countries: [
+        {
+          country: 'Канада',
+        },
+      ],
+      genres: [
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      rating: '6.8',
+      ratingVoteCount: 1959,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4499094.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/4499094.jpg',
+    },
+    {
+      filmId: 661203,
+      nameRu: 'Крепыш',
+      nameEn: '10 timer til Paradis',
+      type: 'FILM',
+      year: '2011',
+      description:
+        'Деннис Питерсен – изрезанный глубокими морщинами и щедро покрытый татуировками человек-шкаф, человек-Шрек, похожий на зелёного огра не только гигантским телом и каменной башкой, но и детской наивностью. Профессиональный бодибилдер, подрабатывающий охранником, живёт с сухонькой и седенькой мамой, ведёт себя тише воды-ниже травы и безнадёжно мечтает о постоянной девушке. И вот однажды, последовав примеру друга семьи и закрыв глаза на пассивно-агрессивное поведение мамы, Деннис отправляется в Таиланд, где доступных девушек не счесть...',
+      filmLength: '01:32',
+      countries: [
+        {
+          country: 'Дания',
+        },
+      ],
+      genres: [
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'мелодрама',
+        },
+      ],
+      rating: '6.8',
+      ratingVoteCount: 3643,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/661203.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/661203.jpg',
+    },
+    {
+      filmId: 295055,
+      nameRu: 'Отец невесты',
+      nameEn: 'Father of the Pride',
+      type: 'TV_SERIES',
+      year: '2004',
+      description:
+        'Жили-были Зигфрид и Рой, два полных придурка, говорящих с немецким акцентом и устраивающих магические шоу. Веселые и смешные львы, хитрые тигры, чокнутые зебры, бандиты - индюшки, бабник суслик, чокнутый слон, юморист улитка, ослик из Шрека, ягуар жигало, романтичная панда, и много веселых и потрясающих приключений...',
+      filmLength: '00:22',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'короткометражка',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'приключения',
+        },
+      ],
+      rating: '6.0',
+      ratingVoteCount: 481,
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/295055.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/295055.jpg',
+    },
+  ],
+  keyword: 'shrek',
+  totalPages: 3,
+  total: 39,
+}

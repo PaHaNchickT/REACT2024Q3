@@ -8,7 +8,7 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { App } from '../App'
 import { BrowserRouter } from 'react-router-dom'
-import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
+import { mockAPIempty, mockAPIfilmData, mockAPIsearch, mockAPIstart } from '../test/__ mocks __/API-mocked'
 import { act } from 'react'
 import { Details } from '../components/details/details'
 import { Search } from '../components/search/search'
@@ -220,8 +220,8 @@ describe('Search', () => {
       )
     })
 
-    const button = screen.getByText('Search')
-    await act(async () => fireEvent.click(button))
+    const searchBtn = screen.getByText('Search')
+    await act(async () => fireEvent.click(searchBtn))
 
     expect(isSaved).toBeTruthy()
   })
@@ -243,6 +243,27 @@ describe('Search', () => {
     const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
 
     expect(input.value === 'test').toBeTruthy()
+  })
+
+  it('should reset Search while clicking by home button', async () => {
+    localStorage.setItem('paul-saved-value', 'test')
+
+    const mockJsonPromise = Promise.resolve(mockAPIsearch)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    const searchBtn = screen.getByText('Reset Search')
+    await act(async () => fireEvent.click(searchBtn))
+
+    expect(localStorage.getItem('paul-saved-value') === '').toBeTruthy()
   })
 })
 
