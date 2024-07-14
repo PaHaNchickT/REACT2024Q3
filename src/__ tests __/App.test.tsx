@@ -8,58 +8,46 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { App } from '../App'
 import { BrowserRouter } from 'react-router-dom'
-import { mockAPIempty, mockAPIfilmData, mockAPIsearch, mockAPIstart } from '../test/__ mocks __/API-mocked'
+import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
 import { act } from 'react'
 import { Details } from '../components/details/details'
 import { Search } from '../components/search/search'
 
+const AppCalling = async (mock: object) => {
+  const mockJsonPromise = Promise.resolve(mock)
+  const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+  global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+  await act(async () => {
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    )
+  })
+}
+
+const fetchMocking = async (mock: object) => {
+  const mockJsonPromise = Promise.resolve(mock)
+  const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+  global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+}
+
 describe('Items list', () => {
   it('should render the specified number of items', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIstart)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
-
+    await AppCalling(mockAPIstart)
     expect(screen.getAllByTestId('results__item')).toHaveLength(40)
   })
 
   it('should display an appropriate message if no items are present', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIempty)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
-
+    await AppCalling(mockAPIempty)
     expect(screen.getByTestId('results__stub')).toBeInTheDocument()
   })
 })
 
 describe('Item', () => {
   it('should render the relevant item data', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIstart)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
+    await AppCalling(mockAPIstart)
 
     const currentData = mockAPIstart.items[0]
     const item = screen.getAllByTestId('results__item')
@@ -71,17 +59,7 @@ describe('Item', () => {
   })
 
   it("should render detailed item component after it's clicking", async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIstart)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
+    await AppCalling(mockAPIstart)
 
     const item = screen.getAllByTestId('results__item')
     fireEvent.click(item[0])
@@ -90,17 +68,7 @@ describe('Item', () => {
   })
 
   it('should triggers an additional API call to fetch detailed information after item clicking', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIstart)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
+    await AppCalling(mockAPIstart)
 
     const item = screen.getAllByTestId('results__item')
     fireEvent.click(item[0])
@@ -111,17 +79,7 @@ describe('Item', () => {
 
 describe('Detailed item', () => {
   it('should display a loading indicator while fetching data', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIstart)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
+    await AppCalling(mockAPIstart)
 
     const item = screen.getAllByTestId('results__item')
     fireEvent.click(item[0])
@@ -130,9 +88,7 @@ describe('Detailed item', () => {
   })
 
   it('should correctly display the detailed item data', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIfilmData)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+    fetchMocking(mockAPIfilmData)
 
     await act(async () => {
       render(
@@ -156,9 +112,7 @@ describe('Detailed item', () => {
 
   it('should hide the details component after clicking the close button', async () => {
     let isClicked = false
-    const mockJsonPromise = Promise.resolve(mockAPIfilmData)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+    fetchMocking(mockAPIfilmData)
 
     await act(async () => {
       render(
@@ -182,17 +136,7 @@ describe('Detailed item', () => {
 
 describe('Pagination', () => {
   it('should update URL query parameter when page changes', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIstart)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
+    await AppCalling(mockAPIstart)
 
     const item = screen.getAllByTestId('pendingBtn')
     await act(async () => fireEvent.click(item[0]))
@@ -203,9 +147,7 @@ describe('Pagination', () => {
 
 describe('Search', () => {
   it('should save the entered value to the local storage after clicking the Search button', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIstart)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+    fetchMocking(mockAPIstart)
 
     let isSaved = false
     await act(async () => {
@@ -228,9 +170,7 @@ describe('Search', () => {
   })
 
   it('should retrieve the value from the local storage upon component mounting', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIstart)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+    fetchMocking(mockAPIstart)
 
     localStorage.setItem('paul-saved-value', 'test')
     await act(async () => {
@@ -249,17 +189,7 @@ describe('Search', () => {
   it('should reset Search while clicking by home button', async () => {
     localStorage.setItem('paul-saved-value', 'test')
 
-    const mockJsonPromise = Promise.resolve(mockAPIsearch)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
+    await AppCalling(mockAPIstart)
 
     const searchBtn = screen.getByText('Reset Search')
     await act(async () => fireEvent.click(searchBtn))
@@ -270,33 +200,13 @@ describe('Search', () => {
 
 describe('Error Boundary', () => {
   it('should render error page when app is crashing', async () => {
-    const mockJsonPromise = Promise.resolve({})
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
+    await AppCalling({})
 
     expect(screen.getByTestId('error__wrapper')).toBeInTheDocument()
   })
 
   it('should render error page when clicking on error button', async () => {
-    const mockJsonPromise = Promise.resolve(mockAPIstart)
-    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      )
-    })
+    await AppCalling(mockAPIstart)
 
     const mockJsonPromiseT = Promise.resolve({})
     const mockFetchPromiseT = Promise.resolve({ json: () => mockJsonPromiseT })
