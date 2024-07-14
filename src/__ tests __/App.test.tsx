@@ -142,7 +142,6 @@ describe('Detailed item', () => {
     const details = screen.getByTestId('details__cont')
     const currentData = mockAPIfilmData.data
 
-    // const closeBtn = details.children[1]
     expect(details.children[2].children[0].textContent === currentData.nameEn).toBeTruthy()
     expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
     expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
@@ -152,16 +151,30 @@ describe('Detailed item', () => {
     expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
   })
 
-  // it('should hide the component after clicking the close button', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <App />
-  //     </BrowserRouter>
-  //   )
-  //   expect(true).toBeTruthy()
-  //   // const heading = screen.getByRole('heading')
-  //   // expect(heading).toBeInTheDocument()
-  // })
+  it('should hide the details component after clicking the close button', async () => {
+    let isClicked = false
+    const mockJsonPromise = Promise.resolve(mockAPIfilmData)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <Details
+            id={430}
+            onClick={() => {
+              isClicked = true
+            }}
+          />
+        </BrowserRouter>
+      )
+    })
+
+    const closeBtn = screen.getByTestId('details__cont').children[1]
+    fireEvent.click(closeBtn)
+
+    expect(isClicked).toBeTruthy()
+  })
 })
 
 describe('Pagination', () => {
