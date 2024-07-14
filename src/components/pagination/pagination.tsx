@@ -23,6 +23,7 @@ export function Pagination(props: {
           props.onClick(props.value, props.page)
         }}
         className={buttonClassname}
+        data-testid="pendingBtn"
       >
         {props.page}
       </Link>

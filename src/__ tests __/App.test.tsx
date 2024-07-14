@@ -134,16 +134,30 @@ describe('Detailed item', () => {
   //   // const heading = screen.getByRole('heading')
   //   // expect(heading).toBeInTheDocument()
   // })
-  // it('should update URL query parameter when page changes', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <App />
-  //     </BrowserRouter>
-  //   )
-  //   expect(true).toBeTruthy()
-  //   // const heading = screen.getByRole('heading')
-  //   // expect(heading).toBeInTheDocument()
-  // })
+})
+
+describe('Pagination', () => {
+  it('should update URL query parameter when page changes', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    const item = screen.getAllByTestId('pendingBtn')
+    fireEvent.click(item[0])
+
+    expect(+window.location.pathname.split('/')[1] === 1).toBeTruthy()
+  })
+})
+
+describe('Search', () => {
   // it('should save the entered value to the local storage after clicking the Search button', () => {
   //   render(
   //     <BrowserRouter>
