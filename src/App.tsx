@@ -24,32 +24,25 @@ export function App() {
     setCurrentPage(page)
 
     const searchString = value.trim()
-    let tempArr = []
-    let tempPages = 0
+    let request
+
     if (searchString === TEXT_CONTENT.errorID) {
-      tempArr = ((await API().fakeRequest()) as unknown as { items: FilmObj[] }).items
+      request = (await API().fakeRequest()) as unknown as { items: FilmObj[]; totalPages: number }
     } else if (searchString === '') {
-      const request = (await API().start(page)) as unknown as { items: FilmObj[]; totalPages: number }
-      tempArr = request.items
-      tempPages = request.totalPages
+      request = (await API().start(page)) as unknown as { items: FilmObj[]; totalPages: number }
     } else {
-      const request = (await API().search(searchString, page)) as unknown as {
-        films: FilmObj[]
-        searchFilmsCountResult: number
-      }
-      tempArr = request.films
-      tempPages = Math.ceil(request.searchFilmsCountResult / 20)
+      request = (await API().search(searchString, page)) as unknown as { items: FilmObj[]; totalPages: number }
     }
 
     setLoading(false)
-    setFilmsArr(tempArr as SetStateAction<never[]>)
-    setPages(tempPages)
+    setFilmsArr(request.items as SetStateAction<never[]>)
+    setPages(request.totalPages)
 
-    if (page > tempPages) {
+    if (page > request.totalPages) {
       const pathNameArr = location.pathname.split('/')
 
-      navigate(`${pathNameArr.slice(0, pathNameArr.length - 1).join('/')}/${tempPages}`)
-      buttonHandler(value, tempPages)
+      navigate(`${pathNameArr.slice(0, pathNameArr.length - 1).join('/')}/${request.totalPages}`)
+      buttonHandler(value, request.totalPages)
     }
   }
 
