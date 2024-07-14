@@ -284,4 +284,27 @@ describe('Error Boundary', () => {
 
     expect(screen.getByTestId('error__wrapper')).toBeInTheDocument()
   })
+
+  it('should render error page when clicking on error button', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    const mockJsonPromiseT = Promise.resolve({})
+    const mockFetchPromiseT = Promise.resolve({ json: () => mockJsonPromiseT })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseT)
+
+    const erroBtn = screen.getByTestId('search__error-btn')
+    await act(async () => fireEvent.click(erroBtn))
+
+    expect(screen.getByTestId('error__wrapper')).toBeInTheDocument()
+  })
 })

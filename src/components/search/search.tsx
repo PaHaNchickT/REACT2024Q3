@@ -47,6 +47,7 @@ export function Search(props: { initialValue: string; onClick: (value: string, p
       </form>
       <button
         className="search__error-btn"
+        data-testid="search__error-btn"
         onClick={() => {
           props.onClick(TEXT_CONTENT.errorID, 1)
         }}
