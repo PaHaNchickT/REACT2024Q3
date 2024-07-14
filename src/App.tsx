@@ -57,6 +57,19 @@ export function App() {
       //root page redirecting
     }
 
+    console.log(pathNameArr)
+
+    if (pathNameArr.length === 3 && !savedValue && +pathNameArr[2]) {
+      navigate(`/${pathNameArr[2]}`)
+      buttonHandler('', +pathNameArr[2])
+      //page redirecting when on home page user tries to enter search in URL
+    } else if (pathNameArr.length === 2 && savedValue && +pathNameArr[1]) {
+      navigate(`/${pathNameArr[1]}`)
+      setSavedValue('')
+      buttonHandler('', +pathNameArr[1])
+      //page redirecting when on search page user tries to delete search from URL
+    }
+
     if (
       (pathNameArr.length === 2 && (+pathNameArr[1] === 0 || +pathNameArr[1].split('&')[0] === 0)) ||
       (pathNameArr.length === 3 && (+pathNameArr[2] === 0 || +pathNameArr[2].split('&')[0] === 0))
