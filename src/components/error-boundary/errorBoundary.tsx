@@ -21,6 +21,7 @@ export default class ErrorBoundary extends Component<
 
   render() {
     if (this.state.hasError) {
+      localStorage.removeItem('paul-saved-value')
       return this.props.fallback
     }
 
