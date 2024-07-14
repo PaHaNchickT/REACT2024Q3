@@ -3,17 +3,18 @@ import { Search } from './components/search/search'
 import { Results } from './components/results/results'
 import { FilmObj } from './components/types'
 import { API } from './utils/API'
-import { LocalStorage } from './utils/localStorage'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
 import { Loader } from './components/loader/loader'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocalStorage } from './hooks/useLocalStorage'
 
 export function App() {
   const [filmsArr, setFilmsArr] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [pages, setPages] = useState(0)
-  const [value, setValue] = useState(LocalStorage().getValue())
+  const [savedValue, setSavedValue] = useLocalStorage('')
+  const [value, setValue] = useState(savedValue as string)
   const [currentPage, setCurrentPage] = useState(1)
   const location = useLocation()
   const navigate = useNavigate()
@@ -51,7 +52,7 @@ export function App() {
 
     if (location.pathname === '/' || pathNameArr.length > 3) {
       navigate('1')
-      LocalStorage().saveValue('')
+      setSavedValue('')
       buttonHandler('', 1)
       //root page redirecting
     }
@@ -61,15 +62,15 @@ export function App() {
       (pathNameArr.length === 3 && (+pathNameArr[2] === 0 || +pathNameArr[2].split('&')[0] === 0))
     ) {
       navigate(`${pathNameArr.splice(0, pathNameArr.length - 1).join('/')}/1`)
-      buttonHandler(LocalStorage().getValue(), 1)
+      buttonHandler(savedValue as string, 1)
       //zero pages for main and search
     }
 
     if (pathNameArr.length === 2 && (+pathNameArr[1].split('&')[0] || +pathNameArr[1])) {
-      buttonHandler(LocalStorage().getValue(), +pathNameArr[1].split('&')[0] || +pathNameArr[1])
+      buttonHandler(savedValue as string, +pathNameArr[1].split('&')[0] || +pathNameArr[1])
       //main page URL editing
     } else if (pathNameArr.length === 3) {
-      buttonHandler(LocalStorage().getValue(), +pathNameArr[2].split('&')[0] || +pathNameArr[2])
+      buttonHandler(savedValue as string, +pathNameArr[2].split('&')[0] || +pathNameArr[2])
       //search page URL editing
     } else {
       navigate('error/404')

@@ -3,10 +3,11 @@ import { TEXT_CONTENT } from '../constants'
 
 import './search.css'
 import { useNavigate } from 'react-router-dom'
-import { LocalStorage } from '../../utils/localStorage'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 export function Search(props: { onClick: (value: string, page: number) => void }) {
-  const [value, setValue] = useState(LocalStorage().getValue())
+  const [savedValue, setSavedValue] = useLocalStorage('')
+  const [value, setValue] = useState(savedValue)
   const navigate = useNavigate()
 
   const buttonHandler = (event: Event) => {
@@ -14,14 +15,14 @@ export function Search(props: { onClick: (value: string, page: number) => void }
 
     if ((event.target as HTMLInputElement).textContent === TEXT_CONTENT.btnHome) {
       tempValue = ''
-      LocalStorage().saveValue('')
+      setSavedValue('')
     }
 
     tempValue === '' ? navigate('/1') : navigate(`/search/1`)
 
     props.onClick(tempValue, 1)
     setValue(tempValue.trim())
-    LocalStorage().saveValue(tempValue.trim())
+    setSavedValue(tempValue.trim())
   }
 
   return (
