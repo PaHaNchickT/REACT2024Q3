@@ -39,7 +39,7 @@ export function App() {
     setFilmsArr(request.items as SetStateAction<never[]>)
     setPages(request.totalPages)
 
-    if (page > request.totalPages) {
+    if (page > request.totalPages && request.totalPages !== 0) {
       const pathNameArr = location.pathname.split('/')
 
       navigate(`${pathNameArr.slice(0, pathNameArr.length - 1).join('/')}/${request.totalPages}`)

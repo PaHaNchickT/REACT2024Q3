@@ -86,6 +86,7 @@ export function Results(props: {
       <ul className="pagination__cont">{pages}</ul>
     </div>
   )
+
   if (!props.filmsArr.length) {
     resultsUI = <NoResults value={props.value} />
   }
