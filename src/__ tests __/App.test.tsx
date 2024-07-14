@@ -106,26 +106,56 @@ describe('Item', () => {
 })
 
 describe('Detailed item', () => {
-  // it('should display a loading indicator while fetching data', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <App />
-  //     </BrowserRouter>
-  //   )
-  //   expect(true).toBeTruthy()
-  //   // const heading = screen.getByRole('heading')
-  //   // expect(heading).toBeInTheDocument()
+  it('should display a loading indicator while fetching data', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    const item = screen.getAllByTestId('results__item')
+    fireEvent.click(item[0])
+
+    expect(screen.getByTestId('loader__wrapper')).toBeInTheDocument()
+  })
+
+  // it('should correctly display the detailed item data', async () => {
+  //   const mockJsonPromise = Promise.resolve(mockAPIstart)
+  //   const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+  //   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+  //   await act(async () => {
+  //     render(
+  //       <BrowserRouter>
+  //         <App />
+  //       </BrowserRouter>
+  //     )
+  //   })
+
+  //   const item = screen.getAllByTestId('results__item')
+  //   fireEvent.click(item[0])
+
+  //   // const details = screen.getByTestId('details__cont')
+  //   // const currentData = mockAPIstart.items[0]
+
+  //   // const closeBtn = details.children[1]
+  //   // const title = details.children[2].children[0].textContent
+  //   // const slogan = details.children[2].children[1].textContent
+  //   // const img = details.children[3].textContent
+  //   // const year = details.children[4].children[1].textContent
+  //   // const descr = details.children[6].children[1].textContent
+  //   // const length = details.children[7].children[1].textContent
+  //   // const link = details.children[8].textContent
+
+  //   // console.log(title === currentData.nameOriginal)
   // })
-  // it('should correctly display the detailed item data', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <App />
-  //     </BrowserRouter>
-  //   )
-  //   expect(true).toBeTruthy()
-  //   // const heading = screen.getByRole('heading')
-  //   // expect(heading).toBeInTheDocument()
-  // })
+
   // it('should hide the component after clicking the close button', () => {
   //   render(
   //     <BrowserRouter>
