@@ -307,4 +307,32 @@ describe('Error Boundary', () => {
 
     expect(screen.getByTestId('error__wrapper')).toBeInTheDocument()
   })
+
+  it('should render 404 page after wrong URL entering', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    window.history.pushState({}, '', new URL('http://localhost/test/test/test'))
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    expect(location.href === 'http://localhost/error/2').toBeTruthy()
+  })
 })
