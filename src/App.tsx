@@ -92,7 +92,7 @@ export function App() {
   return (
     <ErrorBoundary
       fallback={
-        <div className="error__wrapper">
+        <div className="error__wrapper" data-testid="error__wrapper">
           <div className="error__cont">
             <h2>{TEXT_CONTENT.errorTitle}</h2>
             <div></div>

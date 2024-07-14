@@ -181,3 +181,21 @@ describe('Search', () => {
   //   // expect(heading).toBeInTheDocument()
   // })
 })
+
+describe('Error Boundary', () => {
+  it('should render error page when app is crashing', async () => {
+    const mockJsonPromise = Promise.resolve({})
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      )
+    })
+
+    expect(screen.getByTestId('error__wrapper')).toBeInTheDocument()
+  })
+})
