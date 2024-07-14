@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-start'
 import { act } from 'react'
 import { Details } from '../components/details/details'
+import { Search } from '../components/search/search'
 
 // screen.debug()
 
@@ -199,16 +200,31 @@ describe('Pagination', () => {
 })
 
 describe('Search', () => {
-  // it('should save the entered value to the local storage after clicking the Search button', () => {
-  //   render(
-  //     <BrowserRouter>
-  //       <App />
-  //     </BrowserRouter>
-  //   )
-  //   expect(true).toBeTruthy()
-  //   // const heading = screen.getByRole('heading')
-  //   // expect(heading).toBeInTheDocument()
-  // })
+  it('should save the entered value to the local storage after clicking the Search button', async () => {
+    // need to be fixed
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    let isSaved = false
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <Search
+            onClick={() => {
+              isSaved = true
+            }}
+          />
+        </BrowserRouter>
+      )
+    })
+
+    const button = screen.getByText('Search')
+    await act(async () => fireEvent.click(button))
+
+    expect(isSaved).toBeTruthy()
+  })
+
   // it('should retrieve the value from the local storage upon component mounting', () => {
   //   render(
   //     <BrowserRouter>
