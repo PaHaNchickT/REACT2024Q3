@@ -1,4 +1,4 @@
-import { useRouteError } from 'react-router-dom'
+import { Link, useRouteError } from 'react-router-dom'
 import { TEXT_CONTENT } from '../constants'
 import './errorPage.css'
 import { useEffect } from 'react'
@@ -19,6 +19,7 @@ export function ErrorPage() {
         <h2>{TEXT_CONTENT.errorPageTitle}</h2>
         <div></div>
         <p>{TEXT_CONTENT.errorPageText}</p>
+        <Link to="/1">{TEXT_CONTENT.btnErrorHome}</Link>
       </div>
     </div>
   )
