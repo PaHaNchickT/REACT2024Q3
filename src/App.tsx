@@ -112,3 +112,11 @@ export function App() {
     </ErrorBoundary>
   )
 }
+
+//
+// Обновление состояния:
+// const dispatch = useDispatch()
+// dispatch(setSearchValue(value)), где value - то, что нужно сохранить
+//
+// Обращение к состоянию:
+// const searchString = useSelector((state) => state.searchString.searchString)

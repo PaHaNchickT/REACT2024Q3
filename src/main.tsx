@@ -4,6 +4,8 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { App } from './App.tsx'
 import './index.css'
 import { ErrorPage } from './components/error-page/errorPage.tsx'
+import { Provider } from 'react-redux'
+import store from './redux/store.ts'
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,9 @@ const root = document.getElementById('root')
 if (root) {
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </React.StrictMode>
   )
 }
