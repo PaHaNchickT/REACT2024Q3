@@ -58,8 +58,8 @@ export function Details() {
         <p>{data.description || 'No information'}</p>
       </div>
       <div className="details__length">
-        <h3>Film length:</h3>
-        <p>{`${data.filmLength} mins` || 'No information'}</p>
+        <h3>Film length (mins):</h3>
+        <p>{data.filmLength || 'No information'}</p>
       </div>
       <a href={data.webUrl} target="_blank">
         More details
