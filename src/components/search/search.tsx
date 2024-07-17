@@ -4,7 +4,7 @@ import { TEXT_CONTENT } from '../constants'
 import './search.css'
 // import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSearchValue } from '../../services/searchSlice'
+import { setPage, setSearchValue } from '../../services/searchSlice'
 import { reduxStore } from '../types'
 
 export function Search() {
@@ -30,6 +30,11 @@ export function Search() {
     dispatch(
       setSearchValue({
         value: '',
+      })
+    )
+    dispatch(
+      setPage({
+        page: 1,
       })
     )
   }
