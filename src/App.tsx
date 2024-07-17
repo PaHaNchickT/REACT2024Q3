@@ -7,7 +7,6 @@ import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
 // import { Loader } from './components/loader/loader'
 // import { useLocation, useNavigate } from 'react-router-dom'
-// import { useLocalStorage } from './hooks/useLocalStorage'
 // import { useDispatch, useSelector } from 'react-redux'
 // import { useGetFilmsQuery } from './services/API'
 // import { setResultsData } from './services/resultsSlice'
@@ -16,8 +15,6 @@ export function App() {
   // const [filmsArr, setFilmsArr] = useState([])
   // const [isLoading, setLoading] = useState(true)
   // const [pages, setPages] = useState(0)
-  // const [savedValue, setSavedValue] = useLocalStorage('')
-  // const [value, setValue] = useState(savedValue as string)
   // const [currentPage, setCurrentPage] = useState(1)
   // const location = useLocation()
   // const navigate = useNavigate()

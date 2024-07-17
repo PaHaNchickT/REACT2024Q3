@@ -3,13 +3,13 @@ import { TEXT_CONTENT } from '../constants'
 
 import './search.css'
 // import { useNavigate } from 'react-router-dom'
-// import { useLocalStorage } from '../../hooks/useLocalStorage'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setSearchValue } from '../../services/searchSlice'
+import { reduxStore } from '../types'
 
 export function Search() {
-  // const [savedValue, setSavedValue] = useLocalStorage('')
-  const [inputValue, setInputValue] = useState('') //localStorage
+  const searchValue = useSelector((state: reduxStore) => state.searchData.searchData.value)
+  const [inputValue, setInputValue] = useState(searchValue)
   // const navigate = useNavigate()
 
   const dispatch = useDispatch()
