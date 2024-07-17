@@ -13,8 +13,11 @@ const searchDataSlice = createSlice({
       state.searchData.value = action.payload.value
       localStorage.setItem('paul-saved-value', action.payload.value)
     },
+    setPage(state, action) {
+      state.searchData.page = action.payload.page
+    },
   },
 })
 
-export const { setSearchValue } = searchDataSlice.actions
+export const { setSearchValue, setPage } = searchDataSlice.actions
 export default searchDataSlice.reducer

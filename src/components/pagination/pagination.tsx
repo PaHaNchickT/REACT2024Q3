@@ -1,22 +1,35 @@
+import { setPage } from '../../services/searchSlice'
 import { reduxStore } from '../types'
 import './pagination.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 export function Pagination(props: { page: number }) {
   // const location = useLocation()
+  const dispatch = useDispatch()
 
   const currentPage = useSelector((state: reduxStore) => state.searchData.searchData.page)
 
   let buttonClassname = 'pendingBtn'
-  if (props.page === currentPage) buttonClassname = 'activeBtn'
+  if (props.page === +currentPage) buttonClassname = 'activeBtn'
 
   // let rootName = ''
   // if (location.pathname.split('/')[1] === 'search') rootName = 'search'
 
-  const pagButtonHandler = () => {}
+  const changePage = (event: Event) => {
+    dispatch(
+      setPage({
+        page: (event.target as HTMLElement).id,
+      })
+    )
+  }
 
   return (
-    <li onClick={pagButtonHandler} className={buttonClassname} data-testid="pendingBtn">
+    <li
+      id={props.page.toString()}
+      onClick={(event) => changePage(event as unknown as Event)}
+      className={buttonClassname}
+      data-testid="pendingBtn"
+    >
       {props.page}
     </li>
   )
