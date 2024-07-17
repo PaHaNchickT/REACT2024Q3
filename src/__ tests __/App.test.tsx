@@ -1,9 +1,3 @@
-// MESSAGE FOR CROSS-CHECK REVIEWERS!!!
-
-// Errors that you see when running tests are CONSOLE ERRORS that are not prohibited in the criteria.
-// This is OK as I am testing the error boundaries.
-// According to the criteria, the tests must pass successfully and indeed they do so.
-
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { App } from '../App'
