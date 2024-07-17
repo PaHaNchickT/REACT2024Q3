@@ -1,46 +1,10 @@
-// import { SetStateAction, useEffect, useState } from 'react'
 import { Search } from './components/search/search'
 import { Results } from './components/results/results'
-// import { FilmObj, reduxStore } from './components/types'
-// import { API } from './utils/API'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
-// import { Loader } from './components/loader/loader'
-// import { useLocation, useNavigate } from 'react-router-dom'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { useGetFilmsQuery } from './services/API'
-// import { setResultsData } from './services/resultsSlice'
 
 export function App() {
-  // const [filmsArr, setFilmsArr] = useState([])
-  // const [isLoading, setLoading] = useState(true)
-  // const [pages, setPages] = useState(0)
-  // const [currentPage, setCurrentPage] = useState(1)
-  // const location = useLocation()
   // const navigate = useNavigate()
-
-  // const buttonHandler = async (value: string, page: number) => {
-  //   // setLoading(true)
-  //   // setValue(value)
-  //   // setCurrentPage(page)
-  //   // const searchString = value.trim()
-  //   // let request
-  //   // if (searchString === TEXT_CONTENT.errorID) {
-  //   //   request = (await API().fakeRequest()) as unknown as { items: FilmObj[]; totalPages: number }
-  //   // } else if (searchString === '') {
-  //   //   request = (await API().start(page)) as unknown as { items: FilmObj[]; totalPages: number }
-  //   // } else {
-  //   //   request = (await API().search(searchString, page)) as unknown as { items: FilmObj[]; totalPages: number }
-  //   // }
-  //   // setLoading(false)
-  //   // setFilmsArr(request.items as SetStateAction<never[]>)
-  //   // setPages(request.totalPages)
-  //   // if (page > request.totalPages && request.totalPages !== 0) {
-  //   //   const pathNameArr = location.pathname.split('/')
-  //   //   navigate(`${pathNameArr.slice(0, pathNameArr.length - 1).join('/')}/${request.totalPages}`)
-  //   //   buttonHandler(value, request.totalPages)
-  //   // }
-  // }
 
   // useEffect(() => {
   //   const pathNameArr = location.pathname.split('/')
@@ -101,29 +65,4 @@ export function App() {
       <Results />
     </ErrorBoundary>
   )
-
-  // return (
-  //   <ErrorBoundary
-  //     fallback={
-  //       <div className="error__wrapper" data-testid="error__wrapper">
-  //         <div className="error__cont">
-  //           <h2>{TEXT_CONTENT.errorTitle}</h2>
-  //           <div></div>
-  //           <p>{TEXT_CONTENT.errorText}</p>
-  //         </div>
-  //       </div>
-  //     }
-  //   >
-  //     <Search initialValue={savedValue} onClick={buttonHandler} />
-  //     {resultsUI}
-  //   </ErrorBoundary>
-  // )
 }
-
-//
-// Обновление состояния:
-// const dispatch = useDispatch()
-// dispatch(setSearchValue(value)), где value - то, что нужно сохранить
-//
-// Обращение к состоянию:
-// const searchString = useSelector((state) => state.searchString.searchString)
