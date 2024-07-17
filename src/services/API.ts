@@ -4,7 +4,7 @@ import { FilmObj } from '../components/types'
 export const filmsAPI = createApi({
   reducerPath: 'filmsAPI',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://kinopoiskapiunofficial.tech/api/v2.2/films/',
+    baseUrl: 'https://kinopoiskapiunofficial.tech/api/v2.2/films',
     method: 'GET',
     headers: {
       'X-API-KEY': 'fe77bc0c-1287-4d70-adb2-d5f3b64ee3e7',
@@ -12,10 +12,10 @@ export const filmsAPI = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAllFilms: builder.query<{ items: FilmObj[]; total: number; totalPages: number }, string>({
-      query: (page) => `collections?type=TOP_250_MOVIES&page=${page}`,
+    getFilms: builder.query<{ items: FilmObj[]; total: number; totalPages: number }, string>({
+      query: (data) => `?order=NUM_VOTE&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=3000&${data}`,
     }),
   }),
 })
 
-export const { useGetAllFilmsQuery } = filmsAPI
+export const { useGetFilmsQuery } = filmsAPI

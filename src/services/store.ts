@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import searchStringSliceReducer from './searchSlice'
+import searchDataSliceReducer from './searchSlice'
+import resultsDataSliceReducer from './resultsSlice'
 import { filmsAPI } from './API'
 
 export default configureStore({
   reducer: {
-    searchString: searchStringSliceReducer,
+    searchData: searchDataSliceReducer,
+    resultsData: resultsDataSliceReducer,
     [filmsAPI.reducerPath]: filmsAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(filmsAPI.middleware),

@@ -1,51 +1,55 @@
-import { FilmObj } from '../types'
+import { reduxStore } from '../types'
 import { TEXT_CONTENT } from '../constants'
 
 import './results.css'
 import { Pagination } from '../pagination/pagination'
-import { useEffect, useState } from 'react'
-import { Details } from '../details/details'
-import { useNavigate } from 'react-router-dom'
+// import { useEffect, useState } from 'react'
+// import { Details } from '../details/details'
+// import { useNavigate } from 'react-router-dom'
 import { NoResults } from '../no-results/no-results'
 import { numberToArray } from '../../utils/numberToArray'
+import { useGetFilmsQuery } from '../../services/API'
+import { useSelector } from 'react-redux'
+import { Loader } from '../loader/loader'
 
-export function Results(props: {
-  filmsArr: FilmObj[]
-  value: string
-  pages: number
-  currentPage: number
-  onClick: (value: string, page: number) => void
-}) {
-  const [showDetails, setShowDetails] = useState(false)
-  const [id, setId] = useState(0)
-  const navigate = useNavigate()
+export function Results() {
+  // const [showDetails, setShowDetails] = useState(false)
+  // const [id, setId] = useState(0)
+  // const navigate = useNavigate()
 
-  const buttonHandler = (event: MouseEvent) => {
-    const filmId = +(event.currentTarget as HTMLDivElement).id
-    setId(filmId)
+  const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
 
-    setShowDetails(true)
-    navigate(`${location.pathname}&details=${filmId}`)
+  const { data = { items: [], total: 0, totalPages: 0 }, isFetching } = useGetFilmsQuery(
+    `keyword=${searchData.value}&page=${searchData.page}`
+  )
+
+  const openDetails = (event: MouseEvent) => {
+    console.log(event)
+    // const filmId = +(event.currentTarget as HTMLDivElement).id
+    // setId(filmId)
+    // setShowDetails(true)
+    // navigate(`${location.pathname}&details=${filmId}`)
   }
 
   const closeDetails = () => {
-    if (!showDetails) return
+    console.log('closed')
+    // if (!showDetails) return
 
-    setShowDetails(false)
-    navigate(location.pathname.split('&')[0])
+    // setShowDetails(false)
+    // navigate(location.pathname.split('&')[0])
   }
 
-  useEffect(() => {
-    if (location.pathname.split('&')[1]) navigate(location.pathname.split('&')[0])
-  }, [])
+  // useEffect(() => {
+  //   if (location.pathname.split('&')[1]) navigate(location.pathname.split('&')[0])
+  // }, [])
 
-  const films = props.filmsArr.map((film, index) => (
+  const films = data.items.map((film) => (
     <div
       className="results__item"
       data-testid="results__item"
-      key={`${film.filmId || film.kinopoiskId}${index}`}
-      id={(film.filmId || film.kinopoiskId).toString()}
-      onClick={(event) => buttonHandler(event as unknown as MouseEvent)}
+      key={film.kinopoiskId}
+      id={film.kinopoiskId.toString()}
+      onClick={(event) => openDetails(event as unknown as MouseEvent)}
     >
       <img
         src={film.posterUrlPreview}
@@ -70,15 +74,7 @@ export function Results(props: {
     </div>
   ))
 
-  const pages = numberToArray(props.pages).map((page) => (
-    <Pagination
-      page={page}
-      key={`page-${page}`}
-      value={props.value}
-      currentPage={props.currentPage}
-      onClick={props.onClick}
-    />
-  ))
+  const pages = numberToArray(data.totalPages).map((page) => <Pagination page={page} key={page} />)
 
   let resultsUI = (
     <div className="results__wrapper" onClick={closeDetails}>
@@ -87,14 +83,18 @@ export function Results(props: {
     </div>
   )
 
-  if (!props.filmsArr.length) {
-    resultsUI = <NoResults value={props.value} />
+  if (isFetching) {
+    resultsUI = <Loader theme="default" />
+  } else if (!data.items.length) {
+    resultsUI = <NoResults />
   }
 
-  return (
-    <section className="results__cont">
-      {resultsUI}
-      {showDetails && <Details id={id} onClick={closeDetails} />}
-    </section>
-  )
+  return <section className="results__cont">{resultsUI}</section>
+
+  // return (
+  //   <section className="results__cont">
+  //     {resultsUI}
+  //     {showDetails && <Details id={id} onClick={closeDetails} />}
+  //   </section>
+  // )
 }

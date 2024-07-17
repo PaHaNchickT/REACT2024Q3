@@ -1,32 +1,38 @@
-import { Link, useLocation } from 'react-router-dom'
+import { reduxStore } from '../types'
 import './pagination.css'
+import { useSelector } from 'react-redux'
 
-export function Pagination(props: {
-  page: number
-  value: string
-  currentPage: number
-  onClick: (value: string, page: number) => void
-}) {
-  const location = useLocation()
+export function Pagination(props: { page: number }) {
+  // const location = useLocation()
+
+  const currentPage = useSelector((state: reduxStore) => state.searchData.searchData.page)
 
   let buttonClassname = 'pendingBtn'
-  if (props.page === props.currentPage) buttonClassname = 'activeBtn'
+  if (props.page === currentPage) buttonClassname = 'activeBtn'
 
-  let rootName = ''
-  if (location.pathname.split('/')[1] === 'search') rootName = 'search'
+  // let rootName = ''
+  // if (location.pathname.split('/')[1] === 'search') rootName = 'search'
+
+  const pagButtonHandler = () => {}
 
   return (
-    <li>
-      <Link
-        to={`${rootName}/${props.page}`}
-        onClick={() => {
-          props.onClick(props.value, props.page)
-        }}
-        className={buttonClassname}
-        data-testid="pendingBtn"
-      >
-        {props.page}
-      </Link>
+    <li onClick={pagButtonHandler} className={buttonClassname} data-testid="pendingBtn">
+      {props.page}
     </li>
   )
+
+  // return (
+  //   <li>
+  //     <Link
+  //       to={`${rootName}/${props.page}`}
+  //       onClick={() => {
+  //         props.onClick(props.value, props.page)
+  //       }}
+  //       className={buttonClassname}
+  //       data-testid="pendingBtn"
+  //     >
+  //       {props.page}
+  //     </Link>
+  //   </li>
+  // )
 }

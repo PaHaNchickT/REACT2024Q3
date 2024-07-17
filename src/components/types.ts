@@ -14,3 +14,14 @@ export type FilmObj = {
   filmLength: string
   genres: { genre: string }[]
 }
+
+export type reduxStore = {
+  searchData: { searchData: { value: string; page: number } }
+  resultsData: {
+    resultsData: {
+      items: FilmObj[]
+      total: number
+      totalPages: number
+    }
+  }
+}
