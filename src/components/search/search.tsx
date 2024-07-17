@@ -23,8 +23,6 @@ export function Search() {
     // let tempValue = value
 
     // tempValue === '' ? navigate('/1') : navigate(`/search/1`)
-
-    // setSavedValue(tempValue.trim())
   }
 
   const resetSearch = () => {
@@ -34,16 +32,7 @@ export function Search() {
         value: '',
       })
     )
-
-    // if ((event.target as HTMLInputElement).textContent === TEXT_CONTENT.btnHome) {
-    //   tempValue = ''
-    //   setSavedValue('')
-    // }
   }
-
-  // useEffect(() => {
-  //   setValue(props.initialValue)
-  // }, [props.initialValue])
 
   return (
     <div className="search__cont">

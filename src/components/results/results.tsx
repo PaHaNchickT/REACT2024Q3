@@ -3,39 +3,45 @@ import { TEXT_CONTENT } from '../constants'
 
 import './results.css'
 import { Pagination } from '../pagination/pagination'
-// import { useEffect, useState } from 'react'
-// import { Details } from '../details/details'
-// import { useNavigate } from 'react-router-dom'
 import { NoResults } from '../no-results/no-results'
 import { numberToArray } from '../../utils/numberToArray'
 import { useGetFilmsQuery } from '../../services/API'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from '../loader/loader'
+import { setIsClosed } from '../../services/detailsSlice'
+import { Details } from '../details/details'
 
 export function Results() {
-  // const [showDetails, setShowDetails] = useState(false)
-  // const [id, setId] = useState(0)
-  // const navigate = useNavigate()
-
   const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
+  const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
+  const dispatch = useDispatch()
 
   const { data = { items: [], total: 0, totalPages: 0 }, isFetching } = useGetFilmsQuery(
     `keyword=${searchData.value}&page=${searchData.page}`
   )
 
   const openDetails = (event: MouseEvent) => {
-    console.log(event)
-    // const filmId = +(event.currentTarget as HTMLDivElement).id
-    // setId(filmId)
-    // setShowDetails(true)
+    if (detailsData.isClosed) return
+
+    dispatch(
+      setIsClosed({
+        isClosed: true,
+        filmId: +(event.currentTarget as HTMLDivElement).id,
+      })
+    )
+
     // navigate(`${location.pathname}&details=${filmId}`)
   }
 
   const closeDetails = () => {
-    console.log('closed')
-    // if (!showDetails) return
+    if (!detailsData.isClosed) return
 
-    // setShowDetails(false)
+    dispatch(
+      setIsClosed({
+        isClosed: false,
+        filmId: 0,
+      })
+    )
     // navigate(location.pathname.split('&')[0])
   }
 
@@ -89,12 +95,10 @@ export function Results() {
     resultsUI = <NoResults />
   }
 
-  return <section className="results__cont">{resultsUI}</section>
-
-  // return (
-  //   <section className="results__cont">
-  //     {resultsUI}
-  //     {showDetails && <Details id={id} onClick={closeDetails} />}
-  //   </section>
-  // )
+  return (
+    <section className="results__cont">
+      {resultsUI}
+      {detailsData.isClosed && <Details />}
+    </section>
+  )
 }

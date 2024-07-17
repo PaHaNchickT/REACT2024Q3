@@ -1,51 +1,53 @@
-import { useEffect, useState } from 'react'
 import { Loader } from '../loader/loader'
 import './details.css'
-import { FilmObj } from '../types'
-import { API } from '../../utils/API'
+import { FilmObj, reduxStore } from '../types'
+import { useGetFilmQuery } from '../../services/API'
+import { useDispatch, useSelector } from 'react-redux'
+import { setIsClosed } from '../../services/detailsSlice'
 
-export function Details(props: { id: number; onClick: () => void }) {
-  const [isLoading, setLoading] = useState(true)
-  const [filmInfo, setFilmInfo] = useState({} as FilmObj)
+export function Details() {
+  const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
+  const dispatch = useDispatch()
 
-  const getData = async () => {
-    setLoading(true)
+  const { data = {} as FilmObj, isFetching } = useGetFilmQuery(detailsData.filmId.toString())
 
-    const request = (await API().getFilmInfo(props.id)) as unknown as { data: FilmObj }
+  const closeDetails = () => {
+    if (!detailsData.isClosed) return
 
-    setFilmInfo(request.data)
-    setLoading(false)
+    dispatch(
+      setIsClosed({
+        isClosed: false,
+        filmId: 0,
+      })
+    )
+    // navigate(location.pathname.split('&')[0])
   }
 
-  useEffect(() => {
-    getData()
-  }, [])
-
   let genres
-  if (filmInfo.genres) genres = filmInfo.genres.map((genre) => <li key={genre.genre}>{genre.genre}</li>)
+  if (data.genres) genres = data.genres.map((genre) => <li key={genre.genre}>{genre.genre}</li>)
 
   let resultsUI = (
     <>
       <img
         className="details__bg"
-        src={filmInfo.posterUrlPreview}
-        alt={`${filmInfo.nameEn || filmInfo.nameOriginal || filmInfo.nameRu} cover`}
+        src={data.posterUrlPreview}
+        alt={`${data.nameEn || data.nameOriginal || data.nameRu} cover`}
       />
-      <div className="details__close" onClick={props.onClick}></div>
+      <div className="details__close" onClick={closeDetails}></div>
       <div className="details__title">
-        <h2>{filmInfo.nameEn || filmInfo.nameOriginal || filmInfo.nameRu}</h2>
-        <p>{filmInfo.slogan}</p>
+        <h2>{data.nameEn || data.nameOriginal || data.nameRu}</h2>
+        <p>{data.slogan}</p>
       </div>
       <img
         className="details__cover"
-        src={filmInfo.posterUrlPreview}
-        alt={`${filmInfo.nameEn || filmInfo.nameOriginal || filmInfo.nameRu} cover`}
+        src={data.posterUrlPreview}
+        alt={`${data.nameEn || data.nameOriginal || data.nameRu} cover`}
         width="200px"
         height="300px"
       />
       <div className="details__year">
         <h3>Year:</h3>
-        <p>{filmInfo.year || 'No information'}</p>
+        <p>{data.year || 'No information'}</p>
       </div>
       <div className="details__genres">
         <h3>Genres:</h3>
@@ -53,18 +55,18 @@ export function Details(props: { id: number; onClick: () => void }) {
       </div>
       <div className="details__descr">
         <h3>Description:</h3>
-        <p>{filmInfo.description || 'No information'}</p>
+        <p>{data.description || 'No information'}</p>
       </div>
       <div className="details__length">
         <h3>Film length:</h3>
-        <p>{filmInfo.filmLength || 'No information'}</p>
+        <p>{`${data.filmLength} mins` || 'No information'}</p>
       </div>
-      <a href={filmInfo.webUrl} target="_blank">
+      <a href={data.webUrl} target="_blank">
         More details
       </a>
     </>
   )
-  if (isLoading) resultsUI = <Loader theme="details" />
+  if (isFetching) resultsUI = <Loader theme="details" />
 
   return (
     <div className="details__cont" data-testid="details__cont">

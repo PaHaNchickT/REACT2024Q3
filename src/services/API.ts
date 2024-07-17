@@ -15,7 +15,10 @@ export const filmsAPI = createApi({
     getFilms: builder.query<{ items: FilmObj[]; total: number; totalPages: number }, string>({
       query: (data) => `?order=NUM_VOTE&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=3000&${data}`,
     }),
+    getFilm: builder.query<FilmObj, string>({
+      query: (id) => `/${id}`,
+    }),
   }),
 })
 
-export const { useGetFilmsQuery } = filmsAPI
+export const { useGetFilmsQuery, useGetFilmQuery } = filmsAPI

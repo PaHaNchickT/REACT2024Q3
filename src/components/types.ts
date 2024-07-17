@@ -24,4 +24,11 @@ export type reduxStore = {
       totalPages: number
     }
   }
+  detailsData: {
+    detailsData: {
+      isClosed: boolean
+      filmId: number
+      filmData: FilmObj
+    }
+  }
 }
