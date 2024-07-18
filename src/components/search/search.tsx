@@ -5,13 +5,12 @@ import './search.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSearchValue } from '../../services/searchSlice'
 import { reduxStore } from '../types'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export function Search() {
   const searchValue = useSelector((state: reduxStore) => state.searchData.searchData.value)
   const [inputValue, setInputValue] = useState(searchValue)
-  const [searchParams, setSearchParams] = useSearchParams()
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const searchButtonHandler = () => {
@@ -22,21 +21,7 @@ export function Search() {
     )
   }
 
-  const resetSearch = () => {
-    setInputValue('')
-
-    dispatch(
-      setSearchValue({
-        value: '',
-      })
-    )
-
-    setSearchParams(
-      Object.assign(Object.fromEntries(searchParams), {
-        page: '1',
-      })
-    )
-  }
+  const resetSearch = () => navigate('/')
 
   return (
     <div className="search__cont">

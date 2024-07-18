@@ -1,9 +1,16 @@
 import { Search } from './components/search/search'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useSearchParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setSearchValue } from './services/searchSlice'
 
 export function App() {
+  const [searchParams] = useSearchParams()
+  const dispatch = useDispatch()
+
+  dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
+
   return (
     <ErrorBoundary
       fallback={

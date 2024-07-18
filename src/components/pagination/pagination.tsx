@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import './pagination.css'
 
 export function Pagination(props: { page: number; currentPage: number }) {
-  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   let buttonClassname = 'pendingBtn'
   if (props.page === +props.currentPage) buttonClassname = 'activeBtn'
@@ -10,7 +10,13 @@ export function Pagination(props: { page: number; currentPage: number }) {
   return (
     <li
       id={props.page.toString()}
-      onClick={(event) => navigate(`/films?page=${(event.target as HTMLElement).id}`)}
+      onClick={(event) =>
+        setSearchParams(
+          Object.assign(Object.fromEntries(searchParams), {
+            page: (event.target as HTMLElement).id,
+          })
+        )
+      }
       className={buttonClassname}
       data-testid="pendingBtn"
     >
