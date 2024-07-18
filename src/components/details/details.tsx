@@ -2,31 +2,12 @@ import { Loader } from '../loader/loader'
 import './details.css'
 import { FilmObj, reduxStore } from '../types'
 import { useGetFilmQuery } from '../../services/API'
-import { useDispatch, useSelector } from 'react-redux'
-import { setIsClosed } from '../../services/detailsSlice'
-import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-export function Details() {
-  const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
+export function Details(props: { closeDetails: () => void }) {
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const { data = {} as FilmObj, isFetching } = useGetFilmQuery(detailsData.filmId.toString())
-
-  const closeDetails = () => {
-    if (!detailsData.isClosed) return
-
-    dispatch(
-      setIsClosed({
-        isClosed: false,
-        filmId: 0,
-      })
-    )
-    // navigate(location.pathname.split('&')[0])
-
-    navigate(`/films?page=${searchData.page}`)
-  }
 
   let genres
   if (data.genres) genres = data.genres.map((genre) => <li key={genre.genre}>{genre.genre}</li>)
@@ -38,7 +19,7 @@ export function Details() {
         src={data.posterUrlPreview}
         alt={`${data.nameEn || data.nameOriginal || data.nameRu} cover`}
       />
-      <div className="details__close" onClick={closeDetails}></div>
+      <div className="details__close" onClick={props.closeDetails}></div>
       <div className="details__title">
         <h2>{data.nameEn || data.nameOriginal || data.nameRu}</h2>
         <p>{data.slogan}</p>

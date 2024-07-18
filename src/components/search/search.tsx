@@ -2,15 +2,15 @@ import { useState } from 'react'
 import { TEXT_CONTENT } from '../constants'
 
 import './search.css'
-// import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPage, setSearchValue } from '../../services/searchSlice'
+import { setSearchValue } from '../../services/searchSlice'
 import { reduxStore } from '../types'
+import { useSearchParams } from 'react-router-dom'
 
 export function Search() {
   const searchValue = useSelector((state: reduxStore) => state.searchData.searchData.value)
   const [inputValue, setInputValue] = useState(searchValue)
-  // const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const dispatch = useDispatch()
 
@@ -20,21 +20,20 @@ export function Search() {
         value: inputValue,
       })
     )
-    // let tempValue = value
-
-    // tempValue === '' ? navigate('/1') : navigate(`/search/1`)
   }
 
   const resetSearch = () => {
     setInputValue('')
+
     dispatch(
       setSearchValue({
         value: '',
       })
     )
-    dispatch(
-      setPage({
-        page: 1,
+
+    setSearchParams(
+      Object.assign(Object.fromEntries(searchParams), {
+        page: '1',
       })
     )
   }

@@ -10,17 +10,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from '../loader/loader'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { setPage } from '../../services/searchSlice'
 import { useEffect } from 'react'
 
 export function Results() {
   const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
+  const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const [searchParams] = useSearchParams()
 
   dispatch(setPage({ page: searchParams.get('page') || '1' }))
 
@@ -38,7 +36,12 @@ export function Results() {
       })
     )
 
-    // navigate(`${location.pathname}&details=${filmId}`)
+    setSearchParams(
+      Object.assign(Object.fromEntries(searchParams), {
+        page: searchData.page.toString(),
+        details: (event.currentTarget as HTMLDivElement).id,
+      })
+    )
   }
 
   const closeDetails = () => {
@@ -50,12 +53,25 @@ export function Results() {
         filmId: 0,
       })
     )
-    // navigate(location.pathname.split('&')[0])
+
+    setSearchParams(
+      Object.fromEntries(Object.entries(Object.fromEntries(searchParams)).filter(([key]) => key !== 'details'))
+    )
   }
 
   useEffect(() => {
-    navigate(`/films?page=${searchData.page}`)
-  }, [])
+    let queryParams
+
+    if (searchData.value === '') {
+      queryParams = {
+        page: searchData.page.toString(),
+      }
+    } else {
+      queryParams = { search: searchData.value, page: searchData.page.toString() }
+    }
+
+    setSearchParams(queryParams)
+  }, [searchData.value])
 
   const films = data.items.map((film) => (
     <div
@@ -108,7 +124,7 @@ export function Results() {
   return (
     <section className="results__cont">
       {resultsUI}
-      {detailsData.isClosed && <Details />}
+      {detailsData.isClosed && <Details closeDetails={closeDetails} />}
     </section>
   )
 }
