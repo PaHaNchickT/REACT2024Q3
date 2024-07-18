@@ -8,8 +8,8 @@ import { reduxStore } from '../types'
 import { useNavigate } from 'react-router-dom'
 
 export function Search() {
-  const searchValue = useSelector((state: reduxStore) => state.searchData.searchData.value)
-  const [inputValue, setInputValue] = useState(searchValue)
+  const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
+  const [inputValue, setInputValue] = useState(searchData.value)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -21,7 +21,10 @@ export function Search() {
     )
   }
 
-  const resetSearch = () => navigate('/')
+  const resetSearch = () => {
+    if (searchData.value === '' && +searchData.page === 1) return
+    navigate('/')
+  }
 
   return (
     <div className="search__cont">
