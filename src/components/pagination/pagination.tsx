@@ -1,51 +1,20 @@
-import { setPage } from '../../services/searchSlice'
-import { reduxStore } from '../types'
+import { useNavigate } from 'react-router-dom'
 import './pagination.css'
-import { useDispatch, useSelector } from 'react-redux'
 
-export function Pagination(props: { page: number }) {
-  // const location = useLocation()
-  const dispatch = useDispatch()
-
-  const currentPage = useSelector((state: reduxStore) => state.searchData.searchData.page)
+export function Pagination(props: { page: number; currentPage: number }) {
+  const navigate = useNavigate()
 
   let buttonClassname = 'pendingBtn'
-  if (props.page === +currentPage) buttonClassname = 'activeBtn'
-
-  // let rootName = ''
-  // if (location.pathname.split('/')[1] === 'search') rootName = 'search'
-
-  const changePage = (event: Event) => {
-    dispatch(
-      setPage({
-        page: (event.target as HTMLElement).id,
-      })
-    )
-  }
+  if (props.page === +props.currentPage) buttonClassname = 'activeBtn'
 
   return (
     <li
       id={props.page.toString()}
-      onClick={(event) => changePage(event as unknown as Event)}
+      onClick={(event) => navigate(`/films?page=${(event.target as HTMLElement).id}`)}
       className={buttonClassname}
       data-testid="pendingBtn"
     >
       {props.page}
     </li>
   )
-
-  // return (
-  //   <li>
-  //     <Link
-  //       to={`${rootName}/${props.page}`}
-  //       onClick={() => {
-  //         props.onClick(props.value, props.page)
-  //       }}
-  //       className={buttonClassname}
-  //       data-testid="pendingBtn"
-  //     >
-  //       {props.page}
-  //     </Link>
-  //   </li>
-  // )
 }

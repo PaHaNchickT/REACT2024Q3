@@ -6,30 +6,25 @@ import './index.css'
 import { ErrorPage } from './components/error-page/errorPage.tsx'
 import { Provider } from 'react-redux'
 import store from './services/store.ts'
+import { Results } from './components/results/results.tsx'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: 'films',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'search/:pagenumber',
-        element: <App />,
-      },
-      {
-        path: ':pagenumber',
-        element: <App />,
-      },
-      {
-        path: 'search/:pagenumber/:id',
-        element: <App />,
+        index: true,
+        element: <Results />,
+        errorElement: <ErrorPage />,
       },
     ],
   },
   {
-    path: 'search',
-    element: <Navigate to="/" />,
+    path: '/',
+    element: <Navigate to="films" />,
+    errorElement: <ErrorPage />,
   },
 ])
 

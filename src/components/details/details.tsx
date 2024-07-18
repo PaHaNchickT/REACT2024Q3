@@ -4,10 +4,13 @@ import { FilmObj, reduxStore } from '../types'
 import { useGetFilmQuery } from '../../services/API'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsClosed } from '../../services/detailsSlice'
+import { useNavigate } from 'react-router-dom'
 
 export function Details() {
+  const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { data = {} as FilmObj, isFetching } = useGetFilmQuery(detailsData.filmId.toString())
 
@@ -21,6 +24,8 @@ export function Details() {
       })
     )
     // navigate(location.pathname.split('&')[0])
+
+    navigate(`/films?page=${searchData.page}`)
   }
 
   let genres

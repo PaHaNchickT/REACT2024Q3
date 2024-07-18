@@ -1,7 +1,7 @@
 import { Search } from './components/search/search'
-import { Results } from './components/results/results'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
+import { Outlet } from 'react-router-dom'
 
 export function App() {
   // const navigate = useNavigate()
@@ -62,7 +62,7 @@ export function App() {
       }
     >
       <Search />
-      <Results />
+      <Outlet />
     </ErrorBoundary>
   )
 }

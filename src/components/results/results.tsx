@@ -10,11 +10,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from '../loader/loader'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { setPage } from '../../services/searchSlice'
+import { useEffect } from 'react'
 
 export function Results() {
   const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const [searchParams] = useSearchParams()
+
+  dispatch(setPage({ page: searchParams.get('page') || '1' }))
 
   const { data = { items: [], total: 0, totalPages: 0 }, isFetching } = useGetFilmsQuery(
     `keyword=${searchData.value}&page=${searchData.page}`
@@ -45,9 +53,9 @@ export function Results() {
     // navigate(location.pathname.split('&')[0])
   }
 
-  // useEffect(() => {
-  //   if (location.pathname.split('&')[1]) navigate(location.pathname.split('&')[0])
-  // }, [])
+  useEffect(() => {
+    navigate(`/films?page=${searchData.page}`)
+  }, [])
 
   const films = data.items.map((film) => (
     <div
@@ -80,7 +88,9 @@ export function Results() {
     </div>
   ))
 
-  const pages = numberToArray(data.totalPages).map((page) => <Pagination page={page} key={page} />)
+  const pages = numberToArray(data.totalPages).map((page) => (
+    <Pagination page={page} currentPage={searchData.page} key={page} />
+  ))
 
   let resultsUI = (
     <div className="results__wrapper" onClick={closeDetails}>
