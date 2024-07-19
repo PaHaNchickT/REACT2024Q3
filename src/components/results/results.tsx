@@ -30,7 +30,7 @@ export function Results() {
   } = useGetFilmsQuery(`keyword=${searchData.value}&page=${searchData.page}`)
 
   const openDetails = (event: MouseEvent) => {
-    if (detailsData.isClosed) return
+    if (detailsData.isClosed || (event.target as HTMLElement).tagName === 'INPUT') return
 
     dispatch(
       setIsClosed({
@@ -104,6 +104,7 @@ export function Results() {
           {film.ratingImdb || +film.rating || TEXT_CONTENT.itemRaitingStub}
         </p>
       </div>
+      <input type="checkbox"></input>
     </div>
   ))
 
