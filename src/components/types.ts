@@ -1,6 +1,6 @@
 export type FilmObj = {
   nameOriginal: string
-  nameEn: string | undefined
+  nameEn?: string
   nameRu: string
   posterUrlPreview: string
   year: number
