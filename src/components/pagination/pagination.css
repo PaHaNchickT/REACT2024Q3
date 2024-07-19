@@ -7,7 +7,7 @@
   padding: 0;
 }
 
-.pagination__cont > li {
+.pagination__cont > li > a {
   background-color: white;
   width: 30px;
   height: 30px;
@@ -20,7 +20,7 @@
   font-weight: 700;
   color: black;
 }
-.pagination__cont > li:hover {
+.pagination__cont > li > a:hover {
   color: black;
   background-color: #ffc873;
   box-shadow: 0 0 5px 2px #a66400;
