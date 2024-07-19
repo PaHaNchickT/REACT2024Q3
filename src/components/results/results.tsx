@@ -13,6 +13,7 @@ import { Details } from '../details/details'
 import { useSearchParams } from 'react-router-dom'
 import { setPage } from '../../services/searchSlice'
 import { useEffect } from 'react'
+import { ErrorPage } from '../error-page/errorPage'
 
 export function Results() {
   const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
@@ -22,9 +23,11 @@ export function Results() {
 
   dispatch(setPage({ page: searchParams.get('page') || '1' }))
 
-  const { data = { items: [], total: 0, totalPages: 0 }, isFetching } = useGetFilmsQuery(
-    `keyword=${searchData.value}&page=${searchData.page}`
-  )
+  const {
+    data = { items: [], total: 0, totalPages: 0 },
+    isFetching,
+    error,
+  } = useGetFilmsQuery(`keyword=${searchData.value}&page=${searchData.page}`)
 
   const openDetails = (event: MouseEvent) => {
     if (detailsData.isClosed) return
@@ -117,6 +120,8 @@ export function Results() {
 
   if (isFetching) {
     resultsUI = <Loader theme="default" />
+  } else if (error) {
+    resultsUI = <ErrorPage />
   } else if (!data.items.length) {
     resultsUI = <NoResults />
   }
