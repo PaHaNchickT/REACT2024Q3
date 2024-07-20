@@ -45,7 +45,7 @@
   border: 1px solid white;
 }
 .results__item.dark:hover {
-  box-shadow: 0 0 10px 0 dimgray;
+  box-shadow: 0 0 10px 0 white;
 }
 
 .results__item > img {
