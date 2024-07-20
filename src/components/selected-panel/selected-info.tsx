@@ -8,7 +8,36 @@ export function Selected() {
   const dispatch = useDispatch()
 
   const download = () => {
-    console.log('download')
+    const outputData = ['id;name;year;countries;genres;poster URL', '\n']
+
+    selectedData.forEach((film) => {
+      const countries: string[] = []
+      film.countries.forEach((country) => {
+        countries.push(country.country)
+      })
+
+      const genres: string[] = []
+      film.genres.forEach((genre) => {
+        genres.push(genre.genre)
+      })
+
+      const tempData = [
+        `${film.kinopoiskId}`,
+        film.nameEn || film.nameOriginal || film.nameRu,
+        `${film.year}`,
+        countries.join(', ') || 'No information',
+        genres.join(', ') || 'No information',
+        film.posterUrl,
+      ]
+      outputData.push(tempData.join(';'), '\n')
+    })
+
+    const blob = new Blob([...outputData], { type: 'text/csv;charset=utf-8' })
+    const link = document.createElement('a')
+
+    link.href = window.URL.createObjectURL(blob)
+    link.download = `${selectedData.length}_films`
+    link.click()
   }
 
   return (

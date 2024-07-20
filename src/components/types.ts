@@ -13,6 +13,8 @@ export type FilmObj = {
   webUrl: string
   filmLength: string
   genres: { genre: string }[]
+  countries: { country: string }[]
+  posterUrl: string
 }
 
 export type reduxStore = {
