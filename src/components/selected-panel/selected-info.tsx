@@ -10,29 +10,22 @@ export function Selected() {
   const { theme } = useContext(ThemeContext)
   const dispatch = useDispatch()
 
-  const download = () => {
-    const outputData = ['id;name;year;IMDb raiting;Kinopoisk raiting;project type;poster URL', '\n']
+  const outputData = ['id;name;year;IMDb raiting;Kinopoisk raiting;project type;poster URL', '\n']
 
-    selectedData.forEach((film) => {
-      const tempData = [
-        `${film.kinopoiskId}`,
-        film.nameEn || film.nameOriginal || film.nameRu || 'No information',
-        `${film.year}` || 'No information',
-        `${film.ratingImdb}` || 'No information',
-        `${film.ratingKinopoisk}` || 'No information',
-        `${film.type}` || 'No information',
-        film.posterUrl,
-      ]
-      outputData.push(tempData.join(';'), '\n')
-    })
+  selectedData.forEach((film) => {
+    const tempData = [
+      `${film.kinopoiskId}`,
+      film.nameEn || film.nameOriginal || film.nameRu || 'No information',
+      `${film.year}` || 'No information',
+      `${film.ratingImdb}` || 'No information',
+      `${film.ratingKinopoisk}` || 'No information',
+      `${film.type}` || 'No information',
+      film.posterUrl,
+    ]
+    outputData.push(tempData.join(';'), '\n')
+  })
 
-    const blob = new Blob([...outputData], { type: 'text/csv;charset=utf-8' })
-    const link = document.createElement('a')
-
-    link.href = window.URL.createObjectURL(blob)
-    link.download = `${selectedData.length}_films`
-    link.click()
-  }
+  const blob = new Blob([...outputData], { type: 'text/csv;charset=utf-8' })
 
   return (
     <div className={`selected-cont ${theme}`}>
@@ -43,9 +36,9 @@ export function Selected() {
         <button className={theme} onClick={() => dispatch(clearItemData())}>
           Unselect all
         </button>
-        <button className={theme} onClick={download}>
+        <a href={window.URL.createObjectURL(blob)} download={`${selectedData.length}_films`}>
           Download
-        </button>
+        </a>
       </div>
     </div>
   )
