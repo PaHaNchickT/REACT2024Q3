@@ -23,8 +23,8 @@ export function Selected() {
 
       const tempData = [
         `${film.kinopoiskId}`,
-        film.nameEn || film.nameOriginal || film.nameRu,
-        `${film.year}`,
+        film.nameEn || film.nameOriginal || film.nameRu || 'No information',
+        `${film.year}` || 'No information',
         countries.join(', ') || 'No information',
         genres.join(', ') || 'No information',
         film.posterUrl,
