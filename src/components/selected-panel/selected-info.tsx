@@ -8,25 +8,16 @@ export function Selected() {
   const dispatch = useDispatch()
 
   const download = () => {
-    const outputData = ['id;name;year;countries;genres;poster URL', '\n']
+    const outputData = ['id;name;year;IMDb raiting;Kinopoisk raiting;project type;poster URL', '\n']
 
     selectedData.forEach((film) => {
-      const countries: string[] = []
-      film.countries.forEach((country) => {
-        countries.push(country.country)
-      })
-
-      const genres: string[] = []
-      film.genres.forEach((genre) => {
-        genres.push(genre.genre)
-      })
-
       const tempData = [
         `${film.kinopoiskId}`,
         film.nameEn || film.nameOriginal || film.nameRu || 'No information',
         `${film.year}` || 'No information',
-        countries.join(', ') || 'No information',
-        genres.join(', ') || 'No information',
+        `${film.ratingImdb}` || 'No information',
+        `${film.ratingKinopoisk}` || 'No information',
+        `${film.type}` || 'No information',
         film.posterUrl,
       ]
       outputData.push(tempData.join(';'), '\n')
