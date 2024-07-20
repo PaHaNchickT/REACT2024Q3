@@ -88,6 +88,5 @@
   color: white;
 }
 .details__cont > a.dark:hover {
-  color: black;
-  text-shadow: 0 0 10px white;
+  color: lightgray;
 } /*# sourceMappingURL=details.css.map */
