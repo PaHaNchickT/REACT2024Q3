@@ -17,6 +17,7 @@ import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
 import { ThemeContext } from '../../App'
+import { setResultsData } from '../../services/resultsSlice'
 
 export function Results() {
   const selectedItems: number[] = []
@@ -34,6 +35,8 @@ export function Results() {
     isFetching,
     error,
   } = useGetFilmsQuery(`keyword=${searchData.value}&page=${searchData.page}`)
+
+  dispatch(setResultsData(data))
 
   const openDetails = (event: MouseEvent) => {
     if (detailsData.isClosed || (event.target as HTMLElement).tagName === 'INPUT') return
