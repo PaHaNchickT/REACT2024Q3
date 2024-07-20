@@ -21,9 +21,16 @@ ul {
 }
 
 body {
-  background: linear-gradient(#ff9a00, black);
   min-height: 100vh;
   height: 100%;
+}
+
+body.light {
+  background: linear-gradient(#ff9a00, black);
+}
+
+body.dark {
+  background: linear-gradient(black, dimgray);
 }
 
 body,
@@ -35,15 +42,28 @@ input {
 
 button {
   cursor: pointer;
-  background-color: black;
-  color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   font-weight: 500;
 }
-button:hover {
+
+button.light {
+  background-color: black;
+  color: white;
+}
+button.light:hover {
   color: black;
   background-color: #ffc873;
   box-shadow: 0 0 5px 2px #a66400;
+}
+
+button.dark {
+  background-color: white;
+  color: black;
+}
+button.dark:hover {
+  color: white;
+  background-color: dimgray;
+  box-shadow: 0 0 5px 2px white;
 } /*# sourceMappingURL=index.css.map */

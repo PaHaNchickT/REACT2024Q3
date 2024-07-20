@@ -20,6 +20,8 @@ export function App() {
 
   dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
 
+  document.body.className = theme
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <ErrorBoundary

@@ -2,9 +2,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import './selected-info.css'
 import { reduxStore } from '../types'
 import { clearItemData } from '../../services/selectedSlice'
+import { useContext } from 'react'
+import { ThemeContext } from '../../App'
 
 export function Selected() {
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
+  const { theme } = useContext(ThemeContext)
   const dispatch = useDispatch()
 
   const download = () => {
@@ -37,8 +40,12 @@ export function Selected() {
         <span>{selectedData.length.toString()}</span>items are selected
       </p>
       <div className="selected__buttons-cont">
-        <button onClick={() => dispatch(clearItemData())}>Unselect all</button>
-        <button onClick={download}>Download</button>
+        <button className={theme} onClick={() => dispatch(clearItemData())}>
+          Unselect all
+        </button>
+        <button className={theme} onClick={download}>
+          Download
+        </button>
       </div>
     </div>
   )

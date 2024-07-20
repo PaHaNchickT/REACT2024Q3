@@ -16,9 +16,14 @@ p, h2, h3, ul
   height: 100%
 
 body
-  background: linear-gradient(#FF9A00, black)
   min-height: 100vh
   height: 100%
+
+body.light
+  background: linear-gradient(#FF9A00, black)
+
+body.dark
+  background: linear-gradient(black, dimgray)
 
 body, button, input
   margin: 0
@@ -26,13 +31,23 @@ body, button, input
 
 button
   cursor: pointer
-  background-color: black
-  color: white
   border: none
   padding: 5px 10px
   border-radius: 5px
   font-weight: 500
+
+button.light
+  background-color: black
+  color: white
   &:hover
     color: black
     background-color: #FFC873
     box-shadow: 0 0 5px 2px #A66400
+
+button.dark
+  background-color: white
+  color: black
+  &:hover
+    color: white
+    background-color: dimgray
+    box-shadow: 0 0 5px 2px white
