@@ -6,7 +6,9 @@ import { useSelector } from 'react-redux'
 import { useContext } from 'react'
 import { ThemeContext } from '../../App'
 
-export function Details(props: { closeDetails: () => void }) {
+export function Details(props: {
+  closeDetails: <HTMLDivElement, MouseEvent>(event: MouseEvent | HTMLDivElement) => void
+}) {
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const { theme } = useContext(ThemeContext)
 
@@ -22,7 +24,7 @@ export function Details(props: { closeDetails: () => void }) {
         src={data.posterUrlPreview}
         alt={`${data.nameEn || data.nameOriginal || data.nameRu} cover`}
       />
-      <div className={`details__close ${theme}`} onClick={props.closeDetails}></div>
+      <div className={`details__close ${theme}`} onClick={(event) => props.closeDetails(event)}></div>
       <div className="details__title">
         <h2>{data.nameEn || data.nameOriginal || data.nameRu}</h2>
         <p>{data.slogan}</p>

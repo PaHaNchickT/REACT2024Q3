@@ -56,7 +56,8 @@ export function Results() {
     )
   }
 
-  const closeDetails = () => {
+  const closeDetails = <HTMLDivElement, MouseEvent>(event: MouseEvent | HTMLDivElement) => {
+    console.log(event)
     if (!detailsData.isClosed) return
 
     dispatch(
@@ -147,7 +148,7 @@ export function Results() {
   ))
 
   let resultsUI = (
-    <div className="results__wrapper" onClick={closeDetails}>
+    <div className="results__wrapper" onClick={(event) => closeDetails(event)}>
       <div className="results__items">{films}</div>
       <ul className="pagination__cont">{pages}</ul>
       {Boolean(selectedData.length) && <Selected />}
