@@ -11,7 +11,7 @@ import { Loader } from '../loader/loader'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
 import { useSearchParams } from 'react-router-dom'
-import { setPage } from '../../services/searchSlice'
+import { setPage, setSearchValue } from '../../services/searchSlice'
 import { ChangeEvent, useContext, useEffect, MouseEvent } from 'react'
 import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
@@ -28,7 +28,8 @@ export function Results() {
   const { theme } = useContext(ThemeContext)
   const dispatch = useDispatch()
 
-  dispatch(setPage({ page: searchParams.get('page') || '1' }))
+  dispatch(setPage({ page: searchParams.get('page') || 1 }))
+  dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
 
   const {
     data = { items: [], total: 0, totalPages: 0 },
