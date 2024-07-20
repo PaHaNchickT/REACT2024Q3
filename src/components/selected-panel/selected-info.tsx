@@ -35,7 +35,7 @@ export function Selected() {
   }
 
   return (
-    <div className="selected-cont">
+    <div className={`selected-cont ${theme}`}>
       <p>
         <span>{selectedData.length.toString()}</span>items are selected
       </p>

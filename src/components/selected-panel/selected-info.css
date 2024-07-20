@@ -1,6 +1,5 @@
 .selected-cont {
   position: fixed;
-  background-color: white;
   padding: 10px 20px;
   border-radius: 10px;
   display: flex;
@@ -8,7 +7,17 @@
   gap: 15px;
   box-sizing: border-box;
   bottom: 60px;
+}
+
+.selected-cont.light {
+  background-color: white;
   box-shadow: 0 0 10px -2px #ff9a00;
+}
+
+.selected-cont.dark {
+  color: white;
+  background-color: black;
+  box-shadow: 0 0 10px -2px white;
 }
 
 .selected-cont > p {
@@ -16,9 +25,16 @@
 }
 
 .selected-cont > p > span {
-  color: #ff9a00;
   font-weight: 900;
   margin-right: 5px;
+}
+
+.selected-cont.light > p > span {
+  color: #ff9a00;
+}
+
+.selected-cont.dark > p > span {
+  color: gray;
 }
 
 .selected__buttons-cont {
