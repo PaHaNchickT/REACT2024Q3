@@ -6,10 +6,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ThemeContext } from '../../App'
 
 export function Search() {
-  const searchValue = localStorage.getItem('paul-saved-value') || ''
-  const [inputValue, setInputValue] = useState(searchValue)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [inputValue, setInputValue] = useState(searchParams.get('search') || '')
   const { theme, setTheme } = useContext(ThemeContext)
-  const [, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
 
   const searchButtonHandler = () => {
@@ -20,7 +19,7 @@ export function Search() {
   }
 
   const resetSearch = () => {
-    if (searchValue === '') return
+    if (searchParams.get('search') === '') return
     navigate('/')
   }
 
