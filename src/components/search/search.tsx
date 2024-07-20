@@ -19,7 +19,7 @@ export function Search() {
   }
 
   const resetSearch = () => {
-    if (searchParams.get('search') === '') return
+    if (!searchParams.get('search')) return
     navigate('/')
   }
 
