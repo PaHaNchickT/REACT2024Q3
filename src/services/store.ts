@@ -3,6 +3,7 @@ import searchDataSliceReducer from './searchSlice'
 import resultsDataSliceReducer from './resultsSlice'
 import detailsDataSliceReducer from './detailsSlice'
 import selectedDataSliceReducer from './selectedSlice'
+import themeDataSliceReducer from './themeSlice'
 import { filmsAPI } from './API'
 
 export default configureStore({
@@ -11,6 +12,7 @@ export default configureStore({
     resultsData: resultsDataSliceReducer,
     detailsData: detailsDataSliceReducer,
     selectedData: selectedDataSliceReducer,
+    themeData: themeDataSliceReducer,
     [filmsAPI.reducerPath]: filmsAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(filmsAPI.middleware),

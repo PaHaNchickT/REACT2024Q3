@@ -38,4 +38,7 @@ export type reduxStore = {
   selectedData: {
     selectedData: FilmObj[]
   }
+  themeData: {
+    themeData: string
+  }
 }
