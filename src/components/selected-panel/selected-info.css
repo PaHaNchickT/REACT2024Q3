@@ -1,0 +1,27 @@
+.selected-cont {
+  position: fixed;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-sizing: border-box;
+  bottom: 60px;
+  box-shadow: 0 0 10px -2px #ff9a00;
+}
+
+.selected-cont > p {
+  font-weight: 700;
+}
+
+.selected-cont > p > span {
+  color: #ff9a00;
+  font-weight: 900;
+  margin-right: 5px;
+}
+
+.selected__buttons-cont {
+  display: flex;
+  gap: 7px;
+} /*# sourceMappingURL=selected-info.css.map */

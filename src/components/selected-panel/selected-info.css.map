@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "sources": [
+    "selected-info.sass",
+    "selected-info.css"
+  ],
+  "names": [],
+  "mappings": "AAAA;EACI,eAAA;EACA,uBAAA;EAEA,kBAAA;EAEA,mBAAA;EACA,aAAA;EACA,mBAAA;EACA,SAAA;EACA,sBAAA;EACA,YAAA;EACA,iCAAA;ACDJ;;ADGA;EACI,gBAAA;ACAJ;;ADEA;EACI,cAAA;EACA,gBAAA;EACA,iBAAA;ACCJ;;ADCA;EACI,aAAA;EACA,QAAA;ACEJ",
+  "file": "selected-info.css"
+}

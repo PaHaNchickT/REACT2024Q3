@@ -144,7 +144,7 @@ export function Results() {
     <div className="results__wrapper" onClick={closeDetails}>
       <div className="results__items">{films}</div>
       <ul className="pagination__cont">{pages}</ul>
-      {Boolean(selectedItems.length) && <Selected />}
+      {Boolean(selectedData.length) && <Selected />}
     </div>
   )
 

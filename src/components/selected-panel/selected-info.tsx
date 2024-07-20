@@ -12,10 +12,14 @@ export function Selected() {
   }
 
   return (
-    <div className={`selected-cont`}>
-      <p>{`${selectedData.length} items are selected`}</p>
-      <button onClick={() => dispatch(clearItemData())}>Unselect all</button>
-      <button onClick={download}>Download</button>
+    <div className="selected-cont">
+      <p>
+        <span>{selectedData.length.toString()}</span>items are selected
+      </p>
+      <div className="selected__buttons-cont">
+        <button onClick={() => dispatch(clearItemData())}>Unselect all</button>
+        <button onClick={download}>Download</button>
+      </div>
     </div>
   )
 }
