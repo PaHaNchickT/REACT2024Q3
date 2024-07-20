@@ -29,8 +29,13 @@ export function Search() {
   }
 
   const themeSwapping = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light')
-    console.log(theme)
+    if (theme === 'light') {
+      setTheme('dark')
+      localStorage.setItem('paul-theme', 'dark')
+    } else {
+      setTheme('light')
+      localStorage.setItem('paul-theme', 'light')
+    }
   }
 
   return (

@@ -14,7 +14,7 @@ export const ThemeContext = createContext({
 })
 
 export function App() {
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState(localStorage.getItem('paul-theme') || 'light')
   const [searchParams] = useSearchParams()
   const dispatch = useDispatch()
 
