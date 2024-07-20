@@ -1,8 +1,12 @@
 import { Link, useRouteError } from 'react-router-dom'
 import { TEXT_CONTENT } from '../constants'
 import './errorPage.css'
+import { useContext } from 'react'
+import { ThemeContext } from '../../App'
 
 export function ErrorPage() {
+  const { theme } = useContext(ThemeContext)
+
   const error = useRouteError()
   if (error) console.log(error)
 
@@ -12,7 +16,9 @@ export function ErrorPage() {
         <h2>{TEXT_CONTENT.errorPageTitle}</h2>
         <div></div>
         <p>{TEXT_CONTENT.errorPageText}</p>
-        <Link to="/">{TEXT_CONTENT.btnErrorHome}</Link>
+        <Link to="/" className={theme}>
+          {TEXT_CONTENT.btnErrorHome}
+        </Link>
       </div>
     </div>
   )

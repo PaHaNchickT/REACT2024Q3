@@ -37,8 +37,15 @@
   font-weight: 500;
   text-decoration: none;
 }
-.error-page__cont > a:hover {
+
+.error-page__cont > a.light:hover {
   color: black;
   background-color: #ffc873;
   box-shadow: 0 0 5px 2px #a66400;
+}
+
+.error-page__cont > a.dark:hover {
+  color: white;
+  background-color: dimgray;
+  box-shadow: 0 0 5px 2px dimgray;
 } /*# sourceMappingURL=errorPage.css.map */
