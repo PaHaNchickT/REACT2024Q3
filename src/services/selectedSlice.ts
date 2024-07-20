@@ -13,8 +13,11 @@ const selectedDataSlice = createSlice({
     removeItemData(state, action) {
       state.selectedData = state.selectedData.filter((item) => JSON.stringify(item) !== JSON.stringify(action.payload))
     },
+    clearItemData(state) {
+      state.selectedData = []
+    },
   },
 })
 
-export const { addItemData, removeItemData } = selectedDataSlice.actions
+export const { addItemData, removeItemData, clearItemData } = selectedDataSlice.actions
 export default selectedDataSlice.reducer

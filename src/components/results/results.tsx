@@ -15,6 +15,7 @@ import { setPage } from '../../services/searchSlice'
 import { ChangeEvent, useEffect } from 'react'
 import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
+import { Selected } from '../selected-panel/selected-info'
 
 export function Results() {
   const selectedItems: number[] = []
@@ -143,6 +144,7 @@ export function Results() {
     <div className="results__wrapper" onClick={closeDetails}>
       <div className="results__items">{films}</div>
       <ul className="pagination__cont">{pages}</ul>
+      {Boolean(selectedItems.length) && <Selected />}
     </div>
   )
 
