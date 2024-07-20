@@ -28,7 +28,7 @@ export function Search() {
     navigate('/')
   }
 
-  const test = () => {
+  const themeSwapping = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
     console.log(theme)
   }
@@ -49,9 +49,9 @@ export function Search() {
           {TEXT_CONTENT.btnSearch}
         </button>
       </form>
-      <button className="search__error-btn" data-testid="search__error-btn" onClick={test}>
-        {TEXT_CONTENT.btnError}
-      </button>
+      <div className="search__theme-wrapper" data-testid="search__theme-wrapper" onClick={themeSwapping}>
+        <div className="search__theme-btn">Theme</div>
+      </div>
     </div>
   )
 }

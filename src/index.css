@@ -43,9 +43,4 @@ button:hover {
   color: black;
   background-color: #ffc873;
   box-shadow: 0 0 5px 2px #a66400;
-}
-
-.search__error-btn:hover {
-  background-color: #ffa473;
-  box-shadow: 0 0 5px 2px #a63a00;
 } /*# sourceMappingURL=index.css.map */

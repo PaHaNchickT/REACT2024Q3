@@ -1,7 +1,6 @@
 export const TEXT_CONTENT = {
   btnHome: 'Reset Search',
   btnSearch: 'Search',
-  btnError: 'Throw Error',
   btnErrorHome: 'Home',
   itemYearStub: 'No information',
   itemRaitingStub: 'Unranked',
