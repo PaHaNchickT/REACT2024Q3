@@ -12,10 +12,11 @@ import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
 import { useSearchParams } from 'react-router-dom'
 import { setPage } from '../../services/searchSlice'
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent, useContext, useEffect } from 'react'
 import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
+import { ThemeContext } from '../../App'
 
 export function Results() {
   const selectedItems: number[] = []
@@ -23,6 +24,7 @@ export function Results() {
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
   const [searchParams, setSearchParams] = useSearchParams()
+  const { theme } = useContext(ThemeContext)
   const dispatch = useDispatch()
 
   dispatch(setPage({ page: searchParams.get('page') || '1' }))
@@ -101,7 +103,7 @@ export function Results() {
 
   const films = data.items.map((film) => (
     <div
-      className="results__item"
+      className={`results__item ${theme}`}
       data-testid="results__item"
       key={film.kinopoiskId}
       id={film.kinopoiskId.toString()}
@@ -112,6 +114,7 @@ export function Results() {
         alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
         width="200px"
         height="300px"
+        className={theme}
       />
       <div className="results__item-info">
         <p className="results__item-name">

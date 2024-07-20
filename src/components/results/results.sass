@@ -16,25 +16,39 @@
   gap: 10px
 
 .results__item
-  background-color: white
   width: 200px
   display: flex
   flex-direction: column
   gap: 5px
-  border: 1px solid black
   box-sizing: border-box
   overflow: hidden
   border-radius: 10px
-  transition: 300ms
   cursor: pointer
   position: relative
+
+.results__item.light
+  color: black
+  background-color: white
+  border: 1px solid black
   &:hover
     box-shadow: 0 0 10px 0	#FFC873
+
+.results__item.dark
+  color: white
+  background-color: black
+  border: 1px solid white
+  &:hover
+    box-shadow: 0 0 10px 0	dimgray
 
 .results__item > img
   border-top-left-radius: 10px
   border-top-right-radius: 10px
+
+.results__item > img.light
   box-shadow: 0 0 20px -5px black
+
+.results__item > img.dark
+  box-shadow: 0 0 20px -5px white
 
 .results__item-info
   display: flex

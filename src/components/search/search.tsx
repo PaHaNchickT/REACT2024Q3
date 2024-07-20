@@ -35,7 +35,9 @@ export function Search() {
 
   return (
     <div className="search__cont">
-      <button onClick={resetSearch}>{TEXT_CONTENT.btnHome}</button>
+      <button className={theme} onClick={resetSearch}>
+        {TEXT_CONTENT.btnHome}
+      </button>
       <form className="search__panel-wrapper" onSubmit={(event) => event.preventDefault()}>
         <input
           type="text"
@@ -45,7 +47,7 @@ export function Search() {
             setInputValue(event.target.value)
           }}
         />
-        <button type="submit" onClick={searchButtonHandler}>
+        <button className={theme} type="submit" onClick={searchButtonHandler}>
           {TEXT_CONTENT.btnSearch}
         </button>
       </form>
