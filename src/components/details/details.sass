@@ -1,5 +1,4 @@
 .details__cont
-    background-color: white
     width: 40vw
     border-radius: 10px
     padding: 15px
@@ -9,7 +8,15 @@
     gap: 25px
     position: relative
     overflow: hidden
+
+.details__cont.light
+    background-color: white
     border: 1px solid black
+
+.details__cont.dark
+    color: white
+    background-color: dimgray
+    border: 1px solid white
 
 .details__bg
     height: 100%
@@ -31,10 +38,18 @@
     cursor: pointer
     align-self: flex-end
 
+.details__close.dark
+    filter: invert(1)
+
 .details__cover
     align-self: center
     border-radius: 10px
+
+.details__cover.light
     box-shadow: 0 0 20px -3px black
+
+.details__cover.dark
+    box-shadow: 0 0 20px -3px white
 
 .details__descr > p
     text-align: justify
@@ -45,9 +60,17 @@
     gap: 5px
 
 .details__cont > a
-    color: black
     font-weight: 700
     align-self: center
     transition: 300ms
+
+.details__cont > a.light
+    color: black
     &:hover
         color: #ff9a00
+
+.details__cont > a.dark
+    color: white
+    &:hover
+        color: black
+        text-shadow: 0 0 10px white

@@ -3,9 +3,12 @@ import './details.css'
 import { FilmObj, reduxStore } from '../types'
 import { useGetFilmQuery } from '../../services/API'
 import { useSelector } from 'react-redux'
+import { useContext } from 'react'
+import { ThemeContext } from '../../App'
 
 export function Details(props: { closeDetails: () => void }) {
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
+  const { theme } = useContext(ThemeContext)
 
   const { data = {} as FilmObj, isFetching } = useGetFilmQuery(detailsData.filmId.toString())
 
@@ -19,13 +22,13 @@ export function Details(props: { closeDetails: () => void }) {
         src={data.posterUrlPreview}
         alt={`${data.nameEn || data.nameOriginal || data.nameRu} cover`}
       />
-      <div className="details__close" onClick={props.closeDetails}></div>
+      <div className={`details__close ${theme}`} onClick={props.closeDetails}></div>
       <div className="details__title">
         <h2>{data.nameEn || data.nameOriginal || data.nameRu}</h2>
         <p>{data.slogan}</p>
       </div>
       <img
-        className="details__cover"
+        className={`details__cover ${theme}`}
         src={data.posterUrlPreview}
         alt={`${data.nameEn || data.nameOriginal || data.nameRu} cover`}
         width="200px"
@@ -47,7 +50,7 @@ export function Details(props: { closeDetails: () => void }) {
         <h3>Film length (mins):</h3>
         <p>{data.filmLength || 'No information'}</p>
       </div>
-      <a href={data.webUrl} target="_blank">
+      <a className={theme} href={data.webUrl} target="_blank">
         More details
       </a>
     </>
@@ -55,7 +58,7 @@ export function Details(props: { closeDetails: () => void }) {
   if (isFetching) resultsUI = <Loader theme="details" />
 
   return (
-    <div className="details__cont" data-testid="details__cont">
+    <div className={`details__cont ${theme}`} data-testid="details__cont">
       {resultsUI}
     </div>
   )
