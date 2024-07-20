@@ -7,7 +7,6 @@
     padding: 0
 
 .pagination__cont > li > a
-    background-color: white
     width: 30px
     height: 30px
     display: flex
@@ -17,13 +16,31 @@
     border-radius: 5px
     text-decoration: none
     font-weight: 700
+
+.pagination__cont > li > a.light
+    background-color: white
     color: black
     &:hover
         color: black
         background-color: #FFC873
         box-shadow: 0 0 5px 2px #A66400
 
+.pagination__cont > li > a.dark
+    background-color: black
+    color: white
+    &:hover
+        color: white
+        background-color: dimgray
+        box-shadow: 0 0 5px 2px white
+
 .activeBtn
     pointer-events: none
+
+.activeBtn.light
     background-color: #FF9A00 !important
     box-shadow: 0 0 5px 2px #A66400
+
+.activeBtn.dark
+    color: black !important
+    background-color: white !important
+    box-shadow: 0 0 5px 2px white
