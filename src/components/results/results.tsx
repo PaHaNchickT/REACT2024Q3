@@ -12,12 +12,15 @@ import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
 import { useSearchParams } from 'react-router-dom'
 import { setPage } from '../../services/searchSlice'
-import { useEffect } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 import { ErrorPage } from '../error-page/errorPage'
+import { addItemData, removeItemData } from '../../services/selectedSlice'
 
 export function Results() {
+  const selectedItems: number[] = []
   const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
+  const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
   const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useDispatch()
 
@@ -62,6 +65,25 @@ export function Results() {
     )
   }
 
+  const checkboxHandling = (event: ChangeEvent) => {
+    let targetItemData
+    data.items.forEach((item) => {
+      if (item.kinopoiskId === +(event.target as HTMLInputElement).name) targetItemData = item
+    })
+
+    if ((event.target as HTMLInputElement).checked) {
+      dispatch(addItemData(targetItemData))
+    } else {
+      dispatch(removeItemData(targetItemData))
+    }
+  }
+
+  data.items.forEach((defaultItem) => {
+    selectedData.forEach((selectedItem) => {
+      if (defaultItem === selectedItem) selectedItems.push(defaultItem.kinopoiskId)
+    })
+  })
+
   useEffect(() => {
     let queryParams
 
@@ -104,7 +126,12 @@ export function Results() {
           {film.ratingImdb || +film.rating || TEXT_CONTENT.itemRaitingStub}
         </p>
       </div>
-      <input type="checkbox"></input>
+      <input
+        type="checkbox"
+        name={film.kinopoiskId.toString()}
+        onChange={(event) => checkboxHandling(event)}
+        checked={selectedItems.includes(film.kinopoiskId)}
+      ></input>
     </div>
   ))
 

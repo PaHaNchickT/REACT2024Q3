@@ -31,4 +31,7 @@ export type reduxStore = {
       filmData: FilmObj
     }
   }
+  selectedData: {
+    selectedData: FilmObj[]
+  }
 }
