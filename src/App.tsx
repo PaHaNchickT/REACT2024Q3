@@ -4,27 +4,38 @@ import { TEXT_CONTENT } from './components/constants'
 import { Outlet, useSearchParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setSearchValue } from './services/searchSlice'
+import { createContext, useState } from 'react'
+
+export const ThemeContext = createContext({
+  theme: 'light',
+  setTheme: (theme: string) => {
+    console.log(theme)
+  },
+})
 
 export function App() {
+  const [theme, setTheme] = useState('light')
   const [searchParams] = useSearchParams()
   const dispatch = useDispatch()
 
   dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
 
   return (
-    <ErrorBoundary
-      fallback={
-        <div className="error__wrapper" data-testid="error__wrapper">
-          <div className="error__cont">
-            <h2>{TEXT_CONTENT.errorTitle}</h2>
-            <div></div>
-            <p>{TEXT_CONTENT.errorText}</p>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <ErrorBoundary
+        fallback={
+          <div className="error__wrapper" data-testid="error__wrapper">
+            <div className="error__cont">
+              <h2>{TEXT_CONTENT.errorTitle}</h2>
+              <div></div>
+              <p>{TEXT_CONTENT.errorText}</p>
+            </div>
           </div>
-        </div>
-      }
-    >
-      <Search />
-      <Outlet />
-    </ErrorBoundary>
+        }
+      >
+        <Search />
+        <Outlet />
+      </ErrorBoundary>
+    </ThemeContext.Provider>
   )
 }

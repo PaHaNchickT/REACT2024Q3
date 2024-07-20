@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { TEXT_CONTENT } from '../constants'
 
 import './search.css'
@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setSearchValue } from '../../services/searchSlice'
 import { reduxStore } from '../types'
 import { useNavigate } from 'react-router-dom'
+import { ThemeContext } from '../../App'
 
 export function Search() {
   const searchValue = useSelector((state: reduxStore) => state.searchData.searchData.value)
   const [inputValue, setInputValue] = useState(searchValue)
+  const { theme, setTheme } = useContext(ThemeContext)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -24,6 +26,11 @@ export function Search() {
   const resetSearch = () => {
     if (searchValue === '') return
     navigate('/')
+  }
+
+  const test = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+    console.log(theme)
   }
 
   return (
@@ -42,7 +49,7 @@ export function Search() {
           {TEXT_CONTENT.btnSearch}
         </button>
       </form>
-      <button className="search__error-btn" data-testid="search__error-btn">
+      <button className="search__error-btn" data-testid="search__error-btn" onClick={test}>
         {TEXT_CONTENT.btnError}
       </button>
     </div>
