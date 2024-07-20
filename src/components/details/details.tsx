@@ -3,12 +3,10 @@ import './details.css'
 import { FilmObj, reduxStore } from '../types'
 import { useGetFilmQuery } from '../../services/API'
 import { useSelector } from 'react-redux'
-import { useContext } from 'react'
+import { useContext, MouseEvent } from 'react'
 import { ThemeContext } from '../../App'
 
-export function Details(props: {
-  closeDetails: <HTMLDivElement, MouseEvent>(event: MouseEvent | HTMLDivElement) => void
-}) {
+export function Details(props: { closeDetails: (event: MouseEvent<HTMLDivElement>) => void }) {
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const { theme } = useContext(ThemeContext)
 

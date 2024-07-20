@@ -12,7 +12,7 @@ import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
 import { useSearchParams } from 'react-router-dom'
 import { setPage } from '../../services/searchSlice'
-import { ChangeEvent, useContext, useEffect } from 'react'
+import { ChangeEvent, useContext, useEffect, MouseEvent } from 'react'
 import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
@@ -56,9 +56,13 @@ export function Results() {
     )
   }
 
-  const closeDetails = <HTMLDivElement, MouseEvent>(event: MouseEvent | HTMLDivElement) => {
-    console.log(event)
-    if (!detailsData.isClosed) return
+  const closeDetails = (event: MouseEvent<HTMLDivElement>) => {
+    if (
+      !detailsData.isClosed ||
+      (event.target as HTMLInputElement).tagName === 'INPUT' ||
+      (event.target as HTMLInputElement).dataset.family === 'selected-bar'
+    )
+      return
 
     dispatch(
       setIsClosed({

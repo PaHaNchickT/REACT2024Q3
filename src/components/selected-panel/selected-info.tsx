@@ -28,15 +28,20 @@ export function Selected() {
   const blob = new Blob([...outputData], { type: 'text/csv;charset=utf-8' })
 
   return (
-    <div className={`selected-cont ${theme}`}>
-      <p>
-        <span>{selectedData.length.toString()}</span>items are selected
+    <div className={`selected-cont ${theme}`} data-family="selected-bar">
+      <p data-family="selected-bar">
+        <span data-family="selected-bar">{selectedData.length.toString()}</span>items are selected
       </p>
-      <div className="selected__buttons-cont">
-        <button className={theme} onClick={() => dispatch(clearItemData())}>
+      <div className="selected__buttons-cont" data-family="selected-bar">
+        <button className={theme} onClick={() => dispatch(clearItemData())} data-family="selected-bar">
           Unselect all
         </button>
-        <a className={theme} href={window.URL.createObjectURL(blob)} download={`${selectedData.length}_films`}>
+        <a
+          className={theme}
+          href={window.URL.createObjectURL(blob)}
+          download={`${selectedData.length}_films`}
+          data-family="selected-bar"
+        >
           Download
         </a>
       </div>
