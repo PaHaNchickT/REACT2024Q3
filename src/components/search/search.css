@@ -9,8 +9,46 @@
   gap: 10px;
 }
 
-input {
+.search__panel-wrapper > input {
   border: none;
   padding-left: 10px;
   border-radius: 5px;
+}
+
+.search__theme-wrapper {
+  width: 52px;
+  height: 26px;
+  border-radius: 100px;
+  cursor: pointer;
+  position: relative;
+}
+
+.search__theme-wrapper.light {
+  background-color: black;
+}
+
+.search__theme-wrapper.dark {
+  background-color: white;
+}
+
+.search__theme-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 100px;
+  background-size: 60%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+
+.search__theme-btn.light {
+  background-color: white;
+  background-image: url('../../assets/theme-sun.png');
+  left: 0;
+}
+
+.search__theme-btn.dark {
+  background-color: black;
+  background-image: url('../../assets/theme-moon.png');
+  left: calc(100% - 26px);
 } /*# sourceMappingURL=search.css.map */

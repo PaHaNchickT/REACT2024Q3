@@ -6,6 +6,10 @@ ul {
   margin: 0;
 }
 
+* {
+  transition: 300ms;
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -31,7 +35,6 @@ input {
 
 button {
   cursor: pointer;
-  transition: 300ms;
   background-color: black;
   color: white;
   border: none;

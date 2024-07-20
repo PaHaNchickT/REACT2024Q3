@@ -49,8 +49,8 @@ export function Search() {
           {TEXT_CONTENT.btnSearch}
         </button>
       </form>
-      <div className="search__theme-wrapper" data-testid="search__theme-wrapper" onClick={themeSwapping}>
-        <div className="search__theme-btn">Theme</div>
+      <div className={`search__theme-wrapper ${theme}`} data-testid="search__theme-wrapper" onClick={themeSwapping}>
+        <div className={`search__theme-btn ${theme}`}></div>
       </div>
     </div>
   )
