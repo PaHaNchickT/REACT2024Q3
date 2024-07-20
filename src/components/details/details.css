@@ -69,24 +69,4 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-}
-
-.details__cont > a {
-  font-weight: 700;
-  align-self: center;
-  transition: 300ms;
-}
-
-.details__cont > a.light {
-  color: black;
-}
-.details__cont > a.light:hover {
-  color: #ff9a00;
-}
-
-.details__cont > a.dark {
-  color: white;
-}
-.details__cont > a.dark:hover {
-  color: lightgray;
 } /*# sourceMappingURL=details.css.map */

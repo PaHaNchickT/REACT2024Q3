@@ -36,7 +36,7 @@ export function Selected() {
         <button className={theme} onClick={() => dispatch(clearItemData())}>
           Unselect all
         </button>
-        <a href={window.URL.createObjectURL(blob)} download={`${selectedData.length}_films`}>
+        <a className={theme} href={window.URL.createObjectURL(blob)} download={`${selectedData.length}_films`}>
           Download
         </a>
       </div>
