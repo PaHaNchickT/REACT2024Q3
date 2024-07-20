@@ -10,6 +10,8 @@ export function ErrorPage() {
   const error = useRouteError()
   if (error) console.log(error)
 
+  if (!document.body.className) document.body.className = theme
+
   return (
     <div className="error-page__wrapper">
       <div className="error-page__cont">
