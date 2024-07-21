@@ -44,10 +44,10 @@ jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
 jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
 
-const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean, value = '') => {
+const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean) => {
   jest
     .spyOn(reduxHooks, 'useSelector')
-    .mockReturnValue({ value: value, page: 1, selectedItems: [], isClosed: isClosed, filmId: 999 })
+    .mockReturnValue({ value: '', page: 1, selectedItems: [], isClosed: isClosed, filmId: 999 })
   jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: null } as never)
   jest
     .spyOn(APIactions, 'useGetFilmQuery')
@@ -233,16 +233,21 @@ describe('Search', () => {
     expect(window.location.search === '?search=RSS&page=1').toBeTruthy()
   })
 
-  // it('should reset Search while clicking by home button', async () => {
-  //   localStorage.setItem('paul-saved-value', 'test')
+  it('should reset Search while clicking by home button', async () => {
+    window.history.pushState({}, '', new URL('http://localhost/films?search=test&page=2'))
 
-  //   await AppCalling(mockAPIstart)
+    fetchMocking(mockAPIstart, false, false)
 
-  //   const searchBtn = screen.getByText('Reset Search')
-  //   await act(async () => fireEvent.click(searchBtn))
+    render(
+      <BrowserRouter>
+        <Search />
+      </BrowserRouter>
+    )
 
-  //   expect(localStorage.getItem('paul-saved-value') === '').toBeTruthy()
-  // })
+    fireEvent.click(screen.getByText('Reset Search'))
+
+    expect(window.location.search === '').toBeTruthy()
+  })
 })
 
 // describe('Error Boundary', () => {
