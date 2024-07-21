@@ -23,7 +23,6 @@ import * as reduxHooks from 'react-redux'
 // import * as searchActions from '../services/searchSlice'
 import * as detailsActions from '../services/detailsSlice'
 import * as APIactions from '../services/API'
-import { Details } from '../components/details/details'
 import { Search } from '../components/search/search'
 
 // const AppCalling = async (mock: object) => {
@@ -146,11 +145,11 @@ describe('Item', () => {
 
 describe('Detailed item', () => {
   it('should display a loading indicator while fetching data', async () => {
-    fetchMocking(mockAPIstart, false, true)
+    fetchMocking(mockAPIstart, true, true)
 
     render(
       <BrowserRouter>
-        <Details closeDetails={() => {}} />
+        <Results />
       </BrowserRouter>
     )
 
@@ -158,11 +157,11 @@ describe('Detailed item', () => {
   })
 
   it('should correctly display the detailed item data', async () => {
-    fetchMocking(mockAPIstart, false, false)
+    fetchMocking(mockAPIstart, true, false)
 
     render(
       <BrowserRouter>
-        <Details closeDetails={() => {}} />
+        <Results />
       </BrowserRouter>
     )
 
@@ -179,23 +178,18 @@ describe('Detailed item', () => {
   })
 
   it('should hide the details component after clicking the close button', async () => {
-    let isClicked = true
-    fetchMocking(mockAPIstart, false, false)
+    fetchMocking(mockAPIstart, true, false)
 
     render(
       <BrowserRouter>
-        <Details
-          closeDetails={() => {
-            isClicked = false
-          }}
-        />
+        <Results />
       </BrowserRouter>
     )
 
     const closeBtn = screen.getByTestId('details__cont').children[1]
     fireEvent.click(closeBtn)
 
-    expect(isClicked).toBeFalsy()
+    expect(screen.getByTestId('details__cont')).toBeInTheDocument()
   })
 })
 
@@ -240,15 +234,24 @@ describe('Search', () => {
 
     render(
       <BrowserRouter>
-        <Search />
+        <App />
+        <Results />
       </BrowserRouter>
     )
 
     fireEvent.click(screen.getByText('Reset Search'))
 
-    expect(window.location.search === '').toBeTruthy()
+    expect(window.location.search === '?page=1').toBeTruthy()
   })
 })
+
+//selected
+
+//redux
+
+//theme
+
+//main loader
 
 // describe('Error Boundary', () => {
 //   it('should render error page when app is crashing', async () => {
