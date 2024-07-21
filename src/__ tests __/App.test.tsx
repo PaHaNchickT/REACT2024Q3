@@ -177,28 +177,25 @@ describe('Detailed item', () => {
     expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
   })
 
-  // it('should hide the details component after clicking the close button', async () => {
-  //   let isClicked = false
-  //   fetchMocking(mockAPIfilmData)
+  it('should hide the details component after clicking the close button', async () => {
+    let isClicked = true
+    fetchMocking(mockAPIstart, false, false)
 
-  //   await act(async () => {
-  //     render(
-  //       <BrowserRouter>
-  //         <Details
-  //           id={430}
-  //           onClick={() => {
-  //             isClicked = true
-  //           }}
-  //         />
-  //       </BrowserRouter>
-  //     )
-  //   })
+    render(
+      <BrowserRouter>
+        <Details
+          closeDetails={() => {
+            isClicked = false
+          }}
+        />
+      </BrowserRouter>
+    )
 
-  //   const closeBtn = screen.getByTestId('details__cont').children[1]
-  //   fireEvent.click(closeBtn)
+    const closeBtn = screen.getByTestId('details__cont').children[1]
+    fireEvent.click(closeBtn)
 
-  //   expect(isClicked).toBeTruthy()
-  // })
+    expect(isClicked).toBeFalsy()
+  })
 })
 
 // describe('Pagination', () => {
