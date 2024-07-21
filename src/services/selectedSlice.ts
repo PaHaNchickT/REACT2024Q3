@@ -4,17 +4,21 @@ import { FilmObj } from '../components/types'
 const selectedDataSlice = createSlice({
   name: 'selectedData',
   initialState: {
-    selectedData: [],
-  } as { selectedData: FilmObj[] },
+    selectedData: {
+      selectedItems: [],
+    },
+  } as { selectedData: { selectedItems: FilmObj[] } },
   reducers: {
     addItemData(state, action) {
-      state.selectedData.push(action.payload)
+      state.selectedData.selectedItems.push(action.payload)
     },
     removeItemData(state, action) {
-      state.selectedData = state.selectedData.filter((item) => JSON.stringify(item) !== JSON.stringify(action.payload))
+      state.selectedData.selectedItems = state.selectedData.selectedItems.filter(
+        (item) => JSON.stringify(item) !== JSON.stringify(action.payload)
+      )
     },
     clearItemData(state) {
-      state.selectedData = []
+      state.selectedData.selectedItems = []
     },
   },
 })

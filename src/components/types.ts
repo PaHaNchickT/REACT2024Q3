@@ -36,6 +36,6 @@ export type reduxStore = {
     }
   }
   selectedData: {
-    selectedData: FilmObj[]
+    selectedData: { selectedItems: FilmObj[] }
   }
 }

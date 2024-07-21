@@ -91,7 +91,7 @@ export function Results() {
   }
 
   data.items.forEach((defaultItem) => {
-    selectedData.forEach((selectedItem) => {
+    selectedData.selectedItems.forEach((selectedItem) => {
       if (defaultItem === selectedItem) selectedItems.push(defaultItem.kinopoiskId)
     })
   })
@@ -156,7 +156,7 @@ export function Results() {
     <div className="results__wrapper" onClick={(event) => closeDetails(event)}>
       <div className="results__items">{films}</div>
       <ul className="pagination__cont">{pages}</ul>
-      {Boolean(selectedData.length) && <Selected />}
+      {Boolean(selectedData.selectedItems.length) && <Selected />}
     </div>
   )
 

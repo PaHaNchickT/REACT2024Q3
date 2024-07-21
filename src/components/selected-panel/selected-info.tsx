@@ -12,7 +12,7 @@ export function Selected() {
 
   const outputData = ['id;name;year;IMDb raiting;Kinopoisk raiting;project type;poster URL', '\n']
 
-  selectedData.forEach((film) => {
+  selectedData.selectedItems.forEach((film) => {
     const tempData = [
       `${film.kinopoiskId}`,
       film.nameEn || film.nameOriginal || film.nameRu || 'No information',
@@ -30,7 +30,7 @@ export function Selected() {
   return (
     <div className={`selected-cont ${theme}`} data-family="selected-bar">
       <p data-family="selected-bar">
-        <span data-family="selected-bar">{selectedData.length.toString()}</span>items are selected
+        <span data-family="selected-bar">{selectedData.selectedItems.length.toString()}</span>items are selected
       </p>
       <div className="selected__buttons-cont" data-family="selected-bar">
         <button className={theme} onClick={() => dispatch(clearItemData())} data-family="selected-bar">
@@ -39,7 +39,7 @@ export function Selected() {
         <a
           className={theme}
           href={window.URL.createObjectURL(blob)}
-          download={`${selectedData.length}_films`}
+          download={`${selectedData.selectedItems.length}_films`}
           data-family="selected-bar"
         >
           Download
