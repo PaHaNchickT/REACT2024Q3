@@ -11,4 +11,6 @@ export const TEXT_CONTENT = {
   errorID: '9ce1093a-82d7-4c43-b702-925b4e40e0b6',
   loaderText: 'Loading...',
   searchPH: 'Type here to search...',
+  barUnselectBtn: 'Unselect all',
+  barDownloadBtn: 'Download',
 }

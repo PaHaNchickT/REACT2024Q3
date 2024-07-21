@@ -4,6 +4,7 @@ import { reduxStore } from '../types'
 import { clearItemData } from '../../services/selectedSlice'
 import { useContext } from 'react'
 import { ThemeContext } from '../../App'
+import { TEXT_CONTENT } from '../constants'
 
 export function Selected() {
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
@@ -34,7 +35,7 @@ export function Selected() {
       </p>
       <div className="selected__buttons-cont" data-family="selected-bar">
         <button className={theme} onClick={() => dispatch(clearItemData())} data-family="selected-bar">
-          Unselect all
+          {TEXT_CONTENT.barUnselectBtn}
         </button>
         <a
           className={theme}
@@ -42,7 +43,7 @@ export function Selected() {
           download={`${selectedData.selectedItems.length}_films`}
           data-family="selected-bar"
         >
-          Download
+          {TEXT_CONTENT.barDownloadBtn}
         </a>
       </div>
     </div>
