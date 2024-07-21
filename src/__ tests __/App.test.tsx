@@ -44,10 +44,10 @@ jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
 jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
 
-const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean) => {
+const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean, value = '') => {
   jest
     .spyOn(reduxHooks, 'useSelector')
-    .mockReturnValue({ value: '', page: 1, selectedItems: [], isClosed: isClosed, filmId: 999 })
+    .mockReturnValue({ value: value, page: 1, selectedItems: [], isClosed: isClosed, filmId: 999 })
   jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: null } as never)
   jest
     .spyOn(APIactions, 'useGetFilmQuery')
@@ -216,7 +216,7 @@ describe('Pagination', () => {
 })
 
 describe('Search', () => {
-  it('should save the entered value to the local storage after clicking the Search button', async () => {
+  it('should change url query after search button clicking', async () => {
     fetchMocking(mockAPIstart, false, false)
 
     render(
@@ -232,23 +232,6 @@ describe('Search', () => {
 
     expect(window.location.search === '?search=RSS&page=1').toBeTruthy()
   })
-
-  // it('should retrieve the value from the local storage upon component mounting', async () => {
-  //   fetchMocking(mockAPIstart)
-
-  //   localStorage.setItem('paul-saved-value', 'test')
-  //   await act(async () => {
-  //     render(
-  //       <BrowserRouter>
-  //         <Search initialValue="test" onClick={() => {}} />
-  //       </BrowserRouter>
-  //     )
-  //   })
-
-  //   const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
-
-  //   expect(input.value === 'test').toBeTruthy()
-  // })
 
   // it('should reset Search while clicking by home button', async () => {
   //   localStorage.setItem('paul-saved-value', 'test')
