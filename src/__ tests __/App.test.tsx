@@ -23,6 +23,7 @@ import * as reduxHooks from 'react-redux'
 // import * as searchActions from '../services/searchSlice'
 import * as detailsActions from '../services/detailsSlice'
 import * as APIactions from '../services/API'
+import { Details } from '../components/details/details'
 
 // const AppCalling = async (mock: object) => {
 //   const mockJsonPromise = Promise.resolve(mock)
@@ -42,17 +43,19 @@ jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
 jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
 
-const fetchMocking = async (mock: object, isClosed: boolean) => {
+const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean) => {
   jest
     .spyOn(reduxHooks, 'useSelector')
     .mockReturnValue({ value: '', page: 1, selectedItems: [], isClosed: isClosed, filmId: 999 })
   jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: null } as never)
-  jest.spyOn(APIactions, 'useGetFilmQuery').mockReturnValue({ data: mockAPIfilmData.data, isFetching: false } as never)
+  jest
+    .spyOn(APIactions, 'useGetFilmQuery')
+    .mockReturnValue({ data: mockAPIfilmData.data, isFetching: isFetching } as never)
 }
 
 describe('Items list', () => {
   it('should render full layout correctly', async () => {
-    fetchMocking(mockAPIstart, false)
+    fetchMocking(mockAPIstart, false, false)
 
     const component = render(
       <BrowserRouter>
@@ -63,7 +66,7 @@ describe('Items list', () => {
   })
 
   it('should render the specified number of items', async () => {
-    fetchMocking(mockAPIstart, false)
+    fetchMocking(mockAPIstart, false, false)
 
     render(
       <BrowserRouter>
@@ -75,7 +78,7 @@ describe('Items list', () => {
   })
 
   it('should display an appropriate message if no items are present', async () => {
-    fetchMocking(mockAPIempty, false)
+    fetchMocking(mockAPIempty, false, false)
 
     render(
       <BrowserRouter>
@@ -89,7 +92,7 @@ describe('Items list', () => {
 
 describe('Item', () => {
   it('should render the relevant item data', async () => {
-    fetchMocking(mockAPIstart, false)
+    fetchMocking(mockAPIstart, false, false)
 
     render(
       <BrowserRouter>
@@ -107,7 +110,7 @@ describe('Item', () => {
 
   it("should update item component isClosed value after it's clicking", async () => {
     let isClosed = false
-    fetchMocking(mockAPIstart, false)
+    fetchMocking(mockAPIstart, false, false)
 
     jest.spyOn(detailsActions, 'setIsClosed').mockImplementation((payload) => {
       payload.isClosed = true
@@ -128,7 +131,7 @@ describe('Item', () => {
   })
 
   it("should render detailed item component after it's clicking", async () => {
-    fetchMocking(mockAPIstart, true)
+    fetchMocking(mockAPIstart, true, false)
 
     render(
       <BrowserRouter>
@@ -140,62 +143,65 @@ describe('Item', () => {
   })
 })
 
-// describe('Detailed item', () => {
-//   it('should display a loading indicator while fetching data', async () => {
-//     await AppCalling(mockAPIstart)
+describe('Detailed item', () => {
+  it('should display a loading indicator while fetching data', async () => {
+    fetchMocking(mockAPIstart, false, true)
 
-//     const item = screen.getAllByTestId('results__item')
-//     fireEvent.click(item[0])
+    render(
+      <BrowserRouter>
+        <Details closeDetails={() => {}} />
+      </BrowserRouter>
+    )
 
-//     expect(screen.getByTestId('loader__wrapper')).toBeInTheDocument()
-//   })
+    expect(screen.getByTestId('loader__wrapper')).toBeInTheDocument()
+  })
 
-//   it('should correctly display the detailed item data', async () => {
-//     fetchMocking(mockAPIfilmData)
+  // it('should correctly display the detailed item data', async () => {
+  //   fetchMocking(mockAPIfilmData)
 
-//     await act(async () => {
-//       render(
-//         <BrowserRouter>
-//           <Details id={430} onClick={() => {}} />
-//         </BrowserRouter>
-//       )
-//     })
+  //   await act(async () => {
+  //     render(
+  //       <BrowserRouter>
+  //         <Details id={430} onClick={() => {}} />
+  //       </BrowserRouter>
+  //     )
+  //   })
 
-//     const details = screen.getByTestId('details__cont')
-//     const currentData = mockAPIfilmData.data
+  //   const details = screen.getByTestId('details__cont')
+  //   const currentData = mockAPIfilmData.data
 
-//     expect(details.children[2].children[0].textContent === currentData.nameEn).toBeTruthy()
-//     expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
-//     expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
-//     expect(details.children[4].children[1].textContent === currentData.year.toString()).toBeTruthy()
-//     expect(details.children[6].children[1].textContent === currentData.description).toBeTruthy()
-//     expect(details.children[7].children[1].textContent === currentData.filmLength).toBeTruthy()
-//     expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
-//   })
+  //   expect(details.children[2].children[0].textContent === currentData.nameEn).toBeTruthy()
+  //   expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
+  //   expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
+  //   expect(details.children[4].children[1].textContent === currentData.year.toString()).toBeTruthy()
+  //   expect(details.children[6].children[1].textContent === currentData.description).toBeTruthy()
+  //   expect(details.children[7].children[1].textContent === currentData.filmLength).toBeTruthy()
+  //   expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
+  // })
 
-//   it('should hide the details component after clicking the close button', async () => {
-//     let isClicked = false
-//     fetchMocking(mockAPIfilmData)
+  // it('should hide the details component after clicking the close button', async () => {
+  //   let isClicked = false
+  //   fetchMocking(mockAPIfilmData)
 
-//     await act(async () => {
-//       render(
-//         <BrowserRouter>
-//           <Details
-//             id={430}
-//             onClick={() => {
-//               isClicked = true
-//             }}
-//           />
-//         </BrowserRouter>
-//       )
-//     })
+  //   await act(async () => {
+  //     render(
+  //       <BrowserRouter>
+  //         <Details
+  //           id={430}
+  //           onClick={() => {
+  //             isClicked = true
+  //           }}
+  //         />
+  //       </BrowserRouter>
+  //     )
+  //   })
 
-//     const closeBtn = screen.getByTestId('details__cont').children[1]
-//     fireEvent.click(closeBtn)
+  //   const closeBtn = screen.getByTestId('details__cont').children[1]
+  //   fireEvent.click(closeBtn)
 
-//     expect(isClicked).toBeTruthy()
-//   })
-// })
+  //   expect(isClicked).toBeTruthy()
+  // })
+})
 
 // describe('Pagination', () => {
 //   it('should update URL query parameter when page changes', async () => {
