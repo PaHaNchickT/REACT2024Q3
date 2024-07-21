@@ -37,25 +37,19 @@ import * as APIactions from '../services/API'
 //   })
 // }
 
-// const fetchMocking = async (mock: object) => {
-//   const mockJsonPromise = Promise.resolve(mock)
-//   const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-//   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-// }
+const fetchMocking = async (mock: object) => {
+  jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({ value: '', page: 1, selectedItems: [] })
+  jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: null } as never)
+}
 
 jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
 jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
 
 describe('Items list', () => {
-  beforeEach(() => {
-    jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({ value: '', page: 1, selectedItems: [] })
-    jest
-      .spyOn(APIactions, 'useGetFilmsQuery')
-      .mockReturnValue({ data: mockAPIstart, isFetching: false, error: null } as never)
-  })
-
   it('should render full layout correctly', async () => {
+    fetchMocking(mockAPIstart)
+
     const component = render(
       <BrowserRouter>
         <App />
@@ -65,6 +59,8 @@ describe('Items list', () => {
   })
 
   it('should render the specified number of items', async () => {
+    fetchMocking(mockAPIstart)
+
     render(
       <BrowserRouter>
         <Results />
@@ -75,9 +71,7 @@ describe('Items list', () => {
   })
 
   it('should display an appropriate message if no items are present', async () => {
-    jest
-      .spyOn(APIactions, 'useGetFilmsQuery')
-      .mockReturnValue({ data: mockAPIempty, isFetching: false, error: null } as never)
+    fetchMocking(mockAPIempty)
 
     render(
       <BrowserRouter>
@@ -87,50 +81,47 @@ describe('Items list', () => {
 
     expect(screen.getByTestId('results__stub')).toBeInTheDocument()
   })
-
-  // it('should display an appropriate message if no items are present', async () => {
-  //   jest.spyOn(reduxHooks, 'useSelector').mockReturnValue(mockAPIempty)
-
-  //   const component = render(
-  //     <BrowserRouter>
-  //       <App />
-  //     </BrowserRouter>
-  //   )
-  //   expect(component).toMatchSnapshot()
-  // })
 })
 
-// describe('Item', () => {
-//   it('should render the relevant item data', async () => {
-//     await AppCalling(mockAPIstart)
+describe('Item', () => {
+  it('should render the relevant item data', async () => {
+    fetchMocking(mockAPIstart)
 
-//     const currentData = mockAPIstart.items[0]
-//     const item = screen.getAllByTestId('results__item')
+    render(
+      <BrowserRouter>
+        <Results />
+      </BrowserRouter>
+    )
 
-//     expect(item[0].children[0]).toHaveAttribute('src', currentData.posterUrlPreview)
-//     expect(item[0].children[1].children[0].textContent === `Title: ${currentData.nameOriginal}`).toBeTruthy()
-//     expect(item[0].children[1].children[1].textContent === `Year: ${currentData.year}`).toBeTruthy()
-//     expect(item[0].children[1].children[2].textContent === `IMDb: ${currentData.ratingImdb}`).toBeTruthy()
-//   })
+    const currentData = mockAPIstart.items[0]
+    const item = screen.getAllByTestId('results__item')
+    expect(item[0].children[0]).toHaveAttribute('src', currentData.posterUrlPreview)
+    expect(item[0].children[1].children[0].textContent === `Title: ${currentData.nameOriginal}`).toBeTruthy()
+    expect(item[0].children[1].children[1].textContent === `Year: ${currentData.year}`).toBeTruthy()
+    expect(item[0].children[1].children[2].textContent === `IMDb: ${currentData.ratingImdb}`).toBeTruthy()
+  })
 
-//   it("should render detailed item component after it's clicking", async () => {
-//     await AppCalling(mockAPIstart)
+  // it("should render detailed item component after it's clicking", async () => {
+  //   fetchMocking(mockAPIstart)
 
-//     const item = screen.getAllByTestId('results__item')
-//     fireEvent.click(item[0])
+  //   render(
+  //     <BrowserRouter>
+  //       <Results />
+  //     </BrowserRouter>
+  //   )
 
-//     expect(screen.getByTestId('details__cont')).toBeInTheDocument()
-//   })
+  //   const item = screen.getAllByTestId('results__item')
+  //   fireEvent.click(item[0])
+  //   expect(screen.getByTestId('details__cont')).toBeInTheDocument()
+  // })
 
-//   it('should triggers an additional API call to fetch detailed information after item clicking', async () => {
-//     await AppCalling(mockAPIstart)
-
-//     const item = screen.getAllByTestId('results__item')
-//     fireEvent.click(item[0])
-
-//     expect(global.fetch).toHaveBeenCalledTimes(2)
-//   })
-// })
+  // it('should triggers an additional API call to fetch detailed information after item clicking', async () => {
+  //   await AppCalling(mockAPIstart)
+  //   const item = screen.getAllByTestId('results__item')
+  //   fireEvent.click(item[0])
+  //   expect(global.fetch).toHaveBeenCalledTimes(2)
+  // })
+})
 
 // describe('Detailed item', () => {
 //   it('should display a loading indicator while fetching data', async () => {
