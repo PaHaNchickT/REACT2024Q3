@@ -640,9 +640,640 @@ export const mockAPIstart = {
       posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/679486.jpg',
       posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/679486.jpg',
     },
+    {
+      kinopoiskId: 1405508,
+      imdbId: null,
+      nameRu: 'Операция «Фортуна»: Искусство побеждать',
+      nameEn: null,
+      nameOriginal: 'Operation Fortune: Ruse de Guerre',
+      countries: [
+        {
+          country: 'США',
+        },
+        {
+          country: 'Великобритания',
+        },
+      ],
+      genres: [
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      ratingKinopoisk: 7.1,
+      ratingImdb: 6.3,
+      year: 2022,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1405508.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1405508.jpg',
+    },
+    {
+      kinopoiskId: 4542208,
+      imdbId: 'tt15325794',
+      nameRu: 'Вышка',
+      nameEn: null,
+      nameOriginal: 'Fall',
+      countries: [
+        {
+          country: 'США',
+        },
+        {
+          country: 'Великобритания',
+        },
+      ],
+      genres: [
+        {
+          genre: 'триллер',
+        },
+      ],
+      ratingKinopoisk: 6.7,
+      ratingImdb: 6.4,
+      year: 2022,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4542208.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/4542208.jpg',
+    },
+    {
+      kinopoiskId: 586397,
+      imdbId: 'tt1853728',
+      nameRu: 'Джанго освобожденный',
+      nameEn: null,
+      nameOriginal: 'Django Unchained',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'вестерн',
+        },
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      ratingKinopoisk: 8.2,
+      ratingImdb: 8.5,
+      year: 2012,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/586397.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/586397.jpg',
+    },
+    {
+      kinopoiskId: 478491,
+      imdbId: null,
+      nameRu: 'Маша и Медведь',
+      nameEn: null,
+      nameOriginal: null,
+      countries: [
+        {
+          country: 'Россия',
+        },
+      ],
+      genres: [
+        {
+          genre: 'комедия',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'детский',
+        },
+      ],
+      ratingKinopoisk: 7.3,
+      ratingImdb: 7.4,
+      year: 2009,
+      type: 'TV_SERIES',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/478491.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/478491.jpg',
+    },
+    {
+      kinopoiskId: 1224067,
+      imdbId: 'tt10922010',
+      nameRu: 'Вампиры средней полосы',
+      nameEn: null,
+      nameOriginal: null,
+      countries: [
+        {
+          country: 'Россия',
+        },
+      ],
+      genres: [
+        {
+          genre: 'детектив',
+        },
+        {
+          genre: 'фэнтези',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      ratingKinopoisk: 8.3,
+      ratingImdb: 7.6,
+      year: 2021,
+      type: 'TV_SERIES',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1224067.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1224067.jpg',
+    },
+    {
+      kinopoiskId: 263531,
+      imdbId: 'tt0848228',
+      nameRu: 'Мстители',
+      nameEn: null,
+      nameOriginal: 'The Avengers',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'фантастика',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      ratingKinopoisk: 7.9,
+      ratingImdb: 8,
+      year: 2012,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/263531.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/263531.jpg',
+    },
+    {
+      kinopoiskId: 4531254,
+      imdbId: 'tt15474794',
+      nameRu: 'Два холма',
+      nameEn: null,
+      nameOriginal: null,
+      countries: [
+        {
+          country: 'Россия',
+        },
+      ],
+      genres: [
+        {
+          genre: 'фантастика',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      ratingKinopoisk: 7.6,
+      ratingImdb: null,
+      year: 2022,
+      type: 'TV_SERIES',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/4531254.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/4531254.jpg',
+    },
+    {
+      kinopoiskId: 406408,
+      imdbId: 'tt1197624',
+      nameRu: 'Законопослушный гражданин',
+      nameEn: null,
+      nameOriginal: 'Law Abiding Citizen',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'триллер',
+        },
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'криминал',
+        },
+        {
+          genre: 'боевик',
+        },
+      ],
+      ratingKinopoisk: 8,
+      ratingImdb: 7.4,
+      year: 2009,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/406408.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/406408.jpg',
+    },
+    {
+      kinopoiskId: 279102,
+      imdbId: 'tt0910970',
+      nameRu: 'ВАЛЛ·И',
+      nameEn: null,
+      nameOriginal: 'WALL·E',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'фантастика',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'мультфильм',
+        },
+        {
+          genre: 'семейный',
+        },
+      ],
+      ratingKinopoisk: 8.4,
+      ratingImdb: 8.4,
+      year: 2008,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/279102.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/279102.jpg',
+    },
+    {
+      kinopoiskId: 1405843,
+      imdbId: 'tt13266012',
+      nameRu: 'Пищеблок',
+      nameEn: null,
+      nameOriginal: null,
+      countries: [
+        {
+          country: 'Россия',
+        },
+      ],
+      genres: [
+        {
+          genre: 'триллер',
+        },
+        {
+          genre: 'детектив',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      ratingKinopoisk: 7.4,
+      ratingImdb: 6,
+      year: 2021,
+      type: 'TV_SERIES',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1405843.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1405843.jpg',
+    },
+    {
+      kinopoiskId: 474,
+      imdbId: 'tt0172495',
+      nameRu: 'Гладиатор',
+      nameEn: null,
+      nameOriginal: 'Gladiator',
+      countries: [
+        {
+          country: 'США',
+        },
+        {
+          country: 'Великобритания',
+        },
+        {
+          country: 'Мальта',
+        },
+        {
+          country: 'Марокко',
+        },
+      ],
+      genres: [
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'история',
+        },
+      ],
+      ratingKinopoisk: 8.6,
+      ratingImdb: 8.5,
+      year: 2000,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/474.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/474.jpg',
+    },
+    {
+      kinopoiskId: 522892,
+      imdbId: 'tt1670345',
+      nameRu: 'Иллюзия обмана',
+      nameEn: null,
+      nameOriginal: 'Now You See Me',
+      countries: [
+        {
+          country: 'США',
+        },
+        {
+          country: 'Франция',
+        },
+      ],
+      genres: [
+        {
+          genre: 'триллер',
+        },
+        {
+          genre: 'криминал',
+        },
+        {
+          genre: 'детектив',
+        },
+      ],
+      ratingKinopoisk: 7.7,
+      ratingImdb: 7.2,
+      year: 2013,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/522892.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/522892.jpg',
+    },
+    {
+      kinopoiskId: 835086,
+      imdbId: 'tt1950186',
+      nameRu: 'Ford против Ferrari',
+      nameEn: null,
+      nameOriginal: 'Ford v Ferrari',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'биография',
+        },
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'спорт',
+        },
+      ],
+      ratingKinopoisk: 8.2,
+      ratingImdb: 8.1,
+      year: 2019,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/835086.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/835086.jpg',
+    },
+    {
+      kinopoiskId: 462360,
+      imdbId: 'tt1431045',
+      nameRu: 'Дэдпул',
+      nameEn: null,
+      nameOriginal: 'Deadpool',
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      ratingKinopoisk: 7.6,
+      ratingImdb: 8,
+      year: 2016,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/462360.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/462360.jpg',
+    },
+    {
+      kinopoiskId: 322,
+      imdbId: 'tt0304141',
+      nameRu: 'Гарри Поттер и узник Азкабана',
+      nameEn: null,
+      nameOriginal: 'Harry Potter and the Prisoner of Azkaban',
+      countries: [
+        {
+          country: 'США',
+        },
+        {
+          country: 'Великобритания',
+        },
+      ],
+      genres: [
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'фэнтези',
+        },
+        {
+          genre: 'семейный',
+        },
+      ],
+      ratingKinopoisk: 8.2,
+      ratingImdb: 7.9,
+      year: 2004,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/322.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/322.jpg',
+    },
+    {
+      kinopoiskId: 63991,
+      imdbId: 'tt0383574',
+      nameRu: 'Пираты Карибского моря: Сундук мертвеца',
+      nameEn: null,
+      nameOriginal: "Pirates of the Caribbean: Dead Man's Chest",
+      countries: [
+        {
+          country: 'США',
+        },
+      ],
+      genres: [
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      ratingKinopoisk: 8.1,
+      ratingImdb: 7.4,
+      year: 2006,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/63991.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/63991.jpg',
+    },
+    {
+      kinopoiskId: 61237,
+      imdbId: 'tt0371746',
+      nameRu: 'Железный человек',
+      nameEn: null,
+      nameOriginal: 'Iron Man',
+      countries: [
+        {
+          country: 'США',
+        },
+        {
+          country: 'Канада',
+        },
+      ],
+      genres: [
+        {
+          genre: 'фантастика',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'боевик',
+        },
+      ],
+      ratingKinopoisk: 8,
+      ratingImdb: 7.9,
+      year: 2008,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/61237.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/61237.jpg',
+    },
+    {
+      kinopoiskId: 1326397,
+      imdbId: null,
+      nameRu: 'Батя',
+      nameEn: null,
+      nameOriginal: null,
+      countries: [
+        {
+          country: 'Россия',
+        },
+      ],
+      genres: [
+        {
+          genre: 'мелодрама',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      ratingKinopoisk: 7.7,
+      ratingImdb: 6.7,
+      year: 2020,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/1326397.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/1326397.jpg',
+    },
+    {
+      kinopoiskId: 328,
+      imdbId: 'tt0120737',
+      nameRu: 'Властелин колец: Братство Кольца',
+      nameEn: null,
+      nameOriginal: 'The Lord of the Rings: The Fellowship of the Ring',
+      countries: [
+        {
+          country: 'США',
+        },
+        {
+          country: 'Новая Зеландия',
+        },
+      ],
+      genres: [
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'фэнтези',
+        },
+      ],
+      ratingKinopoisk: 8.6,
+      ratingImdb: 8.9,
+      year: 2001,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/328.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/328.jpg',
+    },
+    {
+      kinopoiskId: 420923,
+      imdbId: 'tt0988045',
+      nameRu: 'Шерлок Холмс',
+      nameEn: null,
+      nameOriginal: 'Sherlock Holmes',
+      countries: [
+        {
+          country: 'США',
+        },
+        {
+          country: 'Великобритания',
+        },
+        {
+          country: 'Германия',
+        },
+        {
+          country: 'Австралия',
+        },
+      ],
+      genres: [
+        {
+          genre: 'триллер',
+        },
+        {
+          genre: 'драма',
+        },
+        {
+          genre: 'криминал',
+        },
+        {
+          genre: 'детектив',
+        },
+        {
+          genre: 'приключения',
+        },
+        {
+          genre: 'боевик',
+        },
+        {
+          genre: 'комедия',
+        },
+      ],
+      ratingKinopoisk: 8.1,
+      ratingImdb: 7.6,
+      year: 2009,
+      type: 'FILM',
+      posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/420923.jpg',
+      posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/420923.jpg',
+    },
   ],
-  total: 20,
-  totalPages: 1,
+  total: 40,
+  totalPages: 2,
 }
 
 export const mockAPIempty = {

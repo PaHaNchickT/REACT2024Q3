@@ -74,7 +74,7 @@ describe('Items list', () => {
       </BrowserRouter>
     )
 
-    expect(screen.getAllByTestId('results__item')).toHaveLength(20)
+    expect(screen.getAllByTestId('results__item')).toHaveLength(40)
   })
 
   it('should display an appropriate message if no items are present', async () => {
@@ -198,16 +198,21 @@ describe('Detailed item', () => {
   })
 })
 
-// describe('Pagination', () => {
-//   it('should update URL query parameter when page changes', async () => {
-//     await AppCalling(mockAPIstart)
+describe('Pagination', () => {
+  it('should update URL query parameter when page changes', async () => {
+    fetchMocking(mockAPIstart, false, false)
 
-//     const item = screen.getAllByTestId('pendingBtn')
-//     await act(async () => fireEvent.click(item[0]))
+    render(
+      <BrowserRouter>
+        <Results />
+      </BrowserRouter>
+    )
 
-//     expect(+window.location.pathname.split('/')[1] === 1).toBeTruthy()
-//   })
-// })
+    fireEvent.click(screen.getAllByTestId('pendingBtn')[1])
+
+    expect(window.location.search === '?page=2').toBeTruthy()
+  })
+})
 
 // describe('Search', () => {
 //   it('should save the entered value to the local storage after clicking the Search button', async () => {
