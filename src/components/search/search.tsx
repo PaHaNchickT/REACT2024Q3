@@ -12,10 +12,11 @@ export function Search() {
   const navigate = useNavigate()
 
   const searchButtonHandler = () => {
-    setSearchParams({
-      search: inputValue,
-      page: '1',
-    })
+    if (inputValue !== '')
+      setSearchParams({
+        search: inputValue,
+        page: '1',
+      })
   }
 
   const resetSearch = () => {
