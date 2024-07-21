@@ -1,11 +1,27 @@
 import '@testing-library/jest-dom'
-// import { fireEvent, render, screen } from '@testing-library/react'
-// import { App } from '../App'
-// import { BrowserRouter } from 'react-router-dom'
-// import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { App } from '../App'
+import { BrowserRouter } from 'react-router-dom'
+import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
+console.log(fireEvent, mockAPIempty, mockAPIfilmData)
 // import { act } from 'react'
 // import { Details } from '../components/details/details'
 // import { Search } from '../components/search/search'
+
+// import { UseQueryHookResult } from '@reduxjs/toolkit/dist/query/react/buildHooks'
+// import {
+//   BaseQueryFn,
+//   FetchArgs,
+//   FetchBaseQueryError,
+//   FetchBaseQueryMeta,
+//   QueryDefinition,
+// } from '@reduxjs/toolkit/query'
+// import { FilmObj } from '../components/types'
+import { Results } from '../components/results/results'
+
+import * as reduxHooks from 'react-redux'
+// import * as searchActions from '../services/searchSlice'
+import * as APIactions from '../services/API'
 
 // const AppCalling = async (mock: object) => {
 //   const mockJsonPromise = Promise.resolve(mock)
@@ -27,21 +43,48 @@ import '@testing-library/jest-dom'
 //   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
 // }
 
-it('temp test', () => {
-  expect(true).toBeTruthy()
+jest.mock('react-redux')
+global.URL.createObjectURL = jest.fn()
+jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
+
+describe('Items list', () => {
+  beforeEach(() => {
+    jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({ value: '', page: 1, selectedItems: [] })
+    jest
+      .spyOn(APIactions, 'useGetFilmsQuery')
+      .mockReturnValue({ data: mockAPIstart, isFetching: false, error: null } as never)
+  })
+
+  it('should render full layout correctly', async () => {
+    const component = render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    )
+    expect(component).toMatchSnapshot()
+  })
+
+  it('should render the specified number of items', async () => {
+    render(
+      <BrowserRouter>
+        <Results />
+      </BrowserRouter>
+    )
+
+    expect(screen.getAllByTestId('results__item')).toHaveLength(20)
+  })
+
+  // it('should display an appropriate message if no items are present', async () => {
+  //   jest.spyOn(reduxHooks, 'useSelector').mockReturnValue(mockAPIempty)
+
+  //   const component = render(
+  //     <BrowserRouter>
+  //       <App />
+  //     </BrowserRouter>
+  //   )
+  //   expect(component).toMatchSnapshot()
+  // })
 })
-
-// describe('Items list', () => {
-//   it('should render the specified number of items', async () => {
-//     await AppCalling(mockAPIstart)
-//     expect(screen.getAllByTestId('results__item')).toHaveLength(40)
-//   })
-
-//   it('should display an appropriate message if no items are present', async () => {
-//     await AppCalling(mockAPIempty)
-//     expect(screen.getByTestId('results__stub')).toBeInTheDocument()
-//   })
-// })
 
 // describe('Item', () => {
 //   it('should render the relevant item data', async () => {
