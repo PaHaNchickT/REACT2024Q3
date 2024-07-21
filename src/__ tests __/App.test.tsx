@@ -156,28 +156,26 @@ describe('Detailed item', () => {
     expect(screen.getByTestId('loader__wrapper')).toBeInTheDocument()
   })
 
-  // it('should correctly display the detailed item data', async () => {
-  //   fetchMocking(mockAPIfilmData)
+  it('should correctly display the detailed item data', async () => {
+    fetchMocking(mockAPIstart, false, false)
 
-  //   await act(async () => {
-  //     render(
-  //       <BrowserRouter>
-  //         <Details id={430} onClick={() => {}} />
-  //       </BrowserRouter>
-  //     )
-  //   })
+    render(
+      <BrowserRouter>
+        <Details closeDetails={() => {}} />
+      </BrowserRouter>
+    )
 
-  //   const details = screen.getByTestId('details__cont')
-  //   const currentData = mockAPIfilmData.data
+    const details = screen.getByTestId('details__cont')
+    const currentData = mockAPIfilmData.data
 
-  //   expect(details.children[2].children[0].textContent === currentData.nameEn).toBeTruthy()
-  //   expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
-  //   expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
-  //   expect(details.children[4].children[1].textContent === currentData.year.toString()).toBeTruthy()
-  //   expect(details.children[6].children[1].textContent === currentData.description).toBeTruthy()
-  //   expect(details.children[7].children[1].textContent === currentData.filmLength).toBeTruthy()
-  //   expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
-  // })
+    expect(details.children[2].children[0].textContent === currentData.nameEn).toBeTruthy()
+    expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
+    expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
+    expect(details.children[4].children[1].textContent === currentData.year.toString()).toBeTruthy()
+    expect(details.children[6].children[1].textContent === currentData.description).toBeTruthy()
+    expect(details.children[7].children[1].textContent === currentData.filmLength).toBeTruthy()
+    expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
+  })
 
   // it('should hide the details component after clicking the close button', async () => {
   //   let isClicked = false
