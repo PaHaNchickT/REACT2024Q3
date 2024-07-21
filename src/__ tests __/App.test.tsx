@@ -24,6 +24,7 @@ import * as reduxHooks from 'react-redux'
 import * as detailsActions from '../services/detailsSlice'
 import * as APIactions from '../services/API'
 import { Details } from '../components/details/details'
+import { Search } from '../components/search/search'
 
 // const AppCalling = async (mock: object) => {
 //   const mockJsonPromise = Promise.resolve(mock)
@@ -214,58 +215,52 @@ describe('Pagination', () => {
   })
 })
 
-// describe('Search', () => {
-//   it('should save the entered value to the local storage after clicking the Search button', async () => {
-//     fetchMocking(mockAPIstart)
+describe('Search', () => {
+  it('should save the entered value to the local storage after clicking the Search button', async () => {
+    fetchMocking(mockAPIstart, false, false)
 
-//     let isSaved = false
-//     await act(async () => {
-//       render(
-//         <BrowserRouter>
-//           <Search
-//             initialValue=""
-//             onClick={() => {
-//               isSaved = true
-//             }}
-//           />
-//         </BrowserRouter>
-//       )
-//     })
+    render(
+      <BrowserRouter>
+        <Search />
+      </BrowserRouter>
+    )
 
-//     const searchBtn = screen.getByText('Search')
-//     await act(async () => fireEvent.click(searchBtn))
+    const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
 
-//     expect(isSaved).toBeTruthy()
-//   })
+    fireEvent.change(input, { target: { value: 'RSS' } })
+    fireEvent.click(screen.getByText('Search'))
 
-//   it('should retrieve the value from the local storage upon component mounting', async () => {
-//     fetchMocking(mockAPIstart)
+    expect(window.location.search === '?search=RSS&page=1').toBeTruthy()
+  })
 
-//     localStorage.setItem('paul-saved-value', 'test')
-//     await act(async () => {
-//       render(
-//         <BrowserRouter>
-//           <Search initialValue="test" onClick={() => {}} />
-//         </BrowserRouter>
-//       )
-//     })
+  // it('should retrieve the value from the local storage upon component mounting', async () => {
+  //   fetchMocking(mockAPIstart)
 
-//     const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
+  //   localStorage.setItem('paul-saved-value', 'test')
+  //   await act(async () => {
+  //     render(
+  //       <BrowserRouter>
+  //         <Search initialValue="test" onClick={() => {}} />
+  //       </BrowserRouter>
+  //     )
+  //   })
 
-//     expect(input.value === 'test').toBeTruthy()
-//   })
+  //   const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
 
-//   it('should reset Search while clicking by home button', async () => {
-//     localStorage.setItem('paul-saved-value', 'test')
+  //   expect(input.value === 'test').toBeTruthy()
+  // })
 
-//     await AppCalling(mockAPIstart)
+  // it('should reset Search while clicking by home button', async () => {
+  //   localStorage.setItem('paul-saved-value', 'test')
 
-//     const searchBtn = screen.getByText('Reset Search')
-//     await act(async () => fireEvent.click(searchBtn))
+  //   await AppCalling(mockAPIstart)
 
-//     expect(localStorage.getItem('paul-saved-value') === '').toBeTruthy()
-//   })
-// })
+  //   const searchBtn = screen.getByText('Reset Search')
+  //   await act(async () => fireEvent.click(searchBtn))
+
+  //   expect(localStorage.getItem('paul-saved-value') === '').toBeTruthy()
+  // })
+})
 
 // describe('Error Boundary', () => {
 //   it('should render error page when app is crashing', async () => {
