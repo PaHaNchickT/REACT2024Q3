@@ -27,7 +27,7 @@ export function App() {
           </div>
         }
       >
-        <div className={`root__wrapper ${theme}`}>
+        <div className={`root__wrapper ${theme}`} data-testid={theme}>
           <Search />
           <Outlet />
         </div>

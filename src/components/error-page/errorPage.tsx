@@ -11,7 +11,7 @@ export function ErrorPage() {
   if (error) console.log(error)
 
   return (
-    <div className="error-page__wrapper">
+    <div className="error-page__wrapper" data-testid="error-page__wrapper">
       <div className="error-page__cont">
         <h2>{TEXT_CONTENT.errorPageTitle}</h2>
         <div></div>

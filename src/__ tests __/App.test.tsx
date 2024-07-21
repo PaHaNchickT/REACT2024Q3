@@ -43,10 +43,10 @@ jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
 jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
 
-const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean) => {
+const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean, page = 1) => {
   jest
     .spyOn(reduxHooks, 'useSelector')
-    .mockReturnValue({ value: '', page: 1, selectedItems: [], isClosed: isClosed, filmId: 999 })
+    .mockReturnValue({ value: '', page: page, selectedItems: [], isClosed: isClosed, filmId: 999 })
   jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: null } as never)
   jest
     .spyOn(APIactions, 'useGetFilmQuery')
@@ -245,59 +245,72 @@ describe('Search', () => {
   })
 })
 
+describe('Theme', () => {
+  it('should change app color scheme after theme button clicking', async () => {
+    fetchMocking(mockAPIstart, false, false)
+
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    )
+
+    fireEvent.click(screen.getByTestId('search__theme-wrapper'))
+
+    expect(screen.getByTestId('dark')).toBeInTheDocument()
+  })
+})
+
 //selected
 
 //redux
 
-//theme
-
 //main loader
 
 // describe('Error Boundary', () => {
-//   it('should render error page when app is crashing', async () => {
-//     await AppCalling({})
+//   window.history.pushState({}, '', new URL('http://localhost/jopa/jopa/jopa'))
 
-//     expect(screen.getByTestId('error__wrapper')).toBeInTheDocument()
+//   it('should render error boundary page when app is crashing', async () => {
+//     fetchMocking(mockAPIempty, false, false)
+
+//     render(
+//       <BrowserRouter>
+//         <App />
+//         <Results />
+//       </BrowserRouter>
+//     )
+
+//     console.log(location.href)
+//     screen.debug()
+
+//     // expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
 //   })
 
-//   it('should render error page when clicking on error button', async () => {
-//     await AppCalling(mockAPIstart)
+// it('should render 404 page after wrong URL entering', async () => {
+//   const mockJsonPromise = Promise.resolve(mockAPIstart)
+//   const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+//   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
 
-//     const mockJsonPromiseT = Promise.resolve({})
-//     const mockFetchPromiseT = Promise.resolve({ json: () => mockJsonPromiseT })
-//     global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseT)
+//   window.history.pushState({}, '', new URL('http://localhost/test/test/test'))
 
-//     const erroBtn = screen.getByTestId('search__error-btn')
-//     await act(async () => fireEvent.click(erroBtn))
-
-//     expect(screen.getByTestId('error__wrapper')).toBeInTheDocument()
+//   await act(async () => {
+//     render(
+//       <BrowserRouter>
+//         <App />
+//       </BrowserRouter>
+//     )
 //   })
 
-//   it('should render 404 page after wrong URL entering', async () => {
-//     const mockJsonPromise = Promise.resolve(mockAPIstart)
-//     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-//     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+//   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
 
-//     window.history.pushState({}, '', new URL('http://localhost/test/test/test'))
-
-//     await act(async () => {
-//       render(
-//         <BrowserRouter>
-//           <App />
-//         </BrowserRouter>
-//       )
-//     })
-
-//     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-//     await act(async () => {
-//       render(
-//         <BrowserRouter>
-//           <App />
-//         </BrowserRouter>
-//       )
-//     })
-
-//     expect(location.href === 'http://localhost/error/2').toBeTruthy()
+//   await act(async () => {
+//     render(
+//       <BrowserRouter>
+//         <App />
+//       </BrowserRouter>
+//     )
 //   })
+
+//   expect(location.href === 'http://localhost/error/2').toBeTruthy()
+// })
 // })
