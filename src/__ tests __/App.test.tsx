@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { App } from '../App'
 import { BrowserRouter } from 'react-router-dom'
 import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
-console.log(fireEvent, mockAPIempty, mockAPIfilmData)
+console.log(fireEvent, mockAPIfilmData)
 // import { act } from 'react'
 // import { Details } from '../components/details/details'
 // import { Search } from '../components/search/search'
@@ -72,6 +72,20 @@ describe('Items list', () => {
     )
 
     expect(screen.getAllByTestId('results__item')).toHaveLength(20)
+  })
+
+  it('should display an appropriate message if no items are present', async () => {
+    jest
+      .spyOn(APIactions, 'useGetFilmsQuery')
+      .mockReturnValue({ data: mockAPIempty, isFetching: false, error: null } as never)
+
+    render(
+      <BrowserRouter>
+        <Results />
+      </BrowserRouter>
+    )
+
+    expect(screen.getByTestId('results__stub')).toBeInTheDocument()
   })
 
   // it('should display an appropriate message if no items are present', async () => {
