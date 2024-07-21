@@ -10,29 +10,6 @@ ul {
   transition: 300ms;
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-  padding: 20px;
-  box-sizing: border-box;
-  height: 100%;
-}
-
-body {
-  min-height: 100vh;
-  height: 100%;
-}
-
-body.light {
-  background: linear-gradient(#ff9a00, black);
-}
-
-body.dark {
-  background: linear-gradient(black, dimgray);
-}
-
 body,
 button,
 input {
@@ -74,4 +51,23 @@ a.dark:hover {
   color: white;
   background-color: dimgray;
   box-shadow: 0 0 5px 2px white;
+}
+
+.root__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.root__wrapper.light {
+  background: linear-gradient(#ff9a00, black);
+}
+
+.root__wrapper.dark {
+  background: linear-gradient(black, dimgray);
 } /*# sourceMappingURL=index.css.map */

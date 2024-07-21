@@ -14,8 +14,6 @@ export const ThemeContext = createContext({
 export function App() {
   const [theme, setTheme] = useState(localStorage.getItem('paul-theme') || 'light')
 
-  document.body.className = theme
-
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <ErrorBoundary
@@ -29,8 +27,10 @@ export function App() {
           </div>
         }
       >
-        <Search />
-        <Outlet />
+        <div className={`root__wrapper ${theme}`}>
+          <Search />
+          <Outlet />
+        </div>
       </ErrorBoundary>
     </ThemeContext.Provider>
   )
