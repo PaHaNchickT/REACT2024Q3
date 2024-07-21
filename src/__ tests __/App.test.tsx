@@ -21,6 +21,7 @@ import { Results } from '../components/results/results'
 
 import * as reduxHooks from 'react-redux'
 // import * as searchActions from '../services/searchSlice'
+import * as detailsActions from '../services/detailsSlice'
 import * as APIactions from '../services/API'
 
 // const AppCalling = async (mock: object) => {
@@ -37,18 +38,21 @@ import * as APIactions from '../services/API'
 //   })
 // }
 
-const fetchMocking = async (mock: object) => {
-  jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({ value: '', page: 1, selectedItems: [] })
-  jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: null } as never)
-}
-
 jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
 jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
 
+const fetchMocking = async (mock: object, isClosed: boolean) => {
+  jest
+    .spyOn(reduxHooks, 'useSelector')
+    .mockReturnValue({ value: '', page: 1, selectedItems: [], isClosed: isClosed, filmId: 999 })
+  jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: null } as never)
+  jest.spyOn(APIactions, 'useGetFilmQuery').mockReturnValue({ data: mockAPIfilmData.data, isFetching: false } as never)
+}
+
 describe('Items list', () => {
   it('should render full layout correctly', async () => {
-    fetchMocking(mockAPIstart)
+    fetchMocking(mockAPIstart, false)
 
     const component = render(
       <BrowserRouter>
@@ -59,7 +63,7 @@ describe('Items list', () => {
   })
 
   it('should render the specified number of items', async () => {
-    fetchMocking(mockAPIstart)
+    fetchMocking(mockAPIstart, false)
 
     render(
       <BrowserRouter>
@@ -71,7 +75,7 @@ describe('Items list', () => {
   })
 
   it('should display an appropriate message if no items are present', async () => {
-    fetchMocking(mockAPIempty)
+    fetchMocking(mockAPIempty, false)
 
     render(
       <BrowserRouter>
@@ -85,7 +89,7 @@ describe('Items list', () => {
 
 describe('Item', () => {
   it('should render the relevant item data', async () => {
-    fetchMocking(mockAPIstart)
+    fetchMocking(mockAPIstart, false)
 
     render(
       <BrowserRouter>
@@ -101,26 +105,39 @@ describe('Item', () => {
     expect(item[0].children[1].children[2].textContent === `IMDb: ${currentData.ratingImdb}`).toBeTruthy()
   })
 
-  // it("should render detailed item component after it's clicking", async () => {
-  //   fetchMocking(mockAPIstart)
+  it("should update item component isClosed value after it's clicking", async () => {
+    let isClosed = false
+    fetchMocking(mockAPIstart, false)
 
-  //   render(
-  //     <BrowserRouter>
-  //       <Results />
-  //     </BrowserRouter>
-  //   )
+    jest.spyOn(detailsActions, 'setIsClosed').mockImplementation((payload) => {
+      payload.isClosed = true
+      isClosed = true
+      return { payload: { isClosed: isClosed }, type: 'detailsData/setIsClosed' }
+    })
 
-  //   const item = screen.getAllByTestId('results__item')
-  //   fireEvent.click(item[0])
-  //   expect(screen.getByTestId('details__cont')).toBeInTheDocument()
-  // })
+    render(
+      <BrowserRouter>
+        <Results />
+      </BrowserRouter>
+    )
 
-  // it('should triggers an additional API call to fetch detailed information after item clicking', async () => {
-  //   await AppCalling(mockAPIstart)
-  //   const item = screen.getAllByTestId('results__item')
-  //   fireEvent.click(item[0])
-  //   expect(global.fetch).toHaveBeenCalledTimes(2)
-  // })
+    const item = screen.getAllByTestId('results__item')
+    fireEvent.click(item[0])
+
+    expect(isClosed).toBeTruthy()
+  })
+
+  it("should render detailed item component after it's clicking", async () => {
+    fetchMocking(mockAPIstart, true)
+
+    render(
+      <BrowserRouter>
+        <Results />
+      </BrowserRouter>
+    )
+
+    expect(screen.getByTestId('details__cont')).toBeInTheDocument()
+  })
 })
 
 // describe('Detailed item', () => {
