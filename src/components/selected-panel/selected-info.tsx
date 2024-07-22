@@ -29,7 +29,7 @@ export function Selected() {
   const blob = new Blob([...outputData], { type: 'text/csv;charset=utf-8' })
 
   return (
-    <div className={`selected-cont ${theme}`} data-family="selected-bar">
+    <div className={`selected-cont ${theme}`} data-family="selected-bar" data-testid="selected-bar">
       <p data-family="selected-bar">
         <span data-family="selected-bar">{selectedData.selectedItems.length.toString()}</span>items are selected
       </p>

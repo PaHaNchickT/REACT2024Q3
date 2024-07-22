@@ -43,11 +43,51 @@ jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
 jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
 
-const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean, page = 1) => {
-  jest
-    .spyOn(reduxHooks, 'useSelector')
-    .mockReturnValue({ value: '', page: page, selectedItems: [], isClosed: isClosed, filmId: 999 })
-  jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: null } as never)
+const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean, isError = null) => {
+  jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
+    value: '',
+    page: 1,
+    selectedItems: [
+      {
+        kinopoiskId: 463634,
+        imdbId: 'tt1270797',
+        nameRu: 'Веном',
+        nameEn: null,
+        nameOriginal: 'Venom',
+        countries: [
+          {
+            country: 'США',
+          },
+          {
+            country: 'Китай',
+          },
+        ],
+        genres: [
+          {
+            genre: 'триллер',
+          },
+          {
+            genre: 'фантастика',
+          },
+          {
+            genre: 'боевик',
+          },
+          {
+            genre: 'ужасы',
+          },
+        ],
+        ratingKinopoisk: 6.9,
+        ratingImdb: 6.6,
+        year: 2018,
+        type: 'FILM',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/463634.jpg',
+        posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/463634.jpg',
+      },
+    ],
+    isClosed: isClosed,
+    filmId: 999,
+  })
+  jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: isError } as never)
   jest
     .spyOn(APIactions, 'useGetFilmQuery')
     .mockReturnValue({ data: mockAPIfilmData.data, isFetching: isFetching } as never)
@@ -258,6 +298,22 @@ describe('Theme', () => {
     fireEvent.click(screen.getByTestId('search__theme-wrapper'))
 
     expect(screen.getByTestId('dark')).toBeInTheDocument()
+  })
+})
+
+describe('Selected items', () => {
+  it('should render selected bar after checkbox clicked', async () => {
+    fetchMocking(mockAPIstart, false, false)
+
+    render(
+      <BrowserRouter>
+        <Results />
+      </BrowserRouter>
+    )
+
+    fireEvent.click(screen.getAllByTestId('checkbox')[0])
+
+    expect(screen.getByTestId('selected-bar')).toBeInTheDocument()
   })
 })
 

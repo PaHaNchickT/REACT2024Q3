@@ -141,6 +141,7 @@ export function Results() {
       </div>
       <input
         type="checkbox"
+        data-testid="checkbox"
         name={film.kinopoiskId.toString()}
         onChange={(event) => checkboxHandling(event)}
         checked={selectedItems.includes(film.kinopoiskId)}
