@@ -43,7 +43,12 @@ jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
 jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
 
-const fetchMocking = async (mock: object, isClosed: boolean, isFetching: boolean, isError = null) => {
+const fetchMocking = async (
+  mock: object,
+  isClosed: boolean,
+  isFetching: boolean,
+  isError: null | { status: number; data: { message: string } } = null
+) => {
   jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
     value: '',
     page: 1,
@@ -323,50 +328,63 @@ describe('Selected items', () => {
 
 //main loader
 
-// describe('Error Boundary', () => {
-//   window.history.pushState({}, '', new URL('http://localhost/jopa/jopa/jopa'))
+describe('App errors', () => {
+  it('should render error page when response contains error', async () => {
+    fetchMocking(mockAPIempty, false, false, { status: 404, data: { message: 'error' } })
 
-//   it('should render error boundary page when app is crashing', async () => {
-//     fetchMocking(mockAPIempty, false, false)
+    render(
+      <BrowserRouter>
+        <App />
+        <Results />
+      </BrowserRouter>
+    )
 
-//     render(
-//       <BrowserRouter>
-//         <App />
-//         <Results />
-//       </BrowserRouter>
-//     )
+    screen.debug()
 
-//     console.log(location.href)
-//     screen.debug()
+    expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  })
 
-//     // expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
-//   })
+  // it('should render error boundary page when app is crashing', async () => {
+  //   fetchMocking(mockAPIempty, false, false)
 
-// it('should render 404 page after wrong URL entering', async () => {
-//   const mockJsonPromise = Promise.resolve(mockAPIstart)
-//   const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-//   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+  //   render(
+  //     <BrowserRouter>
+  //       <App />
+  //       <Results />
+  //     </BrowserRouter>
+  //   )
 
-//   window.history.pushState({}, '', new URL('http://localhost/test/test/test'))
+  //   console.log(location.href)
+  //   screen.debug()
 
-//   await act(async () => {
-//     render(
-//       <BrowserRouter>
-//         <App />
-//       </BrowserRouter>
-//     )
-//   })
+  //   // expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  // })
 
-//   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+  // it('should render 404 page after wrong URL entering', async () => {
+  //   const mockJsonPromise = Promise.resolve(mockAPIstart)
+  //   const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+  //   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
 
-//   await act(async () => {
-//     render(
-//       <BrowserRouter>
-//         <App />
-//       </BrowserRouter>
-//     )
-//   })
+  //   window.history.pushState({}, '', new URL('http://localhost/test/test/test'))
 
-//   expect(location.href === 'http://localhost/error/2').toBeTruthy()
-// })
-// })
+  //   await act(async () => {
+  //     render(
+  //       <BrowserRouter>
+  //         <App />
+  //       </BrowserRouter>
+  //     )
+  //   })
+
+  //   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+  //   await act(async () => {
+  //     render(
+  //       <BrowserRouter>
+  //         <App />
+  //       </BrowserRouter>
+  //     )
+  //   })
+
+  //   expect(location.href === 'http://localhost/error/2').toBeTruthy()
+  // })
+})

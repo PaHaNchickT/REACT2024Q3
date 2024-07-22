@@ -37,6 +37,8 @@ export function Results() {
     error,
   } = useGetFilmsQuery(`keyword=${searchData.value}&page=${searchData.page}`)
 
+  if (error) console.log(error)
+
   dispatch(setResultsData(data))
 
   const openDetails = (event: MouseEvent) => {
