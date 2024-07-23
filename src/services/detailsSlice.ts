@@ -6,7 +6,7 @@ const detailsDataSlice = createSlice({
     detailsData: {
       isClosed: false,
       filmId: 0,
-      filmData: {},
+      filmData: { kinopoiskId: 0 },
     },
   },
   reducers: {
