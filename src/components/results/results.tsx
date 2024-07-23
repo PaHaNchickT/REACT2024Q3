@@ -28,9 +28,11 @@ export function Results() {
   const { theme } = useContext(ThemeContext)
   const dispatch = useDispatch()
 
+  // getting search and page info from URL
   dispatch(setPage({ page: searchParams.get('page') || 1 }))
   dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
 
+  // fetching data
   const {
     data = { items: [], total: 0, totalPages: 0 },
     isFetching,
@@ -41,6 +43,7 @@ export function Results() {
 
   dispatch(setResultsData(data))
 
+  // function for open details section
   const openDetails = (event: MouseEvent) => {
     if (detailsData.isClosed || (event.target as HTMLElement).tagName === 'INPUT') return
 
@@ -59,6 +62,7 @@ export function Results() {
     )
   }
 
+  // function for close details section
   const closeDetails = (event: MouseEvent<HTMLDivElement>) => {
     if (
       !detailsData.isClosed ||
@@ -79,6 +83,7 @@ export function Results() {
     )
   }
 
+  // function for open/closing selected bar
   const checkboxHandling = (event: ChangeEvent) => {
     let targetItemData
     data.items.forEach((item) => {
@@ -98,6 +103,7 @@ export function Results() {
     })
   })
 
+  // updating URL after switching search mode to on/off
   useEffect(() => {
     let queryParams
 
@@ -112,6 +118,7 @@ export function Results() {
     setSearchParams(queryParams)
   }, [searchData.value])
 
+  // rendering results UI
   const films = data.items.map((film) => (
     <div
       className={`results__item ${theme}`}
