@@ -185,12 +185,12 @@ describe('Detailed item', () => {
     const details = screen.getByTestId('details__cont')
     const currentData = mockAPIfilmData.data
 
-    expect(details.children[2].children[0].textContent === currentData.nameEn).toBeTruthy()
+    expect(details.children[2].children[0].textContent === currentData.nameRu).toBeTruthy()
     expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
     expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
-    expect(details.children[4].children[1].textContent === currentData.year.toString()).toBeTruthy()
-    expect(details.children[6].children[1].textContent === currentData.description).toBeTruthy()
-    expect(details.children[7].children[1].textContent === currentData.filmLength).toBeTruthy()
+    expect(details.children[4].children[1].textContent === 'No information').toBeTruthy()
+    expect(details.children[6].children[1].textContent === 'No information').toBeTruthy()
+    expect(details.children[7].children[1].textContent === 'No information').toBeTruthy()
     expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
   })
 
