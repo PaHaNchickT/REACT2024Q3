@@ -3,37 +3,25 @@ import resultsDataSliceReducer, { setResultsData } from '../services/resultsSlic
 import detailsDataSliceReducer, { setIsClosed, setFilmData } from '../services/detailsSlice'
 import selectedDataSliceReducer, { addItemData, removeItemData, clearItemData } from '../services/selectedSlice'
 
+describe('Redux searchDataSlice', () => {})
 describe('Redux store', () => {
-  // const selectTodos = (state: { todos: object }) => state.todos
-  // it('should render error page when response contains error', async () => {
-  //   const todos = [{ id: 123 }]
-
-  //   const result = selectTodos({ todos })
-
-  //   expect(result).toEqual(todos)
-  // })
-
-  // it('should return default search data state when passed an empty action', async () => {
-  //   const result = searchDataSliceReducer(undefined, { type: '' })
-
-  //   expect(result).toEqual({ searchData: { value: '', page: 1 } })
-  // })
-
-  it('should shange search value with "setSearchValue" action', async () => {
+  it('should shange search value with "setSearchValue" action', () => {
     const action = { type: setSearchValue.type, payload: { value: 'test' } }
     const result = searchDataSliceReducer({ searchData: { value: '', page: 1 } }, action)
 
     expect(result.searchData.value).toBe('test')
   })
 
-  it('should shange search page with "setPage" action', async () => {
+  it('should shange search page with "setPage" action', () => {
     const action = { type: setPage.type, payload: { page: 2 } }
     const result = searchDataSliceReducer({ searchData: { value: '', page: 1 } }, action)
 
     expect(result.searchData.page).toBe(2)
   })
+})
 
-  it('should shange results data with "setResultsData" action', async () => {
+describe('Redux resultsDataSlice', () => {
+  it('should shange results data with "setResultsData" action', () => {
     const action = { type: setResultsData.type, payload: { items: [], total: 1, totalPages: 1 } }
     const result = resultsDataSliceReducer(
       {
@@ -48,8 +36,10 @@ describe('Redux store', () => {
 
     expect(result.resultsData.total).toBe(1)
   })
+})
 
-  it('should shange isClosed and filmId values with "setIsClosed" action', async () => {
+describe('Redux detailsDataSlice', () => {
+  it('should shange isClosed and filmId values with "setIsClosed" action', () => {
     const action = { type: setIsClosed.type, payload: { isClosed: true, filmId: null } }
     const result = detailsDataSliceReducer(
       {
@@ -65,7 +55,7 @@ describe('Redux store', () => {
     expect(result.detailsData).toEqual({ isClosed: true, filmId: 0, filmData: { kinopoiskId: 0 } })
   })
 
-  it('should shange filmData value with "setFilmData" action', async () => {
+  it('should shange filmData value with "setFilmData" action', () => {
     const action = { type: setFilmData.type, payload: { isClosed: true, filmId: 999, filmData: { kinopoiskId: 999 } } }
     const result = detailsDataSliceReducer(
       {
@@ -80,8 +70,10 @@ describe('Redux store', () => {
 
     expect(result.detailsData.filmData.kinopoiskId).toBe(999)
   })
+})
 
-  it('should add item data with "addItemData" action', async () => {
+describe('Redux selectedDataSlice', () => {
+  it('should add item data with "addItemData" action', () => {
     const action = { type: addItemData.type, payload: { kinopoiskId: 999 } }
     const result = selectedDataSliceReducer(
       {
@@ -95,7 +87,7 @@ describe('Redux store', () => {
     expect(result.selectedData.selectedItems[0].kinopoiskId).toBe(999)
   })
 
-  it('should remove item data with "removeItemData" action', async () => {
+  it('should remove item data with "removeItemData" action', () => {
     const action = {
       type: removeItemData.type,
       payload: {
@@ -182,7 +174,7 @@ describe('Redux store', () => {
     expect(result.selectedData.selectedItems).toHaveLength(0)
   })
 
-  it('should clear items with "clearItemData" action', async () => {
+  it('should clear items with "clearItemData" action', () => {
     const action = {
       type: clearItemData.type,
     }
