@@ -29,7 +29,7 @@ export function Results() {
   const dispatch = useDispatch()
 
   // getting search and page info from URL
-  dispatch(setPage({ page: searchParams.get('page') || 1 }))
+  dispatch(setPage({ page: +searchParams.get('page')! || 1 }))
   dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
 
   // fetching data
