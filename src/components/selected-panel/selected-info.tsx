@@ -34,7 +34,12 @@ export function Selected() {
         <span data-family="selected-bar">{selectedData.selectedItems.length.toString()}</span>items are selected
       </p>
       <div className="selected__buttons-cont" data-family="selected-bar">
-        <button className={theme} onClick={() => dispatch(clearItemData())} data-family="selected-bar">
+        <button
+          className={theme}
+          onClick={() => dispatch(clearItemData())}
+          data-family="selected-bar"
+          data-testid="selected-unselect-btn"
+        >
           {TEXT_CONTENT.barUnselectBtn}
         </button>
         <a
@@ -42,6 +47,7 @@ export function Selected() {
           href={window.URL.createObjectURL(blob)}
           download={`${selectedData.selectedItems.length}_films`}
           data-family="selected-bar"
+          data-testid="selected-download-btn"
         >
           {TEXT_CONTENT.barDownloadBtn}
         </a>

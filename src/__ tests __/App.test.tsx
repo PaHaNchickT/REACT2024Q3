@@ -317,6 +317,8 @@ describe('Selected items', () => {
     )
 
     fireEvent.click(screen.getAllByTestId('checkbox')[0])
+    fireEvent.click(screen.getByTestId('selected-unselect-btn'))
+    fireEvent.click(screen.getByTestId('selected-download-btn'))
 
     expect(screen.getByTestId('selected-bar')).toBeInTheDocument()
   })
