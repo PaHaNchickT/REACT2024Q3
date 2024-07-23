@@ -12,6 +12,7 @@ import { Search } from '../components/search/search'
 import ErrorBoundary from '../components/error-boundary/errorBoundary'
 
 import searchDataSliceReducer, { setSearchValue, setPage } from '../services/searchSlice'
+import resultsDataSliceReducer, { setResultsData } from '../services/resultsSlice'
 
 jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
@@ -328,6 +329,22 @@ describe('Redux store', () => {
     const result = searchDataSliceReducer({ searchData: { value: '', page: 1 } }, action)
 
     expect(result.searchData.page).toBe(2)
+  })
+
+  it('should shange results data with "setResultsData" action', async () => {
+    const action = { type: setResultsData.type, payload: { items: [], total: 1, totalPages: 1 } }
+    const result = resultsDataSliceReducer(
+      {
+        resultsData: {
+          items: [],
+          total: 0,
+          totalPages: 0,
+        },
+      },
+      action
+    )
+
+    expect(result.resultsData.total).toBe(1)
   })
 })
 
