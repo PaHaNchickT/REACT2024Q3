@@ -346,8 +346,36 @@ describe('App errors', () => {
     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
   })
 
-  // it('should render error boundary page when app is crashing', async () => {
-  //   fetchMocking(mockAPIempty, false, false)
+  it('should render error page when app is crashing', async () => {
+    jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
+      value: null,
+      page: '',
+      selectedItems: [],
+    })
+
+    render(
+      <BrowserRouter>
+        <App />
+        <Results />
+      </BrowserRouter>
+    )
+
+    expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  })
+
+  // it('should render error page when app is crashing', async () => {
+  //   jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
+  //     value: null,
+  //     page: '',
+  //     selectedItems: [],
+  //   })
+  //   // jest
+  //   //   .spyOn(APIactions, 'useGetFilmsQuery')
+  //   //   .mockReturnValue({ data: mockAPIstart, isFetching: false, error: null } as never)
+  //   // jest
+  //   //   .spyOn(APIactions, 'useGetFilmQuery')
+  //   //   .mockReturnValue({ data: mockAPIfilmData.data, isFetching: false } as never)
+  //   // fetchMocking(mockAPIempty, false, false)
 
   //   render(
   //     <BrowserRouter>
