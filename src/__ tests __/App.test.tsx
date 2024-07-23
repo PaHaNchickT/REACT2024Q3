@@ -11,6 +11,8 @@ import * as APIactions from '../services/API'
 import { Search } from '../components/search/search'
 import ErrorBoundary from '../components/error-boundary/errorBoundary'
 
+import searchDataSliceReducer, { setSearchValue, setPage } from '../services/searchSlice'
+
 jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
 jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
@@ -296,9 +298,38 @@ describe('Selected items', () => {
   })
 })
 
-//redux
-
 //main loader
+
+describe('Redux store', () => {
+  // const selectTodos = (state: { todos: object }) => state.todos
+  // it('should render error page when response contains error', async () => {
+  //   const todos = [{ id: 123 }]
+
+  //   const result = selectTodos({ todos })
+
+  //   expect(result).toEqual(todos)
+  // })
+
+  // it('should return default search data state when passed an empty action', async () => {
+  //   const result = searchDataSliceReducer(undefined, { type: '' })
+
+  //   expect(result).toEqual({ searchData: { value: '', page: 1 } })
+  // })
+
+  it('should shange search value with "setSearchValue" action', async () => {
+    const action = { type: setSearchValue.type, payload: { value: 'test' } }
+    const result = searchDataSliceReducer({ searchData: { value: '', page: 1 } }, action)
+
+    expect(result.searchData.value).toBe('test')
+  })
+
+  it('should shange search page with "setPage" action', async () => {
+    const action = { type: setPage.type, payload: { page: 2 } }
+    const result = searchDataSliceReducer({ searchData: { value: '', page: 1 } }, action)
+
+    expect(result.searchData.page).toBe(2)
+  })
+})
 
 describe('App errors', () => {
   it('should render error page when response contains error', async () => {
@@ -310,8 +341,6 @@ describe('App errors', () => {
         <Results />
       </BrowserRouter>
     )
-
-    screen.debug()
 
     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
   })
