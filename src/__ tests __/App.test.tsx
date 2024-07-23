@@ -3,42 +3,13 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { App } from '../App'
 import { BrowserRouter } from 'react-router-dom'
 import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
-console.log(fireEvent, mockAPIfilmData)
-// import { act } from 'react'
-// import { Details } from '../components/details/details'
-// import { Search } from '../components/search/search'
-
-// import { UseQueryHookResult } from '@reduxjs/toolkit/dist/query/react/buildHooks'
-// import {
-//   BaseQueryFn,
-//   FetchArgs,
-//   FetchBaseQueryError,
-//   FetchBaseQueryMeta,
-//   QueryDefinition,
-// } from '@reduxjs/toolkit/query'
-// import { FilmObj } from '../components/types'
 import { Results } from '../components/results/results'
 
 import * as reduxHooks from 'react-redux'
-// import * as searchActions from '../services/searchSlice'
 import * as detailsActions from '../services/detailsSlice'
 import * as APIactions from '../services/API'
 import { Search } from '../components/search/search'
 import ErrorBoundary from '../components/error-boundary/errorBoundary'
-
-// const AppCalling = async (mock: object) => {
-//   const mockJsonPromise = Promise.resolve(mock)
-//   const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-//   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-//   await act(async () => {
-//     render(
-//       <BrowserRouter>
-//         <App />
-//       </BrowserRouter>
-//     )
-//   })
-// }
 
 jest.mock('react-redux')
 global.URL.createObjectURL = jest.fn()
@@ -325,8 +296,6 @@ describe('Selected items', () => {
   })
 })
 
-//selected
-
 //redux
 
 //main loader
@@ -377,32 +346,4 @@ describe('App errors', () => {
 
     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
   })
-
-  // it('should render 404 page after wrong URL entering', async () => {
-  //   const mockJsonPromise = Promise.resolve(mockAPIstart)
-  //   const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-  //   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-  //   window.history.pushState({}, '', new URL('http://localhost/test/test/test'))
-
-  //   await act(async () => {
-  //     render(
-  //       <BrowserRouter>
-  //         <App />
-  //       </BrowserRouter>
-  //     )
-  //   })
-
-  //   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
-
-  //   await act(async () => {
-  //     render(
-  //       <BrowserRouter>
-  //         <App />
-  //       </BrowserRouter>
-  //     )
-  //   })
-
-  //   expect(location.href === 'http://localhost/error/2').toBeTruthy()
-  // })
 })
