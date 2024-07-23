@@ -28,9 +28,9 @@ const fetchMocking = async (
       {
         kinopoiskId: 463634,
         imdbId: 'tt1270797',
-        nameRu: 'Веном',
+        nameRu: null,
         nameEn: null,
-        nameOriginal: 'Venom',
+        nameOriginal: null,
         countries: [
           {
             country: 'США',
@@ -53,10 +53,10 @@ const fetchMocking = async (
             genre: 'ужасы',
           },
         ],
-        ratingKinopoisk: 6.9,
-        ratingImdb: 6.6,
-        year: 2018,
-        type: 'FILM',
+        ratingKinopoisk: null,
+        ratingImdb: null,
+        year: null,
+        type: null,
         posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/463634.jpg',
         posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/463634.jpg',
       },
