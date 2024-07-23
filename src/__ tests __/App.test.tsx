@@ -24,6 +24,7 @@ import * as reduxHooks from 'react-redux'
 import * as detailsActions from '../services/detailsSlice'
 import * as APIactions from '../services/API'
 import { Search } from '../components/search/search'
+import ErrorBoundary from '../components/error-boundary/errorBoundary'
 
 // const AppCalling = async (mock: object) => {
 //   const mockJsonPromise = Promise.resolve(mock)
@@ -348,8 +349,8 @@ describe('App errors', () => {
 
   it('should render error page when app is crashing', async () => {
     jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
-      value: null,
-      page: '',
+      value: '',
+      page: 1,
       selectedItems: [],
     })
 
@@ -363,32 +364,19 @@ describe('App errors', () => {
     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
   })
 
-  // it('should render error page when app is crashing', async () => {
-  //   jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
-  //     value: null,
-  //     page: '',
-  //     selectedItems: [],
-  //   })
-  //   // jest
-  //   //   .spyOn(APIactions, 'useGetFilmsQuery')
-  //   //   .mockReturnValue({ data: mockAPIstart, isFetching: false, error: null } as never)
-  //   // jest
-  //   //   .spyOn(APIactions, 'useGetFilmQuery')
-  //   //   .mockReturnValue({ data: mockAPIfilmData.data, isFetching: false } as never)
-  //   // fetchMocking(mockAPIempty, false, false)
+  it('should render error boundary page when app is crashing', async () => {
+    const ThrowError = () => {
+      throw new Error('Test')
+    }
 
-  //   render(
-  //     <BrowserRouter>
-  //       <App />
-  //       <Results />
-  //     </BrowserRouter>
-  //   )
+    render(
+      <ErrorBoundary fallback={<div className="error-page__wrapper" data-testid="error-page__wrapper"></div>}>
+        <ThrowError />
+      </ErrorBoundary>
+    )
 
-  //   console.log(location.href)
-  //   screen.debug()
-
-  //   // expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
-  // })
+    expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  })
 
   // it('should render 404 page after wrong URL entering', async () => {
   //   const mockJsonPromise = Promise.resolve(mockAPIstart)
