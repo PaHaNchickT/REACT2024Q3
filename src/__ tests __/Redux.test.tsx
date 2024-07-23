@@ -1,6 +1,7 @@
 import searchDataSliceReducer, { setSearchValue, setPage } from '../services/searchSlice'
 import resultsDataSliceReducer, { setResultsData } from '../services/resultsSlice'
 import detailsDataSliceReducer, { setIsClosed, setFilmData } from '../services/detailsSlice'
+import selectedDataSliceReducer, { addItemData, removeItemData, clearItemData } from '../services/selectedSlice'
 
 describe('Redux store', () => {
   // const selectTodos = (state: { todos: object }) => state.todos
@@ -78,5 +79,158 @@ describe('Redux store', () => {
     )
 
     expect(result.detailsData.filmData.kinopoiskId).toBe(999)
+  })
+
+  it('should add item data with "addItemData" action', async () => {
+    const action = { type: addItemData.type, payload: { kinopoiskId: 999 } }
+    const result = selectedDataSliceReducer(
+      {
+        selectedData: {
+          selectedItems: [],
+        },
+      },
+      action
+    )
+
+    expect(result.selectedData.selectedItems[0].kinopoiskId).toBe(999)
+  })
+
+  it('should remove item data with "removeItemData" action', async () => {
+    const action = {
+      type: removeItemData.type,
+      payload: {
+        kinopoiskId: 463634,
+        nameRu: 'Тест',
+        nameEn: 'Test',
+        nameOriginal: 'Testy Test',
+        countries: [
+          {
+            country: 'США',
+          },
+          {
+            country: 'Китай',
+          },
+        ],
+        genres: [
+          {
+            genre: 'триллер',
+          },
+          {
+            genre: 'фантастика',
+          },
+          {
+            genre: 'боевик',
+          },
+          {
+            genre: 'ужасы',
+          },
+        ],
+        rating: 999,
+        ratingKinopoisk: 999,
+        ratingImdb: 999,
+        year: 2014,
+        type: 'FILM',
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/463634.jpg',
+        posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/463634.jpg',
+      },
+    }
+    const result = selectedDataSliceReducer(
+      {
+        selectedData: {
+          selectedItems: [
+            {
+              kinopoiskId: 463634,
+              nameRu: 'Тест',
+              nameEn: 'Test',
+              nameOriginal: 'Testy Test',
+              countries: [
+                {
+                  country: 'США',
+                },
+                {
+                  country: 'Китай',
+                },
+              ],
+              genres: [
+                {
+                  genre: 'триллер',
+                },
+                {
+                  genre: 'фантастика',
+                },
+                {
+                  genre: 'боевик',
+                },
+                {
+                  genre: 'ужасы',
+                },
+              ],
+              rating: 999,
+              ratingKinopoisk: 999,
+              ratingImdb: 999,
+              year: 2014,
+              type: 'FILM',
+              posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/463634.jpg',
+              posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/463634.jpg',
+            },
+          ],
+        },
+      },
+      action
+    )
+
+    expect(result.selectedData.selectedItems).toHaveLength(0)
+  })
+
+  it('should clear items with "clearItemData" action', async () => {
+    const action = {
+      type: clearItemData.type,
+    }
+    const result = selectedDataSliceReducer(
+      {
+        selectedData: {
+          selectedItems: [
+            {
+              kinopoiskId: 463634,
+              nameRu: 'Тест',
+              nameEn: 'Test',
+              nameOriginal: 'Testy Test',
+              countries: [
+                {
+                  country: 'США',
+                },
+                {
+                  country: 'Китай',
+                },
+              ],
+              genres: [
+                {
+                  genre: 'триллер',
+                },
+                {
+                  genre: 'фантастика',
+                },
+                {
+                  genre: 'боевик',
+                },
+                {
+                  genre: 'ужасы',
+                },
+              ],
+              rating: 999,
+              ratingKinopoisk: 999,
+              ratingImdb: 999,
+              year: 2014,
+              type: 'FILM',
+              posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/463634.jpg',
+              posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/463634.jpg',
+            },
+          ],
+        },
+      },
+      action
+    )
+
+    expect(result.selectedData.selectedItems).toHaveLength(0)
   })
 })

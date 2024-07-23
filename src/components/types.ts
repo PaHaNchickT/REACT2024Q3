@@ -1,7 +1,7 @@
 export type FilmObj = {
   countries: { country: string }[]
-  description: string
-  filmId: number
+  description?: string
+  filmId?: number
   filmLength?: string
   genres: { genre: string }[]
   kinopoiskId: number
@@ -11,12 +11,13 @@ export type FilmObj = {
   posterUrl: string
   posterUrlPreview: string
   rating: number
-  ratingImdb: number
-  ratingKinopoisk: number
+  ratingImdb?: number
+  ratingKinopoisk?: number
   slogan?: string
   type: string
   webUrl?: string
   year: number
+  imdbId?: string
 }
 
 export type reduxStore = {
