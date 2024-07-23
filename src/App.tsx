@@ -2,13 +2,14 @@ import { Search } from './components/search/search'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
 import { Outlet } from 'react-router-dom'
-import { createContext, useState } from 'react'
+import { createContext, Dispatch, SetStateAction, useState } from 'react'
 
 export const ThemeContext = createContext({
-  theme: 'light',
-  setTheme: (theme: string) => {
-    console.log(theme)
-  },
+  theme: '',
+  setTheme: () => {},
+} as {
+  theme: string
+  setTheme: Dispatch<SetStateAction<string>>
 })
 
 export function App() {
