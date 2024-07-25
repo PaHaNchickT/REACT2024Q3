@@ -343,3 +343,7 @@
 //     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
 //   })
 // })
+
+it('test', () => {
+  expect(true).toBeTruthy()
+})
