@@ -64,6 +64,49 @@
   position: absolute
   left: 7px
   top: 7px
+  cursor: cell
+  appearance: none
+  background: white
   width: 18px
   height: 18px
-  cursor: cell
+  border-radius: 6px
+  box-shadow: 0 0 5px -1px black
+  &::before
+    content: ""
+    position: absolute
+    margin: auto
+    left: -2px
+    right: 0
+    bottom: 0
+    overflow: hidden
+    top: 0
+  &:focus
+    outline: solid 1px
+    outline-offset: 0
+  &:checked
+    &::before
+      border-right: 3px solid
+      border-bottom: 3px solid
+      height: 29%
+      width: 17%
+      transform: rotate(45deg) translateY(-20%) translateX(-10%)
+
+.results__item > input[type=checkbox].light
+  &:checked
+    background-color: #ff9a00
+  &:focus
+    outline-color: black
+  &:checked
+    &::before
+      border-color: black
+
+.results__item > input[type=checkbox].dark
+  &:checked
+    box-shadow: 0 0 5px -1px white
+    background-color: black
+  &:focus
+    outline-color: white
+  &:checked
+    &::before
+      border-color: white
+  

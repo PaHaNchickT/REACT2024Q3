@@ -154,6 +154,7 @@ export function Results() {
         name={film.kinopoiskId.toString()}
         onChange={(event) => checkboxHandling(event)}
         checked={selectedItems.includes(film.kinopoiskId)}
+        className={theme}
       ></input>
     </div>
   ))
