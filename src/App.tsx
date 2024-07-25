@@ -1,8 +1,8 @@
 import { Search } from './components/search/search'
 import ErrorBoundary from './components/error-boundary/errorBoundary'
 import { TEXT_CONTENT } from './components/constants'
-import { Outlet } from 'react-router-dom'
 import { createContext, Dispatch, SetStateAction, useState } from 'react'
+import { Results } from './components/results/results'
 
 export const ThemeContext = createContext({
   theme: '',
@@ -30,7 +30,7 @@ export function App() {
       >
         <div className={`root__wrapper ${theme}`} data-testid={theme}>
           <Search />
-          <Outlet />
+          <Results />
         </div>
       </ErrorBoundary>
     </ThemeContext.Provider>
