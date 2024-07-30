@@ -20,7 +20,7 @@ export function Search() {
   }
 
   const resetSearch = () => {
-    if (!searchParams.get('search')) return
+    if (!searchParams.get('search') && searchParams.get('page') === '1') return
     router.push('/films?page=1')
   }
 
