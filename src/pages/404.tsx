@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { TEXT_CONTENT } from '../constants'
 // import './errorPage.css'
 import { useContext } from 'react'
-import { ThemeContext } from '../../pages/[films&page=id]'
+import { ThemeContext } from '../App'
+import { TEXT_CONTENT } from '../components/constants'
 
-export function ErrorPage() {
+export default function ErrorPage() {
   const { theme } = useContext(ThemeContext)
 
   return (
@@ -13,7 +13,7 @@ export function ErrorPage() {
         <h2>{TEXT_CONTENT.errorPageTitle}</h2>
         <div></div>
         <p>{TEXT_CONTENT.errorPageText}</p>
-        <Link href="/" className={theme}>
+        <Link href="/films?page=1" className={theme}>
           {TEXT_CONTENT.btnErrorHome}
         </Link>
       </div>

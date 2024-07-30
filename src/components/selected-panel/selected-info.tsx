@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import './selected-info.css'
+// import './selected-info.css'
 import { reduxStore } from '../types'
 import { clearItemData } from '../../services/selectedSlice'
 import { useContext } from 'react'

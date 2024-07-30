@@ -1,11 +1,13 @@
-import { Link, useLocation } from 'react-router-dom'
-import './pagination.css'
+import Link from 'next/link'
+// import './pagination.css'
 import { useContext } from 'react'
-import { ThemeContext } from '../../App'
+import { ThemeContext } from '../../pages/[films&page=id]'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 export function Pagination(props: { page: number; currentPage: number }) {
   const { theme } = useContext(ThemeContext)
-  const location = useLocation()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   let buttonClassname = 'pendingBtn'
   if (props.page === +props.currentPage) buttonClassname = 'activeBtn'
@@ -13,7 +15,7 @@ export function Pagination(props: { page: number; currentPage: number }) {
   return (
     <li>
       <Link
-        to={`${location.pathname}${location.search.split('page=')[0]}page=${props.page}`}
+        href={`${pathname}?page=${props.page}&${searchParams.toString().split('page=')[1].split('&')[1] || ''}`}
         id={props.page.toString()}
         className={`${buttonClassname} ${theme}`}
         data-testid="pendingBtn"

@@ -1,47 +1,54 @@
-import { reduxStore } from '../types'
+import { FilmObj, reduxStore } from '../types'
 import { TEXT_CONTENT } from '../constants'
 
-import './results.css'
+// import './results.css'
 import { Pagination } from '../pagination/pagination'
 import { NoResults } from '../no-results/no-results'
 import { numberToArray } from '../../utils/numberToArray'
-import { useGetFilmsQuery } from '../../services/API'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from '../loader/loader'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
-import { useSearchParams } from 'react-router-dom'
 import { setPage, setSearchValue } from '../../services/searchSlice'
-import { ChangeEvent, useContext, useEffect, MouseEvent } from 'react'
-import { ErrorPage } from '../error-page/errorPage'
+import { ChangeEvent, useContext, useEffect, MouseEvent, useState } from 'react'
+// import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
-import { ThemeContext } from '../../App'
-import { setResultsData } from '../../services/resultsSlice'
+import { API } from '../../services/API'
+import { ThemeContext } from '../../pages/[films&page=id]'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 
 export function Results() {
   const selectedItems: number[] = []
   const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
-  const [searchParams, setSearchParams] = useSearchParams()
+
   const { theme } = useContext(ThemeContext)
   const dispatch = useDispatch()
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const [results, setResults] = useState({ items: [], total: 0, totalPages: 0 })
+  const [loading, setLoading] = useState(true)
 
   // getting search and page info from URL
-  dispatch(setPage({ page: +searchParams.get('page')! || 1 }))
-  dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
+  if (pathname) {
+    dispatch(setPage({ page: +searchParams.get('page')! || 1 }))
+    dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
+  }
 
   // fetching data
-  const {
-    data = { items: [], total: 0, totalPages: 0 },
-    isFetching,
-    error,
-  } = useGetFilmsQuery(`keyword=${searchData.value}&page=${searchData.page}`)
 
-  if (error) console.log(error)
+  const getData = async (value: string, page: number) => {
+    setLoading(true)
+    const response = await API().getFilms({ value: value, page: page })
+    setResults(response!)
+    setLoading(false)
+  }
 
-  dispatch(setResultsData(data))
+  // if (error) console.log(error)
 
   // function for open details section
   const openDetails = (event: MouseEvent) => {
@@ -54,12 +61,9 @@ export function Results() {
       })
     )
 
-    setSearchParams(
-      Object.assign(Object.fromEntries(searchParams), {
-        page: searchData.page.toString(),
-        details: (event.currentTarget as HTMLDivElement).id,
-      })
-    )
+    const params = new URLSearchParams(searchParams)
+    params.set('details', (event.currentTarget as HTMLDivElement).id)
+    router.push(params.toString() ? `films?${params.toString()}` : 'films')
   }
 
   // function for close details section
@@ -78,15 +82,15 @@ export function Results() {
       })
     )
 
-    setSearchParams(
-      Object.fromEntries(Object.entries(Object.fromEntries(searchParams)).filter(([key]) => key !== 'details'))
-    )
+    const params = new URLSearchParams(searchParams)
+    params.delete('details')
+    router.push(params.toString() ? `films?${params.toString()}` : 'films')
   }
 
   // function for open/closing selected bar
   const checkboxHandling = (event: ChangeEvent) => {
     let targetItemData
-    data.items.forEach((item) => {
+    results.items.forEach((item: FilmObj) => {
       if (item.kinopoiskId === +(event.target as HTMLInputElement).name) targetItemData = item
     })
 
@@ -97,7 +101,7 @@ export function Results() {
     }
   }
 
-  data.items.forEach((defaultItem) => {
+  results.items.forEach((defaultItem: FilmObj) => {
     selectedData.selectedItems.forEach((selectedItem) => {
       if (defaultItem === selectedItem) selectedItems.push(defaultItem.kinopoiskId)
     })
@@ -105,21 +109,24 @@ export function Results() {
 
   // updating URL after switching search mode to on/off
   useEffect(() => {
-    let queryParams
-
-    if (searchData.value === '') {
-      queryParams = {
-        page: searchData.page.toString(),
+    if (pathname) {
+      const params = new URLSearchParams(searchParams)
+      if (searchData.value === '') {
+        params.set('page', searchData.page.toString())
+      } else {
+        params.set('search', searchData.value)
+        params.set('page', searchData.page.toString())
       }
-    } else {
-      queryParams = { search: searchData.value, page: searchData.page.toString() }
-    }
+      params.delete('details')
 
-    setSearchParams(queryParams)
-  }, [searchData.value])
+      router.push(params.toString() ? `films?${params.toString()}` : 'films')
+
+      getData(searchData.value, searchData.page)
+    }
+  }, [searchData, pathname])
 
   // rendering results UI
-  const films = data.items.map((film) => (
+  const films = results.items.map((film: FilmObj) => (
     <div
       className={`results__item ${theme}`}
       data-testid="results__item"
@@ -159,7 +166,7 @@ export function Results() {
     </div>
   ))
 
-  const pages = numberToArray(data.totalPages).map((page) => (
+  const pages = numberToArray(results.totalPages).map((page) => (
     <Pagination page={page} currentPage={searchData.page} key={page} />
   ))
 
@@ -171,11 +178,13 @@ export function Results() {
     </div>
   )
 
-  if (isFetching) {
+  if (loading) {
     resultsUI = <Loader theme="default" />
-  } else if (error) {
-    resultsUI = <ErrorPage />
-  } else if (!data.items.length) {
+  }
+  // else if (error) {
+  //   resultsUI = <ErrorPage />
+  // }
+  else if (!results.items.length) {
     resultsUI = <NoResults />
   }
 

@@ -1,6 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
 
-import './errorBoundary.css'
+// import './errorBoundary.css'
 
 export default class ErrorBoundary extends Component<
   { children: ReactNode; fallback: ReactNode },

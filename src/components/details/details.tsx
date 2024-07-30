@@ -1,42 +1,49 @@
 import { Loader } from '../loader/loader'
-import './details.css'
-import { FilmObj, reduxStore } from '../types'
-import { useGetFilmQuery } from '../../services/API'
+// import './details.css'
+import { FilmInfo, reduxStore } from '../types'
 import { useSelector } from 'react-redux'
-import { useContext, MouseEvent } from 'react'
-import { ThemeContext } from '../../App'
+import { useContext, MouseEvent, useState, useEffect } from 'react'
+import { API } from '../../services/API'
+import { ThemeContext } from '../../pages/[films&page=id]'
 
 export function Details(props: { closeDetails: (event: MouseEvent<HTMLDivElement>) => void }) {
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const { theme } = useContext(ThemeContext)
+  const [results, setResults] = useState({ data: {}, externalId: { imdbId: '' } } as FilmInfo)
+  const [loading, setLoading] = useState(true)
 
-  const { data = {} as FilmObj, isFetching } = useGetFilmQuery(detailsData.filmId.toString())
+  const getData = async () => {
+    setLoading(true)
+    const response = (await API().getFilm(detailsData.filmId)) as unknown as FilmInfo
+    setResults(response)
+    setLoading(false)
+  }
 
   let genres
-  if (data.genres) genres = data.genres.map((genre) => <li key={genre.genre}>{genre.genre}</li>)
+  if (results.data.genres) genres = results.data.genres.map((genre) => <li key={genre.genre}>{genre.genre}</li>)
 
   let resultsUI = (
     <>
       <img
         className="details__bg"
-        src={data.posterUrlPreview}
-        alt={`${data.nameEn || data.nameOriginal || data.nameRu} cover`}
+        src={results.data.posterUrlPreview}
+        alt={`${results.data.nameEn || results.data.nameOriginal || results.data.nameRu} cover`}
       />
       <div className={`details__close ${theme}`} onClick={(event) => props.closeDetails(event)}></div>
       <div className="details__title">
-        <h2>{data.nameEn || data.nameOriginal || data.nameRu}</h2>
-        <p>{data.slogan}</p>
+        <h2>{results.data.nameEn || results.data.nameOriginal || results.data.nameRu}</h2>
+        <p>{results.data.slogan}</p>
       </div>
       <img
         className={`details__cover ${theme}`}
-        src={data.posterUrlPreview}
-        alt={`${data.nameEn || data.nameOriginal || data.nameRu} cover`}
+        src={results.data.posterUrlPreview}
+        alt={`${results.data.nameEn || results.data.nameOriginal || results.data.nameRu} cover`}
         width="200px"
         height="300px"
       />
       <div className="details__year">
         <h3>Year:</h3>
-        <p>{data.year || 'No information'}</p>
+        <p>{results.data.year || 'No information'}</p>
       </div>
       <div className="details__genres">
         <h3>Genres:</h3>
@@ -44,18 +51,22 @@ export function Details(props: { closeDetails: (event: MouseEvent<HTMLDivElement
       </div>
       <div className="details__descr">
         <h3>Description:</h3>
-        <p>{data.description || 'No information'}</p>
+        <p>{results.data.description || 'No information'}</p>
       </div>
       <div className="details__length">
         <h3>Film length (mins):</h3>
-        <p>{data.filmLength || 'No information'}</p>
+        <p>{results.data.filmLength || 'No information'}</p>
       </div>
-      <a className={theme} href={data.webUrl} target="_blank">
+      <a className={theme} href={results.data.webUrl} target="_blank">
         More details
       </a>
     </>
   )
-  if (isFetching) resultsUI = <Loader theme="details" />
+  if (loading) resultsUI = <Loader theme="details" />
+
+  useEffect(() => {
+    getData()
+  }, [detailsData])
 
   return (
     <div className={`details__cont ${theme}`} data-testid="details__cont">

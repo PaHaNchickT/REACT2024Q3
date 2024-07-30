@@ -40,3 +40,8 @@ export type reduxStore = {
     selectedData: { selectedItems: FilmObj[] }
   }
 }
+
+export type FilmInfo = {
+  data: FilmObj
+  externalId: { imdbId: string }
+}

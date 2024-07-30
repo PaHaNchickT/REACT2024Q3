@@ -1,27 +1,29 @@
 import { useContext, useState } from 'react'
 import { TEXT_CONTENT } from '../constants'
 
-import './search.css'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { ThemeContext } from '../../App'
+// import './search.css'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { ThemeContext } from '../../pages/[films&page=id]'
 
 export function Search() {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const params = new URLSearchParams(searchParams)
   const [inputValue, setInputValue] = useState(searchParams.get('search') || '')
   const { theme, setTheme } = useContext(ThemeContext)
-  const navigate = useNavigate()
 
   const searchButtonHandler = () => {
-    if (inputValue !== '')
-      setSearchParams({
-        search: inputValue,
-        page: '1',
-      })
+    if (inputValue !== '') {
+      params.set('search', inputValue)
+      params.set('page', '1')
+      params.delete('details')
+      router.push(params.toString() ? `films?${params.toString()}` : 'films')
+    }
   }
 
   const resetSearch = () => {
     if (!searchParams.get('search')) return
-    navigate('/')
+    router.push('/films?page=1')
   }
 
   const themeSwapping = () => {
