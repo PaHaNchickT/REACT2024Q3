@@ -15,7 +15,7 @@ export function API() {
         data = resp.json()
       })
       .catch((err) => {
-        throw new Error(err.text)
+        console.log(err.text)
       })
 
     return data
@@ -34,7 +34,7 @@ export function API() {
         data = resp.json()
       })
       .catch((err) => {
-        throw new Error(err.text)
+        console.log(err.text)
       })
 
     return data

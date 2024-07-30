@@ -9,7 +9,7 @@ import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
 import { setPage, setSearchValue } from '../../services/searchSlice'
 import { ChangeEvent, useContext, useEffect, MouseEvent, useState } from 'react'
-// import { ErrorPage } from '../error-page/errorPage'
+import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
 import { API } from '../../services/API'
@@ -46,7 +46,25 @@ export function Results() {
     setLoading(false)
   }
 
-  // if (error) console.log(error)
+  // updating URL after switching search mode to on/off
+  useEffect(() => {
+    if (pathname) {
+      const params = new URLSearchParams(searchParams)
+      if (searchData.value === '') {
+        params.set('page', searchData.page.toString())
+      } else {
+        params.set('search', searchData.value)
+        params.set('page', searchData.page.toString())
+      }
+      params.delete('details')
+
+      router.push(params.toString() ? `films?${params.toString()}` : 'films')
+
+      getData(searchData.value, searchData.page)
+    }
+  }, [searchData, pathname])
+
+  if (!results.items) return <ErrorPage />
 
   // function for open details section
   const openDetails = (event: MouseEvent) => {
@@ -105,24 +123,6 @@ export function Results() {
     })
   })
 
-  // updating URL after switching search mode to on/off
-  useEffect(() => {
-    if (pathname) {
-      const params = new URLSearchParams(searchParams)
-      if (searchData.value === '') {
-        params.set('page', searchData.page.toString())
-      } else {
-        params.set('search', searchData.value)
-        params.set('page', searchData.page.toString())
-      }
-      params.delete('details')
-
-      router.push(params.toString() ? `films?${params.toString()}` : 'films')
-
-      getData(searchData.value, searchData.page)
-    }
-  }, [searchData, pathname])
-
   // rendering results UI
   const films = results.items.map((film: FilmObj) => (
     <div
@@ -178,11 +178,7 @@ export function Results() {
 
   if (loading) {
     resultsUI = <Loader theme="default" />
-  }
-  // else if (error) {
-  //   resultsUI = <ErrorPage />
-  // }
-  else if (!results.items.length) {
+  } else if (!results.items.length) {
     resultsUI = <NoResults />
   }
 
