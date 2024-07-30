@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction, useState } from 'react'
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Search } from '../../components/search/search'
 import { Results } from '../../components/results/results'
 
@@ -11,10 +11,11 @@ export const ThemeContext = createContext({
 })
 
 export default function App() {
-  let loadedThemeValue
+  const [theme, setTheme] = useState('light')
 
-  if (typeof window !== 'undefined') loadedThemeValue = localStorage.getItem('paul-theme')
-  const [theme, setTheme] = useState(loadedThemeValue || 'light')
+  useEffect(() => {
+    setTheme(localStorage.getItem('paul-theme') || 'light')
+  }, [])
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
