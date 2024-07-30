@@ -60,7 +60,6 @@
     "next": "^14.2.5",
     "prettier": "^3.3.2",
     "react-redux": "^7.2.5",
-    "react-router-dom": "^6.24.1",
     "ts-jest": "^29.2.2",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
