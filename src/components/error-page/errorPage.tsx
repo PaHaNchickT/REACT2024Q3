@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { TEXT_CONTENT } from '../constants'
-// import './errorPage.css'
 import { useContext } from 'react'
 import { ThemeContext } from '../../pages/[films&page=id]'
 

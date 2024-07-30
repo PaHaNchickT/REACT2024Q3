@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
-// import './selected-info.css'
 import { reduxStore } from '../types'
 import { clearItemData } from '../../services/selectedSlice'
 import { useContext } from 'react'
-import { ThemeContext } from '../../App'
 import { TEXT_CONTENT } from '../constants'
+import { ThemeContext } from '../../pages/[films&page=id]'
 
 export function Selected() {
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)

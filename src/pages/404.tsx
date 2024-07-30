@@ -1,8 +1,7 @@
 import Link from 'next/link'
-// import './errorPage.css'
 import { useContext } from 'react'
-import { ThemeContext } from '../App'
 import { TEXT_CONTENT } from '../components/constants'
+import { ThemeContext } from './[films&page=id]'
 
 export default function ErrorPage() {
   const { theme } = useContext(ThemeContext)

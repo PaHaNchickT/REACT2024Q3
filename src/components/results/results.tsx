@@ -1,7 +1,5 @@
 import { FilmObj, reduxStore } from '../types'
 import { TEXT_CONTENT } from '../constants'
-
-// import './results.css'
 import { Pagination } from '../pagination/pagination'
 import { NoResults } from '../no-results/no-results'
 import { numberToArray } from '../../utils/numberToArray'

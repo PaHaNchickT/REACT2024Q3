@@ -1,7 +1,5 @@
 import { useContext, useState } from 'react'
 import { TEXT_CONTENT } from '../constants'
-
-// import './search.css'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { ThemeContext } from '../../pages/[films&page=id]'
 

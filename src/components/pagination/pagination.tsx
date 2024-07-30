@@ -1,5 +1,4 @@
 import Link from 'next/link'
-// import './pagination.css'
 import { useContext } from 'react'
 import { ThemeContext } from '../../pages/[films&page=id]'
 import { usePathname, useSearchParams } from 'next/navigation'

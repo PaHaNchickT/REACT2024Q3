@@ -1,5 +1,4 @@
 import { Loader } from '../loader/loader'
-// import './details.css'
 import { FilmInfo, reduxStore } from '../types'
 import { useSelector } from 'react-redux'
 import { useContext, MouseEvent, useState, useEffect } from 'react'
