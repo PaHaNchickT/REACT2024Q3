@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { TEXT_CONTENT } from '../constants'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { ThemeContext } from '../../pages/[films&page=id]'
@@ -7,7 +7,7 @@ export function Search() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const params = new URLSearchParams(searchParams)
-  const [inputValue, setInputValue] = useState(searchParams.get('search') || '')
+  const [inputValue, setInputValue] = useState('')
   const { theme, setTheme } = useContext(ThemeContext)
 
   const searchButtonHandler = () => {
@@ -33,6 +33,10 @@ export function Search() {
       localStorage.setItem('paul-theme', 'light')
     }
   }
+
+  useEffect(() => {
+    setInputValue(searchParams.get('search') || '')
+  }, [searchParams])
 
   return (
     <div className="search__cont">
