@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { TEXT_CONTENT } from '../constants'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { ThemeContext } from '../../pages/[films&page=id]'
+import { ThemeContext } from '../../app/films/client'
 
 export function Search() {
   const searchParams = useSearchParams()

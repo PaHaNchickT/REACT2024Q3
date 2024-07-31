@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useContext } from 'react'
-import { ThemeContext } from '../../pages/[films&page=id]'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { ThemeContext } from '../../app/films/client'
 
 export function Pagination(props: { page: number; currentPage: number }) {
   const { theme } = useContext(ThemeContext)
@@ -14,7 +14,7 @@ export function Pagination(props: { page: number; currentPage: number }) {
   return (
     <li>
       <Link
-        href={`${pathname}?page=${props.page}&${searchParams.toString().split('page=')[1].split('&')[1] || ''}`}
+        href={`${pathname}?page=${props.page}${(searchParams.get('search') && '&') || ''}`}
         id={props.page.toString()}
         className={`${buttonClassname} ${theme}`}
         data-testid="pendingBtn"

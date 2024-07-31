@@ -13,8 +13,8 @@ import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
 import { API } from '../../services/API'
-import { ThemeContext } from '../../pages/[films&page=id]'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
+import { ThemeContext } from '../../app/films/client'
 
 export function Results() {
   const selectedItems: number[] = []

@@ -1,7 +1,3 @@
-import type { AppProps } from 'next/app'
-import store from '../services/store'
-import { Provider } from 'react-redux'
-
 import '../styles/global.css'
 import '../components/search/search.css'
 import '../components/results/results.css'
@@ -13,10 +9,15 @@ import '../components/error-page/errorPage.css'
 import '../components/error-boundary/errorBoundary.css'
 import '../components/details/details.css'
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body>
+        <div id="root">{children}</div>
+      </body>
+    </html>
   )
 }

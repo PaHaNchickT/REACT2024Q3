@@ -3,7 +3,7 @@ import { FilmInfo, reduxStore } from '../types'
 import { useSelector } from 'react-redux'
 import { useContext, MouseEvent, useState, useEffect } from 'react'
 import { API } from '../../services/API'
-import { ThemeContext } from '../../pages/[films&page=id]'
+import { ThemeContext } from '../../app/films/client'
 
 export function Details(props: { closeDetails: (event: MouseEvent<HTMLDivElement>) => void }) {
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
