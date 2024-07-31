@@ -14,7 +14,7 @@ export function Pagination(props: { page: number; currentPage: number }) {
   return (
     <li>
       <Link
-        href={`${pathname}?page=${props.page}&${searchParams.toString().split('page=')[1].split('&')[1] || ''}`}
+        href={`${pathname}?page=${props.page}${(searchParams.get('search') && `&search=${searchParams.get('search')}`) || ''}`}
         id={props.page.toString()}
         className={`${buttonClassname} ${theme}`}
         data-testid="pendingBtn"
