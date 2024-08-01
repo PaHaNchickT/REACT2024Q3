@@ -1,111 +1,129 @@
-// import '@testing-library/jest-dom'
+import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 // import { fireEvent, render, screen } from '@testing-library/react'
-// import { App } from '../App'
-// import { BrowserRouter } from 'react-router-dom'
+import { mockAPIstart } from '../test/__ mocks __/API-mocked'
 // import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
 // import { Results } from '../components/results/results'
 
-// import * as reduxHooks from 'react-redux'
+import * as reduxHooks from 'react-redux'
+import * as nextHooks from 'next/navigation'
 // import * as detailsActions from '../services/detailsSlice'
 // import * as APIactions from '../services/API'
 // import { Search } from '../components/search/search'
 // import ErrorBoundary from '../components/error-boundary/errorBoundary'
+import App from '../pages/[films&page=id]'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 
-// jest.mock('react-redux')
-// global.URL.createObjectURL = jest.fn()
-// jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
+jest.mock('react-redux')
+jest.mock('next/navigation')
+global.URL.createObjectURL = jest.fn()
+jest.spyOn(reduxHooks, 'useDispatch').mockReturnValue(jest.fn())
 
-// const fetchMocking = async (
-//   mock: object,
-//   isClosed: boolean,
-//   isFetching: boolean,
-//   isError: null | { status: number; data: { message: string } } = null
-// ) => {
-//   jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
-//     value: '',
-//     page: 1,
-//     selectedItems: [
-//       {
-//         kinopoiskId: 463634,
-//         imdbId: 'tt1270797',
-//         nameRu: null,
-//         nameEn: null,
-//         nameOriginal: null,
-//         countries: [
-//           {
-//             country: 'США',
-//           },
-//           {
-//             country: 'Китай',
-//           },
-//         ],
-//         genres: [
-//           {
-//             genre: 'триллер',
-//           },
-//           {
-//             genre: 'фантастика',
-//           },
-//           {
-//             genre: 'боевик',
-//           },
-//           {
-//             genre: 'ужасы',
-//           },
-//         ],
-//         ratingKinopoisk: null,
-//         ratingImdb: null,
-//         year: null,
-//         type: null,
-//         posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/463634.jpg',
-//         posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/463634.jpg',
-//       },
-//     ],
-//     isClosed: isClosed,
-//     filmId: 999,
-//   })
-//   jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: isError } as never)
-//   jest
-//     .spyOn(APIactions, 'useGetFilmQuery')
-//     .mockReturnValue({ data: mockAPIfilmData.data, isFetching: isFetching } as never)
-// }
+jest.spyOn(nextHooks, 'useRouter').mockImplementation(() => {
+  const push = (value: string) => {
+    window.history.pushState({}, '', new URL(`http://localhost/films?${value}`))
+  }
+  const output = Object.freeze({
+    push,
+  }) as AppRouterInstance
+  return output
+})
 
-// describe('Items list', () => {
-//   it('should render full layout correctly', async () => {
-//     fetchMocking(mockAPIstart, false, false)
+jest.spyOn(nextHooks, 'useSearchParams').mockImplementation(() => {
+  const get = (value: string) => {
+    if (value === 'page') return '1'
+    return ''
+  }
+  const output = Object.freeze({
+    get,
+  }) as nextHooks.ReadonlyURLSearchParams
+  return output
+})
 
-//     const component = render(
-//       <BrowserRouter>
-//         <App />
-//       </BrowserRouter>
-//     )
-//     expect(component).toMatchSnapshot()
-//   })
+const fetchMocking = async (
+  mock: object,
+  isClosed: boolean,
+  isFetching: boolean,
+  isError: null | { status: number; data: { message: string } } = null
+) => {
+  console.log(mock, isFetching, isError)
+  jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
+    value: '',
+    page: 1,
+    selectedItems: [
+      {
+        kinopoiskId: 463634,
+        imdbId: 'tt1270797',
+        nameRu: null,
+        nameEn: null,
+        nameOriginal: null,
+        countries: [
+          {
+            country: 'США',
+          },
+          {
+            country: 'Китай',
+          },
+        ],
+        genres: [
+          {
+            genre: 'триллер',
+          },
+          {
+            genre: 'фантастика',
+          },
+          {
+            genre: 'боевик',
+          },
+          {
+            genre: 'ужасы',
+          },
+        ],
+        ratingKinopoisk: null,
+        ratingImdb: null,
+        year: null,
+        type: null,
+        posterUrl: 'https://kinopoiskapiunofficial.tech/images/posters/kp/463634.jpg',
+        posterUrlPreview: 'https://kinopoiskapiunofficial.tech/images/posters/kp_small/463634.jpg',
+      },
+    ],
+    isClosed: isClosed,
+    filmId: 999,
+  })
+  // jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: isError } as never)
+  // jest
+  //   .spyOn(APIactions, 'useGetFilmQuery')
+  //   .mockReturnValue({ data: mockAPIfilmData.data, isFetching: isFetching } as never)
+}
 
-//   it('should render the specified number of items', async () => {
-//     fetchMocking(mockAPIstart, false, false)
+describe('Items list', () => {
+  it('should render full layout correctly', async () => {
+    fetchMocking(mockAPIstart, false, false)
 
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
+    const component = render(<App />)
+    expect(component).toMatchSnapshot()
+  })
 
-//     expect(screen.getAllByTestId('results__item')).toHaveLength(40)
-//   })
+  // it('should render the specified number of items', async () => {
+  //   fetchMocking(mockAPIstart, false, false)
 
-//   it('should display an appropriate message if no items are present', async () => {
-//     fetchMocking(mockAPIempty, false, false)
+  //   render(<Results />)
 
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
+  //   expect(screen.getAllByTestId('results__item')).toHaveLength(40)
+  // })
 
-//     expect(screen.getByTestId('results__stub')).toBeInTheDocument()
-//   })
-// })
+  // it('should display an appropriate message if no items are present', async () => {
+  //   fetchMocking(mockAPIempty, false, false)
+
+  //   render(
+  //     <BrowserRouter>
+  //       <Results />
+  //     </BrowserRouter>
+  //   )
+
+  //   expect(screen.getByTestId('results__stub')).toBeInTheDocument()
+  // })
+})
 
 // describe('Item', () => {
 //   it('should render the relevant item data', async () => {
