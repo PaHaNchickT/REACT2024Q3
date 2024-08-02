@@ -14,6 +14,7 @@ import React from 'react'
 import { Details } from '../components/details/details'
 import { Search } from '../components/search/search'
 import { Selected } from '../components/selected-panel/selected-info'
+import { API } from '../services/API'
 
 jest.mock('react-redux')
 jest.mock('next/navigation')
@@ -264,5 +265,37 @@ describe('App errors', () => {
     render(<Results />)
 
     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  })
+})
+
+describe('API', () => {
+  it('should return right response for "getFilms" request', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    let output
+    await API()
+      .getFilms({ value: '', page: 1 })
+      .then((resp) => {
+        output = resp
+      })
+
+    expect(output).toEqual(mockAPIstart)
+  })
+
+  it('should return right response for "getFilm" request', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIfilmData)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+    let output
+    await API()
+      .getFilm(999)
+      .then((resp) => {
+        output = resp
+      })
+
+    expect(output).toEqual(mockAPIfilmData)
   })
 })
