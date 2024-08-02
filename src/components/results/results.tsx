@@ -28,8 +28,8 @@ export function Results() {
   const router = useRouter()
   const pathname = usePathname()
 
-  const [results, setResults] = useState({ items: [], total: 0, totalPages: 0 })
   const [loading, setLoading] = useState(true)
+  const [results, setResults] = useState({ items: [], total: 0, totalPages: 0 })
 
   // getting search and page info from URL
   if (pathname) {

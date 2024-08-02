@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 // import { fireEvent, render, screen } from '@testing-library/react'
 import { mockAPIstart } from '../test/__ mocks __/API-mocked'
 // import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
@@ -13,6 +13,8 @@ import * as nextHooks from 'next/navigation'
 // import ErrorBoundary from '../components/error-boundary/errorBoundary'
 import App from '../pages/[films&page=id]'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { Results } from '../components/results/results'
+import React from 'react'
 
 jest.mock('react-redux')
 jest.mock('next/navigation')
@@ -40,13 +42,7 @@ jest.spyOn(nextHooks, 'useSearchParams').mockImplementation(() => {
   return output
 })
 
-const fetchMocking = async (
-  mock: object,
-  isClosed: boolean,
-  isFetching: boolean,
-  isError: null | { status: number; data: { message: string } } = null
-) => {
-  console.log(mock, isFetching, isError)
+const fetchMocking = async (isClosed: boolean) => {
   jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
     value: '',
     page: 1,
@@ -90,27 +86,27 @@ const fetchMocking = async (
     isClosed: isClosed,
     filmId: 999,
   })
-  // jest.spyOn(APIactions, 'useGetFilmsQuery').mockReturnValue({ data: mock, isFetching: false, error: isError } as never)
-  // jest
-  //   .spyOn(APIactions, 'useGetFilmQuery')
-  //   .mockReturnValue({ data: mockAPIfilmData.data, isFetching: isFetching } as never)
 }
 
 describe('Items list', () => {
   it('should render full layout correctly', async () => {
-    fetchMocking(mockAPIstart, false, false)
+    fetchMocking(false)
 
     const component = render(<App />)
     expect(component).toMatchSnapshot()
   })
 
-  // it('should render the specified number of items', async () => {
-  //   fetchMocking(mockAPIstart, false, false)
+  it('should render the specified number of items', async () => {
+    const realUseState = React.useState
+    jest.spyOn(React, 'useState').mockImplementationOnce(() => realUseState(false as unknown))
+    jest.spyOn(React, 'useState').mockImplementationOnce(() => realUseState(mockAPIstart as unknown))
 
-  //   render(<Results />)
+    fetchMocking(false)
 
-  //   expect(screen.getAllByTestId('results__item')).toHaveLength(40)
-  // })
+    render(<Results />)
+
+    expect(screen.getAllByTestId('results__item')).toHaveLength(40)
+  })
 
   // it('should display an appropriate message if no items are present', async () => {
   //   fetchMocking(mockAPIempty, false, false)
@@ -316,51 +312,41 @@ describe('Items list', () => {
 
 // //main loader
 
-// describe('App errors', () => {
-//   it('should render error page when response contains error', async () => {
-//     fetchMocking(mockAPIempty, false, false, { status: 404, data: { message: 'error' } })
-
-//     render(
-//       <BrowserRouter>
-//         <App />
-//         <Results />
-//       </BrowserRouter>
-//     )
-
-//     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
-//   })
-
-//   it('should render error page when app is crashing', async () => {
-//     jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
-//       value: '',
-//       page: 1,
-//       selectedItems: [],
-//     })
-
-//     render(
-//       <BrowserRouter>
-//         <App />
-//         <Results />
-//       </BrowserRouter>
-//     )
-
-//     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
-//   })
-
-//   it('should render error boundary page when app is crashing', async () => {
-//     const ThrowError = () => {
-//       throw new Error('Test')
-//     }
-
-//     render(
-//       <ErrorBoundary fallback={<div className="error-page__wrapper" data-testid="error-page__wrapper"></div>}>
-//         <ThrowError />
-//       </ErrorBoundary>
-//     )
-
-//     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
-//   })
-// })
+describe('App errors', () => {
+  // test
+  // it('should render error page when response contains error', async () => {
+  //   const realUseState = React.useState
+  //   jest.spyOn(React, 'useState').mockImplementationOnce(() => realUseState(['stub data', () => {}]))
+  //   fetchMocking(mockAPIstart, false, false)
+  //   render(<Results />)
+  //   expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  // })
+  //   it('should render error page when app is crashing', async () => {
+  //     jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
+  //       value: '',
+  //       page: 1,
+  //       selectedItems: [],
+  //     })
+  //     render(
+  //       <BrowserRouter>
+  //         <App />
+  //         <Results />
+  //       </BrowserRouter>
+  //     )
+  //     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  //   })
+  //   it('should render error boundary page when app is crashing', async () => {
+  //     const ThrowError = () => {
+  //       throw new Error('Test')
+  //     }
+  //     render(
+  //       <ErrorBoundary fallback={<div className="error-page__wrapper" data-testid="error-page__wrapper"></div>}>
+  //         <ThrowError />
+  //       </ErrorBoundary>
+  //     )
+  //     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  //   })
+})
 
 it('test', () => {
   expect(true).toBeTruthy()
