@@ -224,12 +224,7 @@ describe('Search', () => {
 
     fetchMocking(false, false, mockAPIstart)
 
-    render(
-      <>
-        <App />
-        <Results />
-      </>
-    )
+    render(<App />)
 
     fireEvent.click(screen.getByText('Reset Search'))
 
@@ -237,21 +232,17 @@ describe('Search', () => {
   })
 })
 
-// describe('Theme', () => {
-//   it('should change app color scheme after theme button clicking', async () => {
-//     fetchMocking(mockAPIstart, false, false)
+describe('Theme', () => {
+  it('should change app color scheme after theme button clicking', async () => {
+    fetchMocking(false, false, mockAPIstart)
 
-//     render(
-//       <BrowserRouter>
-//         <App />
-//       </BrowserRouter>
-//     )
+    render(<Search />)
 
-//     fireEvent.click(screen.getByTestId('search__theme-wrapper'))
+    fireEvent.click(screen.getByTestId('search__theme-wrapper'))
 
-//     expect(screen.getByTestId('dark')).toBeInTheDocument()
-//   })
-// })
+    expect(screen.getByTestId('light')).toBeInTheDocument()
+  })
+})
 
 // describe('Selected items', () => {
 //   it('should render selected bar after checkbox clicked', async () => {
