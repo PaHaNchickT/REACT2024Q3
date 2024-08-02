@@ -1,13 +1,12 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-// import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { mockAPIempty, mockAPIstart } from '../test/__ mocks __/API-mocked'
 // import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
 // import { Results } from '../components/results/results'
 
 import * as reduxHooks from 'react-redux'
 import * as nextHooks from 'next/navigation'
-// import * as detailsActions from '../services/detailsSlice'
+import * as detailsActions from '../services/detailsSlice'
 // import * as APIactions from '../services/API'
 // import { Search } from '../components/search/search'
 // import ErrorBoundary from '../components/error-boundary/errorBoundary'
@@ -130,32 +129,28 @@ describe('Item', () => {
     expect(item[0].children[1].children[2].textContent === `IMDb: ${currentData.ratingImdb}`).toBeTruthy()
   })
 
-  // it("should update item component isClosed value after it's clicking", async () => {
-  //   let isClosed = false
-  //   fetchMocking(mockAPIstart, false, false)
-  //   jest.spyOn(detailsActions, 'setIsClosed').mockImplementation((payload) => {
-  //     payload.isClosed = true
-  //     isClosed = true
-  //     return { payload: { isClosed: isClosed }, type: 'detailsData/setIsClosed' }
-  //   })
-  //   render(
-  //     <BrowserRouter>
-  //       <Results />
-  //     </BrowserRouter>
-  //   )
-  //   const item = screen.getAllByTestId('results__item')
-  //   fireEvent.click(item[0])
-  //   expect(isClosed).toBeTruthy()
-  // })
-  // it("should render detailed item component after it's clicking", async () => {
-  //   fetchMocking(mockAPIstart, true, false)
-  //   render(
-  //     <BrowserRouter>
-  //       <Results />
-  //     </BrowserRouter>
-  //   )
-  //   expect(screen.getByTestId('details__cont')).toBeInTheDocument()
-  // })
+  it("should update item component isClosed value after it's clicking", async () => {
+    let isClosed = false
+    fetchMocking(false, false, mockAPIstart)
+
+    jest.spyOn(detailsActions, 'setIsClosed').mockImplementation((payload) => {
+      payload.isClosed = true
+      isClosed = true
+      return { payload: { isClosed: isClosed }, type: 'detailsData/setIsClosed' }
+    })
+    render(<Results />)
+
+    const item = screen.getAllByTestId('results__item')
+    fireEvent.click(item[0])
+    expect(isClosed).toBeTruthy()
+  })
+
+  it("should render detailed item component after it's clicking", async () => {
+    fetchMocking(true, false, mockAPIstart)
+
+    render(<Results />)
+    expect(screen.getByTestId('details__cont')).toBeInTheDocument()
+  })
 })
 
 // describe('Detailed item', () => {
