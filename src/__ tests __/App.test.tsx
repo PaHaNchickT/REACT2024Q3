@@ -108,17 +108,16 @@ describe('Items list', () => {
     expect(screen.getAllByTestId('results__item')).toHaveLength(40)
   })
 
-  // it('should display an appropriate message if no items are present', async () => {
-  //   fetchMocking(mockAPIempty, false, false)
+  it('should display an appropriate message if no items are present', async () => {
+    const realUseState = React.useState
+    jest.spyOn(React, 'useState').mockImplementationOnce(() => realUseState(false as unknown))
 
-  //   render(
-  //     <BrowserRouter>
-  //       <Results />
-  //     </BrowserRouter>
-  //   )
+    fetchMocking(false)
 
-  //   expect(screen.getByTestId('results__stub')).toBeInTheDocument()
-  // })
+    render(<Results />)
+
+    expect(screen.getByTestId('results__stub')).toBeInTheDocument()
+  })
 })
 
 // describe('Item', () => {
