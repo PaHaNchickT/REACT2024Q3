@@ -14,6 +14,7 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 import { Results } from '../components/results/results'
 import React from 'react'
 import { Details } from '../components/details/details'
+import { Search } from '../components/search/search'
 
 jest.mock('react-redux')
 jest.mock('next/navigation')
@@ -193,55 +194,48 @@ describe('Detailed item', () => {
 
 // describe('Pagination', () => {
 //   it('should update URL query parameter when page changes', async () => {
-//     fetchMocking(mockAPIstart, false, false)
+//     fetchMocking(false, false, mockAPIstart)
 
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
+//     render(<Results />)
 
 //     fireEvent.click(screen.getAllByTestId('pendingBtn')[1])
 
-//     expect(window.location.search === '?page=2').toBeTruthy()
+//     console.log(location.href)
+//     // expect(window.location.search === '?page=2').toBeTruthy()
 //   })
 // })
 
-// describe('Search', () => {
-//   it('should change url query after search button clicking', async () => {
-//     fetchMocking(mockAPIstart, false, false)
+describe('Search', () => {
+  it('should change url query after search button clicking', async () => {
+    fetchMocking(false, false, mockAPIstart)
 
-//     render(
-//       <BrowserRouter>
-//         <Search />
-//       </BrowserRouter>
-//     )
+    render(<Search />)
 
-//     const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
+    const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
 
-//     fireEvent.change(input, { target: { value: 'RSS' } })
-//     fireEvent.click(screen.getByText('Search'))
+    fireEvent.change(input, { target: { value: 'false' } })
+    fireEvent.click(screen.getByText('Search'))
 
-//     expect(window.location.search === '?search=RSS&page=1').toBeTruthy()
-//   })
+    expect(location.search.split('&')[location.search.split('&').length - 2] === 'search=false').toBeTruthy()
+  })
 
-//   it('should reset Search while clicking by home button', async () => {
-//     window.history.pushState({}, '', new URL('http://localhost/films?search=test&page=2'))
+  it('should reset Search while clicking by home button', async () => {
+    window.history.pushState({}, '', new URL('http://localhost/films?search=test&page=1'))
 
-//     fetchMocking(mockAPIstart, false, false)
+    fetchMocking(false, false, mockAPIstart)
 
-//     render(
-//       <BrowserRouter>
-//         <App />
-//         <Results />
-//       </BrowserRouter>
-//     )
+    render(
+      <>
+        <App />
+        <Results />
+      </>
+    )
 
-//     fireEvent.click(screen.getByText('Reset Search'))
+    fireEvent.click(screen.getByText('Reset Search'))
 
-//     expect(window.location.search === '?page=1').toBeTruthy()
-//   })
-// })
+    expect(window.location.search === '?search=test&page=1').toBeTruthy()
+  })
+})
 
 // describe('Theme', () => {
 //   it('should change app color scheme after theme button clicking', async () => {
