@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
-// import { Results } from '../components/results/results'
 
 import * as reduxHooks from 'react-redux'
 import * as nextHooks from 'next/navigation'
@@ -86,10 +85,6 @@ const fetchMocking = async (isClosed: boolean, isLoading: boolean, mock: object)
     isClosed: isClosed,
     filmId: 999,
   })
-
-  // const mockJsonPromise = Promise.resolve(mockAPIempty)
-  // const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-  // global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
 
   jest.spyOn(React, 'useState').mockReturnValueOnce([isLoading, () => {}])
   jest.spyOn(React, 'useState').mockReturnValueOnce([mock, () => {}])
@@ -180,31 +175,7 @@ describe('Detailed item', () => {
     expect(details.children[7].children[1].textContent === 'No information').toBeTruthy()
     expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
   })
-
-  // it('should hide the details component after clicking the close button', async () => {
-  //   fetchMocking(true, false, mockAPIstart)
-
-  //   render(<Results />)
-
-  //   const closeBtn = screen.getByTestId('details__cont').children[1]
-  //   fireEvent.click(closeBtn)
-
-  //   expect(screen.getByTestId('details__cont')).toBeInTheDocument()
-  // })
 })
-
-// describe('Pagination', () => {
-//   it('should update URL query parameter when page changes', async () => {
-//     fetchMocking(false, false, mockAPIstart)
-
-//     render(<Results />)
-
-//     fireEvent.click(screen.getAllByTestId('pendingBtn')[1])
-
-//     console.log(location.href)
-//     // expect(window.location.search === '?page=2').toBeTruthy()
-//   })
-// })
 
 describe('Search', () => {
   it('should change url query after search button clicking', async () => {
