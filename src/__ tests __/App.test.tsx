@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 // import { fireEvent, render, screen } from '@testing-library/react'
-import { mockAPIstart } from '../test/__ mocks __/API-mocked'
+import { mockAPIempty, mockAPIstart } from '../test/__ mocks __/API-mocked'
 // import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
 // import { Results } from '../components/results/results'
 
@@ -42,7 +42,7 @@ jest.spyOn(nextHooks, 'useSearchParams').mockImplementation(() => {
   return output
 })
 
-const fetchMocking = async (isClosed: boolean) => {
+const fetchMocking = async (isClosed: boolean, isLoading: boolean, mock: object) => {
   jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
     value: '',
     page: 1,
@@ -86,92 +86,77 @@ const fetchMocking = async (isClosed: boolean) => {
     isClosed: isClosed,
     filmId: 999,
   })
+
+  // const mockJsonPromise = Promise.resolve(mockAPIempty)
+  // const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+  // global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+
+  jest.spyOn(React, 'useState').mockReturnValueOnce([isLoading, () => {}])
+  jest.spyOn(React, 'useState').mockReturnValueOnce([mock, () => {}])
 }
 
 describe('Items list', () => {
-  it('should render full layout correctly', async () => {
-    fetchMocking(false)
+  it('should render full layout correctly', () => {
+    fetchMocking(false, false, mockAPIstart)
 
-    const component = render(<App />)
-    expect(component).toMatchSnapshot()
+    expect(render(<App />)).toMatchSnapshot()
   })
 
-  it('should render the specified number of items', async () => {
-    const realUseState = React.useState
-    jest.spyOn(React, 'useState').mockImplementationOnce(() => realUseState(false as unknown))
-    jest.spyOn(React, 'useState').mockImplementationOnce(() => realUseState(mockAPIstart as unknown))
-
-    fetchMocking(false)
+  it('should render the specified number of items', () => {
+    fetchMocking(false, false, mockAPIstart)
 
     render(<Results />)
-
     expect(screen.getAllByTestId('results__item')).toHaveLength(40)
   })
 
-  it('should display an appropriate message if no items are present', async () => {
-    const realUseState = React.useState
-    jest.spyOn(React, 'useState').mockImplementationOnce(() => realUseState(false as unknown))
-
-    fetchMocking(false)
+  it('should display an appropriate message if no items are present', () => {
+    fetchMocking(false, false, mockAPIempty)
 
     render(<Results />)
-
     expect(screen.getByTestId('results__stub')).toBeInTheDocument()
   })
 })
 
-// describe('Item', () => {
-//   it('should render the relevant item data', async () => {
-//     fetchMocking(mockAPIstart, false, false)
+describe('Item', () => {
+  it('should render the relevant item data', () => {
+    fetchMocking(false, false, mockAPIstart)
+    render(<Results />)
 
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
+    const currentData = mockAPIstart.items[0]
+    const item = screen.getAllByTestId('results__item')
+    expect(item[0].children[0]).toHaveAttribute('src', currentData.posterUrlPreview)
+    expect(item[0].children[1].children[0].textContent === `Title: ${currentData.nameOriginal}`).toBeTruthy()
+    expect(item[0].children[1].children[1].textContent === `Year: ${currentData.year}`).toBeTruthy()
+    expect(item[0].children[1].children[2].textContent === `IMDb: ${currentData.ratingImdb}`).toBeTruthy()
+  })
 
-//     const currentData = mockAPIstart.items[0]
-//     const item = screen.getAllByTestId('results__item')
-//     expect(item[0].children[0]).toHaveAttribute('src', currentData.posterUrlPreview)
-//     expect(item[0].children[1].children[0].textContent === `Title: ${currentData.nameOriginal}`).toBeTruthy()
-//     expect(item[0].children[1].children[1].textContent === `Year: ${currentData.year}`).toBeTruthy()
-//     expect(item[0].children[1].children[2].textContent === `IMDb: ${currentData.ratingImdb}`).toBeTruthy()
-//   })
-
-//   it("should update item component isClosed value after it's clicking", async () => {
-//     let isClosed = false
-//     fetchMocking(mockAPIstart, false, false)
-
-//     jest.spyOn(detailsActions, 'setIsClosed').mockImplementation((payload) => {
-//       payload.isClosed = true
-//       isClosed = true
-//       return { payload: { isClosed: isClosed }, type: 'detailsData/setIsClosed' }
-//     })
-
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
-
-//     const item = screen.getAllByTestId('results__item')
-//     fireEvent.click(item[0])
-
-//     expect(isClosed).toBeTruthy()
-//   })
-
-//   it("should render detailed item component after it's clicking", async () => {
-//     fetchMocking(mockAPIstart, true, false)
-
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
-
-//     expect(screen.getByTestId('details__cont')).toBeInTheDocument()
-//   })
-// })
+  // it("should update item component isClosed value after it's clicking", async () => {
+  //   let isClosed = false
+  //   fetchMocking(mockAPIstart, false, false)
+  //   jest.spyOn(detailsActions, 'setIsClosed').mockImplementation((payload) => {
+  //     payload.isClosed = true
+  //     isClosed = true
+  //     return { payload: { isClosed: isClosed }, type: 'detailsData/setIsClosed' }
+  //   })
+  //   render(
+  //     <BrowserRouter>
+  //       <Results />
+  //     </BrowserRouter>
+  //   )
+  //   const item = screen.getAllByTestId('results__item')
+  //   fireEvent.click(item[0])
+  //   expect(isClosed).toBeTruthy()
+  // })
+  // it("should render detailed item component after it's clicking", async () => {
+  //   fetchMocking(mockAPIstart, true, false)
+  //   render(
+  //     <BrowserRouter>
+  //       <Results />
+  //     </BrowserRouter>
+  //   )
+  //   expect(screen.getByTestId('details__cont')).toBeInTheDocument()
+  // })
+})
 
 // describe('Detailed item', () => {
 //   it('should display a loading indicator while fetching data', async () => {
