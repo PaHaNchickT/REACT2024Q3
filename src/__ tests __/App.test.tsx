@@ -15,6 +15,7 @@ import { Results } from '../components/results/results'
 import React from 'react'
 import { Details } from '../components/details/details'
 import { Search } from '../components/search/search'
+import { Selected } from '../components/selected-panel/selected-info'
 
 jest.mock('react-redux')
 jest.mock('next/navigation')
@@ -244,25 +245,20 @@ describe('Theme', () => {
   })
 })
 
-// describe('Selected items', () => {
-//   it('should render selected bar after checkbox clicked', async () => {
-//     fetchMocking(mockAPIstart, false, false)
+describe('Selected items', () => {
+  it('should render selected bar after checkbox clicked', async () => {
+    fetchMocking(true, true, mockAPIstart)
 
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
+    render(<Selected />)
 
-//     fireEvent.click(screen.getAllByTestId('checkbox')[0])
-//     fireEvent.click(screen.getByTestId('selected-unselect-btn'))
-//     fireEvent.click(screen.getByTestId('selected-download-btn'))
+    screen.debug()
+    // fireEvent.click(screen.getAllByTestId('checkbox')[0])
+    fireEvent.click(screen.getByTestId('selected-unselect-btn'))
+    fireEvent.click(screen.getByTestId('selected-download-btn'))
 
-//     expect(screen.getByTestId('selected-bar')).toBeInTheDocument()
-//   })
-// })
-
-// //main loader
+    expect(screen.getByTestId('selected-bar')).toBeInTheDocument()
+  })
+})
 
 describe('App errors', () => {
   // test
@@ -303,3 +299,16 @@ describe('App errors', () => {
 it('test', () => {
   expect(true).toBeTruthy()
 })
+
+// not found
+// it('should render selected bar after checkbox clicked', async () => {
+//   fetchMocking(false, false, mockAPIstart)
+
+//   render(<Results />)
+
+//   fireEvent.click(screen.getAllByTestId('checkbox')[0])
+//   fireEvent.click(screen.getByTestId('selected-unselect-btn'))
+//   fireEvent.click(screen.getByTestId('selected-download-btn'))
+
+//   expect(screen.getByTestId('selected-bar')).toBeInTheDocument()
+// })
