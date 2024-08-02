@@ -8,8 +8,8 @@ import { ThemeContext } from '../../pages/[films&page=id]'
 export function Details(props: { closeDetails: (event: MouseEvent<HTMLDivElement>) => void }) {
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const { theme } = useContext(ThemeContext)
-  const [results, setResults] = useState({ data: {}, externalId: { imdbId: '' } } as FilmInfo)
   const [loading, setLoading] = useState(true)
+  const [results, setResults] = useState({ data: {}, externalId: { imdbId: '' } } as FilmInfo)
 
   const getData = async () => {
     setLoading(true)

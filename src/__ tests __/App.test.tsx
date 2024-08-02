@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { mockAPIempty, mockAPIstart } from '../test/__ mocks __/API-mocked'
-// import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
+import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
 // import { Results } from '../components/results/results'
 
 import * as reduxHooks from 'react-redux'
@@ -14,6 +13,7 @@ import App from '../pages/[films&page=id]'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { Results } from '../components/results/results'
 import React from 'react'
+import { Details } from '../components/details/details'
 
 jest.mock('react-redux')
 jest.mock('next/navigation')
@@ -162,35 +162,27 @@ describe('Detailed item', () => {
     expect(screen.getAllByTestId('loader__wrapper')[0]).toBeInTheDocument()
   })
 
-  // it('should correctly display the detailed item data', async () => {
-  //   fetchMocking(mockAPIstart, true, false)
+  it('should correctly display the detailed item data', async () => {
+    fetchMocking(true, false, mockAPIfilmData)
 
-  //   render(
-  //     <BrowserRouter>
-  //       <Results />
-  //     </BrowserRouter>
-  //   )
+    render(<Details closeDetails={() => {}} />)
 
-  //   const details = screen.getByTestId('details__cont')
-  //   const currentData = mockAPIfilmData.data
+    const details = screen.getByTestId('details__cont')
+    const currentData = mockAPIfilmData.data
 
-  //   expect(details.children[2].children[0].textContent === currentData.nameRu).toBeTruthy()
-  //   expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
-  //   expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
-  //   expect(details.children[4].children[1].textContent === 'No information').toBeTruthy()
-  //   expect(details.children[6].children[1].textContent === 'No information').toBeTruthy()
-  //   expect(details.children[7].children[1].textContent === 'No information').toBeTruthy()
-  //   expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
-  // })
+    expect(details.children[2].children[0].textContent === currentData.nameRu).toBeTruthy()
+    expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
+    expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
+    expect(details.children[4].children[1].textContent === 'No information').toBeTruthy()
+    expect(details.children[6].children[1].textContent === 'No information').toBeTruthy()
+    expect(details.children[7].children[1].textContent === 'No information').toBeTruthy()
+    expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
+  })
 
   // it('should hide the details component after clicking the close button', async () => {
-  //   fetchMocking(mockAPIstart, true, false)
+  //   fetchMocking(true, false, mockAPIstart)
 
-  //   render(
-  //     <BrowserRouter>
-  //       <Results />
-  //     </BrowserRouter>
-  //   )
+  //   render(<Results />)
 
   //   const closeBtn = screen.getByTestId('details__cont').children[1]
   //   fireEvent.click(closeBtn)
