@@ -153,55 +153,51 @@ describe('Item', () => {
   })
 })
 
-// describe('Detailed item', () => {
-//   it('should display a loading indicator while fetching data', async () => {
-//     fetchMocking(mockAPIstart, true, true)
+describe('Detailed item', () => {
+  it('should display a loading indicator while fetching data', async () => {
+    fetchMocking(true, true, mockAPIstart)
 
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
+    render(<Results />)
 
-//     expect(screen.getByTestId('loader__wrapper')).toBeInTheDocument()
-//   })
+    expect(screen.getAllByTestId('loader__wrapper')[0]).toBeInTheDocument()
+  })
 
-//   it('should correctly display the detailed item data', async () => {
-//     fetchMocking(mockAPIstart, true, false)
+  // it('should correctly display the detailed item data', async () => {
+  //   fetchMocking(mockAPIstart, true, false)
 
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
+  //   render(
+  //     <BrowserRouter>
+  //       <Results />
+  //     </BrowserRouter>
+  //   )
 
-//     const details = screen.getByTestId('details__cont')
-//     const currentData = mockAPIfilmData.data
+  //   const details = screen.getByTestId('details__cont')
+  //   const currentData = mockAPIfilmData.data
 
-//     expect(details.children[2].children[0].textContent === currentData.nameRu).toBeTruthy()
-//     expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
-//     expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
-//     expect(details.children[4].children[1].textContent === 'No information').toBeTruthy()
-//     expect(details.children[6].children[1].textContent === 'No information').toBeTruthy()
-//     expect(details.children[7].children[1].textContent === 'No information').toBeTruthy()
-//     expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
-//   })
+  //   expect(details.children[2].children[0].textContent === currentData.nameRu).toBeTruthy()
+  //   expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
+  //   expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
+  //   expect(details.children[4].children[1].textContent === 'No information').toBeTruthy()
+  //   expect(details.children[6].children[1].textContent === 'No information').toBeTruthy()
+  //   expect(details.children[7].children[1].textContent === 'No information').toBeTruthy()
+  //   expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
+  // })
 
-//   it('should hide the details component after clicking the close button', async () => {
-//     fetchMocking(mockAPIstart, true, false)
+  // it('should hide the details component after clicking the close button', async () => {
+  //   fetchMocking(mockAPIstart, true, false)
 
-//     render(
-//       <BrowserRouter>
-//         <Results />
-//       </BrowserRouter>
-//     )
+  //   render(
+  //     <BrowserRouter>
+  //       <Results />
+  //     </BrowserRouter>
+  //   )
 
-//     const closeBtn = screen.getByTestId('details__cont').children[1]
-//     fireEvent.click(closeBtn)
+  //   const closeBtn = screen.getByTestId('details__cont').children[1]
+  //   fireEvent.click(closeBtn)
 
-//     expect(screen.getByTestId('details__cont')).toBeInTheDocument()
-//   })
-// })
+  //   expect(screen.getByTestId('details__cont')).toBeInTheDocument()
+  // })
+})
 
 // describe('Pagination', () => {
 //   it('should update URL query parameter when page changes', async () => {
