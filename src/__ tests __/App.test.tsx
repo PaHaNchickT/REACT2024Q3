@@ -6,9 +6,7 @@ import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __
 import * as reduxHooks from 'react-redux'
 import * as nextHooks from 'next/navigation'
 import * as detailsActions from '../services/detailsSlice'
-// import * as APIactions from '../services/API'
-// import { Search } from '../components/search/search'
-// import ErrorBoundary from '../components/error-boundary/errorBoundary'
+
 import App from '../pages/[films&page=id]'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { Results } from '../components/results/results'
@@ -144,6 +142,8 @@ describe('Item', () => {
 
     const item = screen.getAllByTestId('results__item')
     fireEvent.click(item[0])
+    fireEvent.click(screen.getAllByTestId('checkbox')[0])
+
     expect(isClosed).toBeTruthy()
   })
 
@@ -160,7 +160,6 @@ describe('Detailed item', () => {
     fetchMocking(true, true, mockAPIstart)
 
     render(<Results />)
-
     expect(screen.getAllByTestId('loader__wrapper')[0]).toBeInTheDocument()
   })
 
@@ -251,8 +250,6 @@ describe('Selected items', () => {
 
     render(<Selected />)
 
-    screen.debug()
-    // fireEvent.click(screen.getAllByTestId('checkbox')[0])
     fireEvent.click(screen.getByTestId('selected-unselect-btn'))
     fireEvent.click(screen.getByTestId('selected-download-btn'))
 
@@ -261,54 +258,11 @@ describe('Selected items', () => {
 })
 
 describe('App errors', () => {
-  // test
-  // it('should render error page when response contains error', async () => {
-  //   const realUseState = React.useState
-  //   jest.spyOn(React, 'useState').mockImplementationOnce(() => realUseState(['stub data', () => {}]))
-  //   fetchMocking(mockAPIstart, false, false)
-  //   render(<Results />)
-  //   expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
-  // })
-  //   it('should render error page when app is crashing', async () => {
-  //     jest.spyOn(reduxHooks, 'useSelector').mockReturnValue({
-  //       value: '',
-  //       page: 1,
-  //       selectedItems: [],
-  //     })
-  //     render(
-  //       <BrowserRouter>
-  //         <App />
-  //         <Results />
-  //       </BrowserRouter>
-  //     )
-  //     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
-  //   })
-  //   it('should render error boundary page when app is crashing', async () => {
-  //     const ThrowError = () => {
-  //       throw new Error('Test')
-  //     }
-  //     render(
-  //       <ErrorBoundary fallback={<div className="error-page__wrapper" data-testid="error-page__wrapper"></div>}>
-  //         <ThrowError />
-  //       </ErrorBoundary>
-  //     )
-  //     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
-  //   })
+  it('should render error page when app is crashing', async () => {
+    fetchMocking(false, false, mockAPIstart)
+
+    render(<Results />)
+
+    expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  })
 })
-
-it('test', () => {
-  expect(true).toBeTruthy()
-})
-
-// not found
-// it('should render selected bar after checkbox clicked', async () => {
-//   fetchMocking(false, false, mockAPIstart)
-
-//   render(<Results />)
-
-//   fireEvent.click(screen.getAllByTestId('checkbox')[0])
-//   fireEvent.click(screen.getByTestId('selected-unselect-btn'))
-//   fireEvent.click(screen.getByTestId('selected-download-btn'))
-
-//   expect(screen.getByTestId('selected-bar')).toBeInTheDocument()
-// })
