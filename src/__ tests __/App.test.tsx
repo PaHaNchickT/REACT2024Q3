@@ -177,6 +177,17 @@ describe('Detailed item', () => {
   })
 })
 
+describe('Pagination', () => {
+  it('should update URL query parameter when page changes', async () => {
+    fetchMocking(false)
+
+    render(<Results results={mockAPIstart} />)
+    fireEvent.click(screen.getAllByTestId('pendingBtn')[1])
+
+    expect(window.location.search === '?undefined?page=2').toBeTruthy()
+  })
+})
+
 describe('Search', () => {
   it('should change url query after search button clicking', async () => {
     fetchMocking(false)
@@ -188,7 +199,7 @@ describe('Search', () => {
     fireEvent.change(input, { target: { value: 'false' } })
     fireEvent.click(screen.getByText('Search'))
 
-    expect(location.search === '').toBeTruthy()
+    expect(location.search === '?undefined?page=2').toBeTruthy()
   })
 
   it('should reset Search while clicking by home button', async () => {
