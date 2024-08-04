@@ -209,17 +209,17 @@ describe('Search', () => {
   })
 })
 
-// describe('Theme', () => {
-//   it('should change app color scheme after theme button clicking', async () => {
-//     fetchMocking(false, false, mockAPIstart)
+describe('Theme', () => {
+  it('should change app color scheme after theme button clicking', async () => {
+    fetchMocking(false)
 
-//     render(<Search />)
+    render(<Search />)
 
-//     fireEvent.click(screen.getByTestId('search__theme-wrapper'))
+    fireEvent.click(screen.getByTestId('search__theme-wrapper'))
 
-//     expect(screen.getByTestId('light')).toBeInTheDocument()
-//   })
-// })
+    expect(screen.getByTestId('light')).toBeInTheDocument()
+  })
+})
 
 // describe('Selected items', () => {
 //   it('should render selected bar after checkbox clicked', async () => {
