@@ -1,13 +1,20 @@
 import Link from 'next/link'
 import { TEXT_CONTENT } from '../components/constants'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { reduxStore } from '../components/types'
+import { useEffect } from 'react'
+import { setTheme } from '../services/themeSlice'
 
 export default function ErrorPage() {
+  const dispatch = useDispatch()
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
+  useEffect(() => {
+    dispatch(setTheme(localStorage.getItem('paul-theme') || 'light'))
+  }, [])
+
   return (
-    <div className="error-page__wrapper" data-testid="error-page__wrapper">
+    <div className={`error-page__wrapper root__wrapper ${theme.color}`} data-testid="error-page__wrapper">
       <div className="error-page__cont">
         <h2>{TEXT_CONTENT.errorPageTitle}</h2>
         <div></div>
