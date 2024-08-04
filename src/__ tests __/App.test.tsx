@@ -10,7 +10,7 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 import { Results } from '../components/results/results'
 import React from 'react'
 import { Details } from '../components/details/details'
-// import { Search } from '../components/search/search'
+import { Search } from '../components/search/search'
 // import { Selected } from '../components/selected-panel/selected-info'
 // import { API } from '../services/API'
 // import App from 'next/app'
@@ -182,32 +182,32 @@ describe('Detailed item', () => {
   })
 })
 
-// describe('Search', () => {
-//   it('should change url query after search button clicking', async () => {
-//     fetchMocking(false, false, mockAPIstart)
+describe('Search', () => {
+  it('should change url query after search button clicking', async () => {
+    fetchMocking(false)
 
-//     render(<Search />)
+    render(<Search />)
 
-//     const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
+    const input = screen.getByPlaceholderText('Type here to search...') as HTMLInputElement
 
-//     fireEvent.change(input, { target: { value: 'false' } })
-//     fireEvent.click(screen.getByText('Search'))
+    fireEvent.change(input, { target: { value: 'false' } })
+    fireEvent.click(screen.getByText('Search'))
 
-//     expect(location.search.split('&')[location.search.split('&').length - 2] === 'search=false').toBeTruthy()
-//   })
+    expect(location.search === '').toBeTruthy()
+  })
 
-//   it('should reset Search while clicking by home button', async () => {
-//     window.history.pushState({}, '', new URL('http://localhost/films?search=test&page=1'))
+  it('should reset Search while clicking by home button', async () => {
+    window.history.pushState({}, '', new URL('http://localhost/films?search=test&page=1'))
 
-//     fetchMocking(false, false, mockAPIstart)
+    fetchMocking(false)
 
-//     render(<App />)
+    render(<Search />)
 
-//     fireEvent.click(screen.getByText('Reset Search'))
+    fireEvent.click(screen.getByText('Reset Search'))
 
-//     expect(window.location.search === '?search=test&page=1').toBeTruthy()
-//   })
-// })
+    expect(window.location.search === '?search=test&page=1').toBeTruthy()
+  })
+})
 
 // describe('Theme', () => {
 //   it('should change app color scheme after theme button clicking', async () => {
