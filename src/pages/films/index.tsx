@@ -1,8 +1,10 @@
 import { API } from '../../services/API'
 import { Search } from '../../components/search/search'
-import { createContext, Dispatch, SetStateAction } from 'react'
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Results } from '../../components/results/results'
 import { FilmResp } from '../../components/types'
+import { Loader } from '../../components/loader/loader'
+import { Router } from 'next/router'
 
 export const getServerSideProps = async (context: { query: { page?: string; search?: string } }) => {
   const data = await API().getFilms({ value: context.query.search || '', page: context.query.page || '1' })
@@ -26,14 +28,32 @@ export const ThemeContext = createContext({
   setTheme: Dispatch<SetStateAction<string>>
 })
 
-const Posts = ({ results }: { results: FilmResp }) => {
-  console.log('ended')
+const App = ({ results }: { results: FilmResp }) => {
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const start = () => {
+      setLoading(true)
+    }
+    const end = () => {
+      setLoading(false)
+    }
+    Router.events.on('routeChangeStart', start)
+    Router.events.on('routeChangeComplete', end)
+    Router.events.on('routeChangeError', end)
+    return () => {
+      Router.events.off('routeChangeStart', start)
+      Router.events.off('routeChangeComplete', end)
+      Router.events.off('routeChangeError', end)
+    }
+  }, [])
+
   return (
     <>
       <Search />
-      <Results results={results} />
+      {loading ? <Loader theme="default" /> : <Results results={results} />}
     </>
   )
 }
 
-export default Posts
+export default App

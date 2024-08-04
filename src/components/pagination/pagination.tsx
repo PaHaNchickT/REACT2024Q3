@@ -15,7 +15,6 @@ export function Pagination(props: { page: number; currentPage: number }) {
     router.push(
       `${pathname}?page=${props.page}${(searchParams.get('search') && `&search=${searchParams.get('search')}`) || ''}`
     )
-    console.log('started') ////////////////////////////////////////////////////
   }
 
   return (

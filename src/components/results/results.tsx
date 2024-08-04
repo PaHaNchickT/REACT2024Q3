@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
 import { setPage, setSearchValue } from '../../services/searchSlice'
-import { ChangeEvent, useContext, useEffect, MouseEvent } from 'react'
+import { ChangeEvent, useContext, MouseEvent } from 'react'
 import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
+import { useSearchParams, usePathname } from 'next/navigation'
 import { ThemeContext } from '../../pages/films'
 
 export function Results(props: { results: FilmResp }) {
@@ -23,7 +23,6 @@ export function Results(props: { results: FilmResp }) {
   const { theme } = useContext(ThemeContext)
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
-  const router = useRouter()
   const pathname = usePathname()
 
   // getting search and page info from URL
@@ -31,10 +30,6 @@ export function Results(props: { results: FilmResp }) {
     dispatch(setPage({ page: +searchParams.get('page')! || 1 }))
     dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
   }
-
-  useEffect(() => {
-    console.log('ended')
-  }, [searchParams])
 
   // updating URL after switching search mode to on/off
   // useEffect(() => {
@@ -66,10 +61,6 @@ export function Results(props: { results: FilmResp }) {
         filmId: +(event.currentTarget as HTMLDivElement).id,
       })
     )
-
-    const params = new URLSearchParams(searchParams)
-    params.set('details', (event.currentTarget as HTMLDivElement).id)
-    router.push(params.toString() ? `films?${params.toString()}` : 'films')
   }
 
   // function for close details section
@@ -87,10 +78,6 @@ export function Results(props: { results: FilmResp }) {
         filmId: 0,
       })
     )
-
-    const params = new URLSearchParams(searchParams)
-    params.delete('details')
-    router.push(params.toString() ? `films?${params.toString()}` : 'films')
   }
 
   // function for open/closing selected bar
@@ -166,9 +153,6 @@ export function Results(props: { results: FilmResp }) {
     </div>
   )
 
-  // if (loading) {
-  //   resultsUI = <Loader theme="default" />
-  // } else
   if (!props.results.items.length) {
     resultsUI = <NoResults />
   }
