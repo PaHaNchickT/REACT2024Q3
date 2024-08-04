@@ -1,10 +1,12 @@
 import { API } from '../../services/API'
 import { Search } from '../../components/search/search'
-import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Results } from '../../components/results/results'
-import { FilmResp } from '../../components/types'
+import { FilmResp, reduxStore } from '../../components/types'
 import { Loader } from '../../components/loader/loader'
 import { Router } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
+import { setTheme } from '../../services/themeSlice'
 
 export const getServerSideProps = async (context: { query: { page?: string; search?: string } }) => {
   const data = await API().getFilms({ value: context.query.search || '', page: context.query.page || '1' })
@@ -20,18 +22,14 @@ export const getServerSideProps = async (context: { query: { page?: string; sear
   }
 }
 
-export const ThemeContext = createContext({
-  theme: '',
-  setTheme: () => {},
-} as {
-  theme: string
-  setTheme: Dispatch<SetStateAction<string>>
-})
-
 const App = ({ results }: { results: FilmResp }) => {
+  const dispatch = useDispatch()
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    dispatch(setTheme(localStorage.getItem('paul-theme') || 'light'))
+
     const start = () => {
       setLoading(true)
     }
@@ -49,10 +47,10 @@ const App = ({ results }: { results: FilmResp }) => {
   }, [])
 
   return (
-    <>
+    <div className={`root__wrapper ${theme.color}`}>
       <Search />
       {loading ? <Loader theme="default" /> : <Results results={results} />}
-    </>
+    </div>
   )
 }
 

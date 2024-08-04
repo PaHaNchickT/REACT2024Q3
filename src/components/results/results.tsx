@@ -7,20 +7,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
 import { setPage, setSearchValue } from '../../services/searchSlice'
-import { ChangeEvent, useContext, MouseEvent } from 'react'
+import { ChangeEvent, MouseEvent } from 'react'
 import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
 import { useSearchParams, usePathname } from 'next/navigation'
-import { ThemeContext } from '../../pages/films'
 
 export function Results(props: { results: FilmResp }) {
   const selectedItems: number[] = []
   const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
-  const { theme } = useContext(ThemeContext)
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -103,7 +102,7 @@ export function Results(props: { results: FilmResp }) {
   // rendering results UI
   const films = props.results.items.map((film: FilmObj) => (
     <div
-      className={`results__item ${theme}`}
+      className={`results__item ${theme.color}`}
       data-testid="results__item"
       key={film.kinopoiskId}
       id={film.kinopoiskId.toString()}
@@ -114,7 +113,7 @@ export function Results(props: { results: FilmResp }) {
         alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
         width="200px"
         height="300px"
-        className={theme}
+        className={theme.color}
       />
       <div className="results__item-info">
         <p className="results__item-name">
@@ -136,7 +135,7 @@ export function Results(props: { results: FilmResp }) {
         name={film.kinopoiskId.toString()}
         onChange={(event) => checkboxHandling(event)}
         checked={selectedItems.includes(film.kinopoiskId)}
-        className={theme}
+        className={theme.color}
       ></input>
     </div>
   ))

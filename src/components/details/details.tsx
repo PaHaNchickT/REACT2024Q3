@@ -1,13 +1,12 @@
 import { Loader } from '../loader/loader'
 import { FilmInfo, reduxStore } from '../types'
 import { useSelector } from 'react-redux'
-import { useContext, MouseEvent, useState, useEffect } from 'react'
+import { MouseEvent, useState, useEffect } from 'react'
 import { API } from '../../services/API'
-import { ThemeContext } from '../../pages/films'
 
 export function Details(props: { closeDetails: (event: MouseEvent<HTMLDivElement>) => void }) {
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
-  const { theme } = useContext(ThemeContext)
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const [loading, setLoading] = useState(true)
   const [results, setResults] = useState({ data: {}, externalId: { imdbId: '' } } as FilmInfo)
 
@@ -56,7 +55,7 @@ export function Details(props: { closeDetails: (event: MouseEvent<HTMLDivElement
         <h3>Film length (mins):</h3>
         <p>{results.data.filmLength || 'No information'}</p>
       </div>
-      <a className={theme} href={results.data.webUrl} target="_blank">
+      <a className={theme.color} href={results.data.webUrl} target="_blank">
         More details
       </a>
     </>
@@ -68,7 +67,7 @@ export function Details(props: { closeDetails: (event: MouseEvent<HTMLDivElement
   }, [detailsData])
 
   return (
-    <div className={`details__cont ${theme}`} data-testid="details__cont">
+    <div className={`details__cont ${theme.color}`} data-testid="details__cont">
       {resultsUI}
     </div>
   )

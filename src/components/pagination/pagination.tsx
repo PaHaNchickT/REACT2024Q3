@@ -1,9 +1,9 @@
-import { useContext } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { ThemeContext } from '../../pages/films'
+import { useSelector } from 'react-redux'
+import { reduxStore } from '../types'
 
 export function Pagination(props: { page: number; currentPage: number }) {
-  const { theme } = useContext(ThemeContext)
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -22,7 +22,7 @@ export function Pagination(props: { page: number; currentPage: number }) {
       <a
         onClick={onClick}
         id={props.page.toString()}
-        className={`${buttonClassname} ${theme}`}
+        className={`${buttonClassname} ${theme.color}`}
         data-testid="pendingBtn"
       >
         {props.page}

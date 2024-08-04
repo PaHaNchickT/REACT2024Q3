@@ -45,6 +45,9 @@ export type reduxStore = {
   selectedData: {
     selectedData: { selectedItems: FilmObj[] }
   }
+  themeData: {
+    themeData: { color: string }
+  }
 }
 
 export type FilmInfo = {

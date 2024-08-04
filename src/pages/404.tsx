@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { useContext } from 'react'
 import { TEXT_CONTENT } from '../components/constants'
-import { ThemeContext } from './films'
+import { useSelector } from 'react-redux'
+import { reduxStore } from '../components/types'
 
 export default function ErrorPage() {
-  const { theme } = useContext(ThemeContext)
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
   return (
     <div className="error-page__wrapper" data-testid="error-page__wrapper">
@@ -12,7 +12,7 @@ export default function ErrorPage() {
         <h2>{TEXT_CONTENT.errorPageTitle}</h2>
         <div></div>
         <p>{TEXT_CONTENT.errorPageText}</p>
-        <Link href="/films?page=1" className={theme}>
+        <Link href="/films?page=1" className={theme.color}>
           {TEXT_CONTENT.btnErrorHome}
         </Link>
       </div>
