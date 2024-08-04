@@ -11,7 +11,7 @@ import { Results } from '../components/results/results'
 import React from 'react'
 import { Details } from '../components/details/details'
 import { Search } from '../components/search/search'
-// import { Selected } from '../components/selected-panel/selected-info'
+import { Selected } from '../components/selected-panel/selected-info'
 // import { API } from '../services/API'
 // import App from 'next/app'
 // import { FilmResp } from '../components/types'
@@ -221,18 +221,18 @@ describe('Theme', () => {
   })
 })
 
-// describe('Selected items', () => {
-//   it('should render selected bar after checkbox clicked', async () => {
-//     fetchMocking(true, true, mockAPIstart)
+describe('Selected items', () => {
+  it('should render selected bar after checkbox clicked', async () => {
+    fetchMocking(true)
 
-//     render(<Selected />)
+    render(<Selected />)
 
-//     fireEvent.click(screen.getByTestId('selected-unselect-btn'))
-//     fireEvent.click(screen.getByTestId('selected-download-btn'))
+    fireEvent.click(screen.getByTestId('selected-unselect-btn'))
+    fireEvent.click(screen.getByTestId('selected-download-btn'))
 
-//     expect(screen.getByTestId('selected-bar')).toBeInTheDocument()
-//   })
-// })
+    expect(screen.getByTestId('selected-bar')).toBeInTheDocument()
+  })
+})
 
 // describe('App errors', () => {
 //   it('should render error page when app is crashing', async () => {
