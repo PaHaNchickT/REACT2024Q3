@@ -3,7 +3,7 @@ import { reduxStore } from '../types'
 import { clearItemData } from '../../services/selectedSlice'
 import { useContext } from 'react'
 import { TEXT_CONTENT } from '../constants'
-import { ThemeContext } from '../../pages/[films&page=id]'
+import { ThemeContext } from '../../pages/films'
 
 export function Selected() {
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)

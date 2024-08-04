@@ -20,6 +20,12 @@ export type FilmObj = {
   imdbId?: string
 }
 
+export type FilmResp = {
+  items: FilmObj[]
+  total: number
+  totalPages: number
+}
+
 export type reduxStore = {
   searchData: { searchData: { value: string; page: number } }
   resultsData: {
