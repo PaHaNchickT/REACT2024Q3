@@ -8,10 +8,10 @@ import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
 import { setPage, setSearchValue } from '../../services/searchSlice'
 import { ChangeEvent, MouseEvent } from 'react'
-import { ErrorPage } from '../error-page/errorPage'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
 import { useSearchParams, usePathname } from 'next/navigation'
+import ErrorPage from '../../pages/404'
 
 export function Results(props: { results: FilmResp }) {
   const selectedItems: number[] = []
@@ -29,24 +29,6 @@ export function Results(props: { results: FilmResp }) {
     dispatch(setPage({ page: +searchParams.get('page')! || 1 }))
     dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
   }
-
-  // updating URL after switching search mode to on/off
-  // useEffect(() => {
-  //   if (pathname) {
-  //     const params = new URLSearchParams(searchParams)
-  //     if (searchData.value === '') {
-  //       params.set('page', searchData.page.toString())
-  //     } else {
-  //       params.set('search', searchData.value)
-  //       params.set('page', searchData.page.toString())
-  //     }
-  //     params.delete('details')
-
-  //     router.push(params.toString() ? `films?${params.toString()}` : 'films')
-
-  //     getData(searchData.value, searchData.page)
-  //   }
-  // }, [searchData, pathname])
 
   if (!props.results.items) return <ErrorPage />
 
