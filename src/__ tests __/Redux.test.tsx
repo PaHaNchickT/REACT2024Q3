@@ -2,7 +2,6 @@ import searchDataSliceReducer, { setSearchValue, setPage } from '../services/sea
 import detailsDataSliceReducer, { setIsClosed, setFilmData } from '../services/detailsSlice'
 import selectedDataSliceReducer, { addItemData, removeItemData, clearItemData } from '../services/selectedSlice'
 
-describe('Redux searchDataSlice', () => {})
 describe('Redux store', () => {
   it('should shange search value with "setSearchValue" action', () => {
     const action = { type: setSearchValue.type, payload: { value: 'test' } }
