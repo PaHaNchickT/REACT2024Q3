@@ -12,7 +12,7 @@ import React from 'react'
 import { Details } from '../components/details/details'
 import { Search } from '../components/search/search'
 import { Selected } from '../components/selected-panel/selected-info'
-// import { API } from '../services/API'
+import { API } from '../services/API'
 // import App from 'next/app'
 // import { FilmResp } from '../components/types'
 
@@ -244,34 +244,34 @@ describe('App errors', () => {
   })
 })
 
-// describe('API', () => {
-//   it('should return right response for "getFilms" request', async () => {
-//     const mockJsonPromise = Promise.resolve(mockAPIstart)
-//     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-//     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+describe('API', () => {
+  it('should return right response for "getFilms" request', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIstart)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
 
-//     let output
-//     await API()
-//       .getFilms({ value: '', page: 1 })
-//       .then((resp) => {
-//         output = resp
-//       })
+    let output
+    await API()
+      .getFilms({ value: '', page: '1' })
+      .then((resp) => {
+        output = resp
+      })
 
-//     expect(output).toEqual(mockAPIstart)
-//   })
+    expect(output).toEqual(mockAPIstart)
+  })
 
-//   it('should return right response for "getFilm" request', async () => {
-//     const mockJsonPromise = Promise.resolve(mockAPIfilmData)
-//     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
-//     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
+  it('should return right response for "getFilm" request', async () => {
+    const mockJsonPromise = Promise.resolve(mockAPIfilmData)
+    const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise })
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise)
 
-//     let output
-//     await API()
-//       .getFilm(999)
-//       .then((resp) => {
-//         output = resp
-//       })
+    let output
+    await API()
+      .getFilm(999)
+      .then((resp) => {
+        output = resp
+      })
 
-//     expect(output).toEqual(mockAPIfilmData)
-//   })
-// })
+    expect(output).toEqual(mockAPIfilmData)
+  })
+})
