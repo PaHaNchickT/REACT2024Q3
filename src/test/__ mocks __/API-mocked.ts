@@ -1,3 +1,5 @@
+import { FilmResp } from '../../components/types'
+
 export const mockAPIstart = {
   items: [
     {
@@ -1274,7 +1276,7 @@ export const mockAPIstart = {
   ],
   total: 40,
   totalPages: 2,
-}
+} as unknown as FilmResp
 
 export const mockAPIempty = {
   items: [],
