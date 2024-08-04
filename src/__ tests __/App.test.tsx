@@ -87,12 +87,6 @@ const fetchMocking = async (isClosed: boolean) => {
 }
 
 describe('Items list', () => {
-  // it('should render full layout correctly', () => {
-  //   fetchMocking(false, false, mockAPIstart)
-
-  //   expect(render(<App />)).toMatchSnapshot()
-  // })
-
   it('should render the specified number of items', () => {
     fetchMocking(false)
 
