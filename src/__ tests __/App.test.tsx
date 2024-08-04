@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { mockAPIempty, mockAPIstart } from '../test/__ mocks __/API-mocked'
 
 import * as reduxHooks from 'react-redux'
 import * as nextHooks from 'next/navigation'
-// import * as detailsActions from '../services/detailsSlice'
+import * as detailsActions from '../services/detailsSlice'
 
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { Results } from '../components/results/results'
@@ -126,30 +126,30 @@ describe('Item', () => {
     expect(item[0].children[1].children[2].textContent === `IMDb: ${currentData.ratingImdb}`).toBeTruthy()
   })
 
-  // it("should update item component isClosed value after it's clicking", async () => {
-  //   let isClosed = false
-  //   fetchMocking(false, false, mockAPIstart)
+  it("should update item component isClosed value after it's clicking", async () => {
+    let isClosed = false
+    fetchMocking(false)
 
-  //   jest.spyOn(detailsActions, 'setIsClosed').mockImplementation((payload) => {
-  //     payload.isClosed = true
-  //     isClosed = true
-  //     return { payload: { isClosed: isClosed }, type: 'detailsData/setIsClosed' }
-  //   })
-  //   render(<Results />)
+    jest.spyOn(detailsActions, 'setIsClosed').mockImplementation((payload) => {
+      payload.isClosed = true
+      isClosed = true
+      return { payload: { isClosed: isClosed }, type: 'detailsData/setIsClosed' }
+    })
+    render(<Results results={mockAPIstart} />)
 
-  //   const item = screen.getAllByTestId('results__item')
-  //   fireEvent.click(item[0])
-  //   fireEvent.click(screen.getAllByTestId('checkbox')[0])
+    const item = screen.getAllByTestId('results__item')
+    fireEvent.click(item[0])
+    fireEvent.click(screen.getAllByTestId('checkbox')[0])
 
-  //   expect(isClosed).toBeTruthy()
-  // })
+    expect(isClosed).toBeTruthy()
+  })
 
-  // it("should render detailed item component after it's clicking", async () => {
-  //   fetchMocking(true, false, mockAPIstart)
+  it("should render detailed item component after it's clicking", async () => {
+    fetchMocking(true)
 
-  //   render(<Results />)
-  //   expect(screen.getByTestId('details__cont')).toBeInTheDocument()
-  // })
+    render(<Results results={mockAPIstart} />)
+    expect(screen.getByTestId('details__cont')).toBeInTheDocument()
+  })
 })
 
 // describe('Detailed item', () => {
