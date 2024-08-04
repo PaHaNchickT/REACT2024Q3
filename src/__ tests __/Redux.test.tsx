@@ -1,6 +1,7 @@
 import searchDataSliceReducer, { setSearchValue, setPage } from '../services/searchSlice'
 import detailsDataSliceReducer, { setIsClosed, setFilmData } from '../services/detailsSlice'
 import selectedDataSliceReducer, { addItemData, removeItemData, clearItemData } from '../services/selectedSlice'
+import themeDataSliceReducer, { setTheme } from '../services/themeSlice'
 
 describe('Redux store', () => {
   it('should shange search value with "setSearchValue" action', () => {
@@ -204,5 +205,21 @@ describe('Redux selectedDataSlice', () => {
     )
 
     expect(result.selectedData.selectedItems).toHaveLength(0)
+  })
+})
+
+describe('Redux themeDataSlice', () => {
+  it('should shange color with "setTheme" action', () => {
+    const action = { type: setTheme.type, payload: 'dark' }
+    const result = themeDataSliceReducer(
+      {
+        themeData: {
+          color: 'light',
+        },
+      },
+      action
+    )
+
+    expect(result.themeData).toEqual({ color: 'dark' })
   })
 })

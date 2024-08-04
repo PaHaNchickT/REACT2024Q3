@@ -13,8 +13,6 @@ import { Details } from '../components/details/details'
 import { Search } from '../components/search/search'
 import { Selected } from '../components/selected-panel/selected-info'
 import { API } from '../services/API'
-// import App from 'next/app'
-// import { FilmResp } from '../components/types'
 
 jest.mock('react-redux')
 jest.mock('next/navigation')
@@ -86,9 +84,6 @@ const fetchMocking = async (isClosed: boolean) => {
     isClosed: isClosed,
     filmId: 999,
   })
-
-  // jest.spyOn(React, 'useState').mockReturnValueOnce([isLoading, () => {}])
-  // jest.spyOn(React, 'useState').mockReturnValueOnce([mock, () => {}])
 }
 
 describe('Items list', () => {
