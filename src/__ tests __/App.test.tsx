@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { mockAPIempty, mockAPIstart } from '../test/__ mocks __/API-mocked'
+import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
 
 import * as reduxHooks from 'react-redux'
 import * as nextHooks from 'next/navigation'
@@ -8,8 +8,8 @@ import * as detailsActions from '../services/detailsSlice'
 
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { Results } from '../components/results/results'
-// import React from 'react'
-// import { Details } from '../components/details/details'
+import React from 'react'
+import { Details } from '../components/details/details'
 // import { Search } from '../components/search/search'
 // import { Selected } from '../components/selected-panel/selected-info'
 // import { API } from '../services/API'
@@ -152,31 +152,35 @@ describe('Item', () => {
   })
 })
 
-// describe('Detailed item', () => {
-//   it('should display a loading indicator while fetching data', async () => {
-//     fetchMocking(true, true, mockAPIstart)
+describe('Detailed item', () => {
+  it('should display a loading indicator while fetching data', async () => {
+    fetchMocking(true)
+    jest.spyOn(React, 'useState').mockReturnValueOnce([true, () => {}])
+    jest.spyOn(React, 'useState').mockReturnValueOnce([mockAPIfilmData, () => {}])
 
-//     render(<Results />)
-//     expect(screen.getAllByTestId('loader__wrapper')[0]).toBeInTheDocument()
-//   })
+    render(<Results results={mockAPIstart} />)
+    expect(screen.getAllByTestId('loader__wrapper')[0]).toBeInTheDocument()
+  })
 
-//   it('should correctly display the detailed item data', async () => {
-//     fetchMocking(true, false, mockAPIfilmData)
+  it('should correctly display the detailed item data', async () => {
+    fetchMocking(true)
+    jest.spyOn(React, 'useState').mockReturnValueOnce([false, () => {}])
+    jest.spyOn(React, 'useState').mockReturnValueOnce([mockAPIfilmData, () => {}])
 
-//     render(<Details closeDetails={() => {}} />)
+    render(<Details closeDetails={() => {}} />)
 
-//     const details = screen.getByTestId('details__cont')
-//     const currentData = mockAPIfilmData.data
+    const details = screen.getByTestId('details__cont')
+    const currentData = mockAPIfilmData.data
 
-//     expect(details.children[2].children[0].textContent === currentData.nameRu).toBeTruthy()
-//     expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
-//     expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
-//     expect(details.children[4].children[1].textContent === 'No information').toBeTruthy()
-//     expect(details.children[6].children[1].textContent === 'No information').toBeTruthy()
-//     expect(details.children[7].children[1].textContent === 'No information').toBeTruthy()
-//     expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
-//   })
-// })
+    expect(details.children[2].children[0].textContent === currentData.nameRu).toBeTruthy()
+    expect(details.children[2].children[1].textContent === currentData.slogan).toBeTruthy()
+    expect(details.children[3]).toHaveAttribute('src', currentData.posterUrlPreview)
+    expect(details.children[4].children[1].textContent === 'No information').toBeTruthy()
+    expect(details.children[6].children[1].textContent === 'No information').toBeTruthy()
+    expect(details.children[7].children[1].textContent === 'No information').toBeTruthy()
+    expect(details.children[8]).toHaveAttribute('href', currentData.webUrl)
+  })
+})
 
 // describe('Search', () => {
 //   it('should change url query after search button clicking', async () => {
