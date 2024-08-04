@@ -1284,6 +1284,10 @@ export const mockAPIempty = {
   totalPages: 0,
 }
 
+export const mockAPIerror = {
+  message: '',
+} as unknown as FilmResp
+
 export const mockAPIfilmData = {
   data: {
     filmId: 430,

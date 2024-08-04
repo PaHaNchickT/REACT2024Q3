@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { mockAPIempty, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
+import { mockAPIempty, mockAPIerror, mockAPIfilmData, mockAPIstart } from '../test/__ mocks __/API-mocked'
 
 import * as reduxHooks from 'react-redux'
 import * as nextHooks from 'next/navigation'
@@ -234,15 +234,15 @@ describe('Selected items', () => {
   })
 })
 
-// describe('App errors', () => {
-//   it('should render error page when app is crashing', async () => {
-//     fetchMocking(false, false, mockAPIstart)
+describe('App errors', () => {
+  it('should render error page when app is crashing', async () => {
+    fetchMocking(false)
 
-//     render(<Results />)
+    render(<Results results={mockAPIerror} />)
 
-//     expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
-//   })
-// })
+    expect(screen.getByTestId('error-page__wrapper')).toBeInTheDocument()
+  })
+})
 
 // describe('API', () => {
 //   it('should return right response for "getFilms" request', async () => {
