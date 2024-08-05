@@ -1,22 +1,24 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Search } from '../../components/search/search'
 import { Results } from '../../components/results/results'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 import store from '../../services/store'
-import { FilmResp } from '../../components/types'
+import { FilmResp, reduxStore } from '../../components/types'
+import { setTheme } from '../../services/themeSlice'
 
 export default function App({ results }: { results: FilmResp }) {
-  const [theme, setTheme] = useState('light')
+  const dispatch = useDispatch()
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
   useEffect(() => {
-    setTheme(localStorage.getItem('paul-theme') || 'light')
+    dispatch(setTheme(localStorage.getItem('paul-theme') || 'light'))
   }, [])
 
   return (
     <Provider store={store}>
-      <div className={`root__wrapper ${theme}`} data-testid={theme}>
+      <div className={`root__wrapper ${theme.color}`} data-testid={theme.color}>
         <Search />
         <Results results={results} />
       </div>
