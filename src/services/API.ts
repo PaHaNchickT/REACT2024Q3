@@ -1,8 +1,8 @@
 export function API() {
-  const getFilms = async (inputData: { value: string; page: number }) => {
+  const getFilms = async (inputData: { value: string; page: string }) => {
     let data
     await fetch(
-      `https://kinopoiskapiunofficial.tech/api/v2.2/films?order=NUM_VOTE&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=3000&keyword=${inputData.value}&page=${inputData.page.toString()}`,
+      `https://kinopoiskapiunofficial.tech/api/v2.2/films?order=NUM_VOTE&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=3000&keyword=${inputData.value}&page=${inputData.page}`,
       {
         method: 'GET',
         headers: {

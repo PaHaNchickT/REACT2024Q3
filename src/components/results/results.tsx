@@ -1,35 +1,28 @@
-import { FilmObj, reduxStore } from '../types'
+import { FilmObj, FilmResp, reduxStore } from '../types'
 import { TEXT_CONTENT } from '../constants'
 import { Pagination } from '../pagination/pagination'
 import { NoResults } from '../no-results/no-results'
 import { numberToArray } from '../../utils/numberToArray'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader } from '../loader/loader'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
 import { setPage, setSearchValue } from '../../services/searchSlice'
-import { ChangeEvent, useContext, useEffect, MouseEvent, useState } from 'react'
-import { ErrorPage } from '../error-page/errorPage'
+import { ChangeEvent, MouseEvent } from 'react'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
-import { API } from '../../services/API'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
-import { ThemeContext } from '../../app/films/client'
+import { useSearchParams, usePathname } from 'next/navigation'
+import ErrorPage from '../../app/404'
 
-export function Results() {
+export function Results(props: { results: FilmResp }) {
   const selectedItems: number[] = []
   const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
-  const { theme } = useContext(ThemeContext)
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
-  const router = useRouter()
   const pathname = usePathname()
-
-  const [results, setResults] = useState({ items: [], total: 0, totalPages: 0 })
-  const [loading, setLoading] = useState(true)
 
   // getting search and page info from URL
   if (pathname) {
@@ -37,34 +30,7 @@ export function Results() {
     dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
   }
 
-  // fetching data
-
-  const getData = async (value: string, page: number) => {
-    setLoading(true)
-    const response = await API().getFilms({ value: value, page: page })
-    setResults(response!)
-    setLoading(false)
-  }
-
-  // updating URL after switching search mode to on/off
-  useEffect(() => {
-    if (pathname) {
-      const params = new URLSearchParams(searchParams)
-      if (searchData.value === '') {
-        params.set('page', searchData.page.toString())
-      } else {
-        params.set('search', searchData.value)
-        params.set('page', searchData.page.toString())
-      }
-      params.delete('details')
-
-      router.push(params.toString() ? `films?${params.toString()}` : 'films')
-
-      getData(searchData.value, searchData.page)
-    }
-  }, [searchData, pathname])
-
-  if (!results.items) return <ErrorPage />
+  if (!props.results.items) return <ErrorPage />
 
   // function for open details section
   const openDetails = (event: MouseEvent) => {
@@ -76,10 +42,6 @@ export function Results() {
         filmId: +(event.currentTarget as HTMLDivElement).id,
       })
     )
-
-    const params = new URLSearchParams(searchParams)
-    params.set('details', (event.currentTarget as HTMLDivElement).id)
-    router.push(params.toString() ? `films?${params.toString()}` : 'films')
   }
 
   // function for close details section
@@ -97,16 +59,12 @@ export function Results() {
         filmId: 0,
       })
     )
-
-    const params = new URLSearchParams(searchParams)
-    params.delete('details')
-    router.push(params.toString() ? `films?${params.toString()}` : 'films')
   }
 
   // function for open/closing selected bar
   const checkboxHandling = (event: ChangeEvent) => {
     let targetItemData
-    results.items.forEach((item: FilmObj) => {
+    props.results.items.forEach((item: FilmObj) => {
       if (item.kinopoiskId === +(event.target as HTMLInputElement).name) targetItemData = item
     })
 
@@ -117,16 +75,16 @@ export function Results() {
     }
   }
 
-  results.items.forEach((defaultItem: FilmObj) => {
+  props.results.items.forEach((defaultItem: FilmObj) => {
     selectedData.selectedItems.forEach((selectedItem) => {
       if (defaultItem === selectedItem) selectedItems.push(defaultItem.kinopoiskId)
     })
   })
 
   // rendering results UI
-  const films = results.items.map((film: FilmObj) => (
+  const films = props.results.items.map((film: FilmObj) => (
     <div
-      className={`results__item ${theme}`}
+      className={`results__item ${theme.color}`}
       data-testid="results__item"
       key={film.kinopoiskId}
       id={film.kinopoiskId.toString()}
@@ -137,7 +95,7 @@ export function Results() {
         alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
         width="200px"
         height="300px"
-        className={theme}
+        className={theme.color}
       />
       <div className="results__item-info">
         <p className="results__item-name">
@@ -159,12 +117,12 @@ export function Results() {
         name={film.kinopoiskId.toString()}
         onChange={(event) => checkboxHandling(event)}
         checked={selectedItems.includes(film.kinopoiskId)}
-        className={theme}
+        className={theme.color}
       ></input>
     </div>
   ))
 
-  const pages = numberToArray(results.totalPages).map((page) => (
+  const pages = numberToArray(props.results.totalPages).map((page) => (
     <Pagination page={page} currentPage={searchData.page} key={page} />
   ))
 
@@ -176,9 +134,7 @@ export function Results() {
     </div>
   )
 
-  if (loading) {
-    resultsUI = <Loader theme="default" />
-  } else if (!results.items.length) {
+  if (!props.results.items.length) {
     resultsUI = <NoResults />
   }
 
