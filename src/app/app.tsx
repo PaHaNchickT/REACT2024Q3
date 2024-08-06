@@ -3,14 +3,14 @@
 import { useEffect } from 'react'
 import { Provider, useDispatch, useSelector } from 'react-redux'
 import dynamic from 'next/dynamic'
-import { FilmInfo, FilmResp, reduxStore } from '../../../components/types'
-import { setTheme } from '../../../services/themeSlice'
-import store from '../../../services/store'
-import { Search } from '../../../components/search/search'
-import { Loader } from '../../../components/loader/loader'
 import { useRouter } from 'next/navigation'
+import { Search } from '../components/search/search'
+import { Loader } from '../components/loader/loader'
+import { FilmInfo, FilmResp, reduxStore } from '../components/types'
+import { setTheme } from '../services/themeSlice'
+import store from '../services/store'
 
-const Results = dynamic(() => import('../../../components/results/results').then((module) => module.Results), {
+const Results = dynamic(() => import('../components/results/results').then((module) => module.Results), {
   ssr: false,
   loading: () => <Loader theme="default" />,
 })

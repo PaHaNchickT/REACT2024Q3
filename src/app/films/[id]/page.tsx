@@ -1,7 +1,7 @@
 import { FilmInfo, FilmResp } from '../../../components/types'
 import { API } from '../../../services/API'
+import App from '../../app'
 import { getFilms } from '../page'
-import App from './client'
 
 export function generateStaticParams() {
   return [{ slug: ['id'] }]

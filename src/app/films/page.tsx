@@ -1,6 +1,6 @@
 import { FilmResp } from '../../components/types'
 import { API } from '../../services/API'
-import App from './client'
+import App from '../app'
 
 export const getFilms = async (query: { page: string; search: string }) => {
   const data = await API().getFilms({ value: query.search, page: query.page })
@@ -20,5 +20,5 @@ export default async function Page({ searchParams }: { searchParams: { page: str
     search: searchParams.search || '',
   })) as unknown as FilmResp
 
-  return <App results={results} />
+  return <App data={{ results: results }} />
 }
