@@ -10,7 +10,7 @@ import { setPage, setSearchValue } from '../../services/searchSlice'
 import { ChangeEvent, MouseEvent } from 'react'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
-import { useSearchParams, usePathname } from 'next/navigation'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import ErrorPage from '../../pages/404'
 
 export function Results(props: { results: FilmResp }) {
@@ -20,6 +20,7 @@ export function Results(props: { results: FilmResp }) {
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
+  const router = useRouter()
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -42,6 +43,10 @@ export function Results(props: { results: FilmResp }) {
         filmId: +(event.currentTarget as HTMLDivElement).id,
       })
     )
+
+    const params = new URLSearchParams(searchParams)
+    params.set('details', (event.currentTarget as HTMLDivElement).id)
+    router.push(params.toString() ? `films?${params.toString()}` : 'films')
   }
 
   // function for close details section
@@ -59,6 +64,10 @@ export function Results(props: { results: FilmResp }) {
         filmId: 0,
       })
     )
+
+    const params = new URLSearchParams(searchParams)
+    params.delete('details')
+    router.push(params.toString() ? `films?${params.toString()}` : 'films')
   }
 
   // function for open/closing selected bar
