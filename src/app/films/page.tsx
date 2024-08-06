@@ -2,10 +2,6 @@ import { FilmResp } from '../../components/types'
 import { API } from '../../services/API'
 import App from './client'
 
-export function generateStaticParams() {
-  return [{ slug: ['films'] }]
-}
-
 export const getData = async (query: { page: string; search: string }) => {
   const data = await API().getFilms({ value: query.search, page: query.page })
 
