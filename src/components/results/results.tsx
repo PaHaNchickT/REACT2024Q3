@@ -6,16 +6,14 @@ import { numberToArray } from '../../utils/numberToArray'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
-import { setPage, setSearchValue } from '../../services/searchSlice'
 import { ChangeEvent, MouseEvent } from 'react'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import ErrorPage from '../../app/not-found'
 
 export function Results({ data }: { data: { results: FilmResp; details?: FilmInfo } }) {
   const selectedItems: number[] = []
-  const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
@@ -23,13 +21,6 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
   const router = useRouter()
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
-  const pathname = usePathname()
-
-  // getting search and page info from URL
-  if (pathname) {
-    dispatch(setPage({ page: +searchParams.get('page')! || 1 }))
-    dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
-  }
 
   if (!data.results.items) return <ErrorPage />
 
@@ -127,9 +118,7 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
     </div>
   ))
 
-  const pages = numberToArray(data.results.totalPages).map((page) => (
-    <Pagination page={page} currentPage={searchData.page} key={page} />
-  ))
+  const pages = numberToArray(data.results.totalPages).map((page) => <Pagination page={page} key={page} />)
 
   let resultsUI = (
     <div className="results__wrapper" onClick={(event) => closeDetails(event)}>
