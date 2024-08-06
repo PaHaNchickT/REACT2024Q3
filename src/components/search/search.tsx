@@ -32,6 +32,8 @@ export function Search() {
   }
 
   const resetSearch = () => {
+    localStorage.removeItem('paul-saved-value')
+
     if (!searchParams.get('search') && searchParams.get('page') === '1') return
     router.push('/films?page=1')
 
