@@ -16,6 +16,8 @@ export function Search() {
 
   const searchButtonHandler = () => {
     if (inputValue !== '') {
+      localStorage.setItem('paul-saved-value', inputValue)
+
       params.set('search', inputValue)
       params.set('page', '1')
       params.delete('details')
