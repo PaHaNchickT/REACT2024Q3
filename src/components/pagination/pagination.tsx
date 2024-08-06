@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux'
 import { reduxStore } from '../types'
 import Link from 'next/link'
 
-export function Pagination(props: { page: number; currentPage: number }) {
+export function Pagination(props: { page: number }) {
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
   let buttonClassname = 'pendingBtn'
-  if (props.page === +props.currentPage) buttonClassname = 'activeBtn'
+  if (props.page === +searchParams.get('page')!) buttonClassname = 'activeBtn'
 
   return (
     <li>

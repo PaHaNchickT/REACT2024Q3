@@ -1,4 +1,4 @@
-import { FilmObj, FilmResp, reduxStore } from '../types'
+import { FilmInfo, FilmObj, FilmResp, reduxStore } from '../types'
 import { TEXT_CONTENT } from '../constants'
 import { Pagination } from '../pagination/pagination'
 import { NoResults } from '../no-results/no-results'
@@ -6,16 +6,14 @@ import { numberToArray } from '../../utils/numberToArray'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
-import { setPage, setSearchValue } from '../../services/searchSlice'
 import { ChangeEvent, MouseEvent } from 'react'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import ErrorPage from '../../pages/404'
 
-export function Results(props: { results: FilmResp }) {
+export function Results({ data }: { data: { results: FilmResp; details?: FilmInfo } }) {
   const selectedItems: number[] = []
-  const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
@@ -23,15 +21,8 @@ export function Results(props: { results: FilmResp }) {
   const router = useRouter()
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
-  const pathname = usePathname()
 
-  // getting search and page info from URL
-  if (pathname) {
-    dispatch(setPage({ page: +searchParams.get('page')! || 1 }))
-    dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
-  }
-
-  if (!props.results.items) return <ErrorPage />
+  if (!data.results.items) return <ErrorPage />
 
   // function for open details section
   const openDetails = (event: MouseEvent) => {
@@ -44,9 +35,7 @@ export function Results(props: { results: FilmResp }) {
       })
     )
 
-    const params = new URLSearchParams(searchParams)
-    params.set('details', (event.currentTarget as HTMLDivElement).id)
-    router.push(params.toString() ? `films?${params.toString()}` : 'films')
+    router.push(`films/${(event.currentTarget as HTMLDivElement).id}?${searchParams.toString()}`)
   }
 
   // function for close details section
@@ -65,15 +54,13 @@ export function Results(props: { results: FilmResp }) {
       })
     )
 
-    const params = new URLSearchParams(searchParams)
-    params.delete('details')
-    router.push(params.toString() ? `films?${params.toString()}` : 'films')
+    router.back()
   }
 
   // function for open/closing selected bar
   const checkboxHandling = (event: ChangeEvent) => {
     let targetItemData
-    props.results.items.forEach((item: FilmObj) => {
+    data.results.items.forEach((item: FilmObj) => {
       if (item.kinopoiskId === +(event.target as HTMLInputElement).name) targetItemData = item
     })
 
@@ -84,14 +71,14 @@ export function Results(props: { results: FilmResp }) {
     }
   }
 
-  props.results.items.forEach((defaultItem: FilmObj) => {
+  data.results.items.forEach((defaultItem: FilmObj) => {
     selectedData.selectedItems.forEach((selectedItem) => {
       if (defaultItem === selectedItem) selectedItems.push(defaultItem.kinopoiskId)
     })
   })
 
   // rendering results UI
-  const films = props.results.items.map((film: FilmObj) => (
+  const films = data.results.items.map((film: FilmObj) => (
     <div
       className={`results__item ${theme.color}`}
       data-testid="results__item"
@@ -131,9 +118,7 @@ export function Results(props: { results: FilmResp }) {
     </div>
   ))
 
-  const pages = numberToArray(props.results.totalPages).map((page) => (
-    <Pagination page={page} currentPage={searchData.page} key={page} />
-  ))
+  const pages = numberToArray(data.results.totalPages).map((page) => <Pagination page={page} key={page} />)
 
   let resultsUI = (
     <div className="results__wrapper" onClick={(event) => closeDetails(event)}>
@@ -143,14 +128,12 @@ export function Results(props: { results: FilmResp }) {
     </div>
   )
 
-  if (!props.results.items.length) {
-    resultsUI = <NoResults />
-  }
+  if (!data.results.items.length) resultsUI = <NoResults />
 
   return (
     <section className="results__cont">
       {resultsUI}
-      {detailsData.isClosed && <Details closeDetails={closeDetails} />}
+      {detailsData.isClosed && <Details results={data.details} closeDetails={closeDetails} />}
     </section>
   )
 }

@@ -1,30 +1,31 @@
-import { API } from '../../services/API'
-import { Search } from '../../components/search/search'
 import { useEffect, useState } from 'react'
-import { Results } from '../../components/results/results'
-import { FilmResp, reduxStore } from '../../components/types'
 import { Loader } from '../../components/loader/loader'
 import { Router } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTheme } from '../../services/themeSlice'
+import { API } from '../../services/API'
+import { FilmResp, reduxStore } from '../../components/types'
+import { Search } from '../../components/search/search'
+import { Results } from '../../components/results/results'
 
 export const getServerSideProps = async (context: { query: { page?: string; search?: string } }) => {
-  const data = await API().getFilms({ value: context.query.search || '', page: context.query.page || '1' })
+  const results = await API().getFilms({ value: context.query.search || '', page: context.query.page || '1' })
 
-  if (!data) {
+  if (!results) {
     return {
       notFound: true,
     }
   }
 
   return {
-    props: { results: data },
+    props: { results: results },
   }
 }
 
 const App = ({ results }: { results: FilmResp }) => {
   const dispatch = useDispatch()
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
+  const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const App = ({ results }: { results: FilmResp }) => {
   return (
     <div className={`root__wrapper ${theme.color}`}>
       <Search />
-      {loading ? <Loader theme="default" /> : <Results results={results} />}
+      {loading && !detailsData.isClosed ? <Loader theme="default" /> : <Results data={{ results: results }} />}
     </div>
   )
 }

@@ -21,7 +21,7 @@
 .error-page__cont > div {
   width: 200px;
   height: 200px;
-  background-image: url('../../assets/sad-smile.png');
+  background-image: url('../assets/sad-smile.png');
   background-position: 50%;
   background-size: 200px;
 }
