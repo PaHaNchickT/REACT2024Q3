@@ -10,13 +10,14 @@ import { ChangeEvent, MouseEvent } from 'react'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { itemsToArray } from '../../utils/itemsToArray'
 import ErrorPage from '../../app/not-found'
 
 export function Results({ data }: { data: { results: FilmResp; details?: FilmInfo } }) {
-  const selectedItems: number[] = []
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
-  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
+  const selectedItems: number[] = itemsToArray(selectedData.selectedItems)
 
   const router = useRouter()
   const dispatch = useDispatch()
