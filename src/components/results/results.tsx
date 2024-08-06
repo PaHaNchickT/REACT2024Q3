@@ -11,7 +11,7 @@ import { ChangeEvent, MouseEvent } from 'react'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
-import ErrorPage from '../../app/404'
+import ErrorPage from '../../app/not-found'
 
 export function Results(props: { results: FilmResp }) {
   const selectedItems: number[] = []

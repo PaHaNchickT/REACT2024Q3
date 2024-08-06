@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { TEXT_CONTENT } from '../components/constants'
 import { useDispatch, useSelector } from 'react-redux'
