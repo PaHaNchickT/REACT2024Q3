@@ -7,6 +7,7 @@ import { API } from '../../services/API'
 import { FilmResp, reduxStore } from '../../components/types'
 import { Search } from '../../components/search/search'
 import { Results } from '../../components/results/results'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export const getServerSideProps = async (context: { query: { page?: string; search?: string } }) => {
   const results = await API().getFilms({ value: context.query.search || '', page: context.query.page || '1' })
@@ -23,13 +24,16 @@ export const getServerSideProps = async (context: { query: { page?: string; sear
 }
 
 const App = ({ results }: { results: FilmResp }) => {
+  const router = useRouter()
   const dispatch = useDispatch()
+  const searchParams = useSearchParams()
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     dispatch(setTheme(localStorage.getItem('paul-theme') || 'light'))
+    router.push(`/films?${(searchParams.toString() && searchParams.toString()) || 'page=1'}`)
 
     const start = () => {
       setLoading(true)

@@ -20,8 +20,7 @@ export function Search() {
 
       params.set('search', inputValue)
       params.set('page', '1')
-      params.delete('details')
-      router.push(params.toString() ? `films?${params.toString()}` : 'films')
+      router.push(`/films?${params.toString()}`)
 
       dispatch(
         setIsClosed({
