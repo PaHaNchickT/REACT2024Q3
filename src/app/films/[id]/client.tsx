@@ -8,6 +8,7 @@ import { setTheme } from '../../../services/themeSlice'
 import store from '../../../services/store'
 import { Search } from '../../../components/search/search'
 import { Loader } from '../../../components/loader/loader'
+import { useRouter } from 'next/navigation'
 
 const Results = dynamic(() => import('../../../components/results/results').then((module) => module.Results), {
   ssr: false,
@@ -15,11 +16,14 @@ const Results = dynamic(() => import('../../../components/results/results').then
 })
 
 export default function App({ data }: { data: { results: FilmResp; details?: FilmInfo } }) {
+  const router = useRouter()
   const dispatch = useDispatch()
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
+  const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
 
   useEffect(() => {
     dispatch(setTheme(localStorage.getItem('paul-theme') || 'light'))
+    if (!detailsData.isClosed) router.push('/films?page=1')
   }, [])
 
   return (
