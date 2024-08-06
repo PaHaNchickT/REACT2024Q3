@@ -24,7 +24,11 @@ export function Details(props: { results?: FilmInfo; closeDetails: (event: Mouse
         src={props.results.data.posterUrlPreview}
         alt={`${props.results.data.nameEn || props.results.data.nameOriginal || props.results.data.nameRu} cover`}
       />
-      <div className={`details__close ${theme.color}`} onClick={(event) => props.closeDetails(event)}></div>
+      <div
+        className={`details__close ${theme.color}`}
+        data-testid="details__close"
+        onClick={(event) => props.closeDetails(event)}
+      ></div>
       <div className="details__title">
         <h2>{props.results.data.nameEn || props.results.data.nameOriginal || props.results.data.nameRu}</h2>
         <p>{props.results.data.slogan}</p>

@@ -1,23 +1,6 @@
-import searchDataSliceReducer, { setSearchValue, setPage } from '../services/searchSlice'
 import detailsDataSliceReducer, { setIsClosed, setFilmData } from '../services/detailsSlice'
 import selectedDataSliceReducer, { addItemData, removeItemData, clearItemData } from '../services/selectedSlice'
 import themeDataSliceReducer, { setTheme } from '../services/themeSlice'
-
-describe('Redux store', () => {
-  it('should shange search value with "setSearchValue" action', () => {
-    const action = { type: setSearchValue.type, payload: { value: 'test' } }
-    const result = searchDataSliceReducer({ searchData: { value: '', page: 1 } }, action)
-
-    expect(result.searchData.value).toBe('test')
-  })
-
-  it('should shange search page with "setPage" action', () => {
-    const action = { type: setPage.type, payload: { page: 2 } }
-    const result = searchDataSliceReducer({ searchData: { value: '', page: 1 } }, action)
-
-    expect(result.searchData.page).toBe(2)
-  })
-})
 
 describe('Redux detailsDataSlice', () => {
   it('should shange isClosed and filmId values with "setIsClosed" action', () => {

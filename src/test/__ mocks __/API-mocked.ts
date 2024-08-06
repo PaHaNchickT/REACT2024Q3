@@ -1,4 +1,4 @@
-import { FilmResp } from '../../components/types'
+import { FilmInfo, FilmResp } from '../../components/types'
 
 export const mockAPIstart = {
   items: [
@@ -1377,7 +1377,7 @@ export const mockAPIfilmData = {
   externalId: {
     imdbId: 'tt0126029',
   },
-}
+} as unknown as FilmInfo
 
 export const mockAPIsearch = {
   items: [

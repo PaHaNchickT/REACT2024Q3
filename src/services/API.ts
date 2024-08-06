@@ -10,13 +10,9 @@ export function API() {
           'Content-Type': 'application/json',
         },
       }
-    )
-      .then((resp) => {
-        data = resp.json()
-      })
-      .catch((err) => {
-        console.log(err.text)
-      })
+    ).then((resp) => {
+      data = resp.json()
+    })
 
     return data
   }
@@ -29,13 +25,9 @@ export function API() {
         'X-API-KEY': 'fe77bc0c-1287-4d70-adb2-d5f3b64ee3e7',
         'Content-Type': 'application/json',
       },
+    }).then((resp) => {
+      data = resp.json()
     })
-      .then((resp) => {
-        data = resp.json()
-      })
-      .catch((err) => {
-        console.log(err.text)
-      })
 
     return data
   }
