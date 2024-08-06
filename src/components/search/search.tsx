@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxStore } from '../types'
 import { setTheme } from '../../services/themeSlice'
+import { setIsClosed } from '../../services/detailsSlice'
 
 export function Search() {
   const searchParams = useSearchParams()
@@ -19,12 +20,26 @@ export function Search() {
       params.set('page', '1')
       params.delete('details')
       router.push(params.toString() ? `films?${params.toString()}` : 'films')
+
+      dispatch(
+        setIsClosed({
+          isClosed: false,
+          filmId: 0,
+        })
+      )
     }
   }
 
   const resetSearch = () => {
     if (!searchParams.get('search') && searchParams.get('page') === '1') return
     router.push('/films?page=1')
+
+    dispatch(
+      setIsClosed({
+        isClosed: false,
+        filmId: 0,
+      })
+    )
   }
 
   const themeSwapping = () => {
