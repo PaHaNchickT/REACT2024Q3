@@ -27,13 +27,13 @@ export function Details(props: { closeDetails: (event: MouseEvent<HTMLDivElement
         src={results.data.posterUrlPreview}
         alt={`${results.data.nameEn || results.data.nameOriginal || results.data.nameRu} cover`}
       />
-      <div className={`details__close ${theme}`} onClick={(event) => props.closeDetails(event)}></div>
+      <div className={`details__close ${theme.color}`} onClick={(event) => props.closeDetails(event)}></div>
       <div className="details__title">
         <h2>{results.data.nameEn || results.data.nameOriginal || results.data.nameRu}</h2>
         <p>{results.data.slogan}</p>
       </div>
       <img
-        className={`details__cover ${theme}`}
+        className={`details__cover ${theme.color}`}
         src={results.data.posterUrlPreview}
         alt={`${results.data.nameEn || results.data.nameOriginal || results.data.nameRu} cover`}
         width="200px"
