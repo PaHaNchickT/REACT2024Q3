@@ -20,6 +20,13 @@ export function Search() {
       params.set('page', '1')
       params.delete('details')
       router.push(params.toString() ? `films?${params.toString()}` : 'films')
+
+      dispatch(
+        setIsClosed({
+          isClosed: false,
+          filmId: 0,
+        })
+      )
     }
   }
 
