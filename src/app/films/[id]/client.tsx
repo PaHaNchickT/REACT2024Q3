@@ -1,20 +1,20 @@
 'use client'
 
 import { useEffect } from 'react'
-import { Search } from '../../components/search/search'
 import { Provider, useDispatch, useSelector } from 'react-redux'
-import store from '../../services/store'
-import { FilmResp, reduxStore } from '../../components/types'
-import { setTheme } from '../../services/themeSlice'
 import dynamic from 'next/dynamic'
-import { Loader } from '../../components/loader/loader'
+import { FilmInfo, FilmResp, reduxStore } from '../../../components/types'
+import { setTheme } from '../../../services/themeSlice'
+import store from '../../../services/store'
+import { Search } from '../../../components/search/search'
+import { Loader } from '../../../components/loader/loader'
 
-const Results = dynamic(() => import('../../components/results/results').then((module) => module.Results), {
+const Results = dynamic(() => import('../../../components/results/results').then((module) => module.Results), {
   ssr: false,
   loading: () => <Loader theme="default" />,
 })
 
-export default function App({ results }: { results: FilmResp }) {
+export default function App({ data }: { data: { results: FilmResp; details?: FilmInfo } }) {
   const dispatch = useDispatch()
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
@@ -26,7 +26,7 @@ export default function App({ results }: { results: FilmResp }) {
     <Provider store={store}>
       <div className={`root__wrapper ${theme.color}`} data-testid={theme.color}>
         <Search />
-        <Results data={{ results: results }} />
+        <Results data={data} />
       </div>
     </Provider>
   )

@@ -2,7 +2,7 @@ import { FilmResp } from '../../components/types'
 import { API } from '../../services/API'
 import App from './client'
 
-export const getData = async (query: { page: string; search: string }) => {
+export const getFilms = async (query: { page: string; search: string }) => {
   const data = await API().getFilms({ value: query.search, page: query.page })
 
   if (!data) {
@@ -15,7 +15,7 @@ export const getData = async (query: { page: string; search: string }) => {
 }
 
 export default async function Page({ searchParams }: { searchParams: { page: string; search: string } }) {
-  const results = (await getData({
+  const results = (await getFilms({
     page: searchParams.page || '1',
     search: searchParams.search || '',
   })) as unknown as FilmResp
