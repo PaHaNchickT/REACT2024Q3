@@ -8,7 +8,6 @@ const Redirecting = () => {
   const router = useRouter()
 
   useEffect(() => {
-    router.push('/films?page=1')
     if (localStorage.getItem('paul-saved-value')) {
       router.push(`/films?page=1&search=${localStorage.getItem('paul-saved-value')}`)
     } else {
