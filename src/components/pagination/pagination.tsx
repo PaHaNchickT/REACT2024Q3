@@ -4,8 +4,6 @@ import { useSearchParams } from '@remix-run/react'
 
 export function Pagination(props: { page: number }) {
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
-  // const pathname = usePathname()
-  const pathname = 'films'
   const [searchParams] = useSearchParams()
 
   let buttonClassname = 'pendingBtn'
@@ -14,7 +12,7 @@ export function Pagination(props: { page: number }) {
   return (
     <li>
       <a
-        href={`${pathname}?page=${props.page}${(searchParams.get('search') && `&search=${searchParams.get('search')}`) || ''}`}
+        href={`films?page=${props.page}${(searchParams.get('search') && `&search=${searchParams.get('search')}`) || ''}`}
         id={props.page.toString()}
         className={`${buttonClassname} ${theme.color}`}
         data-testid="pendingBtn"
