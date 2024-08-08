@@ -1,12 +1,11 @@
-import { useSelector } from 'react-redux'
-import { reduxStore } from '../types'
+import { useSearchParams } from 'next/navigation'
 
 export function NoResults() {
-  const currentValue = useSelector((state: reduxStore) => state.searchData.searchData.value)
+  const searchParams = useSearchParams()
 
   return (
     <div className="results__stub" data-testid="results__stub">
-      <h2>{`No results for "${currentValue}"`}</h2>
+      <h2>{`No results for "${searchParams.get('search')}"`}</h2>
     </div>
   )
 }
