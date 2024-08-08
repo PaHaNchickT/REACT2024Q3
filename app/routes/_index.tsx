@@ -12,11 +12,8 @@ export default function Redirecting() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (localStorage.getItem('paul-saved-value')) {
-      navigate(`/films?page=1&search=${localStorage.getItem('paul-saved-value')}`)
-    } else {
-      navigate('/films?page=1')
-    }
+    const savedValue = localStorage.getItem('paul-saved-value')
+    savedValue ? navigate(`/films?page=1&search=${savedValue}`) : navigate('/films?page=1')
   }, [])
 
   return <Loader theme="default" />
