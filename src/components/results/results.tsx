@@ -36,7 +36,7 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
       })
     )
 
-    navigate(`films/${(event.currentTarget as HTMLDivElement).id}?${searchParams.toString()}`)
+    navigate(`${(event.currentTarget as HTMLDivElement).id}?${searchParams.toString()}`)
   }
 
   // function for close details section
@@ -55,7 +55,7 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
       })
     )
 
-    navigate(`films?${searchParams.toString()}`)
+    navigate(-1)
   }
 
   // function for open/closing selected bar
