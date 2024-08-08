@@ -1,47 +1,29 @@
-import { reduxStore } from '../types'
+import { FilmInfo, FilmObj, FilmResp, reduxStore } from '../types'
 import { TEXT_CONTENT } from '../constants'
-
-import './results.css'
 import { Pagination } from '../pagination/pagination'
 import { NoResults } from '../no-results/no-results'
 import { numberToArray } from '../../utils/numberToArray'
-import { useGetFilmsQuery } from '../../services/API'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader } from '../loader/loader'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
-import { useSearchParams } from 'react-router-dom'
-import { setPage, setSearchValue } from '../../services/searchSlice'
-import { ChangeEvent, useContext, useEffect, MouseEvent } from 'react'
-import { ErrorPage } from '../error-page/errorPage'
+import { ChangeEvent, MouseEvent } from 'react'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
-import { ThemeContext } from '../../App'
-import { setResultsData } from '../../services/resultsSlice'
+import { itemsToArray } from '../../utils/itemsToArray'
+import ErrorPage from '../error-page/errorPage'
+import { useNavigate, useSearchParams } from '@remix-run/react'
 
-export function Results() {
-  const selectedItems: number[] = []
-  const searchData = useSelector((state: reduxStore) => state.searchData.searchData)
+export function Results({ data }: { data: { results: FilmResp; details?: FilmInfo } }) {
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
-  const [searchParams, setSearchParams] = useSearchParams()
-  const { theme } = useContext(ThemeContext)
+  const selectedItems: number[] = itemsToArray(selectedData.selectedItems)
+
+  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
 
-  // getting search and page info from URL
-  dispatch(setPage({ page: +searchParams.get('page')! || 1 }))
-  dispatch(setSearchValue({ value: searchParams.get('search') || '' }))
-
-  // fetching data
-  const {
-    data = { items: [], total: 0, totalPages: 0 },
-    isFetching,
-    error,
-  } = useGetFilmsQuery(`keyword=${searchData.value}&page=${searchData.page}`)
-
-  if (error) console.log(error)
-
-  dispatch(setResultsData(data))
+  if (!data.results.items) return <ErrorPage />
 
   // function for open details section
   const openDetails = (event: MouseEvent) => {
@@ -54,12 +36,7 @@ export function Results() {
       })
     )
 
-    setSearchParams(
-      Object.assign(Object.fromEntries(searchParams), {
-        page: searchData.page.toString(),
-        details: (event.currentTarget as HTMLDivElement).id,
-      })
-    )
+    navigate(`films/${(event.currentTarget as HTMLDivElement).id}?${searchParams.toString()}`)
   }
 
   // function for close details section
@@ -78,15 +55,13 @@ export function Results() {
       })
     )
 
-    setSearchParams(
-      Object.fromEntries(Object.entries(Object.fromEntries(searchParams)).filter(([key]) => key !== 'details'))
-    )
+    navigate(`films?${searchParams.toString()}`)
   }
 
   // function for open/closing selected bar
   const checkboxHandling = (event: ChangeEvent) => {
     let targetItemData
-    data.items.forEach((item) => {
+    data.results.items.forEach((item: FilmObj) => {
       if (item.kinopoiskId === +(event.target as HTMLInputElement).name) targetItemData = item
     })
 
@@ -97,31 +72,16 @@ export function Results() {
     }
   }
 
-  data.items.forEach((defaultItem) => {
+  data.results.items.forEach((defaultItem: FilmObj) => {
     selectedData.selectedItems.forEach((selectedItem) => {
       if (defaultItem === selectedItem) selectedItems.push(defaultItem.kinopoiskId)
     })
   })
 
-  // updating URL after switching search mode to on/off
-  useEffect(() => {
-    let queryParams
-
-    if (searchData.value === '') {
-      queryParams = {
-        page: searchData.page.toString(),
-      }
-    } else {
-      queryParams = { search: searchData.value, page: searchData.page.toString() }
-    }
-
-    setSearchParams(queryParams)
-  }, [searchData.value])
-
   // rendering results UI
-  const films = data.items.map((film) => (
+  const films = data.results.items.map((film: FilmObj) => (
     <div
-      className={`results__item ${theme}`}
+      className={`results__item ${theme.color}`}
       data-testid="results__item"
       key={film.kinopoiskId}
       id={film.kinopoiskId.toString()}
@@ -132,7 +92,7 @@ export function Results() {
         alt={`${film.nameEn || film.nameOriginal || film.nameRu} cover`}
         width="200px"
         height="300px"
-        className={theme}
+        className={theme.color}
       />
       <div className="results__item-info">
         <p className="results__item-name">
@@ -154,14 +114,12 @@ export function Results() {
         name={film.kinopoiskId.toString()}
         onChange={(event) => checkboxHandling(event)}
         checked={selectedItems.includes(film.kinopoiskId)}
-        className={theme}
+        className={theme.color}
       ></input>
     </div>
   ))
 
-  const pages = numberToArray(data.totalPages).map((page) => (
-    <Pagination page={page} currentPage={searchData.page} key={page} />
-  ))
+  const pages = numberToArray(data.results.totalPages).map((page) => <Pagination page={page} key={page} />)
 
   let resultsUI = (
     <div className="results__wrapper" onClick={(event) => closeDetails(event)}>
@@ -171,18 +129,12 @@ export function Results() {
     </div>
   )
 
-  if (isFetching) {
-    resultsUI = <Loader theme="default" />
-  } else if (error) {
-    resultsUI = <ErrorPage />
-  } else if (!data.items.length) {
-    resultsUI = <NoResults />
-  }
+  if (!data.results.items.length) resultsUI = <NoResults />
 
   return (
     <section className="results__cont">
       {resultsUI}
-      {detailsData.isClosed && <Details closeDetails={closeDetails} />}
+      {detailsData.isClosed && <Details results={data.details} closeDetails={closeDetails} />}
     </section>
   )
 }

@@ -1,14 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
-import './selected-info.css'
 import { reduxStore } from '../types'
 import { clearItemData } from '../../services/selectedSlice'
-import { useContext } from 'react'
-import { ThemeContext } from '../../App'
 import { TEXT_CONTENT } from '../constants'
 
 export function Selected() {
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
-  const { theme } = useContext(ThemeContext)
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const dispatch = useDispatch()
 
   const outputData = ['id;name;year;IMDb raiting;Kinopoisk raiting;project type;poster URL', '\n']
@@ -29,13 +26,13 @@ export function Selected() {
   const blob = new Blob([...outputData], { type: 'text/csv;charset=utf-8' })
 
   return (
-    <div className={`selected-cont ${theme}`} data-family="selected-bar" data-testid="selected-bar">
+    <div className={`selected-cont ${theme.color}`} data-family="selected-bar" data-testid="selected-bar">
       <p data-family="selected-bar">
         <span data-family="selected-bar">{selectedData.selectedItems.length.toString()}</span>items are selected
       </p>
       <div className="selected__buttons-cont" data-family="selected-bar">
         <button
-          className={theme}
+          className={theme.color}
           onClick={() => dispatch(clearItemData())}
           data-family="selected-bar"
           data-testid="selected-unselect-btn"
@@ -43,7 +40,7 @@ export function Selected() {
           {TEXT_CONTENT.barUnselectBtn}
         </button>
         <a
-          className={theme}
+          className={theme.color}
           href={window.URL.createObjectURL(blob)}
           download={`${selectedData.selectedItems.length}_films`}
           data-family="selected-bar"

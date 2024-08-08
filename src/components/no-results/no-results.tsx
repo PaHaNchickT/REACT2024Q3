@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-import './no-results.css'
 import { reduxStore } from '../types'
 
 export function NoResults() {

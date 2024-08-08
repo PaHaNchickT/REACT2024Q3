@@ -1,25 +1,26 @@
-import { Link, useLocation } from 'react-router-dom'
-import './pagination.css'
-import { useContext } from 'react'
-import { ThemeContext } from '../../App'
+import { useSelector } from 'react-redux'
+import { reduxStore } from '../types'
+import { useSearchParams } from '@remix-run/react'
 
-export function Pagination(props: { page: number; currentPage: number }) {
-  const { theme } = useContext(ThemeContext)
-  const location = useLocation()
+export function Pagination(props: { page: number }) {
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
+  // const pathname = usePathname()
+  const pathname = 'films'
+  const [searchParams] = useSearchParams()
 
   let buttonClassname = 'pendingBtn'
-  if (props.page === +props.currentPage) buttonClassname = 'activeBtn'
+  if (props.page === +searchParams.get('page')!) buttonClassname = 'activeBtn'
 
   return (
     <li>
-      <Link
-        to={`${location.pathname}${location.search.split('page=')[0]}page=${props.page}`}
+      <a
+        href={`${pathname}?page=${props.page}${(searchParams.get('search') && `&search=${searchParams.get('search')}`) || ''}`}
         id={props.page.toString()}
-        className={`${buttonClassname} ${theme}`}
+        className={`${buttonClassname} ${theme.color}`}
         data-testid="pendingBtn"
       >
         {props.page}
-      </Link>
+      </a>
     </li>
   )
 }

@@ -1,42 +1,68 @@
-import { useContext, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TEXT_CONTENT } from '../constants'
-
-import './search.css'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { ThemeContext } from '../../App'
+import { useDispatch, useSelector } from 'react-redux'
+import { reduxStore } from '../types'
+import { setTheme } from '../../services/themeSlice'
+import { setIsClosed } from '../../services/detailsSlice'
+import { useNavigate, useSearchParams } from '@remix-run/react'
 
 export function Search() {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [inputValue, setInputValue] = useState(searchParams.get('search') || '')
-  const { theme, setTheme } = useContext(ThemeContext)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
+  const params = new URLSearchParams(searchParams)
+  const [inputValue, setInputValue] = useState('')
+  const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
   const searchButtonHandler = () => {
-    if (inputValue !== '')
-      setSearchParams({
-        search: inputValue,
-        page: '1',
-      })
+    if (inputValue !== '') {
+      localStorage.setItem('paul-saved-value', inputValue)
+
+      params.set('search', inputValue)
+      params.set('page', '1')
+      params.delete('details')
+      navigate(params.toString() ? `films?${params.toString()}` : 'films')
+
+      dispatch(
+        setIsClosed({
+          isClosed: false,
+          filmId: 0,
+        })
+      )
+    }
   }
 
   const resetSearch = () => {
-    if (!searchParams.get('search')) return
-    navigate('/')
+    localStorage.removeItem('paul-saved-value')
+
+    if (!searchParams.get('search') && searchParams.get('page') === '1') return
+    navigate('/films?page=1')
+
+    dispatch(
+      setIsClosed({
+        isClosed: false,
+        filmId: 0,
+      })
+    )
   }
 
   const themeSwapping = () => {
-    if (theme === 'light') {
-      setTheme('dark')
+    if (theme.color === 'light') {
+      dispatch(setTheme('dark'))
       localStorage.setItem('paul-theme', 'dark')
     } else {
-      setTheme('light')
+      dispatch(setTheme('light'))
       localStorage.setItem('paul-theme', 'light')
     }
   }
 
+  useEffect(() => {
+    setInputValue(searchParams.get('search') || '')
+  }, [searchParams])
+
   return (
     <div className="search__cont">
-      <button className={theme} onClick={resetSearch}>
+      <button className={theme.color} onClick={resetSearch}>
         {TEXT_CONTENT.btnHome}
       </button>
       <form className="search__panel-wrapper" onSubmit={(event) => event.preventDefault()}>
@@ -48,12 +74,16 @@ export function Search() {
             setInputValue(event.target.value)
           }}
         />
-        <button className={theme} type="submit" onClick={searchButtonHandler}>
+        <button className={theme.color} type="submit" onClick={searchButtonHandler}>
           {TEXT_CONTENT.btnSearch}
         </button>
       </form>
-      <div className={`search__theme-wrapper ${theme}`} data-testid="search__theme-wrapper" onClick={themeSwapping}>
-        <div className={`search__theme-btn ${theme}`}></div>
+      <div
+        className={`search__theme-wrapper ${theme.color}`}
+        data-testid="search__theme-wrapper"
+        onClick={themeSwapping}
+      >
+        <div className={`search__theme-btn ${theme.color}`} data-testid={theme.color || 'light'}></div>
       </div>
     </div>
   )

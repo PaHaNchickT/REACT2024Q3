@@ -1,3 +1,5 @@
+import { FilmInfo, FilmResp } from '../../components/types'
+
 export const mockAPIstart = {
   items: [
     {
@@ -1274,13 +1276,17 @@ export const mockAPIstart = {
   ],
   total: 40,
   totalPages: 2,
-}
+} as unknown as FilmResp
 
 export const mockAPIempty = {
   items: [],
   total: 0,
   totalPages: 0,
 }
+
+export const mockAPIerror = {
+  message: '',
+} as unknown as FilmResp
 
 export const mockAPIfilmData = {
   data: {
@@ -1371,7 +1377,7 @@ export const mockAPIfilmData = {
   externalId: {
     imdbId: 'tt0126029',
   },
-}
+} as unknown as FilmInfo
 
 export const mockAPIsearch = {
   items: [
