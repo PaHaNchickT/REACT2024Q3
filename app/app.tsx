@@ -17,7 +17,7 @@ export default function App({ data }: { data: { results: FilmResp; details?: Fil
 
     if (!detailsData.isClosed) {
       setSearchParams(
-        `page=${searchParams.get('page')}${(searchParams.get('search') && `&search=${searchParams.get('search')}`) || ''}`
+        `page=${searchParams.get('page') || '1'}${(searchParams.get('search') && `&search=${searchParams.get('search')}`) || ''}`
       )
     }
   }, [])
