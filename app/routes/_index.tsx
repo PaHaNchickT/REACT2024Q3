@@ -1,45 +1,25 @@
 import type { MetaFunction } from '@remix-run/node'
+import { useEffect } from 'react'
+import { Loader } from 'src/components/loader/loader'
+import { useNavigate } from '@remix-run/react'
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'New Remix App' }, { name: 'description', content: 'Welcome to Remix!' }]
+  return [
+    { title: 'Kinomania' },
+    { name: 'description', content: 'Here you can find information about favorite movies and tv series' },
+  ]
 }
 
-export default function Index() {
-  return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
-  )
+export default function Redirecting() {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (localStorage.getItem('paul-saved-value')) {
+      navigate(`/films?page=1&search=${localStorage.getItem('paul-saved-value')}`)
+    } else {
+      navigate('/films?page=1')
+    }
+  }, [])
+
+  return <Loader theme="default" />
 }
