@@ -9,19 +9,14 @@ import { useNavigate, useSearchParams } from '@remix-run/react'
 export function Search() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [searchParams] = useSearchParams()
-  const params = new URLSearchParams(searchParams)
+  const [searchParams, setSearchParams] = useSearchParams()
   const [inputValue, setInputValue] = useState('')
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
   const searchButtonHandler = () => {
     if (inputValue !== '') {
       localStorage.setItem('paul-saved-value', inputValue)
-
-      params.set('search', inputValue)
-      params.set('page', '1')
-      params.delete('details')
-      navigate(params.toString() ? `films?${params.toString()}` : 'films')
+      setSearchParams(`?page=1&search=${inputValue}`)
 
       dispatch(
         setIsClosed({

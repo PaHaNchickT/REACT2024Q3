@@ -29,6 +29,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   )
 }
 
-export default function App() {
+export default function MyApp() {
   return <Outlet />
 }
