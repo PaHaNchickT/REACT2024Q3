@@ -21,7 +21,7 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   if (!data.results.items) return <ErrorPage />
 
@@ -36,7 +36,7 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
       })
     )
 
-    navigate(`${(event.currentTarget as HTMLDivElement).id}?${searchParams.toString()}`)
+    setSearchParams(`?${searchParams.toString()}&details=${(event.currentTarget as HTMLDivElement).id}`)
   }
 
   // function for close details section

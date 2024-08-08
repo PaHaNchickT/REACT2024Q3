@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from '@remix-run/react'
+import { useSearchParams } from '@remix-run/react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Results } from 'src/components/results/results'
@@ -7,15 +7,19 @@ import { FilmInfo, FilmResp, reduxStore } from 'src/components/types'
 import { setTheme } from 'src/services/themeSlice'
 
 export default function App({ data }: { data: { results: FilmResp; details?: FilmInfo } }) {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
 
   useEffect(() => {
     dispatch(setTheme(localStorage.getItem('paul-theme') || 'light'))
-    if (!detailsData.isClosed) navigate(`/films?${(searchParams.toString() && searchParams.toString()) || 'page=1'}`)
+
+    if (!detailsData.isClosed) {
+      setSearchParams(
+        `page=${searchParams.get('page')}${(searchParams.get('search') && `&search=${searchParams.get('search')}`) || ''}`
+      )
+    }
   }, [])
 
   return (

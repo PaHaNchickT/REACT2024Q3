@@ -13,29 +13,27 @@ export const meta: MetaFunction = () => {
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url)
 
-  const data = await API().getFilms({
+  const results = await API().getFilms({
     value: url.searchParams.get('search') || '',
     page: url.searchParams.get('page') || '1',
   })
+  const details = await API().getFilm(url.searchParams.get('details') || '9999')
 
-  if (!data) {
+  if (!results || !details) {
     return {
       notFound: true,
     }
   }
 
-  return data
+  return { results: results, details: details }
 }
 
 export default function Page() {
-  const results = useLoaderData<typeof loader>() as unknown as FilmResp
+  const data = useLoaderData<typeof loader>() as unknown as { results: FilmResp }
 
   return (
     <Provider store={store}>
-      <App data={{ results: results }} />
+      <App data={data} />
     </Provider>
   )
 }
-
-// import type { LoaderFunctionArgs } from '@remix-run/node' // or cloudflare/deno
-// { params }: LoaderFunctionArgs
