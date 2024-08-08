@@ -10,6 +10,15 @@ import '../src/components/no-results/no-results.css'
 import '../src/components/selected-panel/selected-info.css'
 import '../src/components/error-boundary/errorBoundary.css'
 import '../src/components/details/details.css'
+import ErrorPage from 'src/components/error-page/errorPage'
+import { Provider } from 'react-redux'
+import store from 'src/services/store'
+import { MetaFunction } from '@remix-run/node'
+import { TEXT_CONTENT } from 'src/components/constants'
+
+export const meta: MetaFunction = () => {
+  return [{ title: TEXT_CONTENT.metaTitle }, { name: 'description', content: TEXT_CONTENT.metaDescr }]
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -21,11 +30,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <Provider store={store}>{children}</Provider>
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
+  )
+}
+
+export function ErrorBoundary() {
+  return (
+    <Provider store={store}>
+      <ErrorPage />
+    </Provider>
   )
 }
 
