@@ -24,7 +24,7 @@ export default function App({ data }: { data: { results: FilmResp; details?: Fil
 
   useEffect(() => {
     dispatch(setTheme(localStorage.getItem('paul-theme') || 'light'))
-    if (!detailsData.isClosed) router.push(`/films?${(searchParams.toString() && searchParams.toString()) || 'page=1'}`)
+    if (!detailsData.isClosed) router.push(`/films?${searchParams.toString() || 'page=1'}`)
   }, [])
 
   return (
