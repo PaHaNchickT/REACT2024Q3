@@ -27,7 +27,6 @@ export type FilmResp = {
 }
 
 export type reduxStore = {
-  searchData: { searchData: { value: string; page: number } }
   resultsData: {
     resultsData: {
       items: FilmObj[]
