@@ -16,9 +16,8 @@ export default function App({ data }: { data: { results: FilmResp; details?: Fil
     dispatch(setTheme(localStorage.getItem('paul-theme') || 'light'))
 
     if (!detailsData.isClosed) {
-      setSearchParams(
-        `page=${searchParams.get('page') || '1'}${(searchParams.get('search') && `&search=${searchParams.get('search')}`) || ''}`
-      )
+      const searchValue = searchParams.get('search')
+      setSearchParams(`page=${searchParams.get('page') || '1'}${(searchValue && `&search=${searchValue}`) || ''}`)
     }
   }, [])
 
