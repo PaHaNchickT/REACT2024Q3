@@ -13,4 +13,6 @@ export const TEXT_CONTENT = {
   searchPH: 'Type here to search...',
   barUnselectBtn: 'Unselect all',
   barDownloadBtn: 'Download',
+  metaTitle: 'Kinomania',
+  metaDescr: 'Here you can find information about favorite movies and tv series',
 }

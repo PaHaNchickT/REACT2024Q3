@@ -2,12 +2,10 @@ import type { MetaFunction } from '@remix-run/node'
 import { useEffect } from 'react'
 import { Loader } from 'src/components/loader/loader'
 import { useNavigate } from '@remix-run/react'
+import { TEXT_CONTENT } from 'src/components/constants'
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: 'Kinomania' },
-    { name: 'description', content: 'Here you can find information about favorite movies and tv series' },
-  ]
+  return [{ title: TEXT_CONTENT.metaTitle }, { name: 'description', content: TEXT_CONTENT.metaDescr }]
 }
 
 export default function Redirecting() {
