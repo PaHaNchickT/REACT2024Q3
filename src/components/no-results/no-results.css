@@ -1,0 +1,9 @@
+.results__stub {
+  width: 80vw;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 0 0 3px black;
+} /*# sourceMappingURL=no-results.css.map */

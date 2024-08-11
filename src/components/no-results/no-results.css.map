@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "sources": [
+    "no-results.sass",
+    "no-results.css"
+  ],
+  "names": [],
+  "mappings": "AAAA;EACI,WAAA;EACA,YAAA;EACA,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,YAAA;EACA,0BAAA;ACCJ",
+  "file": "no-results.css"
+}
