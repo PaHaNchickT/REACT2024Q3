@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import searchDataSliceReducer from './searchSlice'
+import contrDataSliceReducer from './contrSlice'
+import uncontrDataSliceReducer from './uncontrSlice'
+import countriesSliceReducer from './countriesSlice'
 
 export default configureStore({
   reducer: {
-    searchData: searchDataSliceReducer,
+    contrData: contrDataSliceReducer,
+    uncontrData: uncontrDataSliceReducer,
+    countries: countriesSliceReducer,
   },
 })
