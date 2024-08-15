@@ -12,6 +12,7 @@ export const FORM_DATA_EMPTY = {
   email: '',
   passOrig: '',
   sex: '',
+  image: '',
   imageURL: '',
   imageName: '',
   country: '',

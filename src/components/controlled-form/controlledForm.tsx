@@ -84,8 +84,12 @@ export function ControlledForm() {
 
       <form
         onSubmit={handleSubmit((data) => {
-          dispatch(setContrData(data))
+          const tempObj = {} as { [key: string]: string }
+          for (const key in data) {
+            if (key !== 'image') tempObj[key] = (data as unknown as { [key: string]: string })[key]
+          }
 
+          dispatch(setContrData(tempObj))
           navigate('/')
         })}
       >
