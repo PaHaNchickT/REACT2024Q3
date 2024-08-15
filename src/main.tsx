@@ -5,7 +5,6 @@ import './index.css'
 import { ErrorPage } from './components/error-page/errorPage.tsx'
 import { Provider } from 'react-redux'
 import store from './services/store.ts'
-import ErrorBoundary from './components/error-boundary/errorBoundary.tsx'
 import { ControlledForm } from './components/controlled-form/controlledForm.tsx'
 import { UncontrolledForm } from './components/uncontrolled-form/uncontrolledForm.tsx'
 import { App } from './app.tsx'
@@ -19,10 +18,12 @@ const router = createBrowserRouter([
   {
     path: 'controlled',
     element: <ControlledForm />,
+    errorElement: <ErrorPage />,
   },
   {
     path: 'uncontrolled',
     element: <UncontrolledForm />,
+    errorElement: <ErrorPage />,
   },
 ])
 
@@ -30,11 +31,9 @@ const root = document.getElementById('root')
 if (root) {
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
-      <ErrorBoundary fallback={<ErrorPage />}>
-        <Provider store={store}>
-          <RouterProvider router={router} />
-        </Provider>
-      </ErrorBoundary>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </React.StrictMode>
   )
 }
