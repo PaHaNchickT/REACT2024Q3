@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux'
 // import { TEXT_CONTENT } from '../constants'
 
 export function UncontrolledForm() {
-  const inputRef = useRef(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const inputRef = useRef(null)
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
@@ -19,7 +19,7 @@ export function UncontrolledForm() {
         login: form.login.value,
         age: form.age.value,
         email: form.email.value,
-        password: form.passOrig.value,
+        passOrig: form.passOrig.value,
         sex: form.sex.value,
         imageName: form.image.files[0].name,
         country: form.country.value,
@@ -76,7 +76,8 @@ export function UncontrolledForm() {
         </label>
         <label>
           Gender:
-          <select name="sex" ref={inputRef}>
+          <select name="sex" value="" ref={inputRef}>
+            <option selected disabled hidden></option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
@@ -92,6 +93,7 @@ export function UncontrolledForm() {
         <label>
           Country:
           <select name="country" ref={inputRef}>
+            <option selected disabled hidden></option>
             <CountryOpts />
           </select>
         </label>
