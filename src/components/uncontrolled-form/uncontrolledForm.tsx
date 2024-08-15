@@ -1,4 +1,4 @@
-import { FormEvent, useRef } from 'react'
+import { ChangeEvent, FormEvent, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CountryOpts } from '../country-options/countryOpts'
 import { setUncontrData } from '../../services/uncontrSlice'
@@ -21,13 +21,31 @@ export function UncontrolledForm() {
         email: form.email.value,
         password: form.passOrig.value,
         sex: form.sex.value,
-        image: form.image.value,
+        imageName: form.image.files[0].name,
         country: form.country.value,
       })
     )
 
     navigate('/')
-    // console.log(form.passConf.value, form.confirm.checked)
+    console.log(form.passConf.value, form.confirm.checked, form.image.files[0])
+  }
+
+  function encodeImageFileAsURL(event: ChangeEvent) {
+    console.log('load started')
+
+    const element = event.target as HTMLInputElement
+    const reader = new FileReader()
+
+    reader.readAsDataURL(element.files![0])
+    reader.onloadend = function () {
+      console.log('load ended')
+
+      dispatch(
+        setUncontrData({
+          imageURL: reader.result,
+        })
+      )
+    }
   }
 
   return (
@@ -69,7 +87,7 @@ export function UncontrolledForm() {
         </label>
         <label>
           Upload Image:
-          <input type="file" name="image" ref={inputRef} />
+          <input type="file" name="image" ref={inputRef} onChange={(event) => encodeImageFileAsURL(event)} />
         </label>
         <label>
           Country:

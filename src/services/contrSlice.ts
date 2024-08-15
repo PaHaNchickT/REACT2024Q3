@@ -8,7 +8,10 @@ const contrDataSlice = createSlice({
   },
   reducers: {
     setContrData(state, action) {
-      state.contrData = action.payload
+      const initObj = state.contrData as unknown as { [key: string]: string }
+      for (const key in action.payload) {
+        initObj[key] = action.payload[key]
+      }
     },
   },
 })

@@ -12,6 +12,7 @@ export const FORM_DATA_DEFAULT = {
   email: '',
   password: '',
   sex: '',
-  image: '',
+  imageURL: '',
+  imageName: '',
   country: '',
 }

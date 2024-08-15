@@ -4,7 +4,8 @@ export type formData = {
   email: string
   password: string
   sex: string
-  image: string
+  imageURL: string
+  imageName: string
   country: string
 }
 

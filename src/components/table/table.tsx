@@ -31,7 +31,9 @@ export function Table(props: { data: formData; name: string }) {
         </tr>
         <tr>
           <td>Image: </td>
-          <td>{props.data.image}</td>
+          <td>
+            <img src={props.data.imageURL} alt={props.data.imageName} width="300px" />
+          </td>
         </tr>
         <tr>
           <td>Country: </td>
