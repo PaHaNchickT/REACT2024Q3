@@ -5,3 +5,14 @@ export const TEXT_CONTENT = {
   errorPageTitle: '404',
   errorPageText: 'Not found...',
 }
+
+export const FORM_DATA_DEFAULT = {
+  login: '',
+  age: 0,
+  email: '',
+  passOrig: '',
+  passConf: '',
+  sex: '',
+  image: '',
+  country: '',
+}

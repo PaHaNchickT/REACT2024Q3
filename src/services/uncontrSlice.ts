@@ -1,18 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { FORM_DATA_DEFAULT } from '../components/constants'
 
 const uncontrDataSlice = createSlice({
   name: 'uncontrData',
   initialState: {
-    uncontrData: {
-      name: '',
-      age: 0,
-      email: '',
-      passInit: '',
-      passCheck: '',
-      sex: '',
-      image: '',
-      country: '',
-    },
+    uncontrData: FORM_DATA_DEFAULT,
   },
   reducers: {
     setUncontrData(state, action) {

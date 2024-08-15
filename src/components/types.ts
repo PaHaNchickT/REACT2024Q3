@@ -1,27 +1,20 @@
+export type formData = {
+  login: string
+  age: number
+  email: string
+  passOrig: string
+  passConf: string
+  sex: string
+  image: string
+  country: string
+}
+
 export type reduxStore = {
   contrData: {
-    contrData: {
-      name: string
-      age: number
-      email: string
-      passInit: string
-      passCheck: string
-      sex: string
-      image: string
-      country: string
-    }
+    contrData: formData
   }
   uncontrData: {
-    uncontrData: {
-      name: string
-      age: number
-      email: string
-      passInit: string
-      passCheck: string
-      sex: string
-      image: string
-      country: string
-    }
+    uncontrData: formData
   }
   countries: {
     countries: string[]
