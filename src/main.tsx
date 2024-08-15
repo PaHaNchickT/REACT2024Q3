@@ -6,20 +6,23 @@ import { ErrorPage } from './components/error-page/errorPage.tsx'
 import { Provider } from 'react-redux'
 import store from './services/store.ts'
 import ErrorBoundary from './components/error-boundary/errorBoundary.tsx'
+import { ControlledForm } from './components/controlled-form/controlledForm.tsx'
+import { UncontrolledForm } from './components/uncontrolled-form/uncontrolledForm.tsx'
+import { App } from './app.tsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <p>Main Page</p>,
+    element: <App />,
     errorElement: <ErrorPage />,
   },
   {
     path: 'controlled',
-    element: <p>Controlled</p>,
+    element: <ControlledForm />,
   },
   {
     path: 'uncontrolled',
-    element: <p>Uncontrolled</p>,
+    element: <UncontrolledForm />,
   },
 ])
 
