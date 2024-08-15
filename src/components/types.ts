@@ -10,13 +10,7 @@ export type formData = {
 }
 
 export type reduxStore = {
-  contrData: {
-    contrData: formData
-  }
-  uncontrData: {
-    uncontrData: formData
-  }
-  countries: {
-    countries: string[]
-  }
+  contrData: { contrData: formData }
+  uncontrData: { uncontrData: formData }
+  countries: { countries: string[] }
 }
