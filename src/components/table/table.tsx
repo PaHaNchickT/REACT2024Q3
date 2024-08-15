@@ -5,7 +5,7 @@ export function Table(props: { data: formData; name: string }) {
     <table>
       <thead>
         <tr>
-          <td>{props.name}</td>
+          <td colSpan={2}>{props.name}</td>
         </tr>
       </thead>
       <tbody>

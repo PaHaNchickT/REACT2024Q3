@@ -27,7 +27,7 @@ export function UncontrolledForm() {
     )
 
     navigate('/')
-    console.log(form.passConf.value, form.confirm.checked, form.image.files[0])
+    // console.log(form.passConf.value, form.confirm.checked, form.image.files[0])
   }
 
   function encodeImageFileAsURL(event: ChangeEvent) {
