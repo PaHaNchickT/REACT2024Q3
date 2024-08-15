@@ -7,7 +7,7 @@ export function App() {
   const uncontrData = useSelector((state: reduxStore) => state.uncontrData.uncontrData)
   const contrData = useSelector((state: reduxStore) => state.contrData.contrData)
 
-  console.log(uncontrData)
+  // console.log(uncontrData)
 
   return (
     <>

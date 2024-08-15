@@ -19,7 +19,7 @@ export const FORM_DATA_EMPTY = {
 
 export const FORM_DATA_DEFAULT = {
   login: '',
-  age: '',
+  age: 0,
   email: '',
   passOrig: '',
   passConf: '',

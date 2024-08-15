@@ -14,3 +14,12 @@ export type reduxStore = {
   uncontrData: { uncontrData: formData }
   countries: { countries: string[] }
 }
+
+export type imageData = {
+  lastModified: number
+  lastModifiedDate: Date
+  name: string
+  size: number
+  type: string
+  webkitRelativePath: string
+}
