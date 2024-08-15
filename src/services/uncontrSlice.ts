@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { FORM_DATA_DEFAULT } from '../components/constants'
+import { FORM_DATA_EMPTY } from '../components/constants'
 
 const uncontrDataSlice = createSlice({
   name: 'uncontrData',
   initialState: {
-    uncontrData: FORM_DATA_DEFAULT,
+    uncontrData: FORM_DATA_EMPTY,
   },
   reducers: {
     setUncontrData(state, action) {

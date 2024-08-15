@@ -6,13 +6,25 @@ export const TEXT_CONTENT = {
   errorPageText: 'Not found...',
 }
 
-export const FORM_DATA_DEFAULT = {
+export const FORM_DATA_EMPTY = {
   login: '',
   age: 0,
   email: '',
-  password: '',
+  passOrig: '',
   sex: '',
   imageURL: '',
   imageName: '',
+  country: '',
+}
+
+export const FORM_DATA_DEFAULT = {
+  login: '',
+  age: '',
+  email: '',
+  passOrig: '',
+  passConf: '',
+  sex: '',
+  confirm: false,
+  image: '',
   country: '',
 }

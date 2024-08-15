@@ -23,7 +23,7 @@ export function Table(props: { data: formData; name: string }) {
         </tr>
         <tr>
           <td>Password: </td>
-          <td>{props.data.password}</td>
+          <td>{props.data.passOrig}</td>
         </tr>
         <tr>
           <td>Gender: </td>
