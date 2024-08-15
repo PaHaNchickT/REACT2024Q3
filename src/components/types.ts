@@ -2,8 +2,7 @@ export type formData = {
   login: string
   age: number
   email: string
-  passOrig: string
-  passConf: string
+  password: string
   sex: string
   image: string
   country: string

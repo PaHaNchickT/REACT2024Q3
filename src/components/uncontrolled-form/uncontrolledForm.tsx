@@ -1,26 +1,33 @@
 import { FormEvent, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { CountryOpts } from '../country-options/countryOpts'
+import { setUncontrData } from '../../services/uncontrSlice'
+import { useDispatch } from 'react-redux'
 // import { TEXT_CONTENT } from '../constants'
 
 export function UncontrolledForm() {
   const inputRef = useRef(null)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
     const form = event.target as HTMLFormElement
 
-    console.log(
-      form.login.value,
-      form.age.value,
-      form.email.value,
-      form.passOrig.value,
-      form.passConf.value,
-      form.sex.value,
-      form.confirm.checked,
-      form.image.value,
-      form.country.value
+    dispatch(
+      setUncontrData({
+        login: form.login.value,
+        age: form.age.value,
+        email: form.email.value,
+        password: form.passOrig.value,
+        sex: form.sex.value,
+        image: form.image.value,
+        country: form.country.value,
+      })
     )
+
+    navigate('/')
+    // console.log(form.passConf.value, form.confirm.checked)
   }
 
   return (

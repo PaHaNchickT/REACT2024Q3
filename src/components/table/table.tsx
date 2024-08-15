@@ -1,0 +1,43 @@
+import { formData } from '../types'
+
+export function Table(props: { data: formData; name: string }) {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <td>{props.name}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Name: </td>
+          <td>{props.data.login}</td>
+        </tr>
+        <tr>
+          <td>Age: </td>
+          <td>{props.data.age}</td>
+        </tr>
+        <tr>
+          <td>Email: </td>
+          <td>{props.data.email}</td>
+        </tr>
+        <tr>
+          <td>Password: </td>
+          <td>{props.data.password}</td>
+        </tr>
+        <tr>
+          <td>Gender: </td>
+          <td>{props.data.sex}</td>
+        </tr>
+        <tr>
+          <td>Image: </td>
+          <td>{props.data.image}</td>
+        </tr>
+        <tr>
+          <td>Country: </td>
+          <td>{props.data.country}</td>
+        </tr>
+      </tbody>
+    </table>
+  )
+}
