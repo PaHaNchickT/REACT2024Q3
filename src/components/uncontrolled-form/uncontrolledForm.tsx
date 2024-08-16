@@ -76,8 +76,8 @@ export function UncontrolledForm() {
         </label>
         <label>
           Gender:
-          <select name="sex" ref={inputRef}>
-            <option selected disabled hidden></option>
+          <select name="sex" defaultValue="" ref={inputRef}>
+            <option value="" disabled hidden></option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
@@ -92,8 +92,8 @@ export function UncontrolledForm() {
         </label>
         <label>
           Country:
-          <select name="country" ref={inputRef}>
-            <option selected disabled hidden></option>
+          <select name="country" defaultValue="" ref={inputRef}>
+            <option value="" disabled hidden></option>
             <CountryOpts />
           </select>
         </label>
