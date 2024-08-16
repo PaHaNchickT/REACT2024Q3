@@ -14,8 +14,8 @@ export function App() {
       <p>Main Page</p>
       <Link to="/uncontrolled">Uncontrolled</Link>
       <Link to="/controlled">Controlled</Link>
-      <Table data={uncontrData} name="Uncontrolled Form Data" />
-      <Table data={contrData} name="Controlled Form Data" />
+      <Table data={uncontrData} tableTitle="Uncontrolled Form Data" />
+      <Table data={contrData} tableTitle="Controlled Form Data" />
     </>
   )
 }

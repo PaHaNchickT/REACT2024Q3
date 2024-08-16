@@ -1,11 +1,11 @@
 import { formData } from '../types'
 
-export function Table(props: { data: formData; name: string }) {
+export function Table(props: { data: formData; tableTitle: string }) {
   return (
     <table>
       <thead>
         <tr>
-          <td colSpan={2}>{props.name}</td>
+          <td colSpan={2}>{props.tableTitle}</td>
         </tr>
       </thead>
       <tbody>
