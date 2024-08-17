@@ -27,47 +27,59 @@ a {
   text-decoration: none;
   font-size: 14px;
   text-align: center;
-}
-
-button.light,
-a.light {
-  background-color: black;
+  background-color: #006363;
+  box-shadow: 0 0 5px 2px #5ccccc;
   color: white;
 }
-button.light:hover,
-a.light:hover {
+button:hover,
+a:hover {
   color: black;
-  background-color: #ffc873;
-  box-shadow: 0 0 5px 2px #a66400;
+  background-color: #5ccccc;
+  box-shadow: 0 0 5px 2px #006363;
 }
 
-button.dark,
-a.dark {
-  background-color: white;
-  color: black;
-}
-button.dark:hover,
-a.dark:hover {
-  color: white;
-  background-color: dimgray;
-  box-shadow: 0 0 5px 2px white;
-}
-
-.root__wrapper {
+#root {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 50px;
-  padding: 20px;
   box-sizing: border-box;
   min-height: 100vh;
   height: 100%;
+  background-color: #009999;
+  padding-bottom: 50px;
 }
 
-.root__wrapper.light {
-  background: linear-gradient(#ff9a00, black);
+header {
+  background-color: #585858;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
-.root__wrapper.dark {
-  background: linear-gradient(black, dimgray);
+.main__root {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+table {
+  background-color: white;
+  border: 1px solid black;
+  border-spacing: 0;
+}
+
+td {
+  box-sizing: border-box;
+  border: 1px solid black;
+  text-align: center;
+  padding: 5px 10px;
+}
+
+thead > tr > td {
+  font-weight: 700;
 } /*# sourceMappingURL=index.css.map */

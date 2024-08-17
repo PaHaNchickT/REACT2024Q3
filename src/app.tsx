@@ -9,11 +9,14 @@ export function App() {
 
   return (
     <>
-      <p>Main Page</p>
-      <Link to="/uncontrolled">Uncontrolled</Link>
-      <Link to="/controlled">Controlled</Link>
-      <Table data={uncontrData} tableTitle="Uncontrolled Form Data" name="uncontrolled" />
-      <Table data={contrData} tableTitle="Controlled Form Data" name="controlled" />
+      <header>
+        <Link to="/uncontrolled">Uncontrolled</Link>
+        <Link to="/controlled">Controlled</Link>
+      </header>
+      <main className="main__root">
+        <Table data={uncontrData} tableTitle="Uncontrolled Form Data" name="uncontrolled" />
+        <Table data={contrData} tableTitle="Controlled Form Data" name="controlled" />
+      </main>
     </>
   )
 }
