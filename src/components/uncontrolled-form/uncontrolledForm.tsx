@@ -13,8 +13,20 @@ export function UncontrolledForm() {
   const inputRef = useRef(null)
 
   const [errors, setErrors] = useState({} as formErrors)
+  const [rel, setRel] = useState('low')
 
-  console.log
+  const passwordReliabilityChecker = (event: ChangeEvent) => {
+    const element = event.target as HTMLInputElement
+
+    if (element.value.length <= 3) {
+      setRel('low')
+    } else if (element.value.length >= 6) {
+      setRel('high')
+    } else {
+      setRel('med')
+    }
+  }
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     const form = event.target as HTMLFormElement
@@ -103,7 +115,16 @@ export function UncontrolledForm() {
         </label>
         <label>
           Password:
-          <input type="password" name="passOrig" ref={inputRef} autoComplete="false" />
+          <input
+            type="password"
+            name="passOrig"
+            ref={inputRef}
+            autoComplete="false"
+            onChange={(event) => passwordReliabilityChecker(event)}
+          />
+          <div className="reliability_cont">
+            <div className="reliability_meter">{rel}</div>
+          </div>
           <p>{errors.passOrig}</p>
         </label>
         <label>
