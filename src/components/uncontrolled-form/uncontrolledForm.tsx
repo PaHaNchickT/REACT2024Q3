@@ -13,23 +13,13 @@ export function UncontrolledForm() {
   const dispatch = useDispatch()
   const inputRef = useRef(null)
 
-  const [errors, setErrors] = useState({
-    login: '',
-    age: '',
-    email: '',
-    passOrig: '',
-    passConf: '',
-    sex: '',
-    confirm: '',
-    imageUncontr: '',
-    country: '',
-  })
+  const [errors, setErrors] = useState({} as formErrors)
+  const [isValid, setValid] = useState(true)
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     const form = event.target as HTMLFormElement
-    // const submitBtn = form.submitBtn as HTMLButtonElement
-    // submitBtn.setAttribute('disabled', '')
+    let errors = {}
 
     try {
       objectFilter(schema, 'imageContr').validateSync(
@@ -52,11 +42,12 @@ export function UncontrolledForm() {
         .inner) {
         errorsTemp[path] = message
       }
-      setErrors(errorsTemp as SetStateAction<formErrors>)
+      errors = errorsTemp
     }
+    setErrors(errors as SetStateAction<formErrors>)
+    setValid(objectFilter(schema, 'imageContr').isValidSync(''))
 
-    // const isValid =
-    if (await objectFilter(schema, 'imageContr').isValid('')) {
+    if (!Object.keys(errors).length) {
       dispatch(
         setUncontrData({
           login: form.login.value,
@@ -96,7 +87,12 @@ export function UncontrolledForm() {
       <p>Uncontrolled</p>
       <Link to="/">Main Page</Link>
 
-      <form onSubmit={(event) => handleSubmit(event)}>
+      <form
+        onSubmit={(event) => handleSubmit(event)}
+        onChange={() => {
+          setValid(true)
+        }}
+      >
         <label>
           Name:
           <input type="text" name="login" ref={inputRef} />
@@ -150,7 +146,7 @@ export function UncontrolledForm() {
           <p>{errors.country}</p>
         </label>
 
-        <button type="submit" name="submitBtn">
+        <button type="submit" name="submitBtn" disabled={!isValid}>
           Submit
         </button>
       </form>
