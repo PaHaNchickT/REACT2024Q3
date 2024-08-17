@@ -112,7 +112,9 @@ export function ControlledForm() {
           <p>{errors.country?.message}</p>
         </label>
 
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={Boolean(Object.keys(errors).length)}>
+          Submit
+        </button>
       </form>
     </>
   )

@@ -146,7 +146,7 @@ export function UncontrolledForm() {
           <p>{errors.country}</p>
         </label>
 
-        <button type="submit" name="submitBtn" disabled={!isValid}>
+        <button type="submit" disabled={!isValid}>
           Submit
         </button>
       </form>
