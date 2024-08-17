@@ -25,6 +25,18 @@ export function ControlledForm() {
     resolver: yupResolver(schema),
   })
 
+  const passwordReliabilityChecker = () => {
+    let output = 'med'
+
+    if (watch('passOrig').length <= 3) {
+      output = 'low'
+    } else if (watch('passOrig').length >= 6) {
+      output = 'high'
+    }
+
+    return output
+  }
+
   useEffect(() => {
     if ((watch('image') as unknown as imageData[])[0]) {
       console.log('load started')
@@ -78,6 +90,9 @@ export function ControlledForm() {
         <label>
           Password:
           <input type="password" {...register('passOrig')} autoComplete="false" />
+          <div className="reliability_cont">
+            <div className="reliability_meter">{passwordReliabilityChecker()}</div>
+          </div>
           <p>{errors.passOrig?.message}</p>
         </label>
         <label>
