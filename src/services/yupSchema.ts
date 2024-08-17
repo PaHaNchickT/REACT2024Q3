@@ -21,18 +21,12 @@ export const schema = yup.object().shape({
   image: yup
     .mixed()
     .test(
-      'fileSize',
-      'Upload an image with the actual size and one of the allowed extensions: .jpeg, .jpg, and .png',
-      (value) => {
-        return (value as imageData[])[0] && (value as imageData[])[0].size >= 0
-      }
-    )
-    .test(
-      'type',
+      'fileSize and fileType',
       'Upload an image with the actual size and one of the allowed extensions: .jpeg, .jpg, and .png',
       (value) => {
         return (
           (value as imageData[])[0] &&
+          (value as imageData[])[0].size >= 0 &&
           ((value as imageData[])[0].type === 'image/jpeg' || (value as imageData[])[0].type === 'image/png')
         )
       }
