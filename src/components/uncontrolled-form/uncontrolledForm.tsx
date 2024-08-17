@@ -5,7 +5,6 @@ import { setUncontrData } from '../../services/uncontrSlice'
 import { useDispatch } from 'react-redux'
 import { formErrors } from '../types'
 import { schema } from '../../services/yupSchema'
-import { objectFilter } from '../../utils/objectFilter'
 // import { TEXT_CONTENT } from '../constants'
 
 export function UncontrolledForm() {
@@ -16,13 +15,14 @@ export function UncontrolledForm() {
   const [errors, setErrors] = useState({} as formErrors)
   const [isValid, setValid] = useState(true)
 
+  console.log
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     const form = event.target as HTMLFormElement
     let errors = {}
 
     try {
-      objectFilter(schema, 'imageContr').validateSync(
+      schema.validateSync(
         {
           login: form.login.value,
           age: form.age.value,
@@ -31,7 +31,7 @@ export function UncontrolledForm() {
           passConf: form.passConf.value,
           sex: form.sex.value,
           confirm: form.confirm.checked,
-          imageUncontr: form.imageUncontr.files,
+          image: form.image.files,
           country: form.country.value,
         },
         { abortEarly: false }
@@ -45,7 +45,7 @@ export function UncontrolledForm() {
       errors = errorsTemp
     }
     setErrors(errors as SetStateAction<formErrors>)
-    setValid(objectFilter(schema, 'imageContr').isValidSync(''))
+    setValid(schema.isValidSync(''))
 
     if (!Object.keys(errors).length) {
       dispatch(
@@ -55,7 +55,7 @@ export function UncontrolledForm() {
           email: form.email.value,
           passOrig: form.passOrig.value,
           sex: form.sex.value,
-          imageName: form.imageUncontr.files[0].name,
+          imageName: form.image.files[0].name,
           country: form.country.value,
         })
       )
@@ -134,8 +134,8 @@ export function UncontrolledForm() {
         </label>
         <label>
           Upload Image:
-          <input type="file" name="imageUncontr" ref={inputRef} onChange={(event) => encodeImageFileAsURL(event)} />
-          <p>{errors.imageUncontr}</p>
+          <input type="file" name="image" ref={inputRef} onChange={(event) => encodeImageFileAsURL(event)} />
+          <p>{errors.image}</p>
         </label>
         <label>
           Country:

@@ -15,25 +15,9 @@ export type formData = {
   passConf?: string
   sex: string
   confirm?: boolean
-  imageContr: unknown
-  imageUncontr: unknown
+  image: imageData[]
   country: string
 }
-
-// export type formData = {
-//   login: string
-//   age: number
-//   email: string
-//   passOrig: string
-//   passConf: string
-//   sex: string
-//   imageContr?: imageData[]
-//   imageUncontr?: imageData[]
-//   imageURL: string
-//   imageName: string
-//   confirm: boolean
-//   country: string
-// }
 
 export type formErrors = {
   login: string
@@ -43,7 +27,7 @@ export type formErrors = {
   passConf: string
   sex: string
   confirm: string
-  imageUncontr: string
+  image: string
   country: string
 }
 

@@ -18,28 +18,24 @@ export const schema = yup.object().shape({
   passConf: yup.string().oneOf([yup.ref('passOrig')], 'Passwords must match'),
   sex: yup.string().required(),
   confirm: yup.boolean().oneOf([true], 'Click ffs'),
-  imageContr: yup
+  image: yup
     .mixed()
-    .required()
-    .test('fileSize', "The file is too small or it's not have been loaded", (value) => {
-      return value && (value as imageData[])[0].size >= 0
-    })
-    .test('type', 'Only the following formats are accepted: .jpeg, .jpg, and .png', (value) => {
-      return (
-        value && ((value as imageData[])[0].type === 'image/jpeg' || (value as imageData[])[0].type === 'image/png')
-      )
-    }),
-  imageUncontr: yup
-    .mixed()
-    .required()
-    .test('type', 'Only the following formats are accepted: .jpeg, .jpg, and .png', (value) => {
-      return (
-        (value as imageData[])[0] &&
-        ((value as imageData[])[0].type === 'image/jpeg' || (value as imageData[])[0].type === 'image/png')
-      )
-    })
-    .test('fileSize', "The file is too small or it's not have been loaded", (value) => {
-      return (value as imageData[])[0] && (value as imageData[])[0].size >= 0
-    }),
+    .test(
+      'fileSize',
+      'Upload an image with the actual size and one of the allowed extensions: .jpeg, .jpg, and .png',
+      (value) => {
+        return (value as imageData[])[0] && (value as imageData[])[0].size >= 0
+      }
+    )
+    .test(
+      'type',
+      'Upload an image with the actual size and one of the allowed extensions: .jpeg, .jpg, and .png',
+      (value) => {
+        return (
+          (value as imageData[])[0] &&
+          ((value as imageData[])[0].type === 'image/jpeg' || (value as imageData[])[0].type === 'image/png')
+        )
+      }
+    ),
   country: yup.string().required(),
 })

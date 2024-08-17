@@ -8,7 +8,6 @@ import { FORM_DATA_DEFAULT } from '../constants'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { imageData } from '../types'
 import { schema } from '../../services/yupSchema'
-import { objectFilter } from '../../utils/objectFilter'
 // import { TEXT_CONTENT } from '../constants'
 
 export function ControlledForm() {
@@ -23,16 +22,16 @@ export function ControlledForm() {
   } = useForm({
     mode: 'onChange',
     defaultValues: FORM_DATA_DEFAULT,
-    resolver: yupResolver(objectFilter(schema, 'imageUncontr')),
+    resolver: yupResolver(schema),
   })
 
   useEffect(() => {
-    if ((watch('imageContr') as unknown as imageData[])[0]) {
+    if ((watch('image') as unknown as imageData[])[0]) {
       console.log('load started')
 
       const reader = new FileReader()
 
-      reader.readAsDataURL((watch('imageContr') as unknown as imageData[])[0] as unknown as Blob)
+      reader.readAsDataURL((watch('image') as unknown as imageData[])[0] as unknown as Blob)
       reader.onloadend = function () {
         console.log('load ended')
 
@@ -43,7 +42,7 @@ export function ControlledForm() {
         )
       }
     }
-  }, [(watch('imageContr') as unknown as imageData[])[0]])
+  }, [(watch('image') as unknown as imageData[])[0]])
 
   return (
     <>
@@ -54,7 +53,7 @@ export function ControlledForm() {
         onSubmit={handleSubmit((data) => {
           const tempObj = {} as { [key: string]: string }
           for (const key in data) {
-            if (key !== 'imageContr') tempObj[key] = (data as unknown as { [key: string]: string })[key]
+            if (key !== 'image') tempObj[key] = (data as unknown as { [key: string]: string })[key]
           }
 
           dispatch(setContrData(tempObj))
@@ -101,8 +100,8 @@ export function ControlledForm() {
         </label>
         <label>
           Upload Image:
-          <input type="file" {...register('imageContr')} />
-          <p>{errors.imageContr?.message}</p>
+          <input type="file" {...register('image')} />
+          <p>{errors.image?.message}</p>
         </label>
         <label>
           Country:
