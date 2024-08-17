@@ -56,79 +56,83 @@ export function ControlledForm() {
 
   return (
     <>
-      <p>Controlled</p>
-      <Link to="/">Main Page</Link>
+      <header>
+        <Link to="/">Main Page</Link>
+      </header>
 
-      <form
-        onSubmit={handleSubmit((data) => {
-          const tempObj = { imageURL: imageData } as { [key: string]: string }
-          for (const key in data) {
-            if (key !== 'image') tempObj[key] = (data as unknown as { [key: string]: string })[key]
-          }
+      <main>
+        <h1>Controlled Form</h1>
+        <form
+          onSubmit={handleSubmit((data) => {
+            const tempObj = { imageURL: imageData } as { [key: string]: string }
+            for (const key in data) {
+              if (key !== 'image') tempObj[key] = (data as unknown as { [key: string]: string })[key]
+            }
 
-          dispatch(setContrData(tempObj))
-          dispatch(addState('controlled'))
-          navigate('/')
-        })}
-      >
-        <div>
-          <label htmlFor="login">Name:</label>
-          <input type="text" id="login" {...register('login')} />
-          <p>{errors.login?.message}</p>
-        </div>
-        <div>
-          <label htmlFor="age">Age:</label>
-          <input type="number" id="age" {...register('age')} />
-          <p>{errors.age?.message}</p>
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" {...register('email')} />
-          <p>{errors.email?.message}</p>
-        </div>
-        <div>
-          <label htmlFor="passOrig">Password:</label>
-          <input type="password" id="passOrig" {...register('passOrig')} autoComplete="false" />
-          <div className="reliability_cont">
-            <div className="reliability_meter">{passwordReliabilityChecker()}</div>
+            dispatch(setContrData(tempObj))
+            dispatch(addState('controlled'))
+            navigate('/')
+          })}
+        >
+          <div>
+            <label htmlFor="login">Name:</label>
+            <input type="text" id="login" {...register('login')} />
+            <p>{errors.login?.message}</p>
           </div>
-          <p>{errors.passOrig?.message}</p>
-        </div>
-        <div>
-          <label htmlFor="passConf">Confirm password:</label>
-          <input type="password" id="passConf" {...register('passConf')} autoComplete="false" />
-          <p>{errors.passConf?.message}</p>
-        </div>
-        <div>
-          <label htmlFor="sex">Gender:</label>
-          <select id="sex" {...register('sex')}>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-          <p>{errors.sex?.message}</p>
-        </div>
-        <div>
-          <label htmlFor="confirm">Accept Terms and Conditions agreement:</label>
-          <input type="checkbox" id="confirm" {...register('confirm')} />
-          <p>{errors.confirm?.message}</p>
-        </div>
-        <div>
-          <label htmlFor="image">Upload Image:</label>
-          <input type="file" id="image" {...register('image')} />
-          <p>{errors.image?.message}</p>
-        </div>
-        <div>
-          <label htmlFor="country">Country:</label>
-          <select id="country" {...register('country')}>
-            <CountryOpts />
-          </select>
-          <p>{errors.country?.message}</p>
-        </div>
+          <div>
+            <label htmlFor="age">Age:</label>
+            <input type="number" id="age" {...register('age')} />
+            <p>{errors.age?.message}</p>
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input type="email" id="email" {...register('email')} />
+            <p>{errors.email?.message}</p>
+          </div>
+          <div>
+            <label htmlFor="passOrig">Password:</label>
+            <input type="password" id="passOrig" {...register('passOrig')} autoComplete="false" />
+            <div className="reliability_cont">
+              <div className={`reliability_meter ${passwordReliabilityChecker()}`}></div>
+            </div>
+            <p>{errors.passOrig?.message}</p>
+          </div>
+          <div>
+            <label htmlFor="passConf">Confirm password:</label>
+            <input type="password" id="passConf" {...register('passConf')} autoComplete="false" />
+            <p>{errors.passConf?.message}</p>
+          </div>
+          <div>
+            <label htmlFor="sex">Gender:</label>
+            <select id="sex" {...register('sex')}>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <p>{errors.sex?.message}</p>
+          </div>
+          <div>
+            <label htmlFor="confirm">Accept Terms and Conditions agreement:</label>
+            <input type="checkbox" id="confirm" {...register('confirm')} />
+            <p>{errors.confirm?.message}</p>
+          </div>
+          <div>
+            <label htmlFor="image">Upload Image:</label>
+            <input type="file" id="image" {...register('image')} />
+            <p>{errors.image?.message}</p>
+          </div>
+          <div>
+            <label htmlFor="country">Country:</label>
+            <select id="country" {...register('country')}>
+              <CountryOpts />
+            </select>
+            <p>{errors.country?.message}</p>
+          </div>
 
-        <button type="submit" disabled={Boolean(Object.keys(errors).length)}>
-          Submit
-        </button>
-      </form>
+          <button type="submit" disabled={Boolean(Object.keys(errors).length)}>
+            Submit
+          </button>
+        </form>
+      </main>
     </>
   )
 }

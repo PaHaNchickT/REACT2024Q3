@@ -6,6 +6,11 @@ ul {
   margin: 0;
 }
 
+h1 {
+  text-align: center;
+  color: white;
+}
+
 * {
   transition: 300ms;
 }
@@ -37,7 +42,14 @@ a:hover {
   background-color: #5ccccc;
   box-shadow: 0 0 5px 2px #006363;
 }
-
+button:disabled,
+a:disabled {
+  background-color: #585858;
+  color: white;
+  background-color: #585858;
+  box-shadow: none;
+  cursor: auto;
+}
 #root {
   display: flex;
   flex-direction: column;
@@ -60,7 +72,7 @@ header {
   gap: 20px;
 }
 
-.main__root {
+main {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -82,4 +94,9 @@ td {
 
 thead > tr > td {
   font-weight: 700;
+}
+
+.fresh {
+  background-color: #39e639;
+  box-shadow: 0 0 5px 2px white;
 } /*# sourceMappingURL=index.css.map */

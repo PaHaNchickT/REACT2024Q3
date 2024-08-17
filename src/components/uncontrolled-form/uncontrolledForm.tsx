@@ -94,75 +94,85 @@ export function UncontrolledForm() {
 
   return (
     <>
-      <p>Uncontrolled</p>
-      <Link to="/">Main Page</Link>
+      <header>
+        <Link to="/">Main Page</Link>
+      </header>
 
-      <form onSubmit={(event) => handleSubmit(event)}>
-        <div>
-          <label htmlFor="login">Name:</label>
-          <input type="text" name="login" id="login" ref={inputRef} />
-          <p>{errors.login}</p>
-        </div>
-        <div>
-          <label htmlFor="age">Age:</label>
-          <input type="number" name="age" id="age" defaultValue={0} ref={inputRef} />
-          <p>{errors.age}</p>
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" name="email" id="email" ref={inputRef} />
-          <p>{errors.email}</p>
-        </div>
-        <div>
-          <label htmlFor="passOrig">Password:</label>
-          <input
-            type="password"
-            name="passOrig"
-            id="passOrig"
-            ref={inputRef}
-            autoComplete="false"
-            onChange={(event) => passwordReliabilityChecker(event)}
-          />
-          <div className="reliability_cont">
-            <div className="reliability_meter">{rel}</div>
+      <main>
+        <h1>Uncontrolled Form</h1>
+        <form onSubmit={(event) => handleSubmit(event)}>
+          <div>
+            <label htmlFor="login">Name:</label>
+            <input type="text" name="login" id="login" ref={inputRef} />
+            <p>{errors.login}</p>
           </div>
-          <p>{errors.passOrig}</p>
-        </div>
-        <div>
-          <label htmlFor="passConf">Confirm password:</label>
-          <input type="password" name="passConf" id="passConf" ref={inputRef} autoComplete="false" />
-          <p>{errors.passConf}</p>
-        </div>
-        <div>
-          <label htmlFor="sex">Gender:</label>
-          <select name="sex" id="sex" defaultValue="" ref={inputRef}>
-            <option value="" disabled hidden></option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-          <p>{errors.sex}</p>
-        </div>
-        <div>
-          <label htmlFor="confirm">Accept Terms and Conditions agreement:</label>
-          <input type="checkbox" name="confirm" id="confirm" ref={inputRef} />
-          <p>{errors.confirm}</p>
-        </div>
-        <div>
-          <label htmlFor="image">Upload Image:</label>
-          <input type="file" name="image" id="image" ref={inputRef} onChange={(event) => encodeImageFileAsURL(event)} />
-          <p>{errors.image}</p>
-        </div>
-        <div>
-          <label htmlFor="country">Country:</label>
-          <select name="country" id="country" defaultValue="" ref={inputRef}>
-            <option value="" disabled hidden></option>
-            <CountryOpts />
-          </select>
-          <p>{errors.country}</p>
-        </div>
+          <div>
+            <label htmlFor="age">Age:</label>
+            <input type="number" name="age" id="age" defaultValue={0} ref={inputRef} />
+            <p>{errors.age}</p>
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input type="email" name="email" id="email" ref={inputRef} />
+            <p>{errors.email}</p>
+          </div>
+          <div>
+            <label htmlFor="passOrig">Password:</label>
+            <input
+              type="password"
+              name="passOrig"
+              id="passOrig"
+              ref={inputRef}
+              autoComplete="false"
+              onChange={(event) => passwordReliabilityChecker(event)}
+            />
+            <div className="reliability_cont">
+              <div className={`reliability_meter ${rel}`}></div>
+            </div>
+            <p>{errors.passOrig}</p>
+          </div>
+          <div>
+            <label htmlFor="passConf">Confirm password:</label>
+            <input type="password" name="passConf" id="passConf" ref={inputRef} autoComplete="false" />
+            <p>{errors.passConf}</p>
+          </div>
+          <div>
+            <label htmlFor="sex">Gender:</label>
+            <select name="sex" id="sex" defaultValue="" ref={inputRef}>
+              <option value="" disabled hidden></option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <p>{errors.sex}</p>
+          </div>
+          <div>
+            <label htmlFor="confirm">Accept Terms and Conditions agreement:</label>
+            <input type="checkbox" name="confirm" id="confirm" ref={inputRef} />
+            <p>{errors.confirm}</p>
+          </div>
+          <div>
+            <label htmlFor="image">Upload Image:</label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              ref={inputRef}
+              onChange={(event) => encodeImageFileAsURL(event)}
+            />
+            <p>{errors.image}</p>
+          </div>
+          <div>
+            <label htmlFor="country">Country:</label>
+            <select name="country" id="country" defaultValue="" ref={inputRef}>
+              <option value="" disabled hidden></option>
+              <CountryOpts />
+            </select>
+            <p>{errors.country}</p>
+          </div>
 
-        <button type="submit">Submit</button>
-      </form>
+          <button type="submit">Submit</button>
+        </form>
+      </main>
     </>
   )
 }
