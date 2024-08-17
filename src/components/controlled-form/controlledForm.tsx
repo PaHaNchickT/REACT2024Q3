@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { imageData } from '../types'
 import { schema } from '../../services/yupSchema'
 import { addState } from '../../services/stateSlice'
-// import { TEXT_CONTENT } from '../constants'
+import { TEXT_CONTENT } from '../constants'
 
 export function ControlledForm() {
   const navigate = useNavigate()
@@ -53,11 +53,11 @@ export function ControlledForm() {
   return (
     <>
       <header>
-        <Link to="/">Main Page</Link>
+        <Link to="/">{TEXT_CONTENT.mainTitle}</Link>
       </header>
 
       <main>
-        <h1>Controlled Form</h1>
+        <h1>{TEXT_CONTENT.contrHeading}</h1>
         <form
           onSubmit={handleSubmit((data) => {
             const tempObj = { imageURL: imageData } as { [key: string]: string }

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { formData, reduxStore } from '../types'
 import { useEffect } from 'react'
 import { clearState } from '../../services/stateSlice'
-import { FORM_DATA_EMPTY } from '../constants'
+import { FORM_DATA_EMPTY, TEXT_CONTENT } from '../constants'
 
 export function Table(props: { data: formData; tableTitle: string; name: string }) {
   const state = useSelector((state: reduxStore) => state.state.lastModified)
@@ -27,7 +27,7 @@ export function Table(props: { data: formData; tableTitle: string; name: string 
         {tableHeader}
         <tbody>
           <tr>
-            <td>Fill out the form to see your data</td>
+            <td>{TEXT_CONTENT.tablePH}</td>
           </tr>
         </tbody>
       </table>
@@ -38,33 +38,33 @@ export function Table(props: { data: formData; tableTitle: string; name: string 
       {tableHeader}
       <tbody>
         <tr>
-          <td>Name: </td>
+          <td>{TEXT_CONTENT.fields.login}</td>
           <td>{props.data.login}</td>
         </tr>
         <tr>
-          <td>Age: </td>
+          <td>{TEXT_CONTENT.fields.age}</td>
           <td>{props.data.age}</td>
         </tr>
         <tr>
-          <td>Email: </td>
+          <td>{TEXT_CONTENT.fields.email}</td>
           <td>{props.data.email}</td>
         </tr>
         <tr>
-          <td>Password: </td>
+          <td>{TEXT_CONTENT.fields.passGlobal}</td>
           <td>{props.data.passOrig}</td>
         </tr>
         <tr>
-          <td>Gender: </td>
+          <td>{TEXT_CONTENT.fields.sex}</td>
           <td>{props.data.sex}</td>
         </tr>
         <tr>
-          <td>Image: </td>
+          <td>{TEXT_CONTENT.fields.image}</td>
           <td>
             <img src={props.data.imageURL} alt={props.data.imageName} width="300px" />
           </td>
         </tr>
         <tr>
-          <td>Country: </td>
+          <td>{TEXT_CONTENT.fields.country}</td>
           <td>{props.data.country}</td>
         </tr>
       </tbody>

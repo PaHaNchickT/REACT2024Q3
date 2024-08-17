@@ -7,7 +7,7 @@ import { formErrors, reduxStore } from '../types'
 import { schema } from '../../services/yupSchema'
 import { addState } from '../../services/stateSlice'
 import { setURL } from '../../services/imageSlice'
-// import { TEXT_CONTENT } from '../constants'
+import { TEXT_CONTENT } from '../constants'
 
 export function UncontrolledForm() {
   const navigate = useNavigate()
@@ -92,11 +92,11 @@ export function UncontrolledForm() {
   return (
     <>
       <header>
-        <Link to="/">Main Page</Link>
+        <Link to="/">{TEXT_CONTENT.mainTitle}</Link>
       </header>
 
       <main>
-        <h1>Uncontrolled Form</h1>
+        <h1>{TEXT_CONTENT.uncontrHeading}</h1>
 
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className={`form__default ${!errors.login && 'div-empty'}`}>
