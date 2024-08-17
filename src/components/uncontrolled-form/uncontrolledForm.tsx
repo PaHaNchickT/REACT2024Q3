@@ -97,23 +97,27 @@ export function UncontrolledForm() {
 
       <main>
         <h1>Uncontrolled Form</h1>
+
         <form onSubmit={(event) => handleSubmit(event)}>
-          <div>
+          <div className={`form__default ${!errors.login && 'div-empty'}`}>
             <label htmlFor="login">Name:</label>
             <input type="text" name="login" id="login" ref={inputRef} />
-            <p>{errors.login}</p>
+            <p className={`${!errors.login && 'empty'}`}>{errors.login}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.age && 'div-empty'}`}>
             <label htmlFor="age">Age:</label>
             <input type="number" name="age" id="age" defaultValue={0} ref={inputRef} />
-            <p>{errors.age}</p>
+            <p className={`${!errors.age && 'empty'}`}>{errors.age}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.email && 'div-empty'}`}>
             <label htmlFor="email">Email:</label>
             <input type="email" name="email" id="email" ref={inputRef} />
-            <p>{errors.email}</p>
+            <p className={`${!errors.email && 'empty'}`}>{errors.email}</p>
           </div>
-          <div>
+
+          <div className={`form__password ${!errors.passOrig && 'div-empty'}`}>
             <label htmlFor="passOrig">Password:</label>
             <input
               type="password"
@@ -126,28 +130,32 @@ export function UncontrolledForm() {
             <div className="reliability_cont">
               <div className={`reliability_meter ${rel}`}></div>
             </div>
-            <p>{errors.passOrig}</p>
+            <p className={`${!errors.passOrig && 'empty'}`}>{errors.passOrig}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.passConf && 'div-empty'}`}>
             <label htmlFor="passConf">Confirm password:</label>
             <input type="password" name="passConf" id="passConf" ref={inputRef} autoComplete="false" />
-            <p>{errors.passConf}</p>
+            <p className={`${!errors.passConf && 'empty'}`}>{errors.passConf}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.sex && 'div-empty'}`}>
             <label htmlFor="sex">Gender:</label>
             <select name="sex" id="sex" defaultValue="" ref={inputRef}>
               <option value="" disabled hidden></option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
-            <p>{errors.sex}</p>
+            <p className={`${!errors.sex && 'empty'}`}>{errors.sex}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.confirm && 'div-empty'}`}>
             <label htmlFor="confirm">Accept Terms and Conditions agreement:</label>
             <input type="checkbox" name="confirm" id="confirm" ref={inputRef} />
-            <p>{errors.confirm}</p>
+            <p className={`${!errors.confirm && 'empty'}`}>{errors.confirm}</p>
           </div>
-          <div>
+
+          <div className={`form__image ${!errors.image && 'div-empty'}`}>
             <label htmlFor="image">Upload Image:</label>
             <input
               type="file"
@@ -156,15 +164,16 @@ export function UncontrolledForm() {
               ref={inputRef}
               onChange={(event) => encodeImageFileAsURL(event)}
             />
-            <p>{errors.image}</p>
+            <p className={`${!errors.image && 'empty'}`}>{errors.image}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.country && 'div-empty'}`}>
             <label htmlFor="country">Country:</label>
             <select name="country" id="country" defaultValue="" ref={inputRef}>
               <option value="" disabled hidden></option>
               <CountryOpts />
             </select>
-            <p>{errors.country}</p>
+            <p className={`${!errors.country && 'empty'}`}>{errors.country}</p>
           </div>
 
           <button type="submit">Submit</button>

@@ -5,7 +5,7 @@ form
   display: flex
   flex-direction: column
   justify-content: center
-  gap: 15px
+  gap: 10px
   width: 450px
 
 form > div > label
@@ -42,3 +42,15 @@ form > button
 .high
   width: 100%
   background-color: #00CC00
+
+.form__default.div-empty, .form__password.div-empty, .form__image.div-empty
+  height: 28px
+
+.form__default.false
+  height: 38px
+
+.form__password.false, .form__image.false
+  height: 60px
+
+.empty
+  font-size: 0px

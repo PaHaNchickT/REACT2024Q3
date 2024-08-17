@@ -70,58 +70,66 @@ export function ControlledForm() {
             navigate('/')
           })}
         >
-          <div>
+          <div className={`form__default ${!errors.login && 'div-empty'}`}>
             <label htmlFor="login">Name:</label>
             <input type="text" id="login" {...register('login')} />
-            <p>{errors.login?.message}</p>
+            <p className={`${!errors.login && 'empty'}`}>{errors.login?.message}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.age && 'div-empty'}`}>
             <label htmlFor="age">Age:</label>
             <input type="number" id="age" {...register('age')} />
-            <p>{errors.age?.message}</p>
+            <p className={`${!errors.age && 'empty'}`}>{errors.age?.message}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.email && 'div-empty'}`}>
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" {...register('email')} />
-            <p>{errors.email?.message}</p>
+            <p className={`${!errors.email && 'empty'}`}>{errors.email?.message}</p>
           </div>
-          <div>
+
+          <div className={`form__password ${!errors.passOrig && 'div-empty'}`}>
             <label htmlFor="passOrig">Password:</label>
             <input type="password" id="passOrig" {...register('passOrig')} autoComplete="false" />
             <div className="reliability_cont">
               <div className={`reliability_meter ${passwordReliabilityChecker()}`}></div>
             </div>
-            <p>{errors.passOrig?.message}</p>
+            <p className={`${!errors.passOrig && 'empty'}`}>{errors.passOrig?.message}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.passConf && 'div-empty'}`}>
             <label htmlFor="passConf">Confirm password:</label>
             <input type="password" id="passConf" {...register('passConf')} autoComplete="false" />
-            <p>{errors.passConf?.message}</p>
+            <p className={`${!errors.passConf && 'empty'}`}>{errors.passConf?.message}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.sex && 'div-empty'}`}>
             <label htmlFor="sex">Gender:</label>
             <select id="sex" {...register('sex')}>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
-            <p>{errors.sex?.message}</p>
+            <p className={`${!errors.sex && 'empty'}`}>{errors.sex?.message}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.confirm && 'div-empty'}`}>
             <label htmlFor="confirm">Accept Terms and Conditions agreement:</label>
             <input type="checkbox" id="confirm" {...register('confirm')} />
-            <p>{errors.confirm?.message}</p>
+            <p className={`${!errors.confirm && 'empty'}`}>{errors.confirm?.message}</p>
           </div>
-          <div>
+
+          <div className={`form__image ${!errors.image && 'div-empty'}`}>
             <label htmlFor="image">Upload Image:</label>
             <input type="file" id="image" {...register('image')} />
-            <p>{errors.image?.message}</p>
+            <p className={`${!errors.image && 'empty'}`}>{errors.image?.message}</p>
           </div>
-          <div>
+
+          <div className={`form__default ${!errors.country && 'div-empty'}`}>
             <label htmlFor="country">Country:</label>
             <select id="country" {...register('country')}>
               <CountryOpts />
             </select>
-            <p>{errors.country?.message}</p>
+            <p className={`${!errors.country && 'empty'}`}>{errors.country?.message}</p>
           </div>
 
           <button type="submit" disabled={Boolean(Object.keys(errors).length)}>
