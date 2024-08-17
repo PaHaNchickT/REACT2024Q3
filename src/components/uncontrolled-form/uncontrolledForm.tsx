@@ -98,26 +98,27 @@ export function UncontrolledForm() {
       <Link to="/">Main Page</Link>
 
       <form onSubmit={(event) => handleSubmit(event)}>
-        <label>
-          Name:
-          <input type="text" name="login" ref={inputRef} />
+        <div>
+          <label htmlFor="login">Name:</label>
+          <input type="text" name="login" id="login" ref={inputRef} />
           <p>{errors.login}</p>
-        </label>
-        <label>
-          Age:
-          <input type="number" name="age" defaultValue={0} ref={inputRef} />
+        </div>
+        <div>
+          <label htmlFor="age">Age:</label>
+          <input type="number" name="age" id="age" defaultValue={0} ref={inputRef} />
           <p>{errors.age}</p>
-        </label>
-        <label>
-          Email:
-          <input type="email" name="email" ref={inputRef} />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input type="email" name="email" id="email" ref={inputRef} />
           <p>{errors.email}</p>
-        </label>
-        <label>
-          Password:
+        </div>
+        <div>
+          <label htmlFor="passOrig">Password:</label>
           <input
             type="password"
             name="passOrig"
+            id="passOrig"
             ref={inputRef}
             autoComplete="false"
             onChange={(event) => passwordReliabilityChecker(event)}
@@ -126,39 +127,39 @@ export function UncontrolledForm() {
             <div className="reliability_meter">{rel}</div>
           </div>
           <p>{errors.passOrig}</p>
-        </label>
-        <label>
-          Confirm password:
-          <input type="password" name="passConf" ref={inputRef} autoComplete="false" />
+        </div>
+        <div>
+          <label htmlFor="passConf">Confirm password:</label>
+          <input type="password" name="passConf" id="passConf" ref={inputRef} autoComplete="false" />
           <p>{errors.passConf}</p>
-        </label>
-        <label>
-          Gender:
-          <select name="sex" defaultValue="" ref={inputRef}>
+        </div>
+        <div>
+          <label htmlFor="sex">Gender:</label>
+          <select name="sex" id="sex" defaultValue="" ref={inputRef}>
             <option value="" disabled hidden></option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
           <p>{errors.sex}</p>
-        </label>
-        <label>
-          Accept Terms and Conditions agreement:
-          <input type="checkbox" name="confirm" ref={inputRef} />
+        </div>
+        <div>
+          <label htmlFor="confirm">Accept Terms and Conditions agreement:</label>
+          <input type="checkbox" name="confirm" id="confirm" ref={inputRef} />
           <p>{errors.confirm}</p>
-        </label>
-        <label>
-          Upload Image:
-          <input type="file" name="image" ref={inputRef} onChange={(event) => encodeImageFileAsURL(event)} />
+        </div>
+        <div>
+          <label htmlFor="image">Upload Image:</label>
+          <input type="file" name="image" id="image" ref={inputRef} onChange={(event) => encodeImageFileAsURL(event)} />
           <p>{errors.image}</p>
-        </label>
-        <label>
-          Country:
-          <select name="country" defaultValue="" ref={inputRef}>
+        </div>
+        <div>
+          <label htmlFor="country">Country:</label>
+          <select name="country" id="country" defaultValue="" ref={inputRef}>
             <option value="" disabled hidden></option>
             <CountryOpts />
           </select>
           <p>{errors.country}</p>
-        </label>
+        </div>
 
         <button type="submit">Submit</button>
       </form>
