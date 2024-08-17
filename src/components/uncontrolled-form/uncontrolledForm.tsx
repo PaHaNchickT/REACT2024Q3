@@ -13,7 +13,6 @@ export function UncontrolledForm() {
   const inputRef = useRef(null)
 
   const [errors, setErrors] = useState({} as formErrors)
-  const [isValid, setValid] = useState(true)
 
   console.log
   const handleSubmit = async (event: FormEvent) => {
@@ -45,7 +44,6 @@ export function UncontrolledForm() {
       errors = errorsTemp
     }
     setErrors(errors as SetStateAction<formErrors>)
-    setValid(schema.isValidSync(''))
 
     if (!Object.keys(errors).length) {
       dispatch(
@@ -87,12 +85,7 @@ export function UncontrolledForm() {
       <p>Uncontrolled</p>
       <Link to="/">Main Page</Link>
 
-      <form
-        onSubmit={(event) => handleSubmit(event)}
-        onChange={() => {
-          setValid(true)
-        }}
-      >
+      <form onSubmit={(event) => handleSubmit(event)}>
         <label>
           Name:
           <input type="text" name="login" ref={inputRef} />
@@ -146,9 +139,7 @@ export function UncontrolledForm() {
           <p>{errors.country}</p>
         </label>
 
-        <button type="submit" disabled={!isValid}>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </>
   )
