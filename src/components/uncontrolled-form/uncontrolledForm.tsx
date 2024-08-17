@@ -11,6 +11,7 @@ export function UncontrolledForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const inputRef = useRef(null)
+  let imageData: ArrayBuffer | string = ''
 
   const [errors, setErrors] = useState({} as formErrors)
   const [rel, setRel] = useState('low')
@@ -66,6 +67,7 @@ export function UncontrolledForm() {
           passOrig: form.passOrig.value,
           sex: form.sex.value,
           imageName: form.image.files[0].name,
+          imageURL: imageData,
           country: form.country.value,
         })
       )
@@ -84,11 +86,7 @@ export function UncontrolledForm() {
     reader.onloadend = function () {
       console.log('load ended')
 
-      dispatch(
-        setUncontrData({
-          imageURL: reader.result,
-        })
-      )
+      imageData = reader.result as ArrayBuffer
     }
   }
 

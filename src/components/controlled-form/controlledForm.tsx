@@ -13,6 +13,7 @@ import { schema } from '../../services/yupSchema'
 export function ControlledForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  let imageData: ArrayBuffer | string = ''
 
   const {
     register,
@@ -47,11 +48,7 @@ export function ControlledForm() {
       reader.onloadend = function () {
         console.log('load ended')
 
-        dispatch(
-          setContrData({
-            imageURL: reader.result,
-          })
-        )
+        imageData = reader.result as ArrayBuffer
       }
     }
   }, [(watch('image') as unknown as imageData[])[0]])
@@ -63,7 +60,7 @@ export function ControlledForm() {
 
       <form
         onSubmit={handleSubmit((data) => {
-          const tempObj = {} as { [key: string]: string }
+          const tempObj = { imageURL: imageData } as { [key: string]: string }
           for (const key in data) {
             if (key !== 'image') tempObj[key] = (data as unknown as { [key: string]: string })[key]
           }
