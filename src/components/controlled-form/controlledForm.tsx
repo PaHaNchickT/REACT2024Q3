@@ -41,14 +41,10 @@ export function ControlledForm() {
 
   useEffect(() => {
     if ((watch('image') as unknown as imageData[])[0]) {
-      console.log('load started')
-
       const reader = new FileReader()
 
       reader.readAsDataURL((watch('image') as unknown as imageData[])[0] as unknown as Blob)
       reader.onloadend = function () {
-        console.log('load ended')
-
         setURL(reader.result as SetStateAction<string>)
       }
     }

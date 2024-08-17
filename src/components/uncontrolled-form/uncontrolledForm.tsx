@@ -80,15 +80,11 @@ export function UncontrolledForm() {
   }
 
   function encodeImageFileAsURL(event: ChangeEvent) {
-    console.log('load started')
-
     const element = event.target as HTMLInputElement
     const reader = new FileReader()
 
     reader.readAsDataURL(element.files![0])
     reader.onloadend = function () {
-      console.log('load ended')
-
       dispatch(setURL(reader.result))
     }
   }
