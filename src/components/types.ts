@@ -38,4 +38,5 @@ export type reduxStore = {
   uncontrData: { uncontrData: formData }
   countries: { countries: string[] }
   state: { lastModified: string }
+  image: { URL: string }
 }

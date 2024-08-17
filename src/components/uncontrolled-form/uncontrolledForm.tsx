@@ -2,18 +2,19 @@ import { ChangeEvent, FormEvent, SetStateAction, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CountryOpts } from '../country-options/countryOpts'
 import { setUncontrData } from '../../services/uncontrSlice'
-import { useDispatch } from 'react-redux'
-import { formErrors } from '../types'
+import { useDispatch, useSelector } from 'react-redux'
+import { formErrors, reduxStore } from '../types'
 import { schema } from '../../services/yupSchema'
 import { addState } from '../../services/stateSlice'
+import { setURL } from '../../services/imageSlice'
 // import { TEXT_CONTENT } from '../constants'
 
 export function UncontrolledForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const inputRef = useRef(null)
-  let imageData: ArrayBuffer | string = ''
 
+  const imageURL = useSelector((state: reduxStore) => state.image.URL)
   const [errors, setErrors] = useState({} as formErrors)
   const [rel, setRel] = useState('low')
 
@@ -68,7 +69,7 @@ export function UncontrolledForm() {
           passOrig: form.passOrig.value,
           sex: form.sex.value,
           imageName: form.image.files[0].name,
-          imageURL: imageData,
+          imageURL: imageURL,
           country: form.country.value,
         })
       )
@@ -88,7 +89,7 @@ export function UncontrolledForm() {
     reader.onloadend = function () {
       console.log('load ended')
 
-      imageData = reader.result as ArrayBuffer
+      dispatch(setURL(reader.result))
     }
   }
 

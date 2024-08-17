@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { SetStateAction, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CountryOpts } from '../country-options/countryOpts'
 import { useDispatch } from 'react-redux'
@@ -14,7 +14,7 @@ import { addState } from '../../services/stateSlice'
 export function ControlledForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  let imageData: ArrayBuffer | string = ''
+  const [imageData, setURL] = useState('')
 
   const {
     register,
@@ -49,7 +49,7 @@ export function ControlledForm() {
       reader.onloadend = function () {
         console.log('load ended')
 
-        imageData = reader.result as ArrayBuffer
+        setURL(reader.result as SetStateAction<string>)
       }
     }
   }, [(watch('image') as unknown as imageData[])[0]])
