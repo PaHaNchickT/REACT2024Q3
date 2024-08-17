@@ -54,7 +54,7 @@ export function ControlledForm() {
         onSubmit={handleSubmit((data) => {
           const tempObj = {} as { [key: string]: string }
           for (const key in data) {
-            if (key !== 'image') tempObj[key] = (data as unknown as { [key: string]: string })[key]
+            if (key !== 'imageContr') tempObj[key] = (data as unknown as { [key: string]: string })[key]
           }
 
           dispatch(setContrData(tempObj))
