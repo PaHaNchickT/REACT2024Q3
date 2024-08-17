@@ -12,7 +12,8 @@ export const FORM_DATA_EMPTY = {
   email: '',
   passOrig: '',
   sex: '',
-  image: '',
+  imageContr: '',
+  imageUncontr: '',
   imageURL: '',
   imageName: '',
   country: '',
@@ -26,6 +27,7 @@ export const FORM_DATA_DEFAULT = {
   passConf: '',
   sex: '',
   confirm: false,
-  image: '',
+  imageContr: '',
+  imageUncontr: '',
   country: '',
 }

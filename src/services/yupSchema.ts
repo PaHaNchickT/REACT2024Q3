@@ -18,7 +18,7 @@ export const schema = yup.object().shape({
   passConf: yup.string().oneOf([yup.ref('passOrig')], 'Passwords must match'),
   sex: yup.string().required(),
   confirm: yup.boolean().oneOf([true], 'Click ffs'),
-  image: yup
+  imageContr: yup
     .mixed()
     .required()
     .test('fileSize', "The file is too small or it's not have been loaded", (value) => {
@@ -28,6 +28,18 @@ export const schema = yup.object().shape({
       return (
         value && ((value as imageData[])[0].type === 'image/jpeg' || (value as imageData[])[0].type === 'image/png')
       )
+    }),
+  imageUncontr: yup
+    .mixed()
+    .required()
+    .test('type', 'Only the following formats are accepted: .jpeg, .jpg, and .png', (value) => {
+      return (
+        (value as imageData[])[0] &&
+        ((value as imageData[])[0].type === 'image/jpeg' || (value as imageData[])[0].type === 'image/png')
+      )
+    })
+    .test('fileSize', "The file is too small or it's not have been loaded", (value) => {
+      return (value as imageData[])[0] && (value as imageData[])[0].size >= 0
     }),
   country: yup.string().required(),
 })

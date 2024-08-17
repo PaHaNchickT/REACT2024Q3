@@ -12,10 +12,38 @@ export type formData = {
   age: number
   email: string
   passOrig: string
+  passConf?: string
   sex: string
-  image: imageData[]
-  imageURL: string
-  imageName: string
+  confirm?: boolean
+  imageContr: unknown
+  imageUncontr: unknown
+  country: string
+}
+
+// export type formData = {
+//   login: string
+//   age: number
+//   email: string
+//   passOrig: string
+//   passConf: string
+//   sex: string
+//   imageContr?: imageData[]
+//   imageUncontr?: imageData[]
+//   imageURL: string
+//   imageName: string
+//   confirm: boolean
+//   country: string
+// }
+
+export type formErrors = {
+  login: string
+  age: string
+  email: string
+  passOrig: string
+  passConf: string
+  sex: string
+  confirm: string
+  imageUncontr: string
   country: string
 }
 
