@@ -7,15 +7,13 @@ export function App() {
   const uncontrData = useSelector((state: reduxStore) => state.uncontrData.uncontrData)
   const contrData = useSelector((state: reduxStore) => state.contrData.contrData)
 
-  // console.log(uncontrData)
-
   return (
     <>
       <p>Main Page</p>
       <Link to="/uncontrolled">Uncontrolled</Link>
       <Link to="/controlled">Controlled</Link>
-      <Table data={uncontrData} tableTitle="Uncontrolled Form Data" />
-      <Table data={contrData} tableTitle="Controlled Form Data" />
+      <Table data={uncontrData} tableTitle="Uncontrolled Form Data" name="uncontrolled" />
+      <Table data={contrData} tableTitle="Controlled Form Data" name="controlled" />
     </>
   )
 }

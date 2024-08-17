@@ -1,8 +1,20 @@
-import { formData } from '../types'
+import { useDispatch, useSelector } from 'react-redux'
+import { formData, reduxStore } from '../types'
+import { useEffect } from 'react'
+import { clearState } from '../../services/stateSlice'
 
-export function Table(props: { data: formData; tableTitle: string }) {
+export function Table(props: { data: formData; tableTitle: string; name: string }) {
+  const state = useSelector((state: reduxStore) => state.state.lastModified)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearState())
+    }, 3000)
+  }, [])
+
   return (
-    <table>
+    <table className={`table-${props.name} ${(state === props.name && 'fresh') || ''}`}>
       <thead>
         <tr>
           <td colSpan={2}>{props.tableTitle}</td>

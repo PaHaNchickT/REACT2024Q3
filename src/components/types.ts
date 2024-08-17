@@ -16,6 +16,8 @@ export type formData = {
   sex: string
   confirm?: boolean
   image: imageData[]
+  imageURL?: string
+  imageName?: string
   country: string
 }
 
@@ -35,5 +37,5 @@ export type reduxStore = {
   contrData: { contrData: formData }
   uncontrData: { uncontrData: formData }
   countries: { countries: string[] }
-  state: { state: string }
+  state: { lastModified: string }
 }

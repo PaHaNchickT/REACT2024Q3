@@ -5,6 +5,7 @@ import { setUncontrData } from '../../services/uncontrSlice'
 import { useDispatch } from 'react-redux'
 import { formErrors } from '../types'
 import { schema } from '../../services/yupSchema'
+import { addState } from '../../services/stateSlice'
 // import { TEXT_CONTENT } from '../constants'
 
 export function UncontrolledForm() {
@@ -72,6 +73,7 @@ export function UncontrolledForm() {
         })
       )
 
+      dispatch(addState('uncontrolled'))
       navigate('/')
     }
   }

@@ -8,6 +8,7 @@ import { FORM_DATA_DEFAULT } from '../constants'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { imageData } from '../types'
 import { schema } from '../../services/yupSchema'
+import { addState } from '../../services/stateSlice'
 // import { TEXT_CONTENT } from '../constants'
 
 export function ControlledForm() {
@@ -66,6 +67,7 @@ export function ControlledForm() {
           }
 
           dispatch(setContrData(tempObj))
+          dispatch(addState('controlled'))
           navigate('/')
         })}
       >
