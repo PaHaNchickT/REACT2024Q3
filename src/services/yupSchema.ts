@@ -12,7 +12,7 @@ export const schema = yup.object().shape({
     .string()
     .required()
     .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{6,}$/,
+      /^(?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\W).{6,}$/,
       '1 number, 1 uppercased letter, 1 lowercased letter, 1 special character, 6 chars min'
     ),
   passConf: yup.string().oneOf([yup.ref('passOrig')], 'Passwords must match'),
