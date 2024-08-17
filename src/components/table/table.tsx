@@ -2,10 +2,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { formData, reduxStore } from '../types'
 import { useEffect } from 'react'
 import { clearState } from '../../services/stateSlice'
+import { FORM_DATA_EMPTY } from '../constants'
 
 export function Table(props: { data: formData; tableTitle: string; name: string }) {
   const state = useSelector((state: reduxStore) => state.state.lastModified)
   const dispatch = useDispatch()
+  const tableHeader = (
+    <thead>
+      <tr>
+        <td colSpan={2}>{props.tableTitle}</td>
+      </tr>
+    </thead>
+  )
 
   useEffect(() => {
     setTimeout(() => {
@@ -13,13 +21,21 @@ export function Table(props: { data: formData; tableTitle: string; name: string 
     }, 3000)
   }, [])
 
+  if (props.data === FORM_DATA_EMPTY)
+    return (
+      <table>
+        {tableHeader}
+        <tbody>
+          <tr>
+            <td>Fill out the form to see your data</td>
+          </tr>
+        </tbody>
+      </table>
+    )
+
   return (
     <table className={`table-${props.name} ${(state === props.name && 'fresh') || ''}`}>
-      <thead>
-        <tr>
-          <td colSpan={2}>{props.tableTitle}</td>
-        </tr>
-      </thead>
+      {tableHeader}
       <tbody>
         <tr>
           <td>Name: </td>

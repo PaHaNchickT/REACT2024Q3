@@ -11,11 +11,13 @@ export const FORM_DATA_EMPTY = {
   age: 0,
   email: '',
   passOrig: '',
+  passConf: '',
   sex: '',
-  image: '',
+  image: [],
   imageURL: '',
   imageName: '',
   country: '',
+  confirm: false,
 }
 
 export const FORM_DATA_DEFAULT = {
