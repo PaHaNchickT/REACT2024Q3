@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap")
+
+p, h2, h3, ul
+  margin: 0
+
+h1
+  text-align: center
+  color: white
+
+*
+  transition: 300ms
+
+body, button, input
+  margin: 0
+  font-family: Inter
+
+button, a
+  cursor: pointer
+  border: none
+  padding: 6px 15px
+  border-radius: 5px
+  font-weight: 500
+  text-decoration: none
+  font-size: 14px
+  text-align: center
+  background-color: #006363
+  box-shadow: 0 0 5px 2px #5CCCCC
+  color: white
+  &:hover
+    color: black
+    background-color: #5CCCCC
+    box-shadow: 0 0 5px 2px #006363
+  &:disabled
+    background-color: #585858
+    &:hover
+    color: white
+    background-color: #585858
+    box-shadow: none
+    cursor: auto
+
+#root
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 50px
+  box-sizing: border-box
+  min-height: 100vh
+  height: 100%
+  background-color: #009999
+  padding-bottom: 50px
+
+header
+  background-color: #585858
+  width: 100%
+  height: 70px
+  display: flex
+  justify-content: center
+  align-items: center
+  gap: 20px
+
+main
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+  gap: 50px
+
+table
+  background-color: white
+  border: 1px solid black
+  border-spacing: 0
+
+td
+  box-sizing: border-box
+  border: 1px solid black
+  text-align: center
+  padding: 5px 10px
+
+thead > tr > td
+  font-weight: 700
+
+.fresh
+  background-color: #39E639
+  box-shadow: 0 0 5px 2px white
