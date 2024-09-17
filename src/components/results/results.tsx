@@ -6,12 +6,13 @@ import { numberToArray } from '../../utils/numberToArray'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsClosed } from '../../services/detailsSlice'
 import { Details } from '../details/details'
-import { ChangeEvent, MouseEvent } from 'react'
+import { ChangeEvent, MouseEvent, SetStateAction, useState } from 'react'
 import { addItemData, removeItemData } from '../../services/selectedSlice'
 import { Selected } from '../selected-panel/selected-info'
-import { useSearchParams, useRouter } from 'next/navigation'
 import { itemsToArray } from '../../utils/itemsToArray'
 import ErrorPage from '../../app/not-found'
+import { API } from '../../services/API'
+// import { Loader } from '../loader/loader'
 
 export function Results({ data }: { data: { results: FilmResp; details?: FilmInfo } }) {
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
@@ -19,14 +20,15 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
   const selectedItems: number[] = itemsToArray(selectedData.selectedItems)
 
-  const router = useRouter()
+  const [clientData, setClientData] = useState({})
+  const [detailsLoading, setDetailsLoading] = useState(true)
+
   const dispatch = useDispatch()
-  const searchParams = useSearchParams()
 
   if (!data.results.items) return <ErrorPage />
 
   // function for open details section
-  const openDetails = (event: MouseEvent) => {
+  const openDetails = async (event: MouseEvent) => {
     if (detailsData.isClosed || (event.target as HTMLElement).tagName === 'INPUT') return
 
     dispatch(
@@ -36,7 +38,10 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
       })
     )
 
-    router.push(`films/${(event.currentTarget as HTMLDivElement).id}?${searchParams.toString()}`)
+    setDetailsLoading(true)
+    const data = await API().getFilm(event.currentTarget.id)
+    setDetailsLoading(false)
+    setClientData(data as unknown as SetStateAction<{ kinopoiskId: number }>)
   }
 
   // function for close details section
@@ -54,8 +59,6 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
         filmId: 0,
       })
     )
-
-    router.back()
   }
 
   // function for open/closing selected bar
@@ -134,7 +137,9 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
   return (
     <section className="results__cont">
       {resultsUI}
-      {detailsData.isClosed && <Details results={data.details} closeDetails={closeDetails} />}
+      {detailsData.isClosed && (
+        <Details results={clientData as FilmInfo} isLoading={detailsLoading} closeDetails={closeDetails} />
+      )}
     </section>
   )
 }

@@ -1,17 +1,15 @@
 import { Loader } from '../loader/loader'
 import { FilmInfo, reduxStore } from '../types'
 import { useSelector } from 'react-redux'
-import { MouseEvent, useState } from 'react'
+import { MouseEvent } from 'react'
 
-export function Details(props: { results?: FilmInfo; closeDetails: (event: MouseEvent<HTMLDivElement>) => void }) {
+export function Details(props: {
+  results?: FilmInfo
+  isLoading: boolean
+  closeDetails: (event: MouseEvent<HTMLDivElement>) => void
+}) {
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
-  const [loading, setLoading] = useState(true)
-
   if (!props.results || !props.results.data) return
-
-  setTimeout(() => {
-    setLoading(false)
-  }, 1000)
 
   let genres
   if (props.results.data.genres)
@@ -61,7 +59,7 @@ export function Details(props: { results?: FilmInfo; closeDetails: (event: Mouse
       </a>
     </>
   )
-  if (loading) resultsUI = <Loader theme="details" />
+  if (props.isLoading) resultsUI = <Loader theme="details" />
 
   return (
     <div className={`details__cont ${theme.color}`} data-testid="details__cont">
