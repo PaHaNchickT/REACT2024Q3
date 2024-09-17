@@ -7,7 +7,7 @@ export function generateStaticParams() {
   return [{ slug: ['id'] }]
 }
 
-export const getFilm = async (id: string) => {
+const getFilm = async (id: string) => {
   const data = await API().getFilm(id)
 
   if (!data) {
