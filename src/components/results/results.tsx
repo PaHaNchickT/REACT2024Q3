@@ -12,20 +12,24 @@ import { Selected } from '../selected-panel/selected-info'
 import { itemsToArray } from '../../utils/itemsToArray'
 import ErrorPage from '../../app/not-found'
 import { API } from '../../services/API'
-// import { Loader } from '../loader/loader'
+import { Loader } from '../loader/loader'
 
-export function Results({ data }: { data: { results: FilmResp; details?: FilmInfo } }) {
+export function Results(props: {
+  data: { results: FilmResp; details?: FilmInfo }
+  loaderHandler: () => void
+  isLoading: boolean
+}) {
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const detailsData = useSelector((state: reduxStore) => state.detailsData.detailsData)
   const selectedData = useSelector((state: reduxStore) => state.selectedData.selectedData)
   const selectedItems: number[] = itemsToArray(selectedData.selectedItems)
 
   const [clientData, setClientData] = useState({})
-  const [detailsLoading, setDetailsLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   const dispatch = useDispatch()
 
-  if (!data.results.items) return <ErrorPage />
+  if (!props.data.results.items) return <ErrorPage />
 
   // function for open details section
   const openDetails = async (event: MouseEvent) => {
@@ -38,9 +42,9 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
       })
     )
 
-    setDetailsLoading(true)
+    setLoading(true)
     const data = await API().getFilm(event.currentTarget.id)
-    setDetailsLoading(false)
+    setLoading(false)
     setClientData(data as unknown as SetStateAction<{ kinopoiskId: number }>)
   }
 
@@ -64,7 +68,7 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
   // function for open/closing selected bar
   const checkboxHandling = (event: ChangeEvent) => {
     let targetItemData
-    data.results.items.forEach((item: FilmObj) => {
+    props.data.results.items.forEach((item: FilmObj) => {
       if (item.kinopoiskId === +(event.target as HTMLInputElement).name) targetItemData = item
     })
 
@@ -75,14 +79,14 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
     }
   }
 
-  data.results.items.forEach((defaultItem: FilmObj) => {
+  props.data.results.items.forEach((defaultItem: FilmObj) => {
     selectedData.selectedItems.forEach((selectedItem) => {
       if (defaultItem === selectedItem) selectedItems.push(defaultItem.kinopoiskId)
     })
   })
 
   // rendering results UI
-  const films = data.results.items.map((film: FilmObj) => (
+  const films = props.data.results.items.map((film: FilmObj) => (
     <div
       className={`results__item ${theme.color}`}
       data-testid="results__item"
@@ -122,7 +126,9 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
     </div>
   ))
 
-  const pages = numberToArray(data.results.totalPages).map((page) => <Pagination page={page} key={page} />)
+  const pages = numberToArray(props.data.results.totalPages).map((page) => (
+    <Pagination page={page} key={page} loaderHandler={props.loaderHandler} />
+  ))
 
   let resultsUI = (
     <div className="results__wrapper" onClick={(event) => closeDetails(event)}>
@@ -132,13 +138,15 @@ export function Results({ data }: { data: { results: FilmResp; details?: FilmInf
     </div>
   )
 
-  if (!data.results.items.length) resultsUI = <NoResults />
+  if (props.isLoading) resultsUI = <Loader theme="default" />
+
+  if (!props.data.results.items.length) resultsUI = <NoResults />
 
   return (
     <section className="results__cont">
       {resultsUI}
       {detailsData.isClosed && (
-        <Details results={clientData as FilmInfo} isLoading={detailsLoading} closeDetails={closeDetails} />
+        <Details results={clientData as FilmInfo} isLoading={loading} closeDetails={closeDetails} />
       )}
     </section>
   )

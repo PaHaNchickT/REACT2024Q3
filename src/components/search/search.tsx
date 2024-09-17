@@ -6,7 +6,7 @@ import { reduxStore } from '../types'
 import { setTheme } from '../../services/themeSlice'
 import { setIsClosed } from '../../services/detailsSlice'
 
-export function Search() {
+export function Search(props: { loaderHandler: () => void }) {
   const router = useRouter()
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
@@ -15,6 +15,8 @@ export function Search() {
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
   const searchButtonHandler = () => {
+    props.loaderHandler()
+
     if (inputValue !== '') {
       localStorage.setItem('paul-saved-value', inputValue)
 

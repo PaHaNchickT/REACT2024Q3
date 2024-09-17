@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { reduxStore } from '../types'
 import Link from 'next/link'
 
-export function Pagination(props: { page: number }) {
+export function Pagination(props: { page: number; loaderHandler: () => void }) {
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -18,6 +18,7 @@ export function Pagination(props: { page: number }) {
         id={props.page.toString()}
         className={`${buttonClassname} ${theme.color}`}
         data-testid="pendingBtn"
+        onClick={() => props.loaderHandler()}
       >
         {props.page}
       </Link>
