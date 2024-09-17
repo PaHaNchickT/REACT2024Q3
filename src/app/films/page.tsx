@@ -2,7 +2,7 @@ import { FilmResp } from '../../components/types'
 import { API } from '../../services/API'
 import App from '../app'
 
-export const getFilms = async (query: { page: string; search: string }) => {
+const getFilms = async (query: { page: string; search: string }) => {
   const data = await API().getFilms({ value: query.search, page: query.page })
 
   if (!data) {
