@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "sources": [
+    "selected-info.sass",
+    "selected-info.css"
+  ],
+  "names": [],
+  "mappings": "AAAA;EACI,eAAA;EACA,kBAAA;EACA,mBAAA;EACA,aAAA;EACA,mBAAA;EACA,SAAA;EACA,sBAAA;EACA,YAAA;ACCJ;;ADCA;EACI,uBAAA;EACA,iCAAA;ACEJ;;ADAA;EACI,YAAA;EACA,uBAAA;EACA,+BAAA;ACGJ;;ADDA;EACI,gBAAA;ACIJ;;ADFA;EACI,gBAAA;EACA,iBAAA;ACKJ;;ADHA;EACI,cAAA;ACMJ;;ADJA;EACI,WAAA;ACOJ;;ADLA;EACI,aAAA;EACA,QAAA;ACQJ",
+  "file": "selected-info.css"
+}

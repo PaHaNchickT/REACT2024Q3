@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+p,
+h2,
+h3,
+ul {
+  margin: 0;
+}
+
+* {
+  transition: 300ms;
+}
+
+body,
+button,
+input {
+  margin: 0;
+  font-family: Inter;
+}
+
+button,
+a {
+  cursor: pointer;
+  border: none;
+  padding: 6px 15px;
+  border-radius: 5px;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+}
+
+button.light,
+a.light {
+  background-color: black;
+  color: white;
+}
+button.light:hover,
+a.light:hover {
+  color: black;
+  background-color: #ffc873;
+  box-shadow: 0 0 5px 2px #a66400;
+}
+
+button.dark,
+a.dark {
+  background-color: white;
+  color: black;
+}
+button.dark:hover,
+a.dark:hover {
+  color: white;
+  background-color: dimgray;
+  box-shadow: 0 0 5px 2px white;
+}
+
+.root__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.root__wrapper.light {
+  background: linear-gradient(#ff9a00, black);
+}
+
+.root__wrapper.dark {
+  background: linear-gradient(black, dimgray);
+} /*# sourceMappingURL=global.css.map */
