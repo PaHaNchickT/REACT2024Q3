@@ -7,6 +7,7 @@ import { Search } from '../components/search/search'
 import { Loader } from '../components/loader/loader'
 import { FilmInfo, FilmResp, reduxStore } from '../components/types'
 import store from '../services/store'
+import { Footer } from '../components/footer/footer'
 
 const Results = dynamic(() => import('../components/results/results').then((module) => module.Results), {
   ssr: false,
@@ -29,6 +30,7 @@ export default function Controller({ data }: { data: { results: FilmResp; detail
       <div className={`root__wrapper ${theme.color}`} data-testid={theme.color}>
         <Search loaderHandler={loaderHandler} />
         <Results data={data} loaderHandler={loaderHandler} isLoading={loading} />
+        <Footer />
       </div>
     </Provider>
   )

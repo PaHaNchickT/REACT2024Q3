@@ -10,6 +10,7 @@ import '../components/no-results/no-results.css'
 import '../components/selected-panel/selected-info.css'
 import '../components/error-boundary/errorBoundary.css'
 import '../components/details/details.css'
+import '../components/footer/footer.css'
 import { Provider } from 'react-redux'
 import store from '../services/store'
 

@@ -1,0 +1,36 @@
+.footer
+    display: flex
+    justify-content: space-between
+    width: 100%
+    font-weight: 500
+
+.footer > a
+    position: relative
+    transition: 0.3s
+    padding: 0
+    font-size: 16px
+    &:link, &:active, &:visited
+        text-decoration: none
+    &:hover
+        text-decoration: underline
+    
+.footer__light
+    color: white
+
+.footer__dark
+    color: black
+    font-weight: 700
+
+.footer__light > a
+    &:link, &:active, &:visited
+        color: white
+
+.footer__dark > a
+    font-weight: 700
+    &:link, &:active, &:visited
+        color: black
+
+.footer__year
+    position: absolute
+    width: 45px
+    left: calc((100% - 45px)/2)
