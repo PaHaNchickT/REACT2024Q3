@@ -15,9 +15,8 @@ export function Search(props: { loaderHandler: () => void }) {
   const theme = useSelector((state: reduxStore) => state.themeData.themeData)
 
   const searchButtonHandler = () => {
-    props.loaderHandler()
-
     if (inputValue !== '') {
+      props.loaderHandler()
       localStorage.setItem('paul-saved-value', inputValue)
 
       params.set('search', inputValue)
