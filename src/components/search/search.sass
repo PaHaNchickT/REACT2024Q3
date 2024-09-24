@@ -2,6 +2,7 @@
   width: 100%
   display: flex
   justify-content: space-between
+  flex-wrap: wrap
 
 .search__panel-wrapper
   display: flex
@@ -46,3 +47,14 @@
   background-color: black
   background-image: url("../../assets/theme-moon.png")
   left: calc( 100% - 26px )
+
+@media screen and (max-width: 767px)
+  .search__cont
+    gap: 10px
+    flex-direction: column
+
+  .search__panel-wrapper
+    justify-content: space-between
+
+  .search__theme-wrapper
+    align-self: flex-end
