@@ -132,7 +132,7 @@ export function Results(props: {
 
   let resultsUI = (
     <div className="results__wrapper" onClick={(event) => closeDetails(event)}>
-      <div className="results__items">{films}</div>
+      <div className={`results__items ${theme.color}`}>{films}</div>
       <ul className="pagination__cont">{pages}</ul>
       {Boolean(selectedData.selectedItems.length) && <Selected />}
     </div>

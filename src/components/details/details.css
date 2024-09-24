@@ -69,4 +69,23 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+@media screen and (max-width: 767px) {
+  .details__cont {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 130vh;
+    overflow-y: scroll;
+    z-index: 10;
+  }
+  .details__title {
+    width: 90%;
+  }
+  .details__close {
+    position: absolute;
+    z-index: 50;
+  }
 } /*# sourceMappingURL=details.css.map */
